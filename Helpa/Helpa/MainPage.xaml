@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Helpa"
+             BackgroundColor="#EFF3F6"
+             ControlTemplate="{StaticResource MainPageTemplate}"
+             x:Class="Helpa.MainPage">
+    <ContentView x:Name="body">
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.8*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" ColumnSpacing="0" Padding="10,5,10,5" >
+                    <local:CustomStackLayout Orientation="Horizontal"  Padding="10,5,10,5" >
+                        <Image x:Name="imgSearch" Source="search.png"/>
+                        <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>
+                        <Image x:Name="imgSend" Source="send.png"/>
+                    </local:CustomStackLayout>
+                    <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" BackgroundColor="Blue"/>
+                <Grid Grid.Column="1" BackgroundColor="Yellow"/>
+                <Grid Grid.Column="2" BackgroundColor="Brown"/>-->
+                </Grid>
+
+                <Grid Grid.Row="1" ColumnSpacing="0" BackgroundColor="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" BackgroundColor="Green"/>
+                    <Grid Grid.Column="1" BackgroundColor="Black"/>
+                    <Grid Grid.Column="2" BackgroundColor="Blue"/>
+                    <Grid Grid.Column="3" BackgroundColor="Yellow"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1" x:Name="grid_map" />
+        </Grid>
+    </ContentView>
+</ContentPage>
