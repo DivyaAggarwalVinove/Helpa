@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Helpa.Register1">
+    <ContentPage.Content>
+        <Grid RowSpacing="0" BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.8*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" RowSpacing="0" Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.25*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="Start">
+                    <Image Source="back.png" Aspect="Fill"/>
+                </Grid>
+
+                <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+                    <Label Text="Parent Sign Up 1/2" TextColor="Black" FontSize="30" FontAttributes="Bold" VerticalTextAlignment="Center" />
+                </Grid>
+            </Grid>
+            
+            <Grid Grid.Row="1" RowSpacing="0" Margin="10,10,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" BackgroundColor="Green">
+                </Grid>
+
+                <Grid Grid.Row="1" BackgroundColor="Blue">
+                </Grid>
+
+                <Grid Grid.Row="2" BackgroundColor="Yellow"></Grid>
+
+                <Grid Grid.Row="3" BackgroundColor="Orange"></Grid>
+                <Grid Grid.Row="4" BackgroundColor="DarkGreen"></Grid>
+                <Grid Grid.Row="5" BackgroundColor="DarkBlue"/>
+                <Grid Grid.Row="6" BackgroundColor="DarkOrange"/>
+                <Grid Grid.Row="7" BackgroundColor="Magenta"/>
+                <Grid Grid.Row="8" BackgroundColor="Purple"/>
+                <Grid Grid.Row="9" BackgroundColor="DarkMagenta"/>
+                <Grid Grid.Row="10" BackgroundColor="DarkKhaki"/>
+                <Grid Grid.Row="11" BackgroundColor="Khaki"/>
+                <Grid Grid.Row="12" BackgroundColor="Black"/>
+                <Grid Grid.Row="13" BackgroundColor="LightGreen"/>
+                <Grid Grid.Row="14" BackgroundColor="LightBlue"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

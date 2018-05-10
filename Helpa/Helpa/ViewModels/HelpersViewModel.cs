@@ -9,21 +9,24 @@ using Xamarin.Forms;
 
 namespace Helpa
 {
-    class HelpersViewModel : INotifyPropertyChanged
+    public class HelpersViewModel : INotifyPropertyChanged
     {
         public IHelpersServices<HelpersModel> DataStore => DependencyService.Get<IHelpersServices<HelpersModel>>();
         public ObservableCollection<HelpersModel> helperList { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Helpers context;
 
-        public HelpersViewModel()
+        public HelpersViewModel(Helpers helpers)
         {
             helperList = new ObservableCollection<HelpersModel>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            context = helpers;
+            //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            ExecuteLoadItemsCommand();
+            //LoadItemsCommand.Execute(null);
         }
 
-        async Task ExecuteLoadItemsCommand()
-        //private Task ExecuteLoadItemsCommand()
+        //private async Task ExecuteLoadItemsCommand()
+        private void ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -35,7 +38,84 @@ namespace Helpa
                 helperList.Clear();
 
                 // Call api to get data from server.
-                var helpers = await DataStore.GetHelpersList(true);
+                //var helpers = await DataStore.GetHelpersList(true);
+                HelpersModel helper = new HelpersModel();
+                helper.name = "Army Rose";
+                helper.service = "Childcare";
+                helper.price = "From $100 per hour";
+                helper.location = "Carble Garden";
+                helper.status = "Available";
+                helper.photo = "picture2.png";
+                helper.rating = 4.3f;
+                helper.rating_count = "4.3(" + "32)";
+                helper.count1 = 37;
+                helper.count2 = 44;
+                helperList.Add(helper);
+
+                helper = new HelpersModel();
+                helper.name = "HSBC";
+                helper.service = "Bank";
+                helper.price = "That is reliable";
+                helper.location = "Carble Garden";
+                helper.status = "Sponsored";
+                helper.photo = "message_picture3.png";
+                helper.rating = 0;
+                helper.rating_count = "0.0(" + "0)";
+                helper.count1 = 0;
+                helper.count2 = 0;
+                helperList.Add(helper);
+
+                helper = new HelpersModel();
+                helper.name = "Emily Clarkson";
+                helper.service = "Childcare";
+                helper.price = "From $100 per hour";
+                helper.location = "Carble Garden";
+                helper.status = "Not Available";
+                helper.photo = "picture.png";
+                helper.rating = 4.4f;
+                helper.rating_count = "4.4(" +"19)";
+                helper.count1 = 23;
+                helper.count2 = 97;
+                helperList.Add(helper);
+
+                helper = new HelpersModel();
+                helper.name = "Army Rose";
+                helper.service = "Childcare";
+                helper.price = "From $100 per hour";
+                helper.location = "Carble Garden";
+                helper.status = "Available";
+                helper.photo = "picture2.png";
+                helper.rating = 4.3f;
+                helper.rating_count = "4.3(" + "32)";
+                helper.count1 = 37;
+                helper.count2 = 44;
+                helperList.Add(helper);
+
+                helper = new HelpersModel();
+                helper.name = "HSBC";
+                helper.service = "Bank";
+                helper.price = "That is reliable";
+                helper.location = "Carble Garden";
+                helper.status = "Sponsored";
+                helper.photo = "message_picture3.png";
+                helper.rating = 0;
+                helper.rating_count = "0.0(" + "0)";
+                helper.count1 = 0;
+                helper.count2 = 0;
+                helperList.Add(helper);
+
+                helper = new HelpersModel();
+                helper.name = "Emily Clarkson";
+                helper.service = "Childcare";
+                helper.price = "From $100 per hour";
+                helper.location = "Carble Garden";
+                helper.status = "Not Available";
+                helper.photo = "picture.png";
+                helper.rating = 4.4f;
+                helper.rating_count = "4.4(" + "19)";
+                helper.count1 = 23;
+                helper.count2 = 97;
+                helperList.Add(helper);
                 /*foreach (var item in helpers)
                 {
                     //Parse list

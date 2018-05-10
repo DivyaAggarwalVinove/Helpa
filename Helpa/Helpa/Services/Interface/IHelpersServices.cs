@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Helpa
 {
-    interface IHelpersServices<T>
+    public interface IHelpersServices<T>
     {
         Task<IEnumerable<T>> GetHelpersList(bool forceRefresh = false);
     }

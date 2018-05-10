@@ -11,9 +11,9 @@ namespace Helpa
         public string price { get; set; }
         public string location { get; set; }
         public string status { get; set; }
-        //public string photo { get; set; }
-        public string rating { get; set; }
-        public int ratinf_count { get; set; }
+        public string photo { get; set; }
+        public float rating { get; set; }
+        public string rating_count { get; set; }
         public int count1 { get; set; }
         public int count2 { get; set; }
     }

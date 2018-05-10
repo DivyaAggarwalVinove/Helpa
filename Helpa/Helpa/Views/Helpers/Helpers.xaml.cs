@@ -18,12 +18,12 @@ namespace Helpa
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            //helpersViewModel = new HelpersViewModel();
-            //helpersViewModel.context = this;
+            helpersViewModel = new HelpersViewModel(this);
+            helpersViewModel.context = this;
 
-            //BindingContext = helpersViewModel;
+            BindingContext = helpersViewModel;
 
-            CreateMap();
+            //CreateMap();
         }
 
         async public void CreateMap()
@@ -89,10 +89,10 @@ namespace Helpa
                     //lvHalfHelpa.ScrollTo(helpersViewModel.helperList, ScrollToPosition., false);
                     //lvHalfHelpa.SelectedItem
 
-                    if (rlHalfList.IsVisible == false)
-                        rlHalfList.IsVisible = true;
+                    if (rlHalfView.IsVisible == false)
+                        rlHalfView.IsVisible = true;
                     else
-                        rlHalfList.IsVisible = false;
+                        rlHalfView.IsVisible = false;
                 });
             }
             catch (Exception e)
@@ -101,23 +101,18 @@ namespace Helpa
             }
         }
 
-        void OnHelpersListTapped(object sender, EventArgs args)
+        void OnClickPostJob(object sender, EventArgs args)
         {
-            
-            //Navigation.PushAsync(new HelpersListPage());
-            //gridHelpersBody.Children.Remove(this.FindByName<RelativeLayout>("relativeLayout"));
-            //gridHelpersBody.Children.Add(new HelpersList());
+            Navigation.PushAsync(new Register());
+        }
 
-            //var mapView = this.FindByName<CustomMap>("mapHelper");
+        void OnShowHelpersList(object sender, EventArgs args)
+        {
             if (mapHelper.IsVisible)
             {
                 lvFullHelpa.IsVisible = true;
                 mapHelper.IsVisible = false;
                 lblCount.IsVisible = false;
-
-                Rectangle rectangle = new Rectangle(relativeLayout.X, relativeLayout.Y, relativeLayout.Width, relativeLayout.Height);
-                rlHalfList.Layout(rectangle);
-                
 
                 imgHelpersList.Source = "location_filter.png";
             } else
