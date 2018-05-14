@@ -81,16 +81,16 @@
                 </Grid>
                 
                 <Grid Grid.Row="5">
-                    <local:CustomEntry Placeholder="Username" BackgroundColor="Green" FontSize="12"/>
+                    <local:CustomEntry Placeholder="Username" PlaceholderColor="#939ba0" FontSize="13"/>
                 </Grid>
 
                 <Grid Grid.Row="6" BackgroundColor="Transparent">
                     <Label Text="Gender:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                 </Grid>
-                
-                <Grid Grid.Row="7" BackgroundColor="Magenta">                    
+
+                <Grid Grid.Row="7" BackgroundColor="Magenta">
                 </Grid>
-                
+
                 <Grid Grid.Row="8" BackgroundColor="Transparent">
                     <Label Text="Contact Info:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                 </Grid>
@@ -102,32 +102,27 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0" BackgroundColor="Green">
-                        
+                        <local:CustomEntry Placeholder="+852" PlaceholderColor="#BDBFC0" FontSize="13"/>
                     </Grid>
                     
                     <Grid Grid.Column="1" BackgroundColor="Blue">
-                        
+                        <local:CustomEntry Placeholder="Phone Number" PlaceholderColor="#BDBFC0" FontSize="13"/>
                     </Grid>
                 </Grid>
                 
-                <Grid Grid.Row="10" BackgroundColor="DarkKhaki">
-                    
+                <Grid Grid.Row="10" BackgroundColor="DarkKhaki">                    
                 </Grid>
                 
-                <Grid Grid.Row="11" BackgroundColor="Khaki">
-                    
+                <Grid Grid.Row="11" BackgroundColor="Khaki">                    
                 </Grid>
                 
-                <Grid Grid.Row="12" BackgroundColor="Black">
-                    
+                <Grid Grid.Row="12" BackgroundColor="Black">                   
                 </Grid>
-                
+
                 <Grid Grid.Row="13" BackgroundColor="LightGreen">
-                    
                 </Grid>
 
                 <Grid Grid.Row="14" BackgroundColor="LightBlue">
-                    
                 </Grid>
             </Grid>
         </Grid>
