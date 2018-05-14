@@ -1,9 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Helpa"
              x:Class="Helpa.Register1">
     <ContentPage.Content>
-        <Grid RowSpacing="0" BackgroundColor="White">
+        <Grid RowSpacing="0" BackgroundColor="#F1F5F6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="0.8*"/>
@@ -15,7 +16,7 @@
                     <RowDefinition Height="0.25*"/>
                 </Grid.RowDefinitions>
                 
-                <Grid Grid.Row="0" BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="Start">
+                <Grid Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Start">
                     <Image Source="back.png" Aspect="Fill"/>
                 </Grid>
 
@@ -24,14 +25,14 @@
                 </Grid>
             </Grid>
             
-            <Grid Grid.Row="1" RowSpacing="0" Margin="10,10,10,0">
+            <Grid Grid.Row="1" RowSpacing="0" Margin="10,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.02*"/>
+                    <RowDefinition Height="0.38*"/>
                     <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.3*"/>
                     <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.12*"/>
                     <RowDefinition Height="0.1*"/>
                     <RowDefinition Height="0.1*"/>
                     <RowDefinition Height="0.1*"/>
@@ -43,26 +44,91 @@
                     <RowDefinition Height="0.1*"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" BackgroundColor="Green">
+                <Grid Grid.Row="0" ColumnSpacing="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                        
+                    <Grid Grid.Column="0"> 
+                        <Label Text="Basic Info" TextColor="#838C91" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label Text="Your Location" TextColor="#838C91" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    </Grid>
                 </Grid>
 
-                <Grid Grid.Row="1" BackgroundColor="Blue">
+                <Grid Grid.Row="1" ColumnSpacing="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                        
+                    <Grid Grid.Column="0" BackgroundColor = "#FF748C"/>
+                    <Grid Grid.Column="1" BackgroundColor = "#818A8F" />
                 </Grid>
 
-                <Grid Grid.Row="2" BackgroundColor="Yellow"></Grid>
+                <Grid Grid.Row="2" BackgroundColor="Transparent" Margin="0,10,0,10">
+                    <Image Source="picture.png"/>
+                </Grid>
 
-                <Grid Grid.Row="3" BackgroundColor="Orange"></Grid>
-                <Grid Grid.Row="4" BackgroundColor="DarkGreen"></Grid>
-                <Grid Grid.Row="5" BackgroundColor="DarkBlue"/>
-                <Grid Grid.Row="6" BackgroundColor="DarkOrange"/>
-                <Grid Grid.Row="7" BackgroundColor="Magenta"/>
-                <Grid Grid.Row="8" BackgroundColor="Purple"/>
-                <Grid Grid.Row="9" BackgroundColor="DarkMagenta"/>
-                <Grid Grid.Row="10" BackgroundColor="DarkKhaki"/>
-                <Grid Grid.Row="11" BackgroundColor="Khaki"/>
-                <Grid Grid.Row="12" BackgroundColor="Black"/>
-                <Grid Grid.Row="13" BackgroundColor="LightGreen"/>
-                <Grid Grid.Row="14" BackgroundColor="LightBlue"/>
+                <Grid Grid.Row="3">
+                    <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Label Text="Username:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                </Grid>
+                
+                <Grid Grid.Row="5">
+                    <local:CustomEntry Placeholder="Username" BackgroundColor="Green" FontSize="12"/>
+                </Grid>
+
+                <Grid Grid.Row="6" BackgroundColor="Transparent">
+                    <Label Text="Gender:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                </Grid>
+                
+                <Grid Grid.Row="7" BackgroundColor="Magenta">                    
+                </Grid>
+                
+                <Grid Grid.Row="8" BackgroundColor="Transparent">
+                    <Label Text="Contact Info:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                </Grid>
+                
+                <Grid Grid.Row="9" BackgroundColor="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.8*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" BackgroundColor="Green">
+                        
+                    </Grid>
+                    
+                    <Grid Grid.Column="1" BackgroundColor="Blue">
+                        
+                    </Grid>
+                </Grid>
+                
+                <Grid Grid.Row="10" BackgroundColor="DarkKhaki">
+                    
+                </Grid>
+                
+                <Grid Grid.Row="11" BackgroundColor="Khaki">
+                    
+                </Grid>
+                
+                <Grid Grid.Row="12" BackgroundColor="Black">
+                    
+                </Grid>
+                
+                <Grid Grid.Row="13" BackgroundColor="LightGreen">
+                    
+                </Grid>
+
+                <Grid Grid.Row="14" BackgroundColor="LightBlue">
+                    
+                </Grid>
             </Grid>
         </Grid>
     </ContentPage.Content>

@@ -20,7 +20,8 @@ namespace Helpa.Droid
             if (Control != null)
             {
                 Control.SetBackgroundResource(Resource.Drawable.custom_entry_style);
-                //Control.TextAlignment = Android.Views.TextAlignment.Center;
+                Control.Gravity = Android.Views.GravityFlags.CenterVertical;
+                // Control.TextAlignment = Android.Views.TextAlignment.Center;
             }
         }
     }
