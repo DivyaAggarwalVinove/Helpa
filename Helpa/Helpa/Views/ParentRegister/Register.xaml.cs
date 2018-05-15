@@ -20,11 +20,27 @@ namespace Helpa
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        void OnButtonClicked(object sender, EventArgs args)
+        void OnSignUpEmailPhnClicked(object sender, EventArgs args)
         {
             btnSignUpEmailPhn.IsVisible = false;
             slSignUpEmailPhn.IsVisible = true;
             btnSignUp.IsVisible = true;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (slSignUpEmailPhn.IsVisible)
+            {
+                btnSignUpEmailPhn.IsVisible = true;
+                slSignUpEmailPhn.IsVisible = false;
+                btnSignUp.IsVisible = false;
+
+                return true;
+            }
+            else
+            {
+                return base.OnBackButtonPressed();
+            }
         }
 
         void OnFacebookLogin(object sender, EventArgs args)
@@ -94,7 +110,7 @@ namespace Helpa
             var userDetails = await httpClient.GetStringAsync(requestUrl);
         }
 
-        void OnClickSignUp(object sender, EventArgs args)
+        void OnSignUp(object sender, EventArgs args)
         {
             Navigation.PushAsync(new Register1());
         }

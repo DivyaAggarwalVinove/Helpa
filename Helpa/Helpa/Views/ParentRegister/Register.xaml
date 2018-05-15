@@ -70,7 +70,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                    <Button x:Name="btnSignUpEmailPhn" Text="Sign up with email or phone" IsVisible="True" Clicked="OnButtonClicked" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button x:Name="btnSignUpEmailPhn" Text="Sign up with email or phone" IsVisible="True" Clicked="OnSignUpEmailPhnClicked" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
 
                     <StackLayout x:Name="slSignUpEmailPhn" Orientation="Vertical" IsVisible="False">
 
@@ -98,7 +98,7 @@
                 </Grid>
 
                 <Grid Grid.Row="3" VerticalOptions="Center" HorizontalOptions="End"> 
-                    <Button x:Name="btnSignUp" Clicked="OnClickSignUp" Text="Sign up >" IsVisible="False" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
+                    <Button x:Name="btnSignUp" Clicked="OnSignUp" Text="Sign up >" IsVisible="False" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
                 </Grid>
             </Grid>
         </Grid>
