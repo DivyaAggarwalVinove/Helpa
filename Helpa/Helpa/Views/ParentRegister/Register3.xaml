@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:custommap="clr-namespace:Helpa"
+             xmlns:local="clr-namespace:Helpa"
+             x:Class="Helpa.Register3">
+    
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.08*"/>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="0.07*"/>
+                <RowDefinition Height="0.7*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="10,0,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Image Source="back.png" Margin="0,15,0,15" Aspect="AspectFit"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                </Grid>
+
+                <Grid Grid.Column="2">
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1"  Margin="10,0,10,0">
+                <Label Text="Is the pin in the right place?" TextColor="Black" FontSize="35" FontAttributes="Bold" />
+            </Grid>
+
+            <Grid Grid.Row="2"  Margin="10,0,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <local:CustomStackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                    <local:CustomEntry x:Name="entryRegSearch3" Placeholder="St. John's Building" TextColor="#949494" PlaceholderColor="#949494" FontSize="Small" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                </local:CustomStackLayout>
+            </Grid>
+
+            <Grid Grid.Row="3" BackgroundColor="Orange"  Margin="0,10,0,0">
+                <RelativeLayout x:Name="relativeLayout" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <custommap:CustomMap x:Name="mapRegister" MapType="Street"
+                              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
+                              RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}" />
+                </RelativeLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

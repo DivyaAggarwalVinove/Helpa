@@ -12,9 +12,9 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Start">
-                <Image Source="back.png" Aspect="Fill"/>
+                <Image Source="back.png" Aspect="AspectFit"/>
             </Grid>
-
+            
             <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="Start">
                 <Label x:Name="lParentSignUp" Text="Parent Sign Up 1/2" TextColor="Black" FontSize="30" FontAttributes="Bold" VerticalTextAlignment="Center" />
             </Grid>
@@ -192,13 +192,7 @@
                                 <Grid Grid.Row="2" VerticalOptions="Start">
                                     <local:CustomStackLayout Orientation="Horizontal"  Padding="10,5,10,5" >
                                         <Image x:Name="imgRegSearch" Source="search.png"/>
-                                        <local:CustomEntry x:Name="entryRegSearch" IsEnabled="True" Placeholder="Search" FontSize="Small" PlaceholderColor="#939BA0" HorizontalOptions="FillAndExpand" Margin="5,0,0,0">
-                                            <local:CustomEntry.GestureRecognizers>
-                                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnTapLocationSearch">
-                                                    
-                                                </TapGestureRecognizer>
-                                            </local:CustomEntry.GestureRecognizers>
-                                        </local:CustomEntry>
+                                        <local:CustomEntry x:Name="entryRegSearch" IsEnabled="True" Placeholder="Search" Focused="OnFocus" FontSize="Small" PlaceholderColor="#939BA0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>
                                     </local:CustomStackLayout>
                                 </Grid>
                                 

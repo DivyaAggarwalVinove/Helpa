@@ -63,10 +63,9 @@ namespace Helpa
                 return base.OnBackButtonPressed();
             }
         }
-
-        void OnTapLocationSearch(object sender, EventArgs args)
+        void OnFocus(object sender, EventArgs args)
         {
-
+            Navigation.PushAsync(new Register2());
         }
     }
 }

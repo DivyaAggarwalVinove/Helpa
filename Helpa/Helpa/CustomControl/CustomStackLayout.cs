@@ -4,6 +4,5 @@ namespace Helpa
 {
     public class CustomStackLayout : StackLayout
     {
-        int color;
     }
 }
