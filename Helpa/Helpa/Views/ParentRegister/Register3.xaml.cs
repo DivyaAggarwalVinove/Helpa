@@ -2,6 +2,7 @@
 using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -19,6 +20,7 @@ namespace Helpa
             NavigationPage.SetHasNavigationBar(this, false);
 
             SetLocationOnMap();
+            
         }
 
         async void SetLocationOnMap()
@@ -41,8 +43,47 @@ namespace Helpa
             mapRegister.Pins.Add(pin);
             //Pin pin = mapRegister.Pins.FirstOrDefault();
 
-            //mapRegister.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude), Distance.FromMiles(0.2)));
+            mapRegister.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude), Distance.FromMiles(0.2)));
             mapRegister.IsShowingUser = true;
+        }
+
+        async void OnLocationSearch(Object sender, EventArgs eventArgs)
+        {
+            try
+            {
+                ObservableCollection<LocationModel> locations = new ObservableCollection<LocationModel>();
+                var locator = CrossGeolocator.Current;
+                var address = ((CustomEntry)sender).Text;
+                List<string> addresses = new List<string>();
+
+                if (string.IsNullOrEmpty(address))
+                    return;
+
+                IEnumerable<Plugin.Geolocator.Abstractions.Position> positions = await locator.GetPositionsForAddressAsync(address, "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
+                foreach (Plugin.Geolocator.Abstractions.Position item in positions)
+                {
+                    var addr = await locator.GetAddressesForPositionAsync(new Plugin.Geolocator.Abstractions.Position(item.Latitude, item.Longitude), "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
+                    var a = addr.FirstOrDefault();
+                    locations.Add(new LocationModel { Address = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode });
+                    addresses.Add(a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode);
+                }
+                addressesView.ItemsSource = locations;
+
+            }
+            catch(Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            //BindingContext = lm;
+        }
+
+        void OnLocationSelected(Object sender, EventArgs eventArgs)
+        {            
+            entryRegSearch3.Text = ((Label)sender).Text;
+
+            ObservableCollection<LocationModel> locations = new ObservableCollection<LocationModel>();
+            addressesView.ItemsSource = locations;
         }
     }
 }
