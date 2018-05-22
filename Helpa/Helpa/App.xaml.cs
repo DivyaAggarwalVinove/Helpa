@@ -118,6 +118,8 @@ namespace Helpa
             selectedPage = newIndex;
         }
 
+        public static Action<string> PostSuccessFacebookAction { get; set; }
+
         protected override void OnStart ()
 		{
 			// Handle when your app starts

@@ -33,7 +33,7 @@
                 </Grid>
                 
                 <Grid Grid.Row="3">
-                    <Button Text="Sign up with Facebook" TextColor="White" Margin="0,5,0,5" BackgroundColor="#3D5A98"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Clicked="OnFacebookLogin"/>
+                    <local:FacebookLoginButton Text="Sign up with Facebook" TextColor="White" Margin="0,5,0,5" BackgroundColor="#3D5A98"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
                 </Grid>
                 
                 <Grid Grid.Row="4">
