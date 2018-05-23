@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Helpa.Services;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -58,7 +56,7 @@ namespace Helpa
             /*var api_request = "
              * https://www.facebook.com/v3.0/dialog/oauth?client_id=172211350107196&display=popup&response_type=token&redirect_uri=https://www.facebook.com/connect/login_success.html
              * ";
-
+             *
             var webview = new WebView
             {
                 Source = api_request,
@@ -84,16 +82,16 @@ namespace Helpa
         //    }
         //}
 
-        ////private void WebViewNavigation(object sender, WebNavigatedEventArgs e)
-        ////{
-        ////    var accessToken = ExtractAccessTokenFromUrl(e.Url);
-        ////    var result = e.Result;
+        //private void WebViewNavigation(object sender, WebNavigatedEventArgs e)
+        //{
+        //    var accessToken = ExtractAccessTokenFromUrl(e.Url);
+        //    var result = e.Result;
 
-        ////    if (accessToken != null)
-        ////    {
-        ////        //await GetFacebookProfileAsync(accessToken);
-        ////    }
-        ////}
+        //    if (accessToken != null)
+        //    {
+        //        //await GetFacebookProfileAsync(accessToken);
+        //    }
+        //}
 
         //private string ExtractAccessTokenFromUrl(string url)
         //{
@@ -120,6 +118,19 @@ namespace Helpa
             var requestUrl = "https://graph.facebook.com/v2.7/me/?fields=name,id,email,gender,picture&access_token=" + accessToken;
             var httpClient = new HttpClient();
             var userDetails = await httpClient.GetStringAsync(requestUrl);
+
+            var detailsInJson = JObject.Parse(userDetails);
+
+            HelpersModel helperModel = new HelpersModel();
+            helperModel.email = detailsInJson.GetValue("email").ToString();
+            //helperModel.profileImage
+            helperModel.gender = detailsInJson.GetValue("gender").ToString();
+            helperModel.token = accessToken;
+            helperModel.userName = detailsInJson.GetValue("name").ToString();
+            helperModel.loginProvider = "Facebook";
+            helperModel.role = "Helper".ToUpper();
+
+            await (new ParentRegisterServices()).RegisterExternal(helperModel);
         }
 
         void OnSignUp(object sender, EventArgs args)

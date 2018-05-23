@@ -6,12 +6,17 @@ namespace Helpa
 {
     public class HelpersModel
     {
-        public string name { get; set; }
+        public string role { get; set; }
+        public string gender { get; set; }
+        public string token { get; set; }
+        public string userName { get; set; }
+        public string loginProvider { get; set; }
+        public string email { get; set; }
         public string service { get; set; }
         public string price { get; set; }
         public string location { get; set; }
         public string status { get; set; }
-        public string photo { get; set; }
+        public string profileImage { get; set; }
         public float rating { get; set; }
         public string rating_count { get; set; }
         public int count1 { get; set; }

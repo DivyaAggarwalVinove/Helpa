@@ -12,7 +12,7 @@ using Java.Util;
 [assembly: ExportRenderer(typeof(FacebookLoginButton), typeof(FacebookLoginButtonRendererAndroid))]
 namespace Helpa.Droid
 {
-    public class FacebookLoginButtonRendererAndroid : ButtonRenderer
+    public class FacebookLoginButtonRendererAndroid : ViewRenderer<Button, LoginButton>
     {
         private static Activity _activity;
 
@@ -46,8 +46,9 @@ namespace Helpa.Droid
                     Console.WriteLine("HelloFacebook: Error: {0}", shareError);
                 }
             };
+            //loginButton.SetBackgroundDrawable(Resources.GetDrawable( Resource.Drawable.fb));
             loginButton.RegisterCallback(MainActivity.CallbackManager, facebookCallback);
-            loginButton.SetReadPermissions(new string[] { "email", "user_gender", "user_about_me" });
+            loginButton.SetReadPermissions(new string[] { "email", "user_gender" });
             base.SetNativeControl(loginButton);
         }
     }

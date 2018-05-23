@@ -4,10 +4,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Helpa
+namespace Helpa.ViewModels
 {
     public class HelpersViewModel : INotifyPropertyChanged
     {
@@ -40,12 +39,12 @@ namespace Helpa
                 // Call api to get data from server.
                 //var helpers = await DataStore.GetHelpersList(true);
                 HelpersModel helper = new HelpersModel();
-                helper.name = "Army Rose";
+                helper.userName = "Army Rose";
                 helper.service = "Childcare";
                 helper.price = "From $100 per hour";
                 helper.location = "Carble Garden";
                 helper.status = "Available";
-                helper.photo = "picture2.png";
+                helper.profileImage = "picture2.png";
                 helper.rating = 4.3f;
                 helper.rating_count = "4.3(" + "32)";
                 helper.count1 = 37;
@@ -53,12 +52,12 @@ namespace Helpa
                 helperList.Add(helper);
 
                 helper = new HelpersModel();
-                helper.name = "HSBC";
+                helper.userName = "HSBC";
                 helper.service = "Bank";
                 helper.price = "That is reliable";
                 helper.location = "Carble Garden";
                 helper.status = "Sponsored";
-                helper.photo = "message_picture3.png";
+                helper.profileImage = "message_picture3.png";
                 helper.rating = 0;
                 helper.rating_count = "0.0(" + "0)";
                 helper.count1 = 0;
@@ -66,12 +65,12 @@ namespace Helpa
                 helperList.Add(helper);
 
                 helper = new HelpersModel();
-                helper.name = "Emily Clarkson";
+                helper.userName = "Emily Clarkson";
                 helper.service = "Childcare";
                 helper.price = "From $100 per hour";
                 helper.location = "Carble Garden";
                 helper.status = "Not Available";
-                helper.photo = "picture.png";
+                helper.profileImage = "picture.png";
                 helper.rating = 4.4f;
                 helper.rating_count = "4.4(" +"19)";
                 helper.count1 = 23;
@@ -79,12 +78,12 @@ namespace Helpa
                 helperList.Add(helper);
 
                 helper = new HelpersModel();
-                helper.name = "Army Rose";
+                helper.userName = "Army Rose";
                 helper.service = "Childcare";
                 helper.price = "From $100 per hour";
                 helper.location = "Carble Garden";
                 helper.status = "Available";
-                helper.photo = "picture2.png";
+                helper.profileImage = "picture2.png";
                 helper.rating = 4.3f;
                 helper.rating_count = "4.3(" + "32)";
                 helper.count1 = 37;
@@ -92,12 +91,12 @@ namespace Helpa
                 helperList.Add(helper);
 
                 helper = new HelpersModel();
-                helper.name = "HSBC";
+                helper.userName = "HSBC";
                 helper.service = "Bank";
                 helper.price = "That is reliable";
                 helper.location = "Carble Garden";
                 helper.status = "Sponsored";
-                helper.photo = "message_picture3.png";
+                helper.profileImage = "message_picture3.png";
                 helper.rating = 0;
                 helper.rating_count = "0.0(" + "0)";
                 helper.count1 = 0;
@@ -105,12 +104,12 @@ namespace Helpa
                 helperList.Add(helper);
 
                 helper = new HelpersModel();
-                helper.name = "Emily Clarkson";
+                helper.userName = "Emily Clarkson";
                 helper.service = "Childcare";
                 helper.price = "From $100 per hour";
                 helper.location = "Carble Garden";
                 helper.status = "Not Available";
-                helper.photo = "picture.png";
+                helper.profileImage = "picture.png";
                 helper.rating = 4.4f;
                 helper.rating_count = "4.4(" + "19)";
                 helper.count1 = 23;

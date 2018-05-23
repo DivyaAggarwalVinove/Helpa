@@ -1,4 +1,5 @@
-﻿using Plugin.Geolocator;
+﻿using Helpa.ViewModels;
+using Plugin.Geolocator;
 using System;
 using System.Diagnostics;
 using System.Globalization;

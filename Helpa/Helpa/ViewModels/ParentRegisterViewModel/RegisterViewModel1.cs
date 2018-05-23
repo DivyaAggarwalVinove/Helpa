@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Helpa
+namespace Helpa.ViewModels
 {
     class RegisterViewModel1 : INotifyPropertyChanged
     {
