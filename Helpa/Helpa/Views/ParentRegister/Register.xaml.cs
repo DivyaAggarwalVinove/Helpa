@@ -1,4 +1,5 @@
 ﻿using Helpa.Services;
+using Helpa.Utility;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Http;
@@ -11,12 +12,20 @@ namespace Helpa
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Register : ContentPage
     {
+        private static Register instance;
+        public static Register Instance
+        {
+            get { return instance; }
+            set { instance = value; }
+        }
+
         public Register()
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
 
+            Instance = this;
             App.PostSuccessFacebookAction = async token =>
             {
                 //you can use this token to authenticate to the server here
@@ -26,6 +35,11 @@ namespace Helpa
 
                 await GetFacebookProfileAsync(token);
             };
+        }
+
+        public void GotoNext()
+        {
+            Navigation.PushAsync(new Register1());
         }
 
         void OnSignUpEmailPhnClicked(object sender, EventArgs args)
@@ -133,9 +147,52 @@ namespace Helpa
             await (new ParentRegisterServices()).RegisterExternal(helperModel);
         }
 
-        void OnSignUp(object sender, EventArgs args)
+        async void OnSignUp(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new Register1());
+            if (string.IsNullOrEmpty(entryRegEmail.Text))
+            {
+                await DisplayAlert("Warning", "Please enter email or phone number.", "Ok");
+            }
+            else if (string.IsNullOrEmpty(entryRegUsername.Text))
+            {
+                await DisplayAlert("Warning", "Please enter username.", "Ok");
+            }
+            else if (string.IsNullOrEmpty(entryRegPwd.Text))
+            {
+                await DisplayAlert("Warning", "Please enter password.", "Ok");
+            }
+            else if (!Utils.isValidEmail(entryRegEmail.Text))
+            {
+                if (!Utils.isValidMobileNo(entryRegEmail.Text))
+                    await DisplayAlert("Warning", "Please enter valid email or phone number.", "Ok");
+                else
+                {
+                    HelpersModel helperModel = new HelpersModel();
+                    helperModel.phoneNumber = entryRegEmail.Text;
+                    helperModel.userName = entryRegUsername.Text;
+                    helperModel.password = entryRegPwd.Text;
+                    helperModel.role = "Helper".ToUpper();
+
+                    await (new ParentRegisterServices()).ParentRegister(helperModel);
+                    //Navigation.PushAsync(new Register1());
+                }
+            }
+            else
+            {
+                HelpersModel helperModel = new HelpersModel();
+                helperModel.email = entryRegEmail.Text;
+                helperModel.userName = entryRegUsername.Text;
+                helperModel.password = entryRegPwd.Text;
+                helperModel.role = "Helper".ToUpper();
+
+                await (new ParentRegisterServices()).ParentRegister(helperModel);
+                //Navigation.PushAsync(new Register1());
+            }
+        }
+
+        void ShowOrHidePassword(object sender, EventArgs args)
+        {
+            entryRegPwd.IsPassword = !entryRegPwd.IsPassword;
         }
     }
 }

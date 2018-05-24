@@ -19,7 +19,8 @@ namespace Helpa
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
-
+            IEnumerable<string> genderList = new List<string>() { "Male", "Female", "Rather no to say" };
+            rgGender.ItemsSource = genderList;
             //vm = new RegisterViewModel1();
             //this.BindingContext = vm;
             //MyRadioGroup.CheckedChanged += MyRadioGroup_CheckedChanged;

@@ -5,6 +5,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Util;
+using AsNum.XFControls.Droid;
 using Xamarin.Facebook;
 
 namespace Helpa.Droid
@@ -25,6 +26,7 @@ namespace Helpa.Droid
                 base.OnCreate(bundle);
 
                 FacebookSdk.SdkInitialize(this.ApplicationContext);
+                AsNumAssemblyHelper.HoldAssembly();
 
                 global::Xamarin.Forms.Forms.Init(this, bundle);
                 Xamarin.FormsMaps.Init(this, bundle);

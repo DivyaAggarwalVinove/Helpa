@@ -8,5 +8,6 @@ namespace Helpa.Services
     public interface IParentRegisterServices
     {
         Task RegisterExternal(HelpersModel helpersModel);
+        Task ParentRegister(HelpersModel helpersModel);
     }
 }

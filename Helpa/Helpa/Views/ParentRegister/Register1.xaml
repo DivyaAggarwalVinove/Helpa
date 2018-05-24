@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
              xmlns:local="clr-namespace:Helpa"
              x:Class="Helpa.Register1">
-    <ContentPage.Content BackgroundColor="#F1F5F6">
+    <ContentPage.Content BackgroundColor="#F2F5F7">
         <Grid RowSpacing="0" Margin="10,5,10,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
@@ -16,14 +17,14 @@
             </Grid>
             
             <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="Start">
-                <Label x:Name="lParentSignUp" Text="Parent Sign Up 1/2" TextColor="Black" FontSize="30" FontAttributes="Bold" VerticalTextAlignment="Center" />
+                <Label x:Name="lParentSignUp" Text="Parent Sign Updo 1/2" TextColor="Black" FontSize="30" FontAttributes="Bold" VerticalTextAlignment="Center" />
             </Grid>
 
             <Grid Grid.Row="2">
                 <Grid RowSpacing="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.02*"/>
+                        <RowDefinition Height="0.01*"/>
                         <RowDefinition Height="1.70*"/>
                     </Grid.RowDefinitions>
 
@@ -90,7 +91,13 @@
                                     <Label Text="Gender:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="5" BackgroundColor="Magenta">
+                                <Grid Grid.Row="5" BackgroundColor="Transparent">
+                                    <ctrls:RadioGroup 
+                                        x:Name="rgGender"
+                                        Orientation="Horizontal"                                     
+                                        OnImg="radio_close.png" 
+                                        OffImg="radio_button.png" />
+                                        <!--SelectedItem="{Binding GenderCollection}-->
                                 </Grid>
 
                                 <Grid Grid.Row="6">

@@ -10,6 +10,24 @@ namespace Helpa.Services
 {
     public class ParentRegisterServices : IParentRegisterServices
     {
+        public async Task ParentRegister(HelpersModel helpersModel)
+        {
+            HttpClient httpClient = new HttpClient();
+
+            var uri = new Uri(string.Format(Constants.baseUrl, "api/Account/Register"));
+            var json = JsonConvert.SerializeObject(helpersModel);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync(uri, content);
+            if (response.IsSuccessStatusCode)
+            {
+                Register.Instance.GotoNext();
+                //var content = await response.Content.ReadAsStringAsync();
+                //Items = JsonConvert.DeserializeObject<List<TodoItem>>(content);
+            }
+
+        }
+
         public async Task RegisterExternal(HelpersModel helpersModel)
         {
             HttpClient httpClient = new HttpClient();
@@ -21,6 +39,7 @@ namespace Helpa.Services
             var response = await httpClient.PostAsync(uri, content);
             if (response.IsSuccessStatusCode)
             {
+                Register.Instance.GotoNext();
                 //var content = await response.Content.ReadAsStringAsync();
                 //Items = JsonConvert.DeserializeObject<List<TodoItem>>(content);
             }
