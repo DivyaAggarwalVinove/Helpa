@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,9 +14,14 @@ namespace Helpa
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        void OnSetLocationOnMap(Object sender, EventArgs eventArgs)
+        void OnSetLocationOnMap(object sender, EventArgs eventArgs)
         {
             Navigation.PushAsync(new Register3());
+        }
+
+        void OnClickYourLocation(object sender, EventArgs eventArgs)
+        {
+            Navigation.PopAsync();
         }
     }
 }

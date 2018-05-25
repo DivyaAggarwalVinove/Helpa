@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,6 +26,11 @@ namespace Helpa.Utility
         public static bool isValidMobileNo(string number)
         {
             return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
+        }
+
+        public static string ToTitleCase(string str)
+        {
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str.ToLower());
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Helpa
             mapRegister.IsShowingUser = true;
         }
 
-        async void OnLocationSearch(Object sender, EventArgs eventArgs)
+        async void OnLocationSearch(object sender, EventArgs eventArgs)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace Helpa
             //BindingContext = lm;
         }
 
-        void OnLocationSelected(Object sender, EventArgs eventArgs)
+        void OnLocationSelected(object sender, EventArgs eventArgs)
         {            
             entryRegSearch3.Text = ((Label)sender).Text;
 

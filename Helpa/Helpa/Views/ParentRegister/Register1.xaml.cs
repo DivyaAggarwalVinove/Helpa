@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Helpa.Utility;
+using Plugin.Geolocator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,34 +16,63 @@ namespace Helpa
     {
         //RegisterViewModel1 vm = null;
 
-        public Register1()
+        public Register1(string userName, string gender, string phoneNumber, string email)
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
             IEnumerable<string> genderList = new List<string>() { "Male", "Female", "Rather no to say" };
             rgGender.ItemsSource = genderList;
-            //vm = new RegisterViewModel1();
-            //this.BindingContext = vm;
-            //MyRadioGroup.CheckedChanged += MyRadioGroup_CheckedChanged;
-            //this.MyRadioGroup.SelectedIndex = 3;
+            rgGender.SelectedItem = Utils.ToTitleCase( gender);
+
+            entryRegUsername1.Text = userName;
+            entryRegPhone1.Text = phoneNumber;
+            entryRegEmail1.Text = email;
+
+            SetLocation();
         }
 
-        //void MyRadioGroup_CheckedChanged(object sender, int e)
-        //{
-        //    var radio = sender as CustomRadioButton;
-        //    if (radio == null || radio.Id == -1) return;
-        //    //this.txtSelected.Text = radio.Text;
-        //    vm.SelectedIndex = this.MyRadioGroup.SelectedIndex;
-        //}
+        async void SetLocation()
+        { 
+            var locator = CrossGeolocator.Current;
+            TimeSpan ts = TimeSpan.FromTicks(1000000);
+            Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(ts);
+            var addr = await locator.GetAddressesForPositionAsync(new Plugin.Geolocator.Abstractions.Position(position.Latitude, position.Longitude), "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
+
+            var a = addr.FirstOrDefault();
+            entryRegSearch.Text = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode;
+        }
 
         void OnSignUpNext(object sender, EventArgs args)
         {
-            lParentSignUp.Text = "Parent Sign Up 2/2";
-            gridLocation.BackgroundColor = Color.FromHex("#FF748C");
-            svBasicInfo.IsVisible = false;
-            svLocationInfo.IsVisible = true;
-            //Navigation.PushAsync(new Register1());
+            if (string.IsNullOrEmpty(entryRegUsername1.Text))
+            {
+                DisplayAlert("Warning", "Please enter username", "Ok");
+            }
+            else if (string.IsNullOrEmpty(entryRegPhone1.Text))
+            {
+                DisplayAlert("Warning", "Please enter phone number", "Ok");
+            }
+            else if (string.IsNullOrEmpty(entryRegEmail1.Text))
+            {
+                DisplayAlert("Warning", "Please enter email", "Ok");
+            }
+            else if (Utils.isValidMobileNo(entryRegPhone1.Text))
+            {
+                DisplayAlert("Warning", "Please enter valid mobile number", "Ok");
+            }
+            else if (!Utils.isValidEmail(entryRegEmail1.Text))
+            {
+                DisplayAlert("Warning", "Please enter valid email", "Ok");
+            }
+            else
+            {
+                lParentSignUp.Text = "Parent Sign Up 2/2";
+                gridLocation.BackgroundColor = Color.FromHex("#FF748C");
+                svBasicInfo.IsVisible = false;
+                svLocationInfo.IsVisible = true;
+                //Navigation.PushAsync(new Register1());
+            }
         }
 
         void OnSignUpDone(object sender, EventArgs args)

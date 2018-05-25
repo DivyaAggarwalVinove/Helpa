@@ -31,7 +31,6 @@ namespace Helpa
         {
             try
             {
-
                 var locator = CrossGeolocator.Current;
                 TimeSpan ts = TimeSpan.FromTicks(1000000);
                 var position = await locator.GetPositionAsync(ts);

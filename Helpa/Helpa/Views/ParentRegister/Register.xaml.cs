@@ -37,9 +37,9 @@ namespace Helpa
             };
         }
 
-        public void GotoNext()
+        public void GotoNext(string userName, string gender, string phoneNumber, string email)
         {
-            Navigation.PushAsync(new Register1());
+            Navigation.PushAsync(new Register1(userName, gender, phoneNumber, email));
         }
 
         void OnSignUpEmailPhnClicked(object sender, EventArgs args)
@@ -140,7 +140,7 @@ namespace Helpa
             //helperModel.profileImage
             helperModel.gender = detailsInJson.GetValue("gender").ToString();
             helperModel.token = accessToken;
-            helperModel.userName = detailsInJson.GetValue("name").ToString();
+            helperModel.userName = detailsInJson.GetValue("id").ToString();
             helperModel.loginProvider = "Facebook";
             helperModel.role = "Helper".ToUpper();
 

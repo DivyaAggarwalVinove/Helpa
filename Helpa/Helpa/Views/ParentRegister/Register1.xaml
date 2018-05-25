@@ -84,7 +84,7 @@
                                 </Grid>
 
                                 <Grid Grid.Row="3">
-                                    <local:CustomEntry Placeholder="Username" PlaceholderColor="#939ba0" FontSize="14"/>
+                                    <local:CustomEntry x:Name="entryRegUsername1" Placeholder="Username" PlaceholderColor="#939ba0" FontSize="14"/>
                                 </Grid>
 
                                 <Grid Grid.Row="4">
@@ -96,7 +96,8 @@
                                         x:Name="rgGender"
                                         Orientation="Horizontal"                                     
                                         OnImg="radio_close.png" 
-                                        OffImg="radio_button.png" />
+                                        OffImg="radio_button.png"
+                                        SelectedItem="Male"/>
                                         <!--SelectedItem="{Binding GenderCollection}-->
                                 </Grid>
 
@@ -111,11 +112,11 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Grid Grid.Column="0" >
-                                        <local:CustomEntry Placeholder="+852" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                        <local:CustomEntry x:Name="entryRegCountryCode" Placeholder="+852" PlaceholderColor="#BDBFC0" FontSize="14"/>
                                     </Grid>
 
                                     <Grid Grid.Column="1">
-                                        <local:CustomEntry Placeholder="Phone Number" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                        <local:CustomEntry x:Name="entryRegPhone1" Placeholder="Phone Number" PlaceholderColor="#BDBFC0" FontSize="14"/>
                                     </Grid>
                                 </Grid>
 
@@ -130,7 +131,7 @@
                                     </Grid>
 
                                     <Grid Grid.Column="1">
-                                        <local:CustomEntry Placeholder="Enter SMS code here" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                        <local:CustomEntry x:Name="entryRegSmsCode1" Placeholder="Enter SMS code here" PlaceholderColor="#BDBFC0" FontSize="14"/>
                                     </Grid>
                                 </Grid>
 
@@ -165,7 +166,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Grid Grid.Column="0" HorizontalOptions="FillAndExpand">
-                                        <local:CustomEntry Placeholder="Email" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                        <local:CustomEntry x:Name="entryRegEmail1" Placeholder="Email" PlaceholderColor="#BDBFC0" FontSize="14"/>
                                     </Grid>
 
                                     <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="5,5,0,5">
