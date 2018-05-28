@@ -142,9 +142,9 @@ namespace Helpa
             helperModel.token = accessToken;
             helperModel.userName = detailsInJson.GetValue("id").ToString();
             helperModel.loginProvider = "Facebook";
-            helperModel.role = "Helper".ToUpper();
+            helperModel.role = "Parent".ToUpper();
 
-            await (new ParentRegisterServices()).RegisterExternal(helperModel);
+            await (new RegisterServices()).RegisterExternal(helperModel);
         }
 
         async void OnSignUp(object sender, EventArgs args)
@@ -173,7 +173,7 @@ namespace Helpa
                     helperModel.password = entryRegPwd.Text;
                     helperModel.role = "Helper".ToUpper();
 
-                    await (new ParentRegisterServices()).ParentRegister(helperModel);
+                    await (new RegisterServices()).RegisterService(helperModel);
                     //Navigation.PushAsync(new Register1());
                 }
             }
@@ -185,7 +185,7 @@ namespace Helpa
                 helperModel.password = entryRegPwd.Text;
                 helperModel.role = "Helper".ToUpper();
 
-                await (new ParentRegisterServices()).ParentRegister(helperModel);
+                await (new RegisterServices()).RegisterService(helperModel);
                 //Navigation.PushAsync(new Register1());
             }
         }

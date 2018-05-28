@@ -85,7 +85,6 @@ namespace Helpa.Droid
 
         public static Bitmap LoadBitmapFromView(Android.Views.View v)
         {
-
             if (v.MeasuredHeight <= 0)
             {
                 v.Measure(50, 50);

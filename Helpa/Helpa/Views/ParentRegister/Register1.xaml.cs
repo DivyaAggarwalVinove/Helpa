@@ -30,6 +30,16 @@ namespace Helpa
             entryRegEmail1.Text = email;
 
             SetLocation();
+
+            MessagingCenter.Subscribe<Register3, string>(this, "Selected Address", (sender, address) =>
+            {
+                entryRegSearch.Text = address;
+            });
+
+            MessagingCenter.Subscribe<Register2>(this, "Current Address", (sender) =>
+            {
+                SetLocation();
+            });
         }
 
         async void SetLocation()

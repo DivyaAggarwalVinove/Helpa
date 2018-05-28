@@ -21,6 +21,7 @@ namespace Helpa
 
         void OnClickYourLocation(object sender, EventArgs eventArgs)
         {
+            MessagingCenter.Send<Register2>(this, "Current Address");
             Navigation.PopAsync();
         }
     }

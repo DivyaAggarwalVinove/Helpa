@@ -69,4 +69,19 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\HelperRegister\HelperRegister.xaml.cs">
+      <DependentUpon>HelperRegister.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\HelperRegister\HelperRegister1.xaml.cs">
+      <DependentUpon>HelperRegister1.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\HelperRegister\HelperRegister2.xaml.cs">
+      <DependentUpon>HelperRegister2.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\HelperRegister\HelperRegister3.xaml.cs">
+      <DependentUpon>HelperRegister3.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

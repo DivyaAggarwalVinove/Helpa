@@ -47,14 +47,6 @@ namespace Helpa
                     Address = "394 Pacific Ave, San Francisco CA",
                     Id = "1"
                 };
-                //pin.Clicked += (sender, e) =>
-                //{
-                //    DisplayAlert("This is a tag", "Click click, click", "Cancel");
-                //    if (slHalfList.IsVisible == false)
-                //        slHalfList.IsVisible = true;
-                //    else
-                //        slHalfList.IsVisible = false;
-                //};
                 mapHelper.Pins.Add(pin);
 
                 mapHelper.Pins.Add(new Pin()
@@ -103,7 +95,7 @@ namespace Helpa
 
         void OnClickPostJob(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new Register());
+            Navigation.PushAsync(new HelperRegister());
         }
 
         void OnShowHelpersList(object sender, EventArgs args)

@@ -19,8 +19,7 @@ namespace Helpa
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            SetLocationOnMap();
-            
+            SetLocationOnMap();            
         }
 
         async void SetLocationOnMap()
@@ -52,20 +51,23 @@ namespace Helpa
             try
             {
                 ObservableCollection<LocationModel> locations = new ObservableCollection<LocationModel>();
-                var locator = CrossGeolocator.Current;
+                //var locator = CrossGeolocator.Current;
+                var locator = new Geocoder();
                 var address = ((CustomEntry)sender).Text;
                 List<string> addresses = new List<string>();
 
                 if (string.IsNullOrEmpty(address))
                     return;
 
-                IEnumerable<Plugin.Geolocator.Abstractions.Position> positions = await locator.GetPositionsForAddressAsync(address, "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
-                foreach (Plugin.Geolocator.Abstractions.Position item in positions)
+                IEnumerable<Xamarin.Forms.Maps.Position> positions = await locator.GetPositionsForAddressAsync(address);
+                foreach (Xamarin.Forms.Maps.Position item in positions)
                 {
-                    var addr = await locator.GetAddressesForPositionAsync(new Plugin.Geolocator.Abstractions.Position(item.Latitude, item.Longitude), "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
+                    IEnumerable<string> addr = await locator.GetAddressesForPositionAsync(new Xamarin.Forms.Maps.Position(item.Latitude, item.Longitude));
                     var a = addr.FirstOrDefault();
-                    locations.Add(new LocationModel { Address = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode });
-                    addresses.Add(a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode);
+                    //locations.Add(new LocationModel { Address = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode });
+                    locations.Add(new LocationModel { Address = a });
+
+                    //addresses.Add(a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode);
                 }
                 addressesView.ItemsSource = locations;
 
@@ -84,6 +86,14 @@ namespace Helpa
 
             ObservableCollection<LocationModel> locations = new ObservableCollection<LocationModel>();
             addressesView.ItemsSource = locations;
+        }
+
+        void OnClickNext(object sender, EventArgs eventArgs)
+        {
+            MessagingCenter.Send<Register3, string>(this, "Selected Address", entryRegSearch3.Text);
+            
+            Navigation.PopAsync();
+            Navigation.PopAsync();
         }
     }
 }

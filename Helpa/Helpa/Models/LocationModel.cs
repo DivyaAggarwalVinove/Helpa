@@ -9,22 +9,12 @@ namespace Helpa
 {
     class LocationModel : INotifyPropertyChanged
     {
-        //public ObservableCollection<LocationModel> locations { get; set; }
-
-        
+        //public ObservableCollection<LocationModel> locations { get; set; } 
 
         string address="";
         public string Address
         {
             get { return address; }
-
-            //set
-            //{
-            //    if (value == address) return;
-            //    address = value;
-            //    OnPropertyChanged("Address");
-            //}
-
             set
             {
                 SetProperty(ref address, value);

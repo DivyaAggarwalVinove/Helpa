@@ -68,7 +68,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <Button x:Name="btnRegNext3" Text="Next >" TextColor="White" BackgroundColor="#FF748C"
+                    <Button x:Name="btnRegNext3" Text="Next >" TextColor="White" BackgroundColor="#FF748C" Clicked="OnClickNext"
                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = -100}"
                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -100}"/>
                 </RelativeLayout> 

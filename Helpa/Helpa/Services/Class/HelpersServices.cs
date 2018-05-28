@@ -24,11 +24,9 @@ namespace Helpa
         public async Task<IEnumerable<HelpersModel>> GetHelpersList(bool forceRefresh = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
-            {
-                
+            {                
                 var json = await client.GetStringAsync($"api/get-icon-list");
                 //helpersModels = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<HelpersModel>>(json));
-                
             }
 
             return helpersModels;
