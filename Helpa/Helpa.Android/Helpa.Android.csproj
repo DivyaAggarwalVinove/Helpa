@@ -93,6 +93,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderer\ServiceButtonRendererAndroid.cs" />
     <Compile Include="CustomRenderer\CustomLabelRendererAndroid.cs" />
     <Compile Include="CustomRenderer\CustomButtonRendererAndroid.cs" />
     <Compile Include="CustomRenderer\CustomEntryRendererAndroid.cs" />
@@ -691,6 +692,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\radio_close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\service_button_style.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

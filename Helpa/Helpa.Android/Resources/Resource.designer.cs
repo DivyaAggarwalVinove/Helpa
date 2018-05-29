@@ -2618,26 +2618,26 @@ namespace Helpa.Droid
 			// aapt resource value: 0x7f020055
 			public const int avd_hide_password = 2130837589;
 			
-			// aapt resource value: 0x7f020193
-			public const int avd_hide_password_1 = 2130837907;
-			
 			// aapt resource value: 0x7f020194
-			public const int avd_hide_password_2 = 2130837908;
+			public const int avd_hide_password_1 = 2130837908;
 			
 			// aapt resource value: 0x7f020195
-			public const int avd_hide_password_3 = 2130837909;
+			public const int avd_hide_password_2 = 2130837909;
+			
+			// aapt resource value: 0x7f020196
+			public const int avd_hide_password_3 = 2130837910;
 			
 			// aapt resource value: 0x7f020056
 			public const int avd_show_password = 2130837590;
 			
-			// aapt resource value: 0x7f020196
-			public const int avd_show_password_1 = 2130837910;
-			
 			// aapt resource value: 0x7f020197
-			public const int avd_show_password_2 = 2130837911;
+			public const int avd_show_password_1 = 2130837911;
 			
 			// aapt resource value: 0x7f020198
-			public const int avd_show_password_3 = 2130837912;
+			public const int avd_show_password_2 = 2130837912;
+			
+			// aapt resource value: 0x7f020199
+			public const int avd_show_password_3 = 2130837913;
 			
 			// aapt resource value: 0x7f020057
 			public const int back = 2130837591;
@@ -3524,11 +3524,11 @@ namespace Helpa.Droid
 			// aapt resource value: 0x7f02017d
 			public const int notification_icon_background = 2130837885;
 			
-			// aapt resource value: 0x7f020191
-			public const int notification_template_icon_bg = 2130837905;
-			
 			// aapt resource value: 0x7f020192
-			public const int notification_template_icon_low_bg = 2130837906;
+			public const int notification_template_icon_bg = 2130837906;
+			
+			// aapt resource value: 0x7f020193
+			public const int notification_template_icon_low_bg = 2130837907;
 			
 			// aapt resource value: 0x7f02017e
 			public const int notification_tile_bg = 2130837886;
@@ -3576,16 +3576,19 @@ namespace Helpa.Droid
 			public const int send = 2130837900;
 			
 			// aapt resource value: 0x7f02018d
-			public const int share = 2130837901;
+			public const int service_button_style = 2130837901;
 			
 			// aapt resource value: 0x7f02018e
-			public const int splash = 2130837902;
+			public const int share = 2130837902;
 			
 			// aapt resource value: 0x7f02018f
-			public const int tooltip_frame_dark = 2130837903;
+			public const int splash = 2130837903;
 			
 			// aapt resource value: 0x7f020190
-			public const int tooltip_frame_light = 2130837904;
+			public const int tooltip_frame_dark = 2130837904;
+			
+			// aapt resource value: 0x7f020191
+			public const int tooltip_frame_light = 2130837905;
 			
 			static Drawable()
 			{

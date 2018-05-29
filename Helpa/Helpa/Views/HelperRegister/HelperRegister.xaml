@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Helpa"
              x:Class="Helpa.HelperRegister">
-    <ContentPage.Content>
-        <Grid RowSpacing="0" BackgroundColor="#F2F5F7">
+    <ContentPage.Content BackgroundColor="#F2F5F7">
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="0.1*"/>
@@ -15,7 +15,7 @@
                     <RowDefinition Height="0.1*"/>
                     <RowDefinition Height="0.18*"/>
                     <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.12*"/>
+                    <RowDefinition Height="0.1*"/>
                     <RowDefinition Height="0.1*"/>
                     <RowDefinition Height="0.1*"/>
                 </Grid.RowDefinitions>
@@ -37,7 +37,7 @@
                 </Grid>
                 
                 <Grid Grid.Row="4">
-                    <Button Text="Sign up with Google" BackgroundColor="White" TextColor="#BDBFC0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button Text="Sign up with Google" BackgroundColor="White" TextColor="#BDBFC0" Margin="0,5,0,5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
                 </Grid>
 
                 <Grid Grid.Row="5" ColumnSpacing="0">
@@ -64,7 +64,7 @@
             <Grid Grid.Row="1" RowSpacing="0" Margin="10,10,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.15*"/>
                     <RowDefinition Height="0.15*"/>
                     <RowDefinition Height="0.25*"/>
                 </Grid.RowDefinitions>
@@ -72,13 +72,18 @@
                 <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <Button x:Name="btnHelperSignUpEmailPhn" Text="Sign up with email or phone" IsVisible="True" Clicked="OnSignUpEmailPhnClicked" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
 
-                    <StackLayout x:Name="slHelperSignUpEmailPhn" Orientation="Vertical" IsVisible="False">
+                    <Grid x:Name="slHelperSignUpEmailPhn" RowSpacing="10" IsVisible="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.1*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <local:CustomEntry Grid.Row="0" x:Name="entryHelperRegEmail" Placeholder="Email or phone" FontSize="15" />
 
-                        <local:CustomEntry x:Name="entryHelperRegEmail" Placeholder="Email or phone" FontSize="15" />
+                        <local:CustomEntry Grid.Row="1" x:Name="entryHelperRegUsername" Placeholder="Username" FontSize="15" />
 
-                        <local:CustomEntry x:Name="entryHelperRegUsername" Placeholder="Username" FontSize="15" />
-
-                        <Grid>
+                        <Grid Grid.Row="2" BackgroundColor="White">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="8*" />
                                 <ColumnDefinition Width="2*" />
@@ -90,15 +95,15 @@
                                 </Image.GestureRecognizers>
                             </Image>
                         </Grid>
-                    </StackLayout>
+                    </Grid>
                 </Grid>
 
                 <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                    <Button Text="Already have an account?" TextColor="#828e93" BackgroundColor="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button Text="Already have an account?" TextColor="#828e93" BackgroundColor="Transparent" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                 </Grid>
 
                 <Grid Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                    <Button Text="Login" TextColor="#72c6e5" BackgroundColor="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Button Text="Login" TextColor="#72c6e5" BackgroundColor="Transparent" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                 </Grid>
 
                 <Grid Grid.Row="3" VerticalOptions="Center" HorizontalOptions="End">

@@ -1,4 +1,5 @@
-﻿using Helpa.Utility;
+﻿using AsNum.XFControls;
+using Helpa.Utility;
 using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,47 @@ namespace Helpa
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
+
             IEnumerable<string> genderList = new List<string>() { "Male", "Female", "Rather no to say" };
             rgHelperGender.ItemsSource = genderList;
             rgHelperGender.SelectedItem = Utils.ToTitleCase( gender);
+            StackLayout content = (StackLayout) rgHelperGender.Content;
+            Radio rg = null;
+            for (int i = 0; i < content.Children.Count; i++)
+            {
+                rg = (Radio)(content.Children[i]);
+                rg.Margin = new Thickness(0, 0, 20, 0);
+                rg.VerticalOptions = LayoutOptions.Center;
+            }
+
+            IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
+            rgHelperStatus.ItemsSource = statusList;
+            content = (StackLayout)rgHelperGender.Content;
+            rg = null;
+            for (int i = 0; i < content.Children.Count; i++)
+            {
+                rg = (Radio)(content.Children[i]);
+                rg.Margin = new Thickness(0, 0, 20, 0);
+                rg.VerticalOptions = LayoutOptions.Center;
+            }
 
             entryHelperRegUsername1.Text = userName;
             entryHelperRegPhone1.Text = phoneNumber;
             entryHelperRegEmail1.Text = email;
+
+            for (int i = 0; i < (15 - 1) / 4 + 1; i++)
+                gridServices.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
+            for (int i = 0; i < 4; i++)
+                gridServices.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
+            ServiceButton serviceButton;
+            for(int i=0;i<15;i++)
+            {
+                serviceButton = new ServiceButton();
+                serviceButton.Text = "Childcare";
+                gridServices.Children.Add(serviceButton, i%4, i/4);
+            }
 
             SetLocation();
 
@@ -51,7 +86,7 @@ namespace Helpa
             entryHelperRegSearch.Text = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode;
         }
 
-        void OnSignUpNext(object sender, EventArgs args)
+        void OnHelperSignUpNext1(object sender, EventArgs args)
         {
             if (string.IsNullOrEmpty(entryHelperRegUsername1.Text))
             {
@@ -75,12 +110,16 @@ namespace Helpa
             }
             else
             {
-                lHelperSignUp.Text = "Helper Sign Up 2/2";
-                gridHelperLocation.BackgroundColor = Color.FromHex("#FF748C");
+                lHelperSignUp.Text = "Helper Sign Up 2/3";
+                gridHelperEditServices.BackgroundColor = Color.FromHex("#FF748C");
                 svHelperBasicInfo.IsVisible = false;
-                svHelperLocationInfo.IsVisible = true;
+                svHelperEditServices.IsVisible = true;
                 //Navigation.PushAsync(new Register1());
             }
+        }
+
+        void OnHelperSignUpNext2(object sender, EventArgs args)
+        {
         }
 
         void OnSignUpDone(object sender, EventArgs args)
@@ -89,12 +128,12 @@ namespace Helpa
 
         protected override bool OnBackButtonPressed()
         {
-            if (svHelperLocationInfo.IsVisible)
+            if (svHelperEditServices.IsVisible)
             {
-                lHelperSignUp.Text = "Parent Sign Up 1/2";
-                gridHelperLocation.BackgroundColor = Color.FromHex("#818A8F");
+                lHelperSignUp.Text = "Helper Sign Up 1/2";
+                gridHelperEditServices.BackgroundColor = Color.FromHex("#818A8F");
                 svHelperBasicInfo.IsVisible = true;
-                svHelperLocationInfo.IsVisible = false;
+                svHelperEditServices.IsVisible = false;
 
                 return true;
             }

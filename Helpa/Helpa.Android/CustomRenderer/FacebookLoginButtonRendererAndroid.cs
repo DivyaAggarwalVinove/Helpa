@@ -49,9 +49,11 @@ namespace Helpa.Droid
             //loginButton.SetBackgroundDrawable(Resources.GetDrawable( Resource.Drawable.fb));
             loginButton.RegisterCallback(MainActivity.CallbackManager, facebookCallback);
             loginButton.SetReadPermissions(new string[] { "email", "user_gender" });
-
+                        
+            loginButton.SetCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             loginButton.TextAlignment = Android.Views.TextAlignment.Center;
-            //loginButton.Text = "Sign up with Facebook";
+            loginButton.Gravity = Android.Views.GravityFlags.Center;
+            loginButton.Text = "Sign up with Facebook";
             base.SetNativeControl(loginButton);
         }
     }
