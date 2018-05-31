@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms;
+using Helpa.Models;
 
 namespace Helpa
 {

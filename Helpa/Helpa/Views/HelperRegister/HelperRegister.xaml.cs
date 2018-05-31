@@ -1,4 +1,5 @@
-﻿using Helpa.Services;
+﻿using Helpa.Models;
+using Helpa.Services;
 using Helpa.Utility;
 using Newtonsoft.Json.Linq;
 using System;
@@ -30,23 +31,24 @@ namespace Helpa
             {
                 JObject detailsInJson = await (new FacebookServices().GetFacebookProfileAsync(token));
 
-                HelpersModel helperModel = new HelpersModel();
-                helperModel.email = detailsInJson.GetValue("email").ToString();
-                //helperModel.profileImage
-                helperModel.gender = detailsInJson.GetValue("gender").ToString();
-                helperModel.token = token;
-                helperModel.userName = detailsInJson.GetValue("id").ToString();
-                helperModel.loginProvider = "Facebook";
-                helperModel.role = "Helper".ToUpper();
+                RegisterUserModel userModel = new RegisterUserModel();
+                userModel.Email = detailsInJson.GetValue("email").ToString();
+                //userModel.profileImage
+                userModel.Gender = detailsInJson.GetValue("gender").ToString();
+                userModel.Token = token;
+                userModel.UserName = detailsInJson.GetValue("id").ToString();
+                userModel.LoginProvider = "Facebook";
+                userModel.Role = "Helper".ToUpper();
 
-                await (new RegisterServices()).RegisterExternal(helperModel);
+                await (new RegisterServices()).RegisterExternal(userModel);
                 //await GetFacebookProfileAsync(token);
             };
         }
 
-        public void GotoNext(string userName, string gender, string phoneNumber, string email)
+        public void GotoNext(RegisterUserModel userModel)
         {
-            Navigation.PushAsync(new HelperRegister1(userName, gender, phoneNumber, email));
+            App.Database.SaveUserAsync(userModel);
+            Navigation.PushAsync(new HelperRegister1(userModel));
         }
 
         void OnSignUpEmailPhnClicked(object sender, EventArgs args)
@@ -86,30 +88,32 @@ namespace Helpa
             {
                 await DisplayAlert("Warning", "Please enter password.", "Ok");
             }
-            else if (!Utils.isValidEmail(entryHelperRegEmail.Text))
+            else if (!Utils.IsValidEmail(entryHelperRegEmail.Text))
             {
-                if (!Utils.isValidMobileNo(entryHelperRegEmail.Text))
+                if (!Utils.IsValidMobileNo(entryHelperRegEmail.Text))
                     await DisplayAlert("Warning", "Please enter valid email or phone number.", "Ok");
                 else
                 {
-                    HelpersModel helperModel = new HelpersModel();
-                    helperModel.phoneNumber = entryHelperRegEmail.Text;
-                    helperModel.userName = entryHelperRegUsername.Text;
-                    helperModel.password = entryHelperRegPwd.Text;
-                    helperModel.role = "Helper".ToUpper();
+                    RegisterUserModel userModel = new RegisterUserModel();
+                    userModel.PhoneNumber = entryHelperRegEmail.Text;
+                    //helperModel.profileImage                    
+                    userModel.UserName = entryHelperRegUsername.Text;
+                    userModel.Password = entryHelperRegPwd.Text;
+                    userModel.Role = "Helper".ToUpper();
 
-                    await (new RegisterServices()).RegisterService(helperModel);                    
+                    await (new RegisterServices()).RegisterService(userModel);                    
                 }
             }
             else
             {
-                HelpersModel helperModel = new HelpersModel();
-                helperModel.email = entryHelperRegEmail.Text;
-                helperModel.userName = entryHelperRegUsername.Text;
-                helperModel.password = entryHelperRegPwd.Text;
-                helperModel.role = "Helper".ToUpper();
+                RegisterUserModel userModel = new RegisterUserModel();
+                userModel.Email = entryHelperRegEmail.Text;
+                //helperModel.profileImage                    
+                userModel.UserName = entryHelperRegUsername.Text;
+                userModel.Password = entryHelperRegPwd.Text;
+                userModel.Role = "Helper".ToUpper();
 
-                await (new RegisterServices()).RegisterService(helperModel);
+                await (new RegisterServices()).RegisterService(userModel);
             }
         }
 

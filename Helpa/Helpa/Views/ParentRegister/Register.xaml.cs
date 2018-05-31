@@ -1,4 +1,5 @@
-﻿using Helpa.Services;
+﻿using Helpa.Models;
+using Helpa.Services;
 using Helpa.Utility;
 using Newtonsoft.Json.Linq;
 using System;
@@ -37,9 +38,9 @@ namespace Helpa
             };
         }
 
-        public void GotoNext(string userName, string gender, string phoneNumber, string email)
+        public void GotoNext(RegisterUserModel userModel)
         {
-            Navigation.PushAsync(new Register1(userName, gender, phoneNumber, email));
+            Navigation.PushAsync(new HelperRegister1(userModel));
         }
 
         void OnSignUpEmailPhnClicked(object sender, EventArgs args)
@@ -135,16 +136,16 @@ namespace Helpa
 
             var detailsInJson = JObject.Parse(userDetails);
 
-            HelpersModel helperModel = new HelpersModel();
-            helperModel.email = detailsInJson.GetValue("email").ToString();
+            RegisterUserModel userModel = new RegisterUserModel();
+            userModel.Email = detailsInJson.GetValue("email").ToString();
             //helperModel.profileImage
-            helperModel.gender = detailsInJson.GetValue("gender").ToString();
-            helperModel.token = accessToken;
-            helperModel.userName = detailsInJson.GetValue("id").ToString();
-            helperModel.loginProvider = "Facebook";
-            helperModel.role = "Parent".ToUpper();
+            userModel.Gender = detailsInJson.GetValue("gender").ToString();
+            userModel.Token = accessToken;
+            userModel.UserName = detailsInJson.GetValue("id").ToString();
+            userModel.LoginProvider = "Facebook";
+            userModel.Role = "Parent".ToUpper();
 
-            await (new RegisterServices()).RegisterExternal(helperModel);
+            await (new RegisterServices()).RegisterExternal(userModel);
         }
 
         async void OnSignUp(object sender, EventArgs args)
@@ -161,31 +162,31 @@ namespace Helpa
             {
                 await DisplayAlert("Warning", "Please enter password.", "Ok");
             }
-            else if (!Utils.isValidEmail(entryRegEmail.Text))
+            else if (!Utils.IsValidEmail(entryRegEmail.Text))
             {
-                if (!Utils.isValidMobileNo(entryRegEmail.Text))
+                if (!Utils.IsValidMobileNo(entryRegEmail.Text))
                     await DisplayAlert("Warning", "Please enter valid email or phone number.", "Ok");
                 else
                 {
-                    HelpersModel helperModel = new HelpersModel();
-                    helperModel.phoneNumber = entryRegEmail.Text;
-                    helperModel.userName = entryRegUsername.Text;
-                    helperModel.password = entryRegPwd.Text;
-                    helperModel.role = "Helper".ToUpper();
+                    RegisterUserModel userModel = new RegisterUserModel();
+                    userModel.PhoneNumber = entryRegEmail.Text;
+                    userModel.UserName = entryRegUsername.Text;
+                    userModel.Password = entryRegPwd.Text;
+                    userModel.Role = "Helper".ToUpper();
 
-                    await (new RegisterServices()).RegisterService(helperModel);
+                    await (new RegisterServices()).RegisterService(userModel);
                     //Navigation.PushAsync(new Register1());
                 }
             }
             else
             {
-                HelpersModel helperModel = new HelpersModel();
-                helperModel.email = entryRegEmail.Text;
-                helperModel.userName = entryRegUsername.Text;
-                helperModel.password = entryRegPwd.Text;
-                helperModel.role = "Helper".ToUpper();
+                RegisterUserModel userModel = new RegisterUserModel();
+                userModel.Email = entryRegEmail.Text;
+                userModel.UserName = entryRegUsername.Text;
+                userModel.Password = entryRegPwd.Text;
+                userModel.Role = "Helper".ToUpper();
 
-                await (new RegisterServices()).RegisterService(helperModel);
+                await (new RegisterServices()).RegisterService(userModel);
                 //Navigation.PushAsync(new Register1());
             }
         }

@@ -1,21 +1,16 @@
-﻿using Android;
-using Android.Content;
-using Android.Content.PM;
+﻿using Android.Content;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Graphics;
-using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
-using Helpa;
 using Helpa.Droid;
+using Helpa.Models;
+using Helpa;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Maps.Android;
 using Xamarin.Forms.Platform.Android;
-
-using Plugin.Permissions;
-using Android.Support.V4.App;
 
 [assembly: ExportRenderer(typeof(CustomMap), typeof(CustomMapRendererAndroid))]
 namespace Helpa.Droid

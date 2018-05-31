@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Helpa
+namespace Helpa.Models
 {
     class LocationModel : INotifyPropertyChanged
     {

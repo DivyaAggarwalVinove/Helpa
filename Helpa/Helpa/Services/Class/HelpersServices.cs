@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Helpa.Models;
+using Helpa.Utility;
+using Newtonsoft.Json;
 using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
@@ -10,26 +12,28 @@ namespace Helpa
 {
     class HelpersServices : IHelpersServices<HelpersModel>
     {
-        HttpClient client;
-        IEnumerable<HelpersModel> helpersModels;
-
-        public HelpersServices()
+        public async Task<IEnumerable<HelpersModel>> GetHelpersList(int radius, double latitude, double longitude)
         {
-            client = new HttpClient();
-            //client.BaseAddress = new Uri($"{App.BackendUrl}/");
+            IEnumerable<HelpersModel> helpers = new List<HelpersModel>();
 
-            helpersModels = new List<HelpersModel>();
-        }
+            if (CrossConnectivity.Current.IsConnected)
+            { 
+                HttpClient httpClient = new HttpClient();
+                var uri = new Uri(string.Concat(Constants.baseUrl, "api/HelpersHome?Radius=" + radius +"&Latitude=" + latitude +"&Longitude="+longitude));
 
-        public async Task<IEnumerable<HelpersModel>> GetHelpersList(bool forceRefresh = false)
-        {
-            if (forceRefresh && CrossConnectivity.Current.IsConnected)
-            {                
-                var json = await client.GetStringAsync($"api/get-icon-list");
-                //helpersModels = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<HelpersModel>>(json));
+                var response = await httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    helpers = JsonConvert.DeserializeObject<IEnumerable<HelpersModel>>(result);
+                }
+                else
+                {
+                }
             }
 
-            return helpersModels;
+            return helpers;
         }
+
     }
 }

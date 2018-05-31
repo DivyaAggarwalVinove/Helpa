@@ -107,7 +107,7 @@
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
                               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}" />
 
-                    <ListView x:Name="lvFullHelpa" ItemsSource="{Binding helperList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False"
+                    <ListView x:Name="lvFullHelpa" ItemsSource="{Binding HelperList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False"
                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
@@ -285,7 +285,7 @@
                                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = 0}"
                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.15, Constant = 0}"/>
 
-                        <ListView x:Name="lvHalfHelpa" ItemsSource="{Binding helperList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False"
+                        <ListView x:Name="lvHalfHelpa" ItemsSource="{Binding HelperList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False"
                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"

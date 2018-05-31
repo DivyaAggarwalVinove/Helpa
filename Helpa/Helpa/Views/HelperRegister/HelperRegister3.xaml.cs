@@ -1,4 +1,5 @@
-﻿using Plugin.Geolocator;
+﻿using Helpa.Models;
+using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;

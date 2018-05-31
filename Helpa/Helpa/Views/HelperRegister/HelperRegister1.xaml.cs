@@ -1,4 +1,5 @@
 ﻿using AsNum.XFControls;
+using Helpa.Models;
 using Helpa.Utility;
 using Plugin.Geolocator;
 using System;
@@ -15,16 +16,53 @@ namespace Helpa
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HelperRegister1 : ContentPage
     {
-        public HelperRegister1(string userName, string gender, string phoneNumber, string email)
+        RegisterUserModel currentUser;
+
+        public HelperRegister1(RegisterUserModel user)
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
+            currentUser = user;
 
+            entryHelperRegUsername1.Text = user.UserName;
+            entryHelperRegPhone1.Text = user.PhoneNumber;
+            entryHelperRegEmail1.Text = user.Email;
+
+            SetGender(user.Gender);
+            SetStatus();
+            SetServices();
+            //SetLocation();
+
+            if (user.IsVerified)
+            {
+                GoToEditServices();
+            }
+            else
+            {
+                GoToBasicInfo();
+            }
+
+            //MessagingCenter.Subscribe<HelperRegister3, string>(this, "Selected Address", (sender, address) =>
+            //{
+            //    entryHelperRegSearch.Text = address;
+            //});
+
+            //MessagingCenter.Subscribe<HelperRegister2>(this, "Current Address", (sender) =>
+            //{
+            //    SetLocation();
+            //});
+        }
+
+        void SetGender(string gender)
+        {
             IEnumerable<string> genderList = new List<string>() { "Male", "Female", "Rather no to say" };
             rgHelperGender.ItemsSource = genderList;
-            rgHelperGender.SelectedItem = Utils.ToTitleCase( gender);
-            StackLayout content = (StackLayout) rgHelperGender.Content;
+
+            if (gender != null)
+                rgHelperGender.SelectedItem = Utils.ToTitleCase(gender);
+
+            StackLayout content = (StackLayout)rgHelperGender.Content;
             Radio rg = null;
             for (int i = 0; i < content.Children.Count; i++)
             {
@@ -32,47 +70,47 @@ namespace Helpa
                 rg.Margin = new Thickness(0, 0, 20, 0);
                 rg.VerticalOptions = LayoutOptions.Center;
             }
+        }
 
+        void SetStatus()
+        {
             IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
             rgHelperStatus.ItemsSource = statusList;
-            content = (StackLayout)rgHelperGender.Content;
-            rg = null;
+            StackLayout content = (StackLayout)rgHelperStatus.Content;
+            Radio rg = null;
             for (int i = 0; i < content.Children.Count; i++)
             {
                 rg = (Radio)(content.Children[i]);
                 rg.Margin = new Thickness(0, 0, 20, 0);
                 rg.VerticalOptions = LayoutOptions.Center;
             }
+        }
 
-            entryHelperRegUsername1.Text = userName;
-            entryHelperRegPhone1.Text = phoneNumber;
-            entryHelperRegEmail1.Text = email;
+        async void SetServices()
+        {
+            #region set services
+            IEnumerable<ServiceModel> services = await (new Services.Services()).GetServicesAsync();
 
-            for (int i = 0; i < (15 - 1) / 4 + 1; i++)
-                gridServices.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            int servicesCount = services.Count();
+            for (int i = 0; i < (servicesCount-1)/3+1; i++)
+                gridServices.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            //gridServices.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
-            for (int i = 0; i < 4; i++)
-                gridServices.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            for (int i = 0; i < 3; i++)
+                gridServices.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
             ServiceButton serviceButton;
-            for(int i=0;i<15;i++)
+            for (int i = 0; i < servicesCount; i++)
             {
                 serviceButton = new ServiceButton();
-                serviceButton.Text = "Childcare";
-                gridServices.Children.Add(serviceButton, i%4, i/4);
+                serviceButton.Text = services.ElementAt(i).ServiceName;
+                gridServices.Children.Add(serviceButton, i % 3, i / 3);
             }
 
-            SetLocation();
-
-            MessagingCenter.Subscribe<HelperRegister3, string>(this, "Selected Address", (sender, address) =>
-            {
-                entryHelperRegSearch.Text = address;
-            });
-
-            MessagingCenter.Subscribe<HelperRegister2>(this, "Current Address", (sender) =>
-            {
-                SetLocation();
-            });
+            //serviceButton = new ServiceButton();
+            //serviceButton.Text = "      ";
+            //gridServices.Children.Add(serviceButton, i % 3, i / 3);
+            #endregion
         }
 
         async void SetLocation()
@@ -100,20 +138,23 @@ namespace Helpa
             {
                 DisplayAlert("Warning", "Please enter email", "Ok");
             }
-            else if (Utils.isValidMobileNo(entryHelperRegPhone1.Text))
+            else if (Utils.IsValidMobileNo(entryHelperRegPhone1.Text))
             {
                 DisplayAlert("Warning", "Please enter valid mobile number", "Ok");
             }
-            else if (!Utils.isValidEmail(entryHelperRegEmail1.Text))
+            else if (!Utils.IsValidEmail(entryHelperRegEmail1.Text))
             {
                 DisplayAlert("Warning", "Please enter valid email", "Ok");
             }
             else
             {
-                lHelperSignUp.Text = "Helper Sign Up 2/3";
-                gridHelperEditServices.BackgroundColor = Color.FromHex("#FF748C");
-                svHelperBasicInfo.IsVisible = false;
-                svHelperEditServices.IsVisible = true;
+                currentUser.IsVerified = true;
+                currentUser.PhoneNumber = entryHelperRegPhone1.Text;
+                currentUser.Gender = rgHelperGender.SelectedItem.ToString();
+                currentUser.Email = entryHelperRegEmail1.Text;
+                
+                App.Database.SaveUserAsync(currentUser);
+                GoToEditServices();
                 //Navigation.PushAsync(new Register1());
             }
         }
@@ -130,11 +171,7 @@ namespace Helpa
         {
             if (svHelperEditServices.IsVisible)
             {
-                lHelperSignUp.Text = "Helper Sign Up 1/2";
-                gridHelperEditServices.BackgroundColor = Color.FromHex("#818A8F");
-                svHelperBasicInfo.IsVisible = true;
-                svHelperEditServices.IsVisible = false;
-
+                GoToBasicInfo();
                 return true;
             }
             else
@@ -142,9 +179,31 @@ namespace Helpa
                 return base.OnBackButtonPressed();
             }
         }
+
         void OnFocus(object sender, EventArgs args)
         {
             Navigation.PushAsync(new HelperRegister2());
+        }
+
+        void GoToBasicInfo()
+        {
+            lHelperSignUp.Text = "Helper Sign Up 1/2";
+            gridHelperEditServices.BackgroundColor = Color.FromHex("#818A8F");
+            svHelperBasicInfo.IsVisible = true;
+            svHelperEditServices.IsVisible = false;
+        }
+
+        void GoToEditServices()
+        {
+            lHelperSignUp.Text = "Helper Sign Up 2/3";
+            gridHelperEditServices.BackgroundColor = Color.FromHex("#FF748C");
+            svHelperBasicInfo.IsVisible = false;
+            svHelperEditServices.IsVisible = true;
+        }
+
+        void BuildTrust()
+        {
+
         }
     }
 }

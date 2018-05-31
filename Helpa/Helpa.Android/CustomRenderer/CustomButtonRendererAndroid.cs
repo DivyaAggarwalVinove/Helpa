@@ -1,8 +1,8 @@
-﻿using Helpa;
-using Helpa.Droid;
+﻿using Helpa.Droid;
 using Android.Content;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Helpa;
 
 [assembly: ExportRenderer(typeof(CustomButton), typeof(CustomButtonRendererAndroid))]
 namespace Helpa.Droid

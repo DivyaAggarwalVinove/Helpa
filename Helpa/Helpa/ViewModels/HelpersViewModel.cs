@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Helpa.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Helpa.ViewModels
@@ -11,21 +13,21 @@ namespace Helpa.ViewModels
     public class HelpersViewModel : INotifyPropertyChanged
     {
         public IHelpersServices<HelpersModel> DataStore => DependencyService.Get<IHelpersServices<HelpersModel>>();
-        public ObservableCollection<HelpersModel> helperList { get; set; }
+        public ObservableCollection<HelpersModel> HelperList { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Helpers context;
 
         public HelpersViewModel(Helpers helpers)
         {
-            helperList = new ObservableCollection<HelpersModel>();
+            HelperList = new ObservableCollection<HelpersModel>();
             context = helpers;
-            //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            ExecuteLoadItemsCommand();
-            //LoadItemsCommand.Execute(null);
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            //ExecuteLoadItemsCommand();
+            LoadItemsCommand.Execute(null);
         }
 
-        //private async Task ExecuteLoadItemsCommand()
-        private void ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand()
+        //private void ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -34,87 +36,89 @@ namespace Helpa.ViewModels
 
             try
             {
-                helperList.Clear();
+                HelperList.Clear();
 
                 // Call api to get data from server.
-                //var helpers = await DataStore.GetHelpersList(true);
-                HelpersModel helper = new HelpersModel();
-                helper.userName = "Army Rose";
-                helper.service = "Childcare";
-                helper.price = "From $100 per hour";
-                helper.location = "Carble Garden";
-                helper.status = "Available";
-                helper.profileImage = "picture2.png";
-                helper.rating = 4.3f;
-                helper.rating_count = "4.3(" + "32)";
-                helper.count1 = 37;
-                helper.count2 = 44;
-                helperList.Add(helper);
+                //var helpers = await DataStore.GetHelpersList(10000, 28.4514279, 77.0704678);
+                var helpers = await (new HelpersServices()).GetHelpersList(10000, 28.4514279, 77.0704678);
 
-                helper = new HelpersModel();
-                helper.userName = "HSBC";
-                helper.service = "Bank";
-                helper.price = "That is reliable";
-                helper.location = "Carble Garden";
-                helper.status = "Sponsored";
-                helper.profileImage = "message_picture3.png";
-                helper.rating = 0;
-                helper.rating_count = "0.0(" + "0)";
-                helper.count1 = 0;
-                helper.count2 = 0;
-                helperList.Add(helper);
+                //HelpersModel helper = new HelpersModel();
+                //helper.userName = "Army Rose";
+                //helper.service = "Childcare";
+                //helper.HelpersInLocalties[0].price = "From $100 per hour";
+                //helper.LocalityName = "Carble Garden";
+                //helper.HelpersInLocalties[0].Status = "Available";
+                //helper.HelpersInLocalties[0].ProfilePicture = "picture2.png";
+                //helper.HelpersInLocalties[0].AverageRating = 4.3f;
+                //helper.HelpersInLocalties[0].AverageRatingCount = "4.3(" + "32)";
+                //helper.HelpersInLocalties[0].ConnectionCount = 37;
+                //helper.HelpersInLocalties[0].EnquiredUserCount = 44;
+                //helperList.Add(helper);
 
-                helper = new HelpersModel();
-                helper.userName = "Emily Clarkson";
-                helper.service = "Childcare";
-                helper.price = "From $100 per hour";
-                helper.location = "Carble Garden";
-                helper.status = "Not Available";
-                helper.profileImage = "picture.png";
-                helper.rating = 4.4f;
-                helper.rating_count = "4.4(" +"19)";
-                helper.count1 = 23;
-                helper.count2 = 97;
-                helperList.Add(helper);
+                //helper = new HelpersModel();
+                //helper.userName = "HSBC";
+                //helper.service = "Bank";
+                //helper.price = "That is reliable";
+                //helper.location = "Carble Garden";
+                //helper.status = "Sponsored";
+                //helper.profileImage = "message_picture3.png";
+                //helper.rating = 0;
+                //helper.rating_count = "0.0(" + "0)";
+                //helper.count1 = 0;
+                //helper.count2 = 0;
+                //helperList.Add(helper);
 
-                helper = new HelpersModel();
-                helper.userName = "Army Rose";
-                helper.service = "Childcare";
-                helper.price = "From $100 per hour";
-                helper.location = "Carble Garden";
-                helper.status = "Available";
-                helper.profileImage = "picture2.png";
-                helper.rating = 4.3f;
-                helper.rating_count = "4.3(" + "32)";
-                helper.count1 = 37;
-                helper.count2 = 44;
-                helperList.Add(helper);
+                //helper = new HelpersModel();
+                //helper.userName = "Emily Clarkson";
+                //helper.service = "Childcare";
+                //helper.price = "From $100 per hour";
+                //helper.location = "Carble Garden";
+                //helper.status = "Not Available";
+                //helper.profileImage = "picture.png";
+                //helper.rating = 4.4f;
+                //helper.rating_count = "4.4(" +"19)";
+                //helper.count1 = 23;
+                //helper.count2 = 97;
+                //helperList.Add(helper);
 
-                helper = new HelpersModel();
-                helper.userName = "HSBC";
-                helper.service = "Bank";
-                helper.price = "That is reliable";
-                helper.location = "Carble Garden";
-                helper.status = "Sponsored";
-                helper.profileImage = "message_picture3.png";
-                helper.rating = 0;
-                helper.rating_count = "0.0(" + "0)";
-                helper.count1 = 0;
-                helper.count2 = 0;
-                helperList.Add(helper);
+                //helper = new HelpersModel();
+                //helper.userName = "Army Rose";
+                //helper.service = "Childcare";
+                //helper.price = "From $100 per hour";
+                //helper.location = "Carble Garden";
+                //helper.status = "Available";
+                //helper.profileImage = "picture2.png";
+                //helper.rating = 4.3f;
+                //helper.rating_count = "4.3(" + "32)";
+                //helper.count1 = 37;
+                //helper.count2 = 44;
+                //helperList.Add(helper);
 
-                helper = new HelpersModel();
-                helper.userName = "Emily Clarkson";
-                helper.service = "Childcare";
-                helper.price = "From $100 per hour";
-                helper.location = "Carble Garden";
-                helper.status = "Not Available";
-                helper.profileImage = "picture.png";
-                helper.rating = 4.4f;
-                helper.rating_count = "4.4(" + "19)";
-                helper.count1 = 23;
-                helper.count2 = 97;
-                helperList.Add(helper);
+                //helper = new HelpersModel();
+                //helper.userName = "HSBC";
+                //helper.service = "Bank";
+                //helper.price = "That is reliable";
+                //helper.location = "Carble Garden";
+                //helper.status = "Sponsored";
+                //helper.profileImage = "message_picture3.png";
+                //helper.rating = 0;
+                //helper.rating_count = "0.0(" + "0)";
+                //helper.count1 = 0;
+                //helper.count2 = 0;
+                //helperList.Add(helper);
+
+                //helper = new HelpersModel();
+                //helper.userName = "Emily Clarkson";
+                //helper.service = "Childcare";
+                //helper.price = "From $100 per hour";
+                //helper.location = "Carble Garden";
+                //helper.status = "Not Available";
+                //helper.profileImage = "picture.png";
+                //helper.rating = 4.4f;
+                //helper.rating_count = "4.4(" + "19)";
+                //helper.count1 = 23;
+                //helper.count2 = 97;
+                //helperList.Add(helper);
                 /*foreach (var item in helpers)
                 {
                     //Parse list

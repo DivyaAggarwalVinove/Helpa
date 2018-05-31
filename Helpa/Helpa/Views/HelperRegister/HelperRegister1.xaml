@@ -226,7 +226,7 @@
 
                             <Grid Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                 <ScrollView>
-                                    <Grid x:Name="gridServices"/>
+                                    <Grid x:Name="gridServices" ColumnSpacing="10" RowSpacing="5"/>
                                 </ScrollView>
                             </Grid>
 

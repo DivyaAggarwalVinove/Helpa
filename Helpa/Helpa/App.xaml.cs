@@ -3,11 +3,31 @@ using System.Diagnostics;
 using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
+using Helpa.Services;
 
 namespace Helpa
 {
     public partial class App : Application
 	{
+        /// <summary>
+        /// Create database
+        /// </summary>
+
+        #region Database
+        static Database database;
+        public static Database Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new Database(DependencyService.Get<IDatabaseServices>().GetLocalFilePath("helpa.db3"));
+                }
+                return database;
+            }
+        }
+        #endregion
+
         int selectedPage = 0;
         List<KeyValuePair<string, string>> listTabs;
         List<string> imagesName;

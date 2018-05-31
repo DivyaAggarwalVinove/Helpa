@@ -10,7 +10,7 @@ namespace Helpa.Utility
     public class Utils
     {
 
-        public static bool isValidEmail(string email)
+        public static bool IsValidEmail(string email)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace Helpa.Utility
             }
         }
 
-        public static bool isValidMobileNo(string number)
+        public static bool IsValidMobileNo(string number)
         {
             return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
         }

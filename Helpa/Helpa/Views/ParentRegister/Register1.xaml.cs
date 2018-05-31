@@ -67,11 +67,11 @@ namespace Helpa
             {
                 DisplayAlert("Warning", "Please enter email", "Ok");
             }
-            else if (Utils.isValidMobileNo(entryRegPhone1.Text))
+            else if (Utils.IsValidMobileNo(entryRegPhone1.Text))
             {
                 DisplayAlert("Warning", "Please enter valid mobile number", "Ok");
             }
-            else if (!Utils.isValidEmail(entryRegEmail1.Text))
+            else if (!Utils.IsValidEmail(entryRegEmail1.Text))
             {
                 DisplayAlert("Warning", "Please enter valid email", "Ok");
             }

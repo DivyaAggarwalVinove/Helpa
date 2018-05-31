@@ -73,6 +73,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.4.118</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRating.Android">
       <Version>16.1.0.37</Version>
     </PackageReference>
@@ -104,6 +107,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DatabaseServices.cs" />
     <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
