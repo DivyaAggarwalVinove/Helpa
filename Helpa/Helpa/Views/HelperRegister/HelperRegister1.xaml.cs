@@ -94,7 +94,6 @@ namespace Helpa
             int servicesCount = services.Count();
             for (int i = 0; i < (servicesCount-1)/3+1; i++)
                 gridServices.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            //gridServices.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
             for (int i = 0; i < 3; i++)
                 gridServices.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -104,12 +103,12 @@ namespace Helpa
             {
                 serviceButton = new ServiceButton();
                 serviceButton.Text = services.ElementAt(i).ServiceName;
+
+                serviceButton.Clicked += delegate{
+                };
+
                 gridServices.Children.Add(serviceButton, i % 3, i / 3);
             }
-
-            //serviceButton = new ServiceButton();
-            //serviceButton.Text = "      ";
-            //gridServices.Children.Add(serviceButton, i % 3, i / 3);
             #endregion
         }
 

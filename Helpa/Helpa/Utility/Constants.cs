@@ -8,5 +8,6 @@ namespace Helpa.Utility
     {
         public static string baseUrl = "http://180.151.232.92:127/"; //Server
         //public static string baseUrl = "http://192.168.2.36:55317/"; // Shyam's Machine
+        //public static string baseUrl = "http://192.168.2.254:127/";
     }
 }

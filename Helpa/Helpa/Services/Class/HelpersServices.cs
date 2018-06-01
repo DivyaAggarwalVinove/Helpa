@@ -16,20 +16,27 @@ namespace Helpa
         {
             IEnumerable<HelpersModel> helpers = new List<HelpersModel>();
 
-            if (CrossConnectivity.Current.IsConnected)
-            { 
-                HttpClient httpClient = new HttpClient();
-                var uri = new Uri(string.Concat(Constants.baseUrl, "api/HelpersHome?Radius=" + radius +"&Latitude=" + latitude +"&Longitude="+longitude));
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/HelpersHome?Radius=" + radius + "&Latitude=" + latitude + "&Longitude=" + longitude));
 
-                var response = await httpClient.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string result = await response.Content.ReadAsStringAsync();
-                    helpers = JsonConvert.DeserializeObject<IEnumerable<HelpersModel>>(result);
+                    var response = await httpClient.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        helpers = JsonConvert.DeserializeObject<IEnumerable<HelpersModel>>(result);
+                    }
+                    else
+                    {
+                    }
                 }
-                else
-                {
-                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
             }
 
             return helpers;
