@@ -34,8 +34,7 @@ namespace Helpa.Droid
 
             if (e.NewElement != null)
             {
-                var formsMap = (CustomMap)e.NewElement;
-                customMap = formsMap;
+                customMap = (CustomMap)e.NewElement;
                 //siteList = formsMap.SiteList;
                 Control.GetMapAsync(this);
             }

@@ -24,6 +24,7 @@ namespace Helpa.Services
         {
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<RegisterUserModel>().Wait();
+            database.CreateTableAsync<ServiceModel>().Wait();
         }
         #endregion
 
@@ -84,6 +85,60 @@ namespace Helpa.Services
         public Task<int> DeleteUserAsync(RegisterUserModel user)
         {
             return database.DeleteAsync(user);
+        }
+
+        #endregion
+
+        #region Operations on Service Table
+        /// <summary>
+        /// SaveServicesAsync: Save services into database.
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns></returns>
+        public Task<int> SaveServicesAsync(IEnumerable<ServiceModel> services)
+        {
+            Task<int> result = null;
+            foreach (ServiceModel service in services)
+            {
+                ServiceModel s = database.Table<ServiceModel>().Where(i => i.Id == service.Id).FirstOrDefaultAsync().Result;
+                if (s != null)
+                {
+                    result = database.UpdateAsync(service);
+                }
+                else
+                {
+                    result = database.InsertAsync(service);
+                }
+            }
+
+            return result;
+        }
+
+        #region Operations on Service Table
+        /// <summary>
+        /// SaveServiceAsync: Save service into database.
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns></returns>
+        public Task<int> SaveServiceAsync(ServiceModel service)
+        {
+            ServiceModel s = database.Table<ServiceModel>().Where(i => i.Id == service.Id).FirstOrDefaultAsync().Result;
+            if (s != null)
+            {
+                return database.UpdateAsync(service);
+            }
+            else
+            {
+                return database.InsertAsync(service);
+            }
+        }
+        #endregion
+
+        public List<ServiceModel> GetServicesAsync()
+        {
+            List<ServiceModel> services = database.Table<ServiceModel>().Where(i => i.isSelected == true).ToListAsync().Result;
+            
+            return services;
         }
 
         #endregion

@@ -17,13 +17,15 @@ namespace Helpa
     public partial class HelperRegister1 : ContentPage
     {
         RegisterUserModel currentUser;
-
+        IEnumerable<ServiceModel> services;
         public HelperRegister1(RegisterUserModel user)
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
             currentUser = user;
+
+            btnHelperRegSelectedService.isSelected = true;
 
             entryHelperRegUsername1.Text = user.UserName;
             entryHelperRegPhone1.Text = user.PhoneNumber;
@@ -43,15 +45,59 @@ namespace Helpa
                 GoToBasicInfo();
             }
 
-            //MessagingCenter.Subscribe<HelperRegister3, string>(this, "Selected Address", (sender, address) =>
-            //{
-            //    entryHelperRegSearch.Text = address;
-            //});
+            MessagingCenter.Subscribe<ServiceButton, bool>(this, "Select Or Unselect Service", (sender, isSelected) =>
+            {
+                try
+                {
+                    string serviceName = ((ServiceButton)sender).serviceName;
+                    var selectedService = services.Where(a => a.ServiceName == serviceName).First();
+                    int serviceIndex = services.ToList().IndexOf(selectedService);
+                    var gService = gridServices.Children.Where(c => Grid.GetRow(c) == serviceIndex / 3 && Grid.GetColumn(c) == serviceIndex % 3);
+                    gService.ElementAt(1).IsVisible = !gService.ElementAt(1).IsVisible;
 
-            //MessagingCenter.Subscribe<HelperRegister2>(this, "Current Address", (sender) =>
-            //{
-            //    SetLocation();
-            //});
+                    if (isSelected)
+                    {
+                        AddGrid();
+                        selectedService.isSelected = true;
+                        App.Database.SaveServiceAsync(selectedService);
+                    }
+                    else
+                    {
+                        int count = gridHelperEditServices.ColumnDefinitions.Count;
+
+                        for (int i = count - 1; i >= 0; i--)
+                        {
+                            gridHelperEditServices.ColumnDefinitions.RemoveAt(i);
+                            gridHelperEditServices.Children.RemoveAt(i);
+                        }
+
+                        for(int i=0;i<count-1;i++)
+                            AddGrid();
+
+                        selectedService.isSelected = false;
+                        App.Database.SaveServiceAsync(selectedService);
+                    }
+
+                    var g = gridHelperEditServices.Children.Where(c => Grid.GetRow(c) == 0 && Grid.GetColumn(c) == 0).First();
+                    g.BackgroundColor = Color.FromHex("#FF748C");
+                }
+                catch(Exception e)
+                {
+                    Console.Write(e.StackTrace);
+                }
+            });
+        }
+
+        void AddGrid()
+        {
+            gridHelperEditServices.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.1, GridUnitType.Star) });
+
+            Grid grid = new Grid();
+            grid.HorizontalOptions = LayoutOptions.FillAndExpand;
+            grid.VerticalOptions = LayoutOptions.FillAndExpand;
+            grid.BackgroundColor = Color.FromHex("#818A8F");
+            gridHelperEditServices.Children.Add(grid, gridHelperEditServices.ColumnDefinitions.Count - 1, 0);
+            gridHelperEditServices.BackgroundColor = Color.Transparent;
         }
 
         void SetGender(string gender)
@@ -71,7 +117,7 @@ namespace Helpa
                 rg.VerticalOptions = LayoutOptions.Center;
             }
         }
-
+        
         void SetStatus()
         {
             IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
@@ -89,10 +135,10 @@ namespace Helpa
         async void SetServices()
         {
             #region set services
-            IEnumerable<ServiceModel> services = await (new Services.Services()).GetServicesAsync();
+            services = await (new Services.Services()).GetServicesAsync();
 
             int servicesCount = services.Count();
-            for (int i = 0; i < (servicesCount-1)/3+1; i++)
+            for (int i = 0; i < (servicesCount - 1) / 3 + 1; i++)
                 gridServices.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
             for (int i = 0; i < 3; i++)
@@ -103,13 +149,22 @@ namespace Helpa
             {
                 serviceButton = new ServiceButton();
                 serviceButton.Text = services.ElementAt(i).ServiceName;
+                serviceButton.Margin = new Thickness(10, 5, 10, 5);
 
-                serviceButton.Clicked += delegate{
-                };
+                Image image = new Image();
+                image.Source = "selected.png";
+                image.Aspect = Aspect.AspectFit;
+                image.Margin = new Thickness(20, 15, 0, 15);
+                image.HorizontalOptions = LayoutOptions.End;
+                image.IsVisible = false;
 
                 gridServices.Children.Add(serviceButton, i % 3, i / 3);
+                gridServices.Children.Add(image, i % 3, i / 3);                
+                #endregion
             }
-            #endregion
+
+
+            await App.Database.SaveServicesAsync(services);
         }
 
         async void SetLocation()
@@ -123,7 +178,7 @@ namespace Helpa
             entryHelperRegSearch.Text = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode;
         }
 
-        void OnHelperSignUpNext1(object sender, EventArgs args)
+        void OnHelperRegBasicInfoNext(object sender, EventArgs args)
         {
             if (string.IsNullOrEmpty(entryHelperRegUsername1.Text))
             {
@@ -158,8 +213,30 @@ namespace Helpa
             }
         }
 
-        void OnHelperSignUpNext2(object sender, EventArgs args)
+        void OnHelperRegEditServicesNext(object sender, EventArgs args)
         {
+            List<ServiceModel> selectedServices = App.Database.GetServicesAsync();
+            if (selectedServices.Count == 0)
+                DisplayAlert("Warning", "Please select at least any one service.", "Ok");
+            else
+            {
+                GotoNextService(selectedServices, 0);
+            }
+        }
+
+        void GotoNextService(List<ServiceModel> selectedServices, int i)
+        {
+            if (i >= selectedServices.Count)
+                return;
+
+            var g = gridHelperEditServices.Children.ElementAt(i + 1);
+            g.BackgroundColor = Color.FromHex("#FF748C");
+
+            svHelperEditServices.IsVisible = false;
+            svHelperRegHelperHome.IsVisible = true;
+
+            ServiceModel service = selectedServices.ElementAt(i);
+            //svHelperRegHelperHome.IsVisible = true;
         }
 
         void OnSignUpDone(object sender, EventArgs args)
@@ -186,8 +263,14 @@ namespace Helpa
 
         void GoToBasicInfo()
         {
-            lHelperSignUp.Text = "Helper Sign Up 1/2";
+            lHelperSignUp.Text = "Helper Sign Up 1/3";
             gridHelperEditServices.BackgroundColor = Color.FromHex("#818A8F");
+
+            for (int i = 0; i < gridHelperEditServices.ColumnDefinitions.Count; i++)
+            {
+                var g = gridHelperEditServices.Children.ElementAt(i);
+                g.BackgroundColor = Color.FromHex("#818A8F");
+            }
             svHelperBasicInfo.IsVisible = true;
             svHelperEditServices.IsVisible = false;
         }
@@ -195,14 +278,14 @@ namespace Helpa
         void GoToEditServices()
         {
             lHelperSignUp.Text = "Helper Sign Up 2/3";
-            gridHelperEditServices.BackgroundColor = Color.FromHex("#FF748C");
+            gridHelperEditServices.BackgroundColor = Color.Transparent;
+            gridHelperEditServices.Children.ElementAt(0).BackgroundColor = Color.FromHex("#FF748C");
             svHelperBasicInfo.IsVisible = false;
             svHelperEditServices.IsVisible = true;
         }
 
         void BuildTrust()
         {
-
         }
     }
 }
