@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.RangeSlider.Forms;
 
 namespace Helpa
 {
@@ -26,13 +27,22 @@ namespace Helpa
             currentUser = user;
 
             btnHelperRegSelectedService.isSelected = true;
+            btnHelperRegTbd.isSelected = true;
 
             entryHelperRegUsername1.Text = user.UserName;
             entryHelperRegPhone1.Text = user.PhoneNumber;
             entryHelperRegEmail1.Text = user.Email;
 
-            SetGender(user.Gender);
-            SetStatus();
+            IEnumerable<string> genders = new List<string>() { "Male", "Female", "Rather no to say" };
+            SetRadioList(genders, rgHelperGender);
+
+            IEnumerable<String> locationTypes = new List<string>() { "Helper's Home", "Mobile Helper"};
+            SetRadioList(locationTypes, rgHelperLocationType);
+
+            IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
+            SetRadioList(statusList, rgHelperStatus);
+            //SetGender(user.Gender);
+            //SetStatus();
             SetServices();
             //SetLocation();
 
@@ -117,7 +127,23 @@ namespace Helpa
                 rg.VerticalOptions = LayoutOptions.Center;
             }
         }
-        
+
+        void SetRadioList(IEnumerable<string> genderList, AsNum.XFControls.RadioGroup radioGroup)
+        {
+            radioGroup.ItemsSource = genderList;
+
+            radioGroup.SelectedItem = genderList.ElementAt(0);
+
+            StackLayout content = (StackLayout)radioGroup.Content;
+            Radio rg = null;
+            for (int i = 0; i < content.Children.Count; i++)
+            {
+                rg = (Radio)(content.Children[i]);
+                rg.Margin = new Thickness(0, 0, 20, 0);
+                rg.VerticalOptions = LayoutOptions.Center;
+            }
+        }
+
         void SetStatus()
         {
             IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
@@ -241,6 +267,21 @@ namespace Helpa
 
         void OnSignUpDone(object sender, EventArgs args)
         {
+        }
+
+        void SetYearOfExperience(object sender, EventArgs args)
+        {
+            btnHelperRegExpCount.Text = ((Slider)sender).Value.ToString();
+        }
+
+        void SetMinAge(object sender, EventArgs args)
+        {
+            btnHelperRegAgeMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+        }
+
+        void SetMaxAge(object sender, EventArgs args)
+        {
+            btnHelperRegAgeMax.Text = ((RangeSlider)sender).UpperValue.ToString();
         }
 
         protected override bool OnBackButtonPressed()

@@ -96,7 +96,7 @@ namespace Helpa
         void OnClickPostJob(object sender, EventArgs args)
         {
             var user = App.Database.GetUsersAsync();
-            if(user==null && user.Count==0)
+            if(user==null || user.Count==0)
                 Navigation.PushAsync(new HelperRegister());
             else
             {
