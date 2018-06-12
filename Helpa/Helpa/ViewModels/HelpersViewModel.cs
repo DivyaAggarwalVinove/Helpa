@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -13,13 +14,13 @@ namespace Helpa.ViewModels
     public class HelpersViewModel : INotifyPropertyChanged
     {
         public IHelpersServices<HelpersModel> DataStore => DependencyService.Get<IHelpersServices<HelpersModel>>();
-        public ObservableCollection<HelpersModel> HelperList { get; set; }
+        public ObservableCollection<Helper> HelperList { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Helpers context;
 
         public HelpersViewModel(Helpers helpers)
         {
-            HelperList = new ObservableCollection<HelpersModel>();
+            HelperList = new ObservableCollection<Helper>();
             context = helpers;
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             //ExecuteLoadItemsCommand();
@@ -41,6 +42,7 @@ namespace Helpa.ViewModels
                 // Call api to get data from server.
                 //var helpers = await DataStore.GetHelpersList(10000, 28.4514279, 77.0704678);
                 var helpers = await (new HelpersServices()).GetHelpersList(10000, 28.4514279, 77.0704678);
+                HelperList = new ObservableCollection<Helper>(helpers.First().HelpersInLocalties);
 
                 //HelpersModel helper = new HelpersModel();
                 //helper.userName = "Army Rose";
@@ -127,7 +129,6 @@ namespace Helpa.ViewModels
                     //Items.Add(item);
                 }*/
 
-                context.CreateMap();
                 //return null;
             }
             catch (Exception ex)

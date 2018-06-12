@@ -1,5 +1,6 @@
 ﻿using AsNum.XFControls;
 using Helpa.Models;
+using Helpa.Services;
 using Helpa.Utility;
 using Plugin.Geolocator;
 using System;
@@ -19,6 +20,8 @@ namespace Helpa
     {
         RegisterUserModel currentUser;
         IEnumerable<ServiceModel> services;
+        static int currentService = 1;
+
         public HelperRegister1(RegisterUserModel user)
         {
             InitializeComponent();
@@ -36,15 +39,13 @@ namespace Helpa
             IEnumerable<string> genders = new List<string>() { "Male", "Female", "Rather no to say" };
             SetRadioList(genders, rgHelperGender);
 
-            IEnumerable<String> locationTypes = new List<string>() { "Helper's Home", "Mobile Helper"};
-            SetRadioList(locationTypes, rgHelperLocationType);
-
+            //IEnumerable<String> locationTypes = new List<string>() { "Helper's Home", "Mobile Helper"};
+            //SetRadioList(locationTypes, rgHelperLocationType);
+            
             IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
             SetRadioList(statusList, rgHelperStatus);
-            //SetGender(user.Gender);
-            //SetStatus();
+            
             SetServices();
-            //SetLocation();
 
             if (user.IsVerified)
             {
@@ -60,6 +61,42 @@ namespace Helpa
                 try
                 {
                     string serviceName = ((ServiceButton)sender).serviceName;
+
+                    if(string.Equals(serviceName, "Hourly"))
+                    {
+                        if(((ServiceButton)sender).isSelected)
+                        {
+                            gridPriceHour.IsVisible = true;
+                        }
+                        else
+                        {
+                            gridPriceHour.IsVisible = false;
+                        }
+                    }
+                    else if(string.Equals(serviceName, "Daily"))
+                    {
+                        if (((ServiceButton)sender).isSelected)
+                        {
+                            gridPriceDay.IsVisible = true;
+                        }
+                        else
+                        {
+                            gridPriceDay.IsVisible = false;
+                        }
+                    }
+                    else if(string.Equals(serviceName, "Monthly"))
+                    {
+                        if (((ServiceButton)sender).isSelected)
+                        {
+                            gridPriceMonth.IsVisible = true;
+                        }
+                        else
+                        {
+                            gridPriceMonth.IsVisible = false;
+                        }
+                    }
+
+
                     var selectedService = services.Where(a => a.ServiceName == serviceName).First();
                     int serviceIndex = services.ToList().IndexOf(selectedService);
                     var gService = gridServices.Children.Where(c => Grid.GetRow(c) == serviceIndex / 3 && Grid.GetColumn(c) == serviceIndex % 3);
@@ -81,7 +118,7 @@ namespace Helpa
                             gridHelperEditServices.Children.RemoveAt(i);
                         }
 
-                        for(int i=0;i<count-1;i++)
+                        for (int i = 0; i < count - 1; i++)
                             AddGrid();
 
                         selectedService.isSelected = false;
@@ -110,25 +147,35 @@ namespace Helpa
             gridHelperEditServices.BackgroundColor = Color.Transparent;
         }
 
-        void SetGender(string gender)
+        void OnHomeLocationSelected(object sender, EventArgs args)
         {
-            IEnumerable<string> genderList = new List<string>() { "Male", "Female", "Rather no to say" };
-            rgHelperGender.ItemsSource = genderList;
-
-            if (gender != null)
-                rgHelperGender.SelectedItem = Utils.ToTitleCase(gender);
-
-            StackLayout content = (StackLayout)rgHelperGender.Content;
-            Radio rg = null;
-            for (int i = 0; i < content.Children.Count; i++)
+            //rgHelperHomeLocation.Checked = !rgHelperHomeLocation.Checked;
+            if (rgHelperHomeLocation.Checked)
             {
-                rg = (Radio)(content.Children[i]);
-                rg.Margin = new Thickness(0, 0, 20, 0);
-                rg.VerticalOptions = LayoutOptions.Center;
+                rgHelperMobileLocation.Checked = !rgHelperMobileLocation.Checked;
+
+                btnHelperRegDistrict.IsVisible = false;
+                entryHelperRegLocation.IsVisible = true;
             }
+            else
+                rgHelperHomeLocation.Checked = !rgHelperHomeLocation.Checked;
         }
 
-        void SetRadioList(IEnumerable<string> genderList, AsNum.XFControls.RadioGroup radioGroup)
+        void OnMobileLocationSelected(object sender, EventArgs args)
+        {
+            if (rgHelperMobileLocation.Checked)
+            {
+                rgHelperHomeLocation.Checked = !rgHelperHomeLocation.Checked;
+
+                btnHelperRegDistrict.IsVisible = true;
+                entryHelperRegLocation.IsVisible = false;
+            }
+            else
+                rgHelperMobileLocation.Checked = !rgHelperMobileLocation.Checked;
+            //rgHelperMobileLocation.Checked = !rgHelperMobileLocation.Checked;
+        }
+
+        void SetRadioList(IEnumerable<string> genderList, RadioGroup radioGroup)
         {
             radioGroup.ItemsSource = genderList;
 
@@ -140,23 +187,23 @@ namespace Helpa
             {
                 rg = (Radio)(content.Children[i]);
                 rg.Margin = new Thickness(0, 0, 20, 0);
-                rg.VerticalOptions = LayoutOptions.Center;
+                rg.VerticalOptions = LayoutOptions.Center; 
             }
         }
 
-        void SetStatus()
-        {
-            IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
-            rgHelperStatus.ItemsSource = statusList;
-            StackLayout content = (StackLayout)rgHelperStatus.Content;
-            Radio rg = null;
-            for (int i = 0; i < content.Children.Count; i++)
-            {
-                rg = (Radio)(content.Children[i]);
-                rg.Margin = new Thickness(0, 0, 20, 0);
-                rg.VerticalOptions = LayoutOptions.Center;
-            }
-        }
+        //void SetStatus()
+        //{
+        //    IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
+        //    rgHelperStatus.ItemsSource = statusList;
+        //    StackLayout content = (StackLayout)rgHelperStatus.Content;
+        //    Radio rg = null;
+        //    for (int i = 0; i < content.Children.Count; i++)
+        //    {
+        //        rg = (Radio)(content.Children[i]);
+        //        rg.Margin = new Thickness(0, 0, 20, 0);
+        //        rg.VerticalOptions = LayoutOptions.Center;
+        //    }
+        //}
 
         async void SetServices()
         {
@@ -189,54 +236,72 @@ namespace Helpa
                 #endregion
             }
 
-
             await App.Database.SaveServicesAsync(services);
         }
 
-        async void SetLocation()
-        { 
-            var locator = CrossGeolocator.Current;
-            TimeSpan ts = TimeSpan.FromTicks(1000000);
-            Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(ts);
-            var addr = await locator.GetAddressesForPositionAsync(new Plugin.Geolocator.Abstractions.Position(position.Latitude, position.Longitude), "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
+        //async void SetLocation()
+        //{ 
+        //    var locator = CrossGeolocator.Current;
+        //    TimeSpan ts = TimeSpan.FromTicks(1000000);
+        //    Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(ts);
+        //    var addr = await locator.GetAddressesForPositionAsync(new Plugin.Geolocator.Abstractions.Position(position.Latitude, position.Longitude), "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
 
-            var a = addr.FirstOrDefault();
-            entryHelperRegSearch.Text = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode;
-        }
+        //    var a = addr.FirstOrDefault();
+        //    entryHelperRegSearch.Text = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode;
+        //}
 
-        void OnHelperRegBasicInfoNext(object sender, EventArgs args)
+        async void OnHelperRegBasicInfoNext(object sender, EventArgs args)
         {
             if (string.IsNullOrEmpty(entryHelperRegUsername1.Text))
             {
-                DisplayAlert("Warning", "Please enter username", "Ok");
+                await DisplayAlert("Warning", "Please enter username", "Ok");
             }
             else if (string.IsNullOrEmpty(entryHelperRegPhone1.Text))
             {
-                DisplayAlert("Warning", "Please enter phone number", "Ok");
+                await DisplayAlert("Warning", "Please enter phone number", "Ok");
             }
             else if (string.IsNullOrEmpty(entryHelperRegEmail1.Text))
             {
-                DisplayAlert("Warning", "Please enter email", "Ok");
+                await DisplayAlert("Warning", "Please enter email", "Ok");
             }
             else if (Utils.IsValidMobileNo(entryHelperRegPhone1.Text))
             {
-                DisplayAlert("Warning", "Please enter valid mobile number", "Ok");
+                await DisplayAlert("Warning", "Please enter valid mobile number", "Ok");
             }
             else if (!Utils.IsValidEmail(entryHelperRegEmail1.Text))
             {
-                DisplayAlert("Warning", "Please enter valid email", "Ok");
+                await DisplayAlert("Warning", "Please enter valid email", "Ok");
             }
             else
             {
                 currentUser.IsVerified = true;
                 currentUser.PhoneNumber = entryHelperRegPhone1.Text;
-                currentUser.Gender = rgHelperGender.SelectedItem.ToString();
+                try
+                {
+                    Gender g = (Gender)Enum.Parse(typeof(Gender), rgHelperGender.SelectedItem.ToString());
+                    currentUser.Gender = (int)g;
+                }
+                catch(Exception e)
+                {
+                    currentUser.Gender = 3;
+                }
+                //currentUser.Gender = rgHelperGender.SelectedItem.ToString();
                 currentUser.Email = entryHelperRegEmail1.Text;
-                
-                App.Database.SaveUserAsync(currentUser);
-                GoToEditServices();
-                //Navigation.PushAsync(new Register1());
+
+                await (new RegisterServices()).CompleteRegisterService(currentUser);
+
+                //App.Database.SaveUserAsync(currentUser);
+                //GoToEditServices();
             }
+        }
+
+        public void GotoNext(RegisterUserModel userModel)
+        {
+            userModel.IsCompleted = true;
+
+            App.Database.SaveUserAsync(userModel);
+            GoToEditServices();
+            //Navigation.PushAsync(new HelperRegister1(userModel));
         }
 
         void OnHelperRegEditServicesNext(object sender, EventArgs args)
@@ -246,43 +311,57 @@ namespace Helpa
                 DisplayAlert("Warning", "Please select at least any one service.", "Ok");
             else
             {
-                GotoNextService(selectedServices, 0);
+                GotoNextService(selectedServices, currentService);
             }
+        }
+
+        void OnCallNextService(object sender, EventArgs args)
+        {
+            List<ServiceModel> selectedServices = App.Database.GetServicesAsync();
+            GotoNextService(selectedServices, ++currentService);
         }
 
         void GotoNextService(List<ServiceModel> selectedServices, int i)
         {
-            if (i >= selectedServices.Count)
+            if (i > selectedServices.Count)
                 return;
 
-            var g = gridHelperEditServices.Children.ElementAt(i + 1);
+            var g = gridHelperEditServices.Children.ElementAt(i);
             g.BackgroundColor = Color.FromHex("#FF748C");
 
             svHelperEditServices.IsVisible = false;
             svHelperRegHelperHome.IsVisible = true;
 
-            ServiceModel service = selectedServices.ElementAt(i);
+            ServiceModel service = selectedServices.ElementAt(i-1);
             //svHelperRegHelperHome.IsVisible = true;
         }
-
-        void OnSignUpDone(object sender, EventArgs args)
-        {
-        }
-
-        void SetYearOfExperience(object sender, EventArgs args)
-        {
+        
+        void SetYearOfExperience(object sender, EventArgs args) => 
             btnHelperRegExpCount.Text = ((Slider)sender).Value.ToString();
-        }
 
-        void SetMinAge(object sender, EventArgs args)
-        {
+        void SetMinHour(object sender, EventArgs args) => 
+            btnHelperRegPriceHrMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+
+        void SetMaxHour(object sender, EventArgs args) =>
+            btnHelperRegPriceHrMax.Text = ((RangeSlider)sender).UpperValue.ToString();
+        
+        void SetMinDay(object sender, EventArgs args) =>
+            btnHelperRegPriceDayMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+        
+        void SetMaxDay(object sender, EventArgs args) =>
+            btnHelperRegPriceDayMax.Text = ((RangeSlider)sender).UpperValue.ToString();
+        
+        void SetMinMonth(object sender, EventArgs args) =>
+            btnHelperRegPriceMonthMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+
+        void SetMaxMonth(object sender, EventArgs args) =>
+            btnHelperRegPriceMonthMax.Text = ((RangeSlider)sender).UpperValue.ToString();
+        
+        void SetMinAge(object sender, EventArgs args) =>
             btnHelperRegAgeMin.Text = ((RangeSlider)sender).LowerValue.ToString();
-        }
 
-        void SetMaxAge(object sender, EventArgs args)
-        {
+        void SetMaxAge(object sender, EventArgs args) =>
             btnHelperRegAgeMax.Text = ((RangeSlider)sender).UpperValue.ToString();
-        }
 
         protected override bool OnBackButtonPressed()
         {

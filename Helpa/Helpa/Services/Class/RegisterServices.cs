@@ -29,7 +29,7 @@ namespace Helpa.Services
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
                     if (response.IsSuccessStatusCode)
                     {
-                        userModel.Id = int.Parse(message.Data);
+                        userModel.Id = int.Parse(message.Id);
                         userModel.IsLogged = true;
                         HelperRegister.Instance.GotoNext(userModel);
                     }
@@ -61,17 +61,9 @@ namespace Helpa.Services
                     string result = await response.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
 
-                    /*
-                    HttpClient httpClient = new HttpClient();
-                    httpClient.BaseAddress = new Uri($"{Constants.baseUrl}/");            
-                    var json = JsonConvert.SerializeObject(userModel);
-
-                    var response = await httpClient.PostAsync($"api/Account/RegisterExternal", new StringContent(json, Encoding.UTF8, "application/json"));
-                    string message = response.RequestMessage.ToString();
-                    */
                     if (response.IsSuccessStatusCode)
                     {
-                        userModel.Id = int.Parse(message.Data);
+                        userModel.Id = int.Parse(message.Id);
                         userModel.IsLogged = true;
                         Register.Instance.GotoNext(userModel);
                     }
@@ -86,6 +78,40 @@ namespace Helpa.Services
             catch(Exception e)
             {
                 Console.Write( e.StackTrace.ToString());
+            }
+        }
+
+        public async Task CompleteRegisterService(RegisterUserModel userModel)
+        {
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Account/complete-registration/"+userModel.Id));
+                    var json = JsonConvert.SerializeObject(userModel);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var response = await httpClient.PostAsync(uri, content);
+
+                    string result = await response.Content.ReadAsStringAsync();
+                    var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        userModel.Id = int.Parse(message.Id);
+                        userModel.IsLogged = true;
+                        HelperRegister.Instance.GotoNext(userModel);
+                    }
+                    else
+                    {
+                        Console.Write(message.Message);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
             }
         }
     }

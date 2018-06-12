@@ -34,7 +34,7 @@ namespace Helpa
                 RegisterUserModel userModel = new RegisterUserModel();
                 userModel.Email = detailsInJson.GetValue("email").ToString();
                 //userModel.profileImage
-                userModel.Gender = detailsInJson.GetValue("gender").ToString();
+                //userModel.Gender = detailsInJson.GetValue("gender").ToString();
                 userModel.Token = token;
                 userModel.UserName = detailsInJson.GetValue("id").ToString();
                 userModel.LoginProvider = "Facebook";

@@ -124,7 +124,7 @@
                                             </Grid.ColumnDefinitions>
 
                                             <Grid Grid.Column="0" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                                <Image Source="{Binding photo}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="80" HeightRequest="80"/>
+                                                <Image Source="{Binding ProfilePicture}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="80" HeightRequest="80"/>
                                             </Grid>
                                             
                                             <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
@@ -143,7 +143,7 @@
                                                     </Grid.ColumnDefinitions>
 
                                                     <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Label Text="{Binding name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        <Label Text="{Binding Name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                     </Grid>
 
                                                     <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
@@ -167,11 +167,11 @@
                                                     </Grid>
 
                                                     <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Label Text="{Binding service}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />                                                        
+                                                        <Label Text="{Binding Service}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />                                                        
                                                     </Grid>
 
                                                     <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Label Text="{Binding price}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        <Label Text="{Binding Price}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                     </Grid>
                                                 </Grid>
 
@@ -203,7 +203,7 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <rating:SfRating x:Name="rating" ItemCount="5" Value="{Binding rating}" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                            <rating:SfRating x:Name="rating" ItemCount="5" Value="{Binding AverageRating}" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                                                                 <rating:SfRating.RatingSettings>
                                                                     <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
                                                                 </rating:SfRating.RatingSettings>
@@ -211,7 +211,7 @@
                                                         </Grid>
 
                                                         <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding rating_count}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding RatingCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
                                                     </Grid>
 
@@ -228,7 +228,7 @@
                                                         </Grid>
 
                                                         <Grid Grid.Column="1" BackgroundColor="Blue" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding count1}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding ConnectionCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="2" BackgroundColor="Yellow" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
@@ -236,7 +236,7 @@
                                                         </Grid>
 
                                                         <Grid Grid.Column="3" BackgroundColor="Orange" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding count2}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding EnquiredUserCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>

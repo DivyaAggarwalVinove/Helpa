@@ -32,8 +32,8 @@ namespace Helpa.Models
         public string RatingCount { get; set; }
         public string AverageRatingCount { get; set; }
         public string Service { get; set; }
-        //public int ConnectionCount { get; set; }
-        //public int EnquiredUserCount { get; set; }
+        public int ConnectionCount { get; set; }
+        public int EnquiredUserCount { get; set; }
         public string Status { get; set; }
         public string Description { get; set; }
         public double Latitude { get; set; }

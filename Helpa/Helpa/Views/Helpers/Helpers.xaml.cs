@@ -109,7 +109,6 @@ namespace Helpa
                     Navigation.PushAsync(new HelperRegister1(user[0]));
                 }
             }
-
         }
 
         void OnShowHelpersList(object sender, EventArgs args)
