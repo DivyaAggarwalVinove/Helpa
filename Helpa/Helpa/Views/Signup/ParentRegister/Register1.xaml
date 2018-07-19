@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             xmlns:local="clr-namespace:Helpa"
+             x:Class="Helpa.Register1">
+    <ContentPage.Content BackgroundColor="#F2F5F7">
+        <Grid RowSpacing="0" Margin="10,5,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Start">
+                <Image Source="back.png" Aspect="AspectFit"/>
+            </Grid>
+            
+            <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="Start">
+                <Label x:Name="lParentSignUp" Text="Parent Sign Updo 1/2" TextColor="Black" FontSize="30" FontAttributes="Bold" VerticalTextAlignment="Center" />
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.01*"/>
+                        <RowDefinition Height="1.70*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" ColumnSpacing="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Label Text="Basic Info" TextColor="#838C91" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Label Text="Your Location" TextColor="#838C91" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" ColumnSpacing="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid x:Name="gridBasic" Grid.Column="0" BackgroundColor = "#FF748C"/>
+                        <Grid x:Name="gridLocation" Grid.Column="1" BackgroundColor = "#818A8F" />
+                    </Grid>
+
+                    <Grid Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <ScrollView x:Name="svBasicInfo">
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.34*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.11*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.12*"/>
+                                    <RowDefinition Height="0.15*"/>
+                                    <RowDefinition Height="0.12*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.12*"/>
+                                    <RowDefinition Height="0.14*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Margin="0,10,0,0">
+                                    <Image Source="picture.png"/>
+                                </Grid>
+
+                                <Grid Grid.Row="1">
+                                    <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <Grid Grid.Row="2">
+                                    <Label Text="Username:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <Grid Grid.Row="3">
+                                    <local:CustomEntry x:Name="entryRegUsername1" Placeholder="Username" PlaceholderColor="#939ba0" FontSize="14"/>
+                                </Grid>
+
+                                <Grid Grid.Row="4">
+                                    <Label Text="Gender:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <Grid Grid.Row="5" BackgroundColor="Transparent">
+                                    <ctrls:RadioGroup 
+                                        x:Name="rgGender"
+                                        Orientation="Horizontal"                                     
+                                        OnImg="radio_close.png" 
+                                        OffImg="radio_button.png"
+                                        SelectedItem="Male"/>
+                                        <!--SelectedItem="{Binding GenderCollection}-->
+                                </Grid>
+
+                                <Grid Grid.Row="6">
+                                    <Label Text="Contact Info:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <Grid Grid.Row="7">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.2*" />
+                                        <ColumnDefinition Width="0.8*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0" >
+                                        <local:CustomEntry x:Name="entryRegCountryCode" Placeholder="+852" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <local:CustomEntry x:Name="entryRegPhone1" Placeholder="Phone Number" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="8" ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.4*" />
+                                        <ColumnDefinition Width="0.6*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0">
+                                        <Button x:Name="btnSendCode" Text="Send SMS Code" FontSize="14" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <local:CustomEntry x:Name="entryRegSmsCode1" Placeholder="Enter SMS code here" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="9">
+                                    <Label Text="You need to verify your phone number to enable the messaging function." TextColor="#939BA0" />
+                                </Grid>
+
+                                <Grid Grid.Row="10" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.05*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                        <Image BackgroundColor="#BDBFC0" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                        <Label x:Name="lOr1" Text="or" TextColor="#BDBFC0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                        <Image BackgroundColor="#BDBFC0" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="11" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.9*"/>
+                                        <ColumnDefinition Width="0.1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0" HorizontalOptions="FillAndExpand">
+                                        <local:CustomEntry x:Name="entryRegEmail1" Placeholder="Email" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="5,5,0,5">
+                                        <Image Source="info.png" Aspect="AspectFit"/>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="12" HorizontalOptions="End" Margin="0,0,0,5">
+                                    <Button x:Name="btnRegNext" Clicked="OnSignUpNext" Text="Next >" TextColor="White" BackgroundColor="#FF748C" />
+                                </Grid>
+                            </Grid>
+                        </ScrollView>
+
+                        <ScrollView x:Name="svLocationInfo" IsVisible="False">
+                            <Grid RowSpacing="0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.5*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" BackgroundColor="Transparent">
+                                    <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <Grid Grid.Row="1" BackgroundColor="Transparent">
+                                    <Label Text="Providing your location will allow our system to find Helpers near you automatically." TextColor="#8F979C" FontAttributes="Bold" />
+                                </Grid>
+
+                                <Grid Grid.Row="2" VerticalOptions="Start">
+                                    <local:CustomStackLayout Orientation="Horizontal"  Padding="10,5,10,5" >
+                                        <Image x:Name="imgRegSearch" Source="search.png"/>
+                                        <local:CustomEntry x:Name="entryRegSearch" IsEnabled="True" Placeholder="Search" Focused="OnFocus" FontSize="Small" PlaceholderColor="#939BA0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>
+                                    </local:CustomStackLayout>
+                                </Grid>
+                                
+                                <Grid Grid.Row="3" HorizontalOptions="End" Margin="0,0,0,5">
+                                    <Button x:Name="btnRegDone" Clicked="OnSignUpDone" Text="Done >" TextColor="White" BackgroundColor="#FF748C" />
+                                </Grid>
+                            </Grid>
+                        </ScrollView>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -100,13 +100,13 @@ namespace Helpa
                 Navigation.PushAsync(new HelperRegister());
             else
             {
-                if (user[0].IsCompleted)
+                if (user[0].IsBuildTrusted)
                 {
                     //post a job
                 }
                 else
                 { 
-                    Navigation.PushAsync(new HelperRegister1(user[0]));
+                    Navigation.PushAsync(new HelperCompleteRegister(user[0]));
                 }
             }
         }

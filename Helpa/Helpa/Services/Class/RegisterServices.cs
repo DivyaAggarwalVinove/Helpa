@@ -30,7 +30,7 @@ namespace Helpa.Services
                     if (response.IsSuccessStatusCode)
                     {
                         userModel.Id = int.Parse(message.Id);
-                        userModel.IsLogged = true;
+                        userModel.IsRegistered = true;
                         HelperRegister.Instance.GotoNext(userModel);
                     }
                     else
@@ -64,8 +64,8 @@ namespace Helpa.Services
                     if (response.IsSuccessStatusCode)
                     {
                         userModel.Id = int.Parse(message.Id);
-                        userModel.IsLogged = true;
-                        Register.Instance.GotoNext(userModel);
+                        userModel.IsRegistered = true;
+                        HelperRegister.Instance.GotoNext(userModel);
                     }
                     else
                     {
@@ -73,6 +73,8 @@ namespace Helpa.Services
                         //var errorMsg = JsonConvert.DeserializeObject<ResponseModel>(result);
                         Console.Write(message.Message);
                     }
+
+                    
                 }
             }
             catch(Exception e)
@@ -100,8 +102,8 @@ namespace Helpa.Services
                     if (response.IsSuccessStatusCode)
                     {
                         userModel.Id = int.Parse(message.Id);
-                        userModel.IsLogged = true;
-                        HelperRegister.Instance.GotoNext(userModel);
+                        userModel.IsCompleted = true;
+                        HelperCompleteRegister.Instance.GotoNext(userModel);
                     }
                     else
                     {

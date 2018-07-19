@@ -38,6 +38,8 @@ namespace Helpa.Droid
                 }
 
                 Control.TextAlignment = Android.Views.TextAlignment.Center;
+                Control.Gravity = GravityFlags.Center;
+                Control.SetIncludeFontPadding(false);
                 Control.InputType = Android.Text.InputTypes.TextFlagCapSentences;
                 Control.Activated = false;
                 Control.SetOnClickListener(this);
@@ -60,7 +62,7 @@ namespace Helpa.Droid
             }
             serviceButton.isSelected = !serviceButton.isSelected;
             serviceButton.serviceName = Control.Text;
-            serviceButton.OnOffServices(!Control.Activated);
+            serviceButton.OnOffServices(serviceButton.isSelected);
         }
     }
 }

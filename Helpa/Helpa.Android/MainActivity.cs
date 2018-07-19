@@ -24,7 +24,7 @@ namespace Helpa.Droid
                 ToolbarResource = Resource.Layout.Toolbar;
 
                 base.OnCreate(bundle);
-
+                
                 FacebookSdk.SdkInitialize(this.ApplicationContext);
                 AsNumAssemblyHelper.HoldAssembly();
 

@@ -11,7 +11,6 @@ using Xamarin.Forms.Platform.Android;
 
 namespace Helpa.Droid
 {
-
     public class FacebookCallback<TResult> : Java.Lang.Object, IFacebookCallback where TResult : Java.Lang.Object
     {
         public Action HandleCancel { get; set; }

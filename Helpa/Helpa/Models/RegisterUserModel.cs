@@ -16,8 +16,8 @@ namespace Helpa.Models
         public string UserName { get; set; }
         public string LoginProvider { get; set; }
         public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public bool IsLogged { get; set; }
+        public string MobileNumber { get; set; }
+        public bool IsRegistered { get; set; }
         public bool IsVerified { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsServiced { get; set; }

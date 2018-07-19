@@ -51,9 +51,15 @@ namespace Helpa.Droid
             loginButton.SetReadPermissions(new string[] { "email", "user_gender" });
                         
             loginButton.SetCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            //loginButton.SetPadding(Resources.GetDimensionPixelSize(Resource.Dimension.fb_margin_override_lr),
+            //    Resources.GetDimensionPixelSize(Resource.Dimension.fb_margin_override_top),
+            //    Resources.GetDimensionPixelSize(Resource.Dimension.fb_margin_override_lr),
+            //    Resources.GetDimensionPixelSize(Resource.Dimension.fb_margin_override_bottom));
+
             loginButton.TextAlignment = Android.Views.TextAlignment.Center;
             loginButton.Gravity = Android.Views.GravityFlags.Center;
             loginButton.Text = "Sign up with Facebook";
+            loginButton.SetPadding(0, 10, 0, 10);
             base.SetNativeControl(loginButton);
         }
     }

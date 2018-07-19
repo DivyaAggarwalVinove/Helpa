@@ -36,13 +36,13 @@ namespace Helpa.Services
         /// <returns></returns>
         public List<RegisterUserModel> GetUsersAsync()
         {
-            List<RegisterUserModel> user = database.Table<RegisterUserModel>().Where(i => i.IsCompleted == true && i.IsLogged==true).ToListAsync().Result;
+            List<RegisterUserModel> user = database.Table<RegisterUserModel>().Where(i => i.IsCompleted == true && i.IsRegistered==true).ToListAsync().Result;
             if(user.Count==0)
             {
-                user = database.Table<RegisterUserModel>().Where(i => i.IsVerified == true && i.IsLogged == true).ToListAsync().Result;
+                user = database.Table<RegisterUserModel>().Where(i => i.IsVerified == true && i.IsRegistered == true).ToListAsync().Result;
                 if(user.Count==0) 
                 {
-                    user = database.Table<RegisterUserModel>().Where(i => i.IsLogged == true).ToListAsync().Result;
+                    user = database.Table<RegisterUserModel>().Where(i => i.IsRegistered == true).ToListAsync().Result;
                 }
             }
 
