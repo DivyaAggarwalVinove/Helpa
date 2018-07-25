@@ -12,7 +12,6 @@ namespace Helpa.Droid
 {
     public class ServiceButtonRendererAndroid : ButtonRenderer, Android.Views.View.IOnClickListener
     {
-        private int resid;
         ServiceButton serviceButton;
 
         public ServiceButtonRendererAndroid(Context context) : base(context)

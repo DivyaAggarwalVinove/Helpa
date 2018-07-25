@@ -8,6 +8,5 @@ namespace Helpa.Services
 {
     interface IServices
     {
-        Task<IEnumerable<ServiceModel>> GetServicesAsync();
     }
 }

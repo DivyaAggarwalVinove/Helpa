@@ -51,7 +51,7 @@ namespace Helpa.Droid
 
         public bool OnMarkerClick(Marker marker)
         {
-            HelpersModel helper = new HelpersModel();
+            HelperHomeModel helper = new HelperHomeModel();
 
             customMap.selectedHelper = helper;
             customMap.ClickedOnPin();

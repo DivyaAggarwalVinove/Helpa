@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderer\RangeSliderEffect.cs" />
+    <Compile Include="CustomRenderer\ScopeButtonRendererAndroid.cs" />
     <Compile Include="CustomRenderer\ServiceButtonRendererAndroid.cs" />
     <Compile Include="CustomRenderer\CustomLabelRendererAndroid.cs" />
     <Compile Include="CustomRenderer\CustomButtonRendererAndroid.cs" />

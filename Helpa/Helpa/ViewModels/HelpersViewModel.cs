@@ -13,14 +13,14 @@ namespace Helpa.ViewModels
 {
     public class HelpersViewModel : INotifyPropertyChanged
     {
-        public IHelpersServices<HelpersModel> DataStore => DependencyService.Get<IHelpersServices<HelpersModel>>();
-        public ObservableCollection<Helper> HelperList { get; set; }
+        public IHelpersServices<HelperHomeModel> DataStore => DependencyService.Get<IHelpersServices<HelperHomeModel>>();
+        public ObservableCollection<HelperHome> HelperList { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Helpers context;
 
         public HelpersViewModel(Helpers helpers)
         {
-            HelperList = new ObservableCollection<Helper>();
+            HelperList = new ObservableCollection<HelperHome>();
             context = helpers;
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             //ExecuteLoadItemsCommand();
@@ -42,7 +42,7 @@ namespace Helpa.ViewModels
                 // Call api to get data from server.
                 //var helpers = await DataStore.GetHelpersList(10000, 28.4514279, 77.0704678);
                 var helpers = await (new HelpersServices()).GetHelpersList(10000, 28.4514279, 77.0704678);
-                HelperList = new ObservableCollection<Helper>(helpers.First().HelpersInLocalties);
+                HelperList = new ObservableCollection<HelperHome>(helpers.First().HelpersInLocalties);
 
                 //HelpersModel helper = new HelpersModel();
                 //helper.userName = "Army Rose";

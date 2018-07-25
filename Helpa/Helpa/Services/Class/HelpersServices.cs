@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Helpa
 {
-    class HelpersServices : IHelpersServices<HelpersModel>
+    class HelpersServices : IHelpersServices<HelperHomeModel>
     {
-        public async Task<IEnumerable<HelpersModel>> GetHelpersList(int radius, double latitude, double longitude)
+        public async Task<IEnumerable<HelperHomeModel>> GetHelpersList(int radius, double latitude, double longitude)
         {
-            IEnumerable<HelpersModel> helpers = new List<HelpersModel>();
+            IEnumerable<HelperHomeModel> helpers = new List<HelperHomeModel>();
 
             try
             {
@@ -27,7 +27,7 @@ namespace Helpa
                     if (response.IsSuccessStatusCode)
                     {
                         string result = await response.Content.ReadAsStringAsync();
-                        helpers = JsonConvert.DeserializeObject<IEnumerable<HelpersModel>>(result);
+                        helpers = JsonConvert.DeserializeObject<IEnumerable<HelperHomeModel>>(result);
                     }
                     else
                     {

@@ -8,7 +8,7 @@ namespace Helpa
     public class CustomMap : Map
     {
         //public List<string> SiteList;
-        public HelpersModel selectedHelper;
+        public HelperHomeModel selectedHelper;
 
         public void ClickedOnPin()
         {

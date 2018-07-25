@@ -19,7 +19,8 @@ namespace Helpa
     public partial class HelperCompleteRegister : ContentPage
     {
         RegisterUserModel currentUser;
-        IEnumerable<ServiceModel> services;
+        IList<ServiceModel> services;
+        IList<ScopeModel> scopes;
         static int currentService;
 
         private static HelperCompleteRegister instance;
@@ -33,7 +34,7 @@ namespace Helpa
         {
             InitializeComponent();
 
-            currentService = 1;
+            currentService = 0;
             instance = this;
             NavigationPage.SetHasNavigationBar(this, false);
             currentUser = user;
@@ -50,17 +51,18 @@ namespace Helpa
 
             //IEnumerable<String> locationTypes = new List<string>() { "Helper's Home", "Mobile Helper"};
             //SetRadioList(locationTypes, rgHelperLocationType);
-            
+
             IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
             SetRadioList(statusList, rgHelperStatus);
-            
+
             SetServices();
+            SetScopes();
 
             if (user.IsServiced)
                 GoToBuildTrust();
             else if (user.IsCompleted)
                 GoToEditServices();
-            else 
+            else
             if (user.IsRegistered)
             {
                 GoToBasicInfo();
@@ -72,88 +74,98 @@ namespace Helpa
                 {
                     string serviceName = ((ServiceButton)sender).serviceName;
 
-                    if(string.Equals(serviceName, "Hourly"))
+                    if (string.Equals(serviceName, "Hourly"))
                     {
-                        if(((ServiceButton)sender).isSelected)
-                        {
+                        if (((ServiceButton)sender).isSelected)
                             gridPriceHour.IsVisible = true;
-                        }
                         else
-                        {
                             gridPriceHour.IsVisible = false;
-                        }
                     }
-                    else if(string.Equals(serviceName, "Daily"))
+                    else if (string.Equals(serviceName, "Daily"))
                     {
                         if (((ServiceButton)sender).isSelected)
-                        {
                             gridPriceDay.IsVisible = true;
-                        }
                         else
-                        {
                             gridPriceDay.IsVisible = false;
-                        }
                     }
-                    else if(string.Equals(serviceName, "Monthly"))
+                    else if (string.Equals(serviceName, "Monthly"))
                     {
                         if (((ServiceButton)sender).isSelected)
-                        {
                             gridPriceMonth.IsVisible = true;
-                        }
                         else
-                        {
                             gridPriceMonth.IsVisible = false;
-                        }
-                    }
-
-                    var selectedService = services.Where(a => a.ServiceName == serviceName).First();
-                    int serviceIndex = services.ToList().IndexOf(selectedService);
-                    var gService = gridServices.Children.Where(c => Grid.GetRow(c) == serviceIndex / 3 && Grid.GetColumn(c) == serviceIndex % 3);
-                    gService.ElementAt(1).IsVisible = !gService.ElementAt(1).IsVisible;
-
-                    if (isSelected)
-                    {
-                        AddGrid();
-                        selectedService.isSelected = true;
-                        App.Database.SaveServiceAsync(selectedService);
                     }
                     else
                     {
-                        int count = gridHelperEditServices.ColumnDefinitions.Count;
+                        var selectedService = services.Where(a => a.ServiceName == serviceName).FirstOrDefault();
+                        int serviceIndex = services.ToList().IndexOf(selectedService);
+                        var gService = gridServices.Children.Where(c => Grid.GetRow(c) == serviceIndex / 3 && Grid.GetColumn(c) == serviceIndex % 3);
+                        gService.ElementAt(1).IsVisible = !gService.ElementAt(1).IsVisible;
 
-                        for (int i = count - 1; i >= 0; i--)
+                        if (isSelected)
                         {
-                            gridHelperEditServices.ColumnDefinitions.RemoveAt(i);
-                            gridHelperEditServices.Children.RemoveAt(i);
+                            AddGrid(gridHelperEditServices);
+                            selectedService.isSelected = true;
+                            App.Database.SaveServiceAsync(selectedService);
+                        }
+                        else
+                        {
+                            int count = gridHelperEditServices.ColumnDefinitions.Count;
+
+                            for (int i = count - 1; i >= 0; i--)
+                            {
+                                gridHelperEditServices.ColumnDefinitions.RemoveAt(i);
+                                gridHelperEditServices.Children.RemoveAt(i);
+                            }
+
+                            for (int i = 0; i < count - 1; i++)
+                                AddGrid(gridHelperEditServices);
+
+                            selectedService.isSelected = false;
+                            App.Database.SaveServiceAsync(selectedService);
                         }
 
-                        for (int i = 0; i < count - 1; i++)
-                            AddGrid();
-
-                        selectedService.isSelected = false;
-                        App.Database.SaveServiceAsync(selectedService);
+                        var g = gridHelperEditServices.Children.Where(c => Grid.GetRow(c) == 0 && Grid.GetColumn(c) == 0).First();
+                        g.BackgroundColor = Color.FromHex("#FF748C");
                     }
-
-                    var g = gridHelperEditServices.Children.Where(c => Grid.GetRow(c) == 0 && Grid.GetColumn(c) == 0).First();
-                    g.BackgroundColor = Color.FromHex("#FF748C");
                 }
-                catch(Exception e)
+                catch (Exception e)
+                {
+                    Console.Write(e.StackTrace);
+                }
+            });
+
+            MessagingCenter.Subscribe<ScopeButton, bool>(this, "Select Or Unselect Service", (sender, isSelected) =>
+            {
+                try
+                {
+                    string scopeName = ((ScopeButton)sender).scopeName;
+
+                    var selectedScope = scopes.Where(a => a.ScopeName == scopeName).FirstOrDefault();
+                    if (isSelected)
+                        selectedScope.isSelected = true;
+                    else
+                        selectedScope.isSelected = false;
+
+                    App.Database.SaveScopeAsync(selectedScope);
+                }
+                catch (Exception e)
                 {
                     Console.Write(e.StackTrace);
                 }
             });
         }
 
-        void AddGrid()
+        void AddGrid(Grid grid)
         {
-            gridHelperEditServices.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.1, GridUnitType.Star) });
 
-            Grid grid = new Grid();
-            grid.HorizontalOptions = LayoutOptions.FillAndExpand;
-            grid.VerticalOptions = LayoutOptions.FillAndExpand;
-            grid.BackgroundColor = Color.FromHex("#818A8F");
-            gridHelperEditServices.Children.Add(grid, gridHelperEditServices.ColumnDefinitions.Count - 1, 0);
-            gridHelperEditServices.BackgroundColor = Color.Transparent;
+            Grid g = new Grid();
+            g.HorizontalOptions = LayoutOptions.FillAndExpand;
+            g.VerticalOptions = LayoutOptions.FillAndExpand;
+            g.BackgroundColor = Color.FromHex("#818A8F");
+            grid.Children.Add(g, grid.ColumnDefinitions.Count - 1, 0);
+            grid.BackgroundColor = Color.Transparent;
         }
 
         void OnHomeLocationSelected(object sender, EventArgs args)
@@ -217,7 +229,7 @@ namespace Helpa
         async void SetServices()
         {
             #region set services
-            services = await (new Services.Services()).GetServicesAsync();
+            services = await (new Utilities()).GetServicesAsync();
 
             int servicesCount = services.Count();
             for (int i = 0; i < (servicesCount - 1) / 3 + 1; i++)
@@ -248,6 +260,39 @@ namespace Helpa
             await App.Database.SaveServicesAsync(services);
         }
 
+        async void SetScopes()
+        {
+            #region set scopes
+            scopes = await (new Utilities()).GetScpoesAsync();
+
+            int scopesCount = scopes.Count();
+            for (int i = 0; i < (scopesCount - 1) / 3 + 1; i++)
+                gridScopes.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+
+            for (int i = 0; i < 3; i++)
+                gridScopes.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+            ScopeButton scopeButton;
+            for (int i = 0; i < scopesCount; i++)
+            {
+                scopeButton = new ScopeButton();
+                scopeButton.Text = scopes.ElementAt(i).ScopeName;
+                scopeButton.Margin = new Thickness(10, 5, 10, 5);
+
+                Image image = new Image();
+                image.Source = "selected.png";
+                image.Aspect = Aspect.AspectFit;
+                image.Margin = new Thickness(20, 15, 0, 15);
+                image.HorizontalOptions = LayoutOptions.End;
+                image.IsVisible = false;
+
+                gridScopes.Children.Add(scopeButton, i % 3, i / 3);
+                gridScopes.Children.Add(image, i % 3, i / 3);
+                #endregion
+            }
+
+            await App.Database.SaveScopeAsync(scopes);
+        }
         //async void SetLocation()
         //{ 
         //    var locator = CrossGeolocator.Current;
@@ -319,6 +364,7 @@ namespace Helpa
                 DisplayAlert("Warning", "Please select at least any one service.", "Ok");
             else
             {
+                //OnCallNextService(sender, args);
                 GotoNextService(selectedServices, currentService);
             }
         }
@@ -326,59 +372,94 @@ namespace Helpa
         void OnCallNextService(object sender, EventArgs args)
         {
             List<ServiceModel> selectedServices = App.Database.GetServicesAsync();
+
+            if (currentService >= selectedServices.Count)
+                return; // Call HelperServices and go to Build Trust
+
+            ServiceModel service = services.Where(i => i.Id == selectedServices.ElementAt(currentService).Id).FirstOrDefault();
+            service = selectedServices.ElementAt(currentService);
+            if (rgHelperHomeLocation.Checked)
+                service.LocationType = 1;
+            else
+                service.LocationType = 2;
+
+            if (btnHelperRegHourly.isSelected)
+            {
+                service.Hour = true;
+                service.MinPriceHour = float.Parse(btnHelperRegPriceHrMin.Text.Substring(2));
+                service.MaxPriceHour = float.Parse(btnHelperRegPriceHrMax.Text.Substring(2));
+            }
+
+            if (btnHelperRegDaily.isSelected)
+            {
+                service.Day = true;
+                service.MinDayPrice = float.Parse(btnHelperRegPriceDayMin.Text.Substring(2));
+                service.MaxDayPrice = float.Parse(btnHelperRegPriceDayMax.Text.Substring(2));
+            }
+
+            if (btnHelperRegMonthly.isSelected)
+            {
+                service.Month = true;
+                service.MinMonthPrice = float.Parse(btnHelperRegPriceMonthMin.Text.Substring(2));
+                service.MaxMonthPrice = float.Parse(btnHelperRegPriceMonthMax.Text.Substring(2));
+            }
+
+            service.Scopes = App.Database.GetScopesAsync();
+
+            SaveService(service, currentService);
+
             GotoNextService(selectedServices, ++currentService);
         }
                 
         void GotoNextService(List<ServiceModel> selectedServices, int i)
         {
-            if (i > selectedServices.Count)
+            if (i >= selectedServices.Count)
                 return;
-
-            SaveService();
-
-            var g = gridHelperEditServices.Children.ElementAt(i);
+            
+            var g = gridHelperEditServices.Children.ElementAt(i+1);
             g.BackgroundColor = Color.FromHex("#FF748C");
 
             svHelperEditServices.IsVisible = false;
             svHelperRegHelperHome.IsVisible = true;
 
-            ServiceModel service = selectedServices.ElementAt(i-1);
+            ServiceModel service = selectedServices.ElementAt(i);
             btnHelperRegSelectedService.Text = service.ServiceName;
 
             //svHelperRegHelperHome.IsVisible = true;
         }
 
-        void SaveService()
+        void SaveService(ServiceModel serviceModel, int serviceIndex)
         {
-
+            services[serviceIndex] = serviceModel;
+            //services.Concat(new[] { serviceModel });
         }
         
         void SetYearOfExperience(object sender, EventArgs args) => 
-            btnHelperRegExpCount.Text = ((RangeSlider)sender).UpperValue.ToString();
+            btnHelperRegExpCount.Text = "$ " + ((RangeSlider)sender).UpperValue.ToString();
 
         void SetMinHour(object sender, EventArgs args) => 
-            btnHelperRegPriceHrMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+            btnHelperRegPriceHrMin.Text = "$ " + ((RangeSlider)sender).LowerValue.ToString();
 
         void SetMaxHour(object sender, EventArgs args) =>
-            btnHelperRegPriceHrMax.Text = ((RangeSlider)sender).UpperValue.ToString();
+            btnHelperRegPriceHrMax.Text = "$ " + ((RangeSlider)sender).UpperValue.ToString();
         
         void SetMinDay(object sender, EventArgs args) =>
-            btnHelperRegPriceDayMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+            btnHelperRegPriceDayMin.Text = "$ " + ((RangeSlider)sender).LowerValue.ToString();
         
         void SetMaxDay(object sender, EventArgs args) =>
-            btnHelperRegPriceDayMax.Text = ((RangeSlider)sender).UpperValue.ToString();
+            btnHelperRegPriceDayMax.Text = "$ " + ((RangeSlider)sender).UpperValue.ToString();
         
         void SetMinMonth(object sender, EventArgs args) =>
-            btnHelperRegPriceMonthMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+            btnHelperRegPriceMonthMin.Text = "$ " + ((RangeSlider)sender).LowerValue.ToString();
 
         void SetMaxMonth(object sender, EventArgs args) =>
-            btnHelperRegPriceMonthMax.Text = ((RangeSlider)sender).UpperValue.ToString();
+            btnHelperRegPriceMonthMax.Text = "$ " + ((RangeSlider)sender).UpperValue.ToString();
         
         void SetMinAge(object sender, EventArgs args) =>
-            btnHelperRegAgeMin.Text = ((RangeSlider)sender).LowerValue.ToString();
+            btnHelperRegAgeMin.Text = "$ " + ((RangeSlider)sender).LowerValue.ToString();
 
         void SetMaxAge(object sender, EventArgs args) =>
-            btnHelperRegAgeMax.Text = ((RangeSlider)sender).UpperValue.ToString();
+            btnHelperRegAgeMax.Text = "$ " + ((RangeSlider)sender).UpperValue.ToString();
 
         protected override bool OnBackButtonPressed()
         {

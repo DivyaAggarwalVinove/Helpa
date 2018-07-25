@@ -1,8 +1,8 @@
 ﻿using Helpa.Models;
 using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace Helpa.Services
 {
@@ -22,14 +22,21 @@ namespace Helpa.Services
         /// <param name="dbPath"></param>
         public Database(string dbPath)
         {
-            database = new SQLiteAsyncConnection(dbPath);
-            database.CreateTableAsync<RegisterUserModel>().Wait();
-            database.CreateTableAsync<ServiceModel>().Wait();
+            try
+            {
+                database = new SQLiteAsyncConnection(dbPath);
+                database.CreateTableAsync<RegisterUserModel>().Wait();
+                database.CreateTableAsync<ServiceModel>().Wait();
+                database.CreateTableAsync<ScopeModel>().Wait();
+            }
+            catch(Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
         }
         #endregion
 
         #region Operations on Register user Table
-
         /// <summary>
         /// GetUsersAsync: Read all user.
         /// </summary>
@@ -86,7 +93,6 @@ namespace Helpa.Services
         {
             return database.DeleteAsync(user);
         }
-
         #endregion
 
         #region Operations on Service Table
@@ -114,7 +120,6 @@ namespace Helpa.Services
             return result;
         }
 
-        #region Operations on Service Table
         /// <summary>
         /// SaveServiceAsync: Save service into database.
         /// </summary>
@@ -132,13 +137,71 @@ namespace Helpa.Services
                 return database.InsertAsync(service);
             }
         }
-        #endregion
 
+        /// <summary>
+        /// GetServicesAsync: To get the list of services from the database.
+        /// </summary>
+        /// <returns></returns>
         public List<ServiceModel> GetServicesAsync()
         {
             List<ServiceModel> services = database.Table<ServiceModel>().Where(i => i.isSelected == true).ToListAsync().Result;
             
             return services;
+        }
+        #endregion
+
+        #region Operations on Scope Table
+        /// <summary>
+        /// SaveScopeAsync: Save scopes into database.
+        /// </summary>
+        /// <param name="scopes"></param>
+        /// <returns></returns>
+        public Task<int> SaveScopeAsync(IEnumerable<ScopeModel> scopes)
+        {
+            Task<int> result = null;
+            foreach (ScopeModel scope in scopes)
+            {
+                ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefaultAsync().Result;
+                if (s != null)
+                {
+                    result = database.UpdateAsync(scope);
+                }
+                else
+                {
+                    result = database.InsertAsync(scope);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// SaveScopeAsync: Save scope into database.
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns></returns>
+        public Task<int> SaveScopeAsync(ScopeModel scope)
+        {
+            ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefaultAsync().Result;
+            if (s != null)
+            {
+                return database.UpdateAsync(scope);
+            }
+            else
+            {
+                return database.InsertAsync(scope);
+            }
+        }
+
+        /// <summary>
+        /// GetScopesAsync: To get the list of scopes from the database.
+        /// </summary>
+        /// <returns></returns>
+        public List<ScopeModel> GetScopesAsync()
+        {
+            List<ScopeModel> scopes = database.Table<ScopeModel>().Where(i => i.isSelected == true).ToListAsync().Result;
+
+            return scopes;
         }
 
         #endregion
