@@ -337,6 +337,7 @@ namespace Helpa
                 }
                 catch(Exception e)
                 {
+                    Console.Write(e.StackTrace);
                     currentUser.Gender = 3;
                 }
                 //currentUser.Gender = rgHelperGender.SelectedItem.ToString();
@@ -374,7 +375,10 @@ namespace Helpa
             List<ServiceModel> selectedServices = App.Database.GetServicesAsync();
 
             if (currentService >= selectedServices.Count)
+            {
+                GoToBuildTrust();
                 return; // Call HelperServices and go to Build Trust
+            }
 
             ServiceModel service = services.Where(i => i.Id == selectedServices.ElementAt(currentService).Id).FirstOrDefault();
             service = selectedServices.ElementAt(currentService);
@@ -404,9 +408,11 @@ namespace Helpa
                 service.MaxMonthPrice = float.Parse(btnHelperRegPriceMonthMax.Text.Substring(2));
             }
 
-            service.Scopes = App.Database.GetScopesAsync();
+            scopes = App.Database.GetScopesAsync();
 
-            SaveService(service, currentService);
+            //SaveService(service, currentService);
+            //Save Service into database
+            App.Database.SaveServiceAsync(service);
 
             GotoNextService(selectedServices, ++currentService);
         }
@@ -431,7 +437,8 @@ namespace Helpa
         void SaveService(ServiceModel serviceModel, int serviceIndex)
         {
             services[serviceIndex] = serviceModel;
-            //services.Concat(new[] { serviceModel });
+
+            App.Database.SaveServiceAsync(serviceModel);
         }
         
         void SetYearOfExperience(object sender, EventArgs args) => 
@@ -502,8 +509,14 @@ namespace Helpa
             svHelperEditServices.IsVisible = true;
         }
 
-        void GoToBuildTrust()
+        async void GoToBuildTrust()
         {
+            //await (new HelpersServices()).get();
+
+            helperCompleteRegisterTitle.Text = "Helper Sign Up 3/3";
+            //svHelperEditServices.IsVisible = false;
+            svHelperRegHelperHome.IsVisible = false;
+            svHelperBuildTrust.IsVisible = true;
         }
     }
 }

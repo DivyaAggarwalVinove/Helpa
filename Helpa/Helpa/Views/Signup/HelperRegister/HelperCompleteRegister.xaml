@@ -542,18 +542,28 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0">
-                                    <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Optional" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
                                 <Grid Grid.Row="1">
-                                    <Label Text="Providing your location will allow our system to find Helpers near you automatically." TextColor="#8F979C" FontAttributes="Bold" />
+                                    <Label Text="All fields in this section are optional. You can click Done now to finish sign up and build your trustability later." TextColor="#8F979C" FontAttributes="Bold" />
                                 </Grid>
 
                                 <Grid Grid.Row="2" VerticalOptions="Start">
-                                    <local:CustomStackLayout Orientation="Horizontal"  Padding="10,5,10,5" >
-                                        <Image x:Name="imgHelperRegSearch" Source="search.png"/>
-                                        <local:CustomEntry x:Name="entryHelperRegSearch" IsEnabled="True" Placeholder="Search" Focused="OnFocus" FontSize="Small" PlaceholderColor="#939BA0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>
-                                    </local:CustomStackLayout>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.6*"/>
+                                            <ColumnDefinition Width="0.4*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="0">
+                                            <Label Text="Self introduction:" />
+                                        </Grid>
+
+                                        <Grid Grid.Column="1">
+                                            <Label Text="0/300" />
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                                 
                                 <Grid Grid.Row="3" HorizontalOptions="End" Margin="0,0,0,5">

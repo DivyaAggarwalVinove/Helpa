@@ -21,7 +21,6 @@ namespace Xamarin.RangeSlider.Forms.Samples.Droid.PlattformEffects
 
            Context context = Xamarin.Forms.Forms.Context;
            //Bitmap icon = BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.);
-
             //ctrl.SetCustomThumbImage(icon);
         }
 

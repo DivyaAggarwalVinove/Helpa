@@ -266,12 +266,11 @@
                     <local:CustomLabel x:Name="lblCount" Text="100" TextColor="#FF4968" HeightRequest="60" WidthRequest="60" FontAttributes="Bold"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Width, Factor=0.75, Constant = -30}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=0.75, Constant = -50}"/>
-
                     <RelativeLayout x:Name="rlHalfView" BackgroundColor="White" IsVisible="False"
                                  RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=X, Factor=1, Constant = 0}"
                                  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=0.4, Constant = 0}"
                                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Width, Factor=1, Constant = 0}"
-                                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=0.6, Constant = 0}}">
+                                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=0.6, Constant = 0}">
 
                         <Label x:Name="lblHelperCount" Text="20 Helpers found in Carble Garden" TextColor="DeepPink" BackgroundColor="Transparent" VerticalTextAlignment="Center"
                                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 10}"
