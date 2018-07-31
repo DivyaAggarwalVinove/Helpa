@@ -11,25 +11,25 @@
     <ContentView x:Name="body">
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*"/>
-                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="0.85*"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.05*"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" ColumnSpacing="0" Padding="10,10,10,5" >
+                <Grid Grid.Row="0" ColumnSpacing="0" Margin="5,0,5,0">
                     <local:CustomStackLayout Orientation="Horizontal"  Padding="10,5,10,5" >
                         <Image x:Name="imgSearch" Source="search.png"/>
-                        <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>
+                        <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>
                         <Image x:Name="imgSend" Source="send.png"/>
                     </local:CustomStackLayout>
                 </Grid>
-
-                <Grid Grid.Row="1" ColumnSpacing="0" Margin="5,0,5,0">
+                
+                <Grid Grid.Row="1" ColumnSpacing="0" Margin="5,0,5,0" VerticalOptions="CenterAndExpand">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.09*"/>
                         <ColumnDefinition Width="0.13*"/>
@@ -44,11 +44,11 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <Label Text="Services" TextColor="#494949" FontSize="10" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            <Label Text="Services" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <Image Source="drop_down.png" Margin="0,4,0,0" VerticalOptions="CenterAndExpand"/>
+                            <Image Source="drop_down.png" Margin="0,2,0,0" VerticalOptions="CenterAndExpand"/>
                         </Grid>
                     </Grid>
 
@@ -59,11 +59,11 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <Label Text="Location types" TextColor="#494949" FontSize="10" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            <Label Text="Location types" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <Image Source="drop_down.png" Margin="0,4,0,0" VerticalOptions="CenterAndExpand"/>
+                            <Image Source="drop_down.png" Margin="0,2,0,0" VerticalOptions="CenterAndExpand"/>
                         </Grid>
                     </Grid>
 
@@ -74,11 +74,11 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <Label Text="Scope" TextColor="#494949" FontSize="10" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            <Label Text="Scope" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <Image Source="drop_down.png" Margin="0,4,0,0" VerticalOptions="CenterAndExpand"/>
+                            <Image Source="drop_down.png" Margin="0,2,0,0" VerticalOptions="CenterAndExpand"/>
                         </Grid>
                     </Grid>
 
@@ -89,11 +89,11 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <Label Text="Sort by" TextColor="#494949" FontSize="10" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            <Label Text="Sort by" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <Image Source="drop_down.png" Margin="0,4,0,0" VerticalOptions="CenterAndExpand"/>
+                            <Image Source="drop_down.png" Margin="0,2,0,0" VerticalOptions="CenterAndExpand"/>
                         </Grid>
                     </Grid>
                 </Grid>

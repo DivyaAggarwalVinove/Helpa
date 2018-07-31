@@ -374,12 +374,13 @@ namespace Helpa
         {
             List<ServiceModel> selectedServices = App.Database.GetServicesAsync();
 
-            if (currentService >= selectedServices.Count)
-            {
-                GoToBuildTrust();
-                return; // Call HelperServices and go to Build Trust
-            }
+            //if (currentService >= selectedServices.Count)
+            //{
+            //    GoToBuildTrust();
+            //    return; // Call HelperServices and go to Build Trust
+            //}
 
+            //services
             ServiceModel service = services.Where(i => i.Id == selectedServices.ElementAt(currentService).Id).FirstOrDefault();
             service = selectedServices.ElementAt(currentService);
             if (rgHelperHomeLocation.Checked)
@@ -408,9 +409,13 @@ namespace Helpa
                 service.MaxMonthPrice = float.Parse(btnHelperRegPriceMonthMax.Text.Substring(2));
             }
 
+            service.Scopes = new List<ScopeModel>();
             scopes = App.Database.GetScopesAsync();
+            foreach (ScopeModel scope in scopes)
+            {
+                service.Scopes.Add(scope);
+            }
 
-            //SaveService(service, currentService);
             //Save Service into database
             App.Database.SaveServiceAsync(service);
 
@@ -420,8 +425,11 @@ namespace Helpa
         void GotoNextService(List<ServiceModel> selectedServices, int i)
         {
             if (i >= selectedServices.Count)
-                return;
-            
+            {
+                GoToBuildTrust();
+                return; // Call HelperServices and go to Build Trust
+            }
+
             var g = gridHelperEditServices.Children.ElementAt(i+1);
             g.BackgroundColor = Color.FromHex("#FF748C");
 

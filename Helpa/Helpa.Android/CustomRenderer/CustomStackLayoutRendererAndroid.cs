@@ -17,7 +17,8 @@ namespace Helpa.Droid
         protected override void OnElementChanged(ElementChangedEventArgs<StackLayout> e)
         {
             base.OnElementChanged(e);
-
+            StackLayout sl = e.NewElement;
+            sl.VerticalOptions = LayoutOptions.Center;
             //if (Control != null)
             {
                 this.SetBackgroundResource(Resource.Drawable.custom_stacklayout_style);

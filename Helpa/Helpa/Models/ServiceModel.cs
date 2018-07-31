@@ -27,7 +27,7 @@ namespace Helpa.Models
         public float MinMonthPrice { get; set; }
         public float MaxMonthPrice { get; set; }
 
-        //[Ignore]
-        //public List<ScopeModel> Scopes { get; set; }
+        [Ignore]
+        public List<ScopeModel> Scopes { get; set; }
     }
 }
