@@ -12,21 +12,21 @@ namespace Helpa.Services
 {
     class Utilities
     {
-        public async Task<IList<ScopeModel>> GetScpoesAsync()
+        public async Task<List<ScopeModel>> GetScpoesAsync(int serviceId)
         {
-            IList<ScopeModel> scopes = new List<ScopeModel>();
+            List<ScopeModel> scopes = new List<ScopeModel>();
             try
             {
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     HttpClient httpClient = new HttpClient();
-                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Scopes"));
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Scopes/"+serviceId));
                     var response = await httpClient.GetAsync(uri);
                     if (response.IsSuccessStatusCode)
                     {
                         ServiceModel sm = new ServiceModel();
                         string result = await response.Content.ReadAsStringAsync();
-                        scopes = JsonConvert.DeserializeObject<IList<ScopeModel>>(result);
+                        scopes = JsonConvert.DeserializeObject<List<ScopeModel>>(result);
                     }
                     else
                     {

@@ -17,7 +17,7 @@
             </Grid>
             
             <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="Start">
-                <Label x:Name="lParentSignUp" Text="Parent Sign Updo 1/2" TextColor="Black" FontSize="30" FontAttributes="Bold" VerticalTextAlignment="Center" />
+                <Label x:Name="lParentSignUp" Text="Parent Sign Up 1/2" TextColor="Black" FontSize="30" FontAttributes="Bold" VerticalTextAlignment="Center" />
             </Grid>
 
             <Grid Grid.Row="2">

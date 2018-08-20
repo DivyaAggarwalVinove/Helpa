@@ -10,9 +10,9 @@ namespace Helpa
         //public List<string> SiteList;
         public HelperHomeModel selectedHelper;
 
-        public void ClickedOnPin()
+        public void ClickedOnPin(string selectedCluster)
         {
-            MessagingCenter.Send<CustomMap>(this, "Hi");
+            MessagingCenter.Send<CustomMap, string>(this, "Hi", selectedCluster);
         }
     }
 }

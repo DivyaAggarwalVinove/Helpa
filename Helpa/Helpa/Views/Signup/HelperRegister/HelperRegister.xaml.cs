@@ -3,6 +3,7 @@ using Helpa.Services;
 using Helpa.Utility;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -52,11 +53,22 @@ namespace Helpa
             Navigation.PushAsync(new HelperCompleteRegister(userModel));
         }
 
+        public void ShowError(string error)
+        {
+            DisplayAlert("Error", error, "Ok");
+        }
+
         void OnSignUpEmailPhnClicked(object sender, EventArgs args)
         {
             btnHelperSignUpEmailPhn.IsVisible = false;
             slHelperSignUpEmailPhn.IsVisible = true;
             btnHelperSignUp.IsVisible = true;
+        }
+
+        async void OnFaceBookSignUp(object sender, EventArgs args)
+        {
+            var externalDetails = await (new RegisterServices()).GetExternalDetails();
+            await (new RegisterServices()).FacebookSignUp(externalDetails.Where(x=>x.Name.ToUpper() == "FACEBOOK").FirstOrDefault());
         }
 
         protected override bool OnBackButtonPressed()
@@ -116,6 +128,11 @@ namespace Helpa
 
                 await (new RegisterServices()).RegisterService(userModel);
             }
+        }
+
+        void OnClickLogin(object sender, EventArgs args)
+        {
+            Navigation.PushAsync(new LoginPage());
         }
 
         void ShowOrHidePassword(object sender, EventArgs args)

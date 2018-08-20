@@ -16,7 +16,7 @@ namespace Helpa
 
         void OnSetLocationOnMap(object sender, EventArgs eventArgs)
         {
-            Navigation.PushAsync(new Register3());
+            //Navigation.PushAsync(new Register3());
         }
 
         void OnClickYourLocation(object sender, EventArgs eventArgs)

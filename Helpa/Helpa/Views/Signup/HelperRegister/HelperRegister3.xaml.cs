@@ -1,6 +1,9 @@
 ﻿using Helpa.Models;
+using Helpa.Services;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,10 +28,16 @@ namespace Helpa
 
         async void SetLocationOnMap()
         {
+            var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+            if (status != PermissionStatus.Granted)
+            {
+                await DependencyService.Get<IPermissionServices>().GetPermission(this);
+            }
+
             var locator = CrossGeolocator.Current;
             TimeSpan ts = TimeSpan.FromTicks(1000000);
             Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(ts);
-            IEnumerable<Address> addresses =  await locator.GetAddressesForPositionAsync(position, "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
+            IEnumerable<Address> addresses = await locator.GetAddressesForPositionAsync(position, "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
             Address address = addresses.FirstOrDefault();
             //Address address = (addresses.ToArray())[0];
             entryHelperRegSearch3.Placeholder = address.FeatureName + "," + address.SubLocality + "," + address.Locality;
@@ -52,26 +61,30 @@ namespace Helpa
             try
             {
                 ObservableCollection<LocationModel> locations = new ObservableCollection<LocationModel>();
-                //var locator = CrossGeolocator.Current;
-                var locator = new Geocoder();
-                var address = ((CustomEntry)sender).Text;
-                List<string> addresses = new List<string>();
-
-                if (string.IsNullOrEmpty(address))
-                    return;
-
-                IEnumerable<Xamarin.Forms.Maps.Position> positions = await locator.GetPositionsForAddressAsync(address);
-                foreach (Xamarin.Forms.Maps.Position item in positions)
+                
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                if (status == PermissionStatus.Granted)
                 {
-                    IEnumerable<string> addr = await locator.GetAddressesForPositionAsync(new Xamarin.Forms.Maps.Position(item.Latitude, item.Longitude));
-                    var a = addr.FirstOrDefault();
-                    //locations.Add(new LocationModel { Address = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode });
-                    locations.Add(new LocationModel { Address = a });
+                    var locator = CrossGeolocator.Current;
+                    
+                    var address = ((CustomEntry)sender).Text;
+                    List<string> addresses = new List<string>();
 
-                    //addresses.Add(a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode);
+                    if (string.IsNullOrEmpty(address))
+                        return;
+
+                    IEnumerable<Plugin.Geolocator.Abstractions.Position> positions = await locator.GetPositionsForAddressAsync(address);
+                    foreach (Plugin.Geolocator.Abstractions.Position item in positions)
+                    {
+                        IEnumerable<Address> addr = await locator.GetAddressesForPositionAsync(new Plugin.Geolocator.Abstractions.Position(item.Latitude, item.Longitude));
+                        var a = addr.FirstOrDefault();
+                        locations.Add(new LocationModel { Address = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode });
+                        //locations.Add(new LocationModel { Address = a });
+
+                        //addresses.Add(a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode);
+                    }
+                    addressesViewHelper.ItemsSource = locations;
                 }
-                addressesViewHelper.ItemsSource = locations;
-
             }
             catch(Exception e)
             {

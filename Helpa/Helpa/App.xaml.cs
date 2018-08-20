@@ -4,11 +4,13 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
 using Helpa.Services;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Helpa
 {
     public partial class App : Application
-	{
+    {
         /// <summary>
         /// Create database
         /// </summary>
@@ -27,15 +29,21 @@ namespace Helpa
             }
         }
         #endregion
-
+        
         int selectedPage = 0;
         List<KeyValuePair<string, string>> listTabs;
         List<string> imagesName;
+
         public App()
         {
             try
             {
+                Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQwMTVAMzEzNjJlMzIyZTMwYzJHZDNOMUtsV1pPbVdKYU5taEp4T3BXMVZjc0lKTVBWV214dWMrT2VyMD0=");
+
                 InitializeComponent();
+
+                DependencyService.Register<IPermissionServices>();
+
                 listTabs = new List<KeyValuePair<string, string>>()
                 {
                     new KeyValuePair<string, string>("imgHelpers", "lblHelpers"),
@@ -51,6 +59,7 @@ namespace Helpa
                 };
 
                 MainPage = new NavigationPage(new Helpers());
+                JobPosts jobPosts = new JobPosts();
             }
             catch (Exception e)
             {
@@ -58,65 +67,73 @@ namespace Helpa
             }
         }
 
-        void OnFindHelperPressed(object sender, EventArgs args)
+        async void OnFindHelperPressed(object sender, EventArgs args)
         {
             if (selectedPage != 0)
             {
                 Grid grid = ((Grid)sender);
                 SelectTab(grid, selectedPage, 0);
 
+                //MainPage = new NavigationPage(Helpers.Instance);
+                //MainPage = Helpers.Instance;
                 ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+                //Helpers helper = new Helpers();
                 contentPresenter.Content = (new Helpers()).Content;
+
+                await Helpers.Instance.GetRuntimeLocationPermission(5000);
             }
         }
-
-        void OnJobPostPressed(object sender, EventArgs args)
+        
+        async void OnJobPostPressed(object sender, EventArgs args)
         {
             if (selectedPage != 1)
             {
-                //Current.MainPage = new JobPosts();
+                //MainPage = new NavigationPage(JobPosts.Instance);
+
                 Grid grid = ((Grid)sender);
                 SelectTab(grid, selectedPage, 1);
-                
+
                 ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
                 contentPresenter.Content = (new JobPosts()).Content;
+
+                await JobPosts.Instance.GetRuntimeLocationPermission(5000);
             }
         }
 
         void OnMessagesPressed(object sender, EventArgs args)
         {
-            if (selectedPage != 2)
-            {
-                Grid grid = ((Grid)sender);
-                SelectTab(grid, selectedPage, 2);
+            //if (selectedPage != 2)
+            //{
+            //    Grid grid = ((Grid)sender);
+            //    SelectTab(grid, selectedPage, 2);
 
-                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-                contentPresenter.Content = (new Messages()).Content;
-            }
+            //    ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+            //    contentPresenter.Content = (new Messages()).Content;
+            //}
         }
 
         void OnNotificationsPressed(object sender, EventArgs args)
         {
-            if (selectedPage != 3)
-            {
-                Grid grid = ((Grid)sender);
-                SelectTab(grid, selectedPage, 3);
+            //if (selectedPage != 3)
+            //{
+            //    Grid grid = ((Grid)sender);
+            //    SelectTab(grid, selectedPage, 3);
 
-                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-                contentPresenter.Content = (new Notifications()).Content;
-            }
+            //    ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+            //    contentPresenter.Content = (new Notifications()).Content;
+            //}
         }
 
         void OnProfilePressed(object sender, EventArgs args)
         {
-            if (selectedPage != 4)
-            {
-                Grid grid = ((Grid)sender);
-                SelectTab(grid, selectedPage, 4);
+            //if (selectedPage != 4)
+            //{
+            //    Grid grid = ((Grid)sender);
+            //    SelectTab(grid, selectedPage, 4);
 
-                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-                contentPresenter.Content = (new Profile()).Content;
-            }
+            //    ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+            //    contentPresenter.Content = (new Profile()).Content;
+            //}
         }
 
         void SelectTab(Grid grid, int currentIndex, int newIndex)

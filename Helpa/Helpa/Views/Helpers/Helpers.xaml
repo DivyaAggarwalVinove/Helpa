@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:custommap="clr-namespace:Helpa"
              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
              xmlns:local="clr-namespace:Helpa"
@@ -101,13 +100,14 @@
 
             <Grid x:Name="gridHelpersBody" Grid.Row="1">
                 <RelativeLayout x:Name="relativeLayout" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <custommap:CustomMap x:Name="mapHelper" MapType="Street"
+                    <custommap:CustomMap x:Name="mapHelper" MapType="Street"          
                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
                               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}" />
 
-                    <ListView x:Name="lvFullHelpa" ItemsSource="{Binding HelperList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False"
+                    <ListView x:Name="lvFullHelpa" ItemsSource="{Binding HelperFullList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False"
+                              ItemTapped="HelperSelectedFullList"
                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
@@ -116,7 +116,8 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell Height="115">
-                                    <StackLayout Margin="5" VerticalOptions="Center">
+                                    <StackLayout x:Name="slOuterFull" BackgroundColor="{Binding color}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <StackLayout Margin="5" Padding="0,2,0,0" VerticalOptions="Center" BackgroundColor="White">
                                         <Grid ColumnSpacing="0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
@@ -186,7 +187,7 @@
                                                     </Grid>
 
                                                     <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Label Text="{Binding location}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        <Label Text="{Binding LocationName}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                     </Grid>
                                                 </Grid>
 
@@ -203,7 +204,7 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <rating:SfRating x:Name="rating" ItemCount="5" Value="{Binding AverageRating}" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                            <rating:SfRating x:Name="rating" ItemCount="5" Value="{Binding AverageRating}" Precision="Exact" ItemSize="15" IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                                                                 <rating:SfRating.RatingSettings>
                                                                     <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
                                                                 </rating:SfRating.RatingSettings>
@@ -223,25 +224,26 @@
                                                             <ColumnDefinition Width="0.1*" />
                                                         </Grid.ColumnDefinitions>
 
-                                                        <Grid Grid.Column="0" BackgroundColor="Green" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                                                             <Image Source="hands.png" Aspect="AspectFit"/>
                                                         </Grid>
 
-                                                        <Grid Grid.Column="1" BackgroundColor="Blue" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                                                             <Label Text="{Binding ConnectionCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
 
-                                                        <Grid Grid.Column="2" BackgroundColor="Yellow" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                                                             <Image Source="question.png" Aspect="AspectFit"/>
                                                         </Grid>
 
-                                                        <Grid Grid.Column="3" BackgroundColor="Orange" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                                                             <Label Text="{Binding EnquiredUserCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
+                                    </StackLayout>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
@@ -263,37 +265,38 @@
                         </Image.GestureRecognizers>
                     </Image>
 
-                    <local:CustomLabel x:Name="lblCount" Text="100" TextColor="#FF4968" HeightRequest="60" WidthRequest="60" FontAttributes="Bold"
+                    <local:CustomLabel x:Name="lblCount" Text="{Binding TotallHelpers}" TextColor="#FF4968" HeightRequest="60" WidthRequest="60" FontAttributes="Bold"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Width, Factor=0.75, Constant = -30}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=0.75, Constant = -50}"/>
-                    <RelativeLayout x:Name="rlHalfView" BackgroundColor="White" IsVisible="False"
+                    
+                    <RelativeLayout x:Name="rlHalfView" BackgroundColor="#F1F5F6" IsVisible="False"
                                  RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=X, Factor=1, Constant = 0}"
                                  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=0.4, Constant = 0}"
                                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Width, Factor=1, Constant = 0}"
                                  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=0.6, Constant = 0}">
 
-                        <Label x:Name="lblHelperCount" Text="20 Helpers found in Carble Garden" TextColor="DeepPink" BackgroundColor="Transparent" VerticalTextAlignment="Center"
+                        <Label x:Name="lblHelperCount" Text=" Helpers found in " TextColor="#FF748C" BackgroundColor="Transparent" VerticalTextAlignment="Center"
                                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 10}"
                                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}"
                                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.7, Constant = 0}"
                                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.15, Constant = 0}"/>
 
-                        <Button x:Name="btnClose" Text="Close" TextColor="Gray" BackgroundColor="Blue" HorizontalOptions="Start"
-                                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=lblHelperCount, Property=Width, Factor=1, Constant = 0}"
+                        <Button x:Name="btnClose" Text="Close" TextColor="Gray" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="OnCloseHalfList"
+                                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=lblHelperCount, Property=Width, Factor=1, Constant = 10}"
                                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}"
-                                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = 0}"
+                                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.2, Constant = 0}"
                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.15, Constant = 0}"/>
 
-                        <ListView x:Name="lvHalfHelpa" ItemsSource="{Binding HelperList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False"
+                        <ListView x:Name="lvHalfHelpa" ItemsSource="{Binding HelperHalfList}" VerticalOptions="FillAndExpand" HasUnevenRows="True"
                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
-                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}">
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=lblHelperCount, Property=Height, Factor=1, Constant = 0}">
 
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell Height="115">
-                                        <StackLayout Margin="5" VerticalOptions="Center">
+                                        <StackLayout Margin="5" VerticalOptions="Center" BackgroundColor="White">
                                             <Grid ColumnSpacing="0">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
@@ -301,7 +304,7 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <Grid Grid.Column="0" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                                    <Image Source="{Binding photo}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="80" HeightRequest="80"/>
+                                                    <Image Source="{Binding ProfilePicture}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="80" HeightRequest="80"/>
                                                 </Grid>
 
                                                 <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
@@ -320,7 +323,7 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding Name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
@@ -344,11 +347,11 @@
                                                         </Grid>
 
                                                         <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding service}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding Service}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding price}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding Price}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
                                                     </Grid>
 
@@ -363,7 +366,7 @@
                                                         </Grid>
 
                                                         <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding location}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding LocationName}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
                                                     </Grid>
 
@@ -380,7 +383,7 @@
                                                             </Grid.ColumnDefinitions>
 
                                                             <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <rating:SfRating x:Name="rating" ItemCount="5" Value="{Binding rating}" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                                <rating:SfRating x:Name="halfRating" ItemCount="5" Value="{Binding AverageRating}" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                                                                     <rating:SfRating.RatingSettings>
                                                                         <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
                                                                     </rating:SfRating.RatingSettings>
@@ -388,7 +391,7 @@
                                                             </Grid>
 
                                                             <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding rating_count}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                <Label Text="{Binding AverageRatingCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                             </Grid>
                                                         </Grid>
 
@@ -400,20 +403,20 @@
                                                                 <ColumnDefinition Width="0.1*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <Grid Grid.Column="0" BackgroundColor="Green" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                                                                 <Image Source="hands.png" Aspect="AspectFit"/>
                                                             </Grid>
 
-                                                            <Grid Grid.Column="1" BackgroundColor="Blue" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding count1}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Label Text="{Binding ConnectionCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                             </Grid>
 
-                                                            <Grid Grid.Column="2" BackgroundColor="Yellow" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Grid Grid.Column="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                                                                 <Image Source="question.png" Aspect="AspectFit"/>
                                                             </Grid>
 
-                                                            <Grid Grid.Column="3" BackgroundColor="Orange" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding count2}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Grid Grid.Column="3" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Label Text="{Binding EnquiredUserCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                             </Grid>
                                                         </Grid>
                                                     </Grid>
@@ -426,6 +429,7 @@
                         </ListView>
                     </RelativeLayout>
                 </RelativeLayout>
+                <ActivityIndicator x:Name="aiFindHelper" IsRunning="False" Color="#FF4968"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             </Grid>
         </Grid>
     </ContentView>

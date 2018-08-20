@@ -69,7 +69,7 @@
                         <ScrollView x:Name="svHelperBasicInfo">
                             <Grid RowSpacing="0">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.34*"/>
+                                    <!--<RowDefinition Height="0.3*"/>
                                     <RowDefinition Height="0.1*"/>
                                     <RowDefinition Height="0.1*"/>
                                     <RowDefinition Height="0.11*"/>
@@ -81,42 +81,53 @@
                                     <RowDefinition Height="0.12*"/>
                                     <RowDefinition Height="0.1*"/>
                                     <RowDefinition Height="0.12*"/>
-                                    <RowDefinition Height="0.14*"/>
+                                    <RowDefinition Height="0.14*"/>-->
+
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0" Margin="0,10,0,0">
-                                    <Image Source="picture.png"/>
+                                    <Image Source="picture.png" Aspect="AspectFit"/>
                                 </Grid>
 
-                                <Grid Grid.Row="1">
-                                    <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                <Grid Grid.Row="1" Margin="0,10,0,0">
+                                    <Label Text="Required" FontSize="Medium" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="2">
+                                <Grid Grid.Row="2" Margin="0,10,0,0">
                                     <Label Text="Username:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="3">
+                                <Grid Grid.Row="3" Margin="0,5,0,0">
                                     <local:CustomEntry x:Name="entryHelperRegUsername1" Placeholder="Username" PlaceholderColor="#939ba0" FontSize="14"/>
                                 </Grid>
 
-                                <Grid Grid.Row="4">
+                                <Grid Grid.Row="4" Margin="0,10,0,0">
                                     <Label Text="Gender:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                    <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                        <ctrls:RadioGroup
-                                            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
-                                            x:Name="rgHelperGender"                                                    
-                                            Orientation="Horizontal"
-                                            OnImg="radio_close.png" 
-                                            OffImg="radio_button.png"
-                                            SelectedItem="Male"/>
-                                    </RelativeLayout>
+                                <Grid Grid.Row="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,5,0,0" >
+                                    <ctrls:RadioGroup
+                                        x:Name="rgHelperGender"                                                    
+                                        Orientation="Horizontal"
+                                        OnImg="radio_close.png" 
+                                        OffImg="radio_button.png"
+                                        SelectedItem="Male"/>
                                 </Grid>
 
-                                <Grid Grid.Row="6">
+                                <Grid Grid.Row="6" Margin="0,10,0,0">
                                     <Label Text="Contact Info:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
@@ -137,8 +148,8 @@
 
                                 <Grid Grid.Row="8" ColumnSpacing="10" Margin="0,5,0,5">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.35*" />
-                                        <ColumnDefinition Width="0.65*" />
+                                        <ColumnDefinition Width="0.4*" />
+                                        <ColumnDefinition Width="0.6*" />
                                     </Grid.ColumnDefinitions>
 
                                     <Grid Grid.Column="0" Margin="0,5,0,5">
@@ -195,349 +206,368 @@
                             </Grid>
                         </ScrollView>
                         <!--#endregion-->
-                        
+
                         <!--#region Helper Edit Service-->
-                        <Grid x:Name="svHelperEditServices" RowSpacing="0" IsVisible="False" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.1*"/>
-                                <RowDefinition Height="0.05*"/>
-                                <RowDefinition Height="0.1*"/>
-                                <RowDefinition Height="0.05*"/>
-                                <RowDefinition Height="0.58*"/>
-                                <RowDefinition Height="0.12*"/>
-                            </Grid.RowDefinitions>
+                        <ScrollView x:Name="svHelperEditServices" IsVisible="False">
+                            <Grid RowSpacing="0" >
+                                <Grid.RowDefinitions>
+                                    <!--<RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.05*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.05*"/>
+                                    <RowDefinition Height="0.58*"/>-->
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Qualification Titles -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Qualifications -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Year of experience -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Experience in no. -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Experience progress-->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Target Age group -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Age group values -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Age Group Progress -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!--<RowDefinition Height="0.12*"/>-->
+                                </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
-                            </Grid>
+                                <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <Label Text="Required" TextColor="#FF748C" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
 
-                            <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                <Label Text="Status:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
-                            </Grid>
+                                <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <Label Text="Status:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
 
-                            <Grid Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                <ctrls:RadioGroup
+                                <Grid Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,5,0,0">
+                                    <ctrls:RadioGroup
                                     x:Name="rgHelperStatus"                                                    
                                     Orientation="Horizontal"
                                     OnImg="radio_close.png" 
                                     OffImg="radio_button.png"
                                     SelectedItem="Available"/>
+                                </Grid>
+
+                                <Grid Grid.Row="3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <Label Text="Select service(s):" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <Grid Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <ScrollView>
+                                        <Grid x:Name="gridServices" ColumnSpacing="10" RowSpacing="5">
+                                        </Grid>
+                                    </ScrollView>
+                                </Grid>
+
+                                <Grid Grid.Row="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <Label Text="Optional" TextColor="#FF748C" FontAttributes="Bold" FontSize="Medium" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand"/>
+                                </Grid>
+                                
+                                <Grid Grid.Row="6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <Label Text="Qualifications:" TextColor="#6F7281" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Grid>
+
+                                <Grid Grid.Row="7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,5,0,0">
+                                    <local:CustomEntry x:Name="entryHelperRegQualifications" FontSize="Small" IsEnabled="True" Placeholder="Enter relevant qualifications, awarding bodies, etc." PlaceholderColor="#939BA0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,30,0,30"/>
+                                </Grid>
+
+                                <Grid Grid.Row="8" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <Label Text="Years of experience:" TextColor="#6F7281"  FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Grid>
+
+                                <Grid Grid.Row="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,5,0,10">
+                                    <local:ServiceButton x:Name="btnHelperRegExpCount" Text="15" HorizontalOptions="Center" IsEnabled="False"/>
+                                </Grid>
+
+                                <Grid Grid.Row="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <!--<Slider Minimum="0" Maximum="100" Value="15" HorizontalOptions="FillAndExpand" ValueChanged="SetYearOfExperience" />-->
+                                    <forms:RangeSlider MinimumValue="0" MaximumValue="100" MinThumbHidden="True" UpperValue="15" StepValue="1" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" BarHeight="10" UpperValueChanged="SetYearOfExperience" />
+                                </Grid>
+
+                                <Grid Grid.Row="11" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <Label Text="Target age group:" TextColor="#6F7281" FontAttributes="Bold" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Grid>
+
+                                <Grid Grid.Row="12" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,5,0,0">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                        <local:ServiceButton x:Name="btnHelperRegAgeMin" Text="0" IsEnabled="False"/>
+                                        <BoxView x:Name="btnHelperRegAge" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="1" WidthRequest="2" BackgroundColor="#BCC1C4" Margin="15,0,15,0"/>
+                                        <local:ServiceButton x:Name="btnHelperRegAgeMax" Text="6" IsEnabled="False"/>
+                                    </StackLayout>
+                                </Grid>
+
+                                <Grid Grid.Row="13" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <forms:RangeSlider x:Name="RangeSlider" MinimumValue="0" MaximumValue="10" LowerValue="0" UpperValue="6" StepValue="1" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" BarHeight="10" LowerValueChanged="SetMinAge" UpperValueChanged="SetMaxAge" />
+                                </Grid>
+
+                                <Grid Grid.Row="14" VerticalOptions="FillAndExpand" HorizontalOptions="End" Margin="0,10,0,10">
+                                    <Button x:Name="btnHelperRegEditServicesNext" Clicked="OnHelperRegEditServicesNext" Text="Next >" TextColor="White" BackgroundColor="#FF748C" />
+                                </Grid>
                             </Grid>
+                        </ScrollView>
 
-                            <Grid Grid.Row="3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                <Label Text="Select service(s):" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
-                            </Grid>
+                        <!--#region HelperServices-->
+                        <ScrollView x:Name="svHelperRegHelperHome" IsVisible="False">
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Service Title -->
+                                    <RowDefinition Height="75"/>
+                                    <!-- Service Details -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Required -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Location type titles -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Location types -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Location Titles -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Locations -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Price Titles -->
+                                    <RowDefinition Height="0.05*"/>
+                                    <!-- Prices -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Hour -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Day -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Monthly -->
+                                    <RowDefinition Height="0.05*"/>
+                                    <!-- Optional -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Scope Titles -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Scopes -->
+                                    <RowDefinition Height="0.05*"/>
+                                </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                <ScrollView>
-                                    <Grid x:Name="gridServices" ColumnSpacing="10" RowSpacing="5">
-                                    </Grid>
-                                </ScrollView>
-                            </Grid>
+                                <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0" >
+                                    <Label Text="Service details of:" TextColor="#6F7281" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Grid>
 
-                            <Grid Grid.Row="5" VerticalOptions="FillAndExpand" HorizontalOptions="End" Margin="0,10,0,10">
-                                <Button x:Name="btnHelperRegEditServicesNext" Clicked="OnHelperRegEditServicesNext" Text="Next >" TextColor="White" BackgroundColor="#FF748C" />
-                            </Grid>
-                        </Grid>
-                        
-                            <!--#region HelperServices-->
-                            <ScrollView x:Name="svHelperRegHelperHome" IsVisible="False">
-                                <Grid RowSpacing="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Service Title -->
-                                        <RowDefinition Height="75"/>
-                                        <!-- Service Details -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Required -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Location type titles -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Location types -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Location Titles -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Locations -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Price Titles -->
-                                        <RowDefinition Height="0.05*"/>
-                                        <!-- Prices -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Hour -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Day -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Monthly -->
-                                        <RowDefinition Height="0.05*"/>
-                                        <!-- Optional -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Scope Titles -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Scopes -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Qualification Titles -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Qualifications -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Year of experience -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Experience in no. -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Experience progress-->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Target Age group -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Age group values -->
-                                        <RowDefinition Height="Auto"/>
-                                        <!-- Age Group Progress -->
-                                        <RowDefinition Height="0.05*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0" >
-                                        <Label Text="Service details of:" TextColor="#6F7281" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="1" ColumnSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                        <RelativeLayout BackgroundColor="#E8EDF1">
-                                            <local:ServiceButton x:Name="btnHelperRegSelectedService" Text="Tutor" IsEnabled="False"
+                                <Grid Grid.Row="1" ColumnSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <RelativeLayout BackgroundColor="#E8EDF1">
+                                        <local:ServiceButton x:Name="btnHelperRegSelectedService" Text="Tutor" IsEnabled="False"
                                                     RelativeLayout.XConstraint="10" 
                                                     RelativeLayout.YConstraint="15"
                                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -30}" />
 
-                                            <Image Source="selected.png" Aspect="AspectFit"
+                                        <Image Source="selected.png" Aspect="AspectFit"
                                                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnHelperRegSelectedService, Property=Width, Factor=1, Constant=0}" 
                                                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnHelperRegSelectedService, Property=Height, Factor=0.6, Constant=0}" />
 
-                                            <Button Text="Remove" TextColor="Gray" BackgroundColor="#E5E5E5"
+                                        <Button Text="Remove" TextColor="Gray" BackgroundColor="#E5E5E5"
                                                     VerticalOptions="Center"
                                                     RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.65, Constant=0}" 
                                                     RelativeLayout.YConstraint="15"
                                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -30}"
                                                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.3, Constant=0}"/>
-                                        </RelativeLayout>
+                                    </RelativeLayout>
+                                </Grid>
+
+                                <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
+                                    <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" FontSize="Medium" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand"/>
+                                </Grid>
+
+                                <Grid Grid.Row="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
+                                    <Label Text="Location type:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Grid>
+
+                                <Grid Grid.Row="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" Margin="0,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0">
+                                        <ctrls:CheckBox x:Name="rgHelperHomeLocation" Text="Helper's Home" ShowLabel="True" OnImg="radio_close.png" OffImg="radio_button.png" Checked="True" CheckChanged="OnHomeLocationSelected"/>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <ctrls:CheckBox x:Name="rgHelperMobileLocation" Text="Mobile Helper" ShowLabel="True" OnImg="radio_close.png" OffImg="radio_button.png" Checked="False" CheckChanged="OnMobileLocationSelected"/>
                                     </Grid>
 
-                                    <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
-                                        <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" FontSize="Medium" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
-                                        <Label Text="Location type:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" Margin="0,10,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Grid Grid.Column="0">
-                                            <ctrls:CheckBox x:Name="rgHelperHomeLocation" Text="Helper's Home" ShowLabel="True" OnImg="radio_close.png" OffImg="radio_button.png" Checked="True" CheckChanged="OnHomeLocationSelected"/>
-                                        </Grid>
-                                        <Grid Grid.Column="1">
-                                            <ctrls:CheckBox x:Name="rgHelperMobileLocation" Text="Mobile Helper" ShowLabel="True" OnImg="radio_close.png" OffImg="radio_button.png" Checked="False" CheckChanged="OnMobileLocationSelected"/>
-                                        </Grid>
-
-                                        <!--<ctrls:RadioGroup
+                                    <!--<ctrls:RadioGroup
                                         x:Name="rgHelperLocationType"                                                    
                                         Orientation="Horizontal"
                                         Orientation="Horizontal"
                                         OnImg="radio_close.png" 
                                         OffImg="radio_button.png" />-->
-                                    </Grid>
+                                </Grid>
 
-                                    <Grid Grid.Row="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="0,15,0,0">
-                                        <Label Text="Location:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                    </Grid>
+                                <Grid Grid.Row="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="0,15,0,0">
+                                    <Label Text="Location:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Grid>
 
-                                    <Grid Grid.Row="6" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Margin="0,10,0,0">
-                                        <local:CustomEntry x:Name="entryHelperRegLocation" IsEnabled="True" Placeholder="E.g. Tsui Estate, Kwun Tong" Focused="OnFocus" FontSize="Small" PlaceholderColor="#939BA0" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                                        <Button x:Name="btnHelperRegDistrict" Text="Select district(s) you can cover" TextColor="White" BackgroundColor="#FF748C" IsVisible="False"/>
-                                    </Grid>
+                                <Grid Grid.Row="6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <local:CustomEntry x:Name="entryHelperRegLocation" IsEnabled="True" Placeholder="E.g. Tsui Estate, Kwun Tong" Focused="OnFocus" FontSize="Small" PlaceholderColor="#939BA0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                                    <Button x:Name="btnHelperRegDistrict" Text="Select district(s) you can cover" TextColor="White" BackgroundColor="#FF748C" IsVisible="False" VerticalOptions="Center"/>
+                                </Grid>
 
-                                    <Grid Grid.Row="7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="0,15,0,0">
-                                        <Label Text="Price:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                    </Grid>
+                                <Grid Grid.Row="7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="0,15,0,0">
+                                    <Label Text="Price:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Grid>
 
-                                    <Grid Grid.Row="8" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,10">
-                                        <!--<StackLayout Orientation="Horizontal">
+                                <Grid Grid.Row="8" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                    <!--<StackLayout Orientation="Horizontal">
                                             <local:ServiceButton x:Name="btnHelperRegHourly" Text="Hourly"/>
                                             <local:ServiceButton x:Name="btnHelperRegDaily" Text="Daily"/>
                                             <local:ServiceButton x:Name="btnHelperRegMonthly" Text="Monthly"/>
                                             <local:ServiceButton x:Name="btnHelperRegTbd" Text="TBD"/>
                                         </StackLayout>-->
-                                        <Grid ColumnSpacing="5">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
+                                    <Grid x:Name="gridPriceType" ColumnSpacing="2">
+                                        <!--<Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
 
-                                            <Grid Grid.Column="0">
-                                                <local:ServiceButton x:Name="btnHelperRegHourly" Text="Hourly"/>
-                                            </Grid>
-
-                                            <Grid Grid.Column="1">
-                                                <local:ServiceButton x:Name="btnHelperRegDaily" Text="Daily"/>
-                                            </Grid>
-
-                                            <Grid Grid.Column="2">
-                                                <local:ServiceButton x:Name="btnHelperRegMonthly" Text="Monthly"/>
-                                            </Grid>
-
-                                            <Grid Grid.Column="3">
-                                                <local:ServiceButton x:Name="btnHelperRegTbd" Text="TBD"/>
-                                            </Grid>
+                                        <Grid Grid.Column="0">
+                                            <local:ServiceButton x:Name="btnHelperRegHourly" Text="Hourly"/>
                                         </Grid>
+
+                                        <Grid Grid.Column="1">
+                                            <local:ServiceButton x:Name="btnHelperRegDaily" Text="Daily"/>
+                                        </Grid>
+
+                                        <Grid Grid.Column="2">
+                                            <local:ServiceButton x:Name="btnHelperRegMonthly" Text="Monthly"/>
+                                        </Grid>
+
+                                        <Grid Grid.Column="3">
+                                            <local:ServiceButton x:Name="btnHelperRegTbd" Text="TBD"/>
+                                        </Grid>-->
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="9" x:Name="gridPriceHour" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
+                                        <Label Text="Per hour:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                     </Grid>
 
-                                    <Grid Grid.Row="9" x:Name="gridPriceHour" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
-                                            <Label Text="Per hour:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                        </Grid>
-
-                                        <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                                <local:ServiceButton x:Name="btnHelperRegPriceHrMin" Text="$ 0" IsEnabled="False"/>
-                                                <BoxView x:Name="bvHelperRegPriceHr" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="1" WidthRequest="2" BackgroundColor="#BCC1C4" Margin="15,0,15,0"/>
-                                                <local:ServiceButton x:Name="btnHelperRegPriceHrMax" Text="$ 200" IsEnabled="False"/>
-                                            </StackLayout>
-                                        </Grid>
-
-                                        <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                            <forms:RangeSlider x:Name="rsHelperRegPriceHr" MinimumValue="0" MaximumValue="500" LowerValue="0" UpperValue="200" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" BarHeight="10" LowerValueChanged="SetMinHour" UpperValueChanged="SetMaxHour" />
-                                        </Grid>
+                                    <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                            <local:ServiceButton x:Name="btnHelperRegPriceHrMin" Text="$ 0" IsEnabled="False"/>
+                                            <BoxView x:Name="bvHelperRegPriceHr" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="1" WidthRequest="2" BackgroundColor="#BCC1C4" Margin="15,0,15,0"/>
+                                            <local:ServiceButton x:Name="btnHelperRegPriceHrMax" Text="$ 200" IsEnabled="False"/>
+                                        </StackLayout>
                                     </Grid>
 
-                                    <Grid Grid.Row="10" x:Name="gridPriceDay" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
+                                    <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                        <forms:RangeSlider x:Name="rsHelperRegPriceHr" MinimumValue="0" MaximumValue="500" LowerValue="0" UpperValue="200" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" BarHeight="10" LowerValueChanged="SetMinHour" UpperValueChanged="SetMaxHour" />
+                                    </Grid>
+                                </Grid>
 
-                                        <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
-                                            <Label Text="Per day:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                        </Grid>
+                                <Grid Grid.Row="10" x:Name="gridPriceDay" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
 
-                                        <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                                <local:ServiceButton x:Name="btnHelperRegPriceDayMin" Text="$ 0" IsEnabled="False"/>
-                                                <BoxView x:Name="bvHelperRegPriceDay" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="1" WidthRequest="2" BackgroundColor="#BCC1C4" Margin="15,0,15,0"/>
-                                                <local:ServiceButton x:Name="btnHelperRegPriceDayMax" Text="$ 500" IsEnabled="False"/>
-                                            </StackLayout>
-                                        </Grid>
-
-                                        <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                            <forms:RangeSlider x:Name="rsHelperRegPriceDay" MinimumValue="0" MaximumValue="1250" LowerValue="0" UpperValue="500" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" BarHeight="10" LowerValueChanged="SetMinDay" UpperValueChanged="SetMaxDay" />
-                                        </Grid>
+                                    <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
+                                        <Label Text="Per day:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                     </Grid>
 
-                                    <Grid Grid.Row="11" x:Name="gridPriceMonth" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-
-                                        <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
-                                            <Label Text="Per month:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                        </Grid>
-
-                                        <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                                <local:ServiceButton x:Name="btnHelperRegPriceMonthMin" Text="$ 0" IsEnabled="False"/>
-                                                <BoxView x:Name="bvHelperRegPriceMonth" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="1" WidthRequest="2" BackgroundColor="#BCC1C4" Margin="15,0,15,0"/>
-                                                <local:ServiceButton x:Name="btnHelperRegPriceMonthMax" Text="$ 10000" IsEnabled="False"/>
-                                            </StackLayout>
-                                        </Grid>
-
-                                        <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                            <forms:RangeSlider x:Name="rsHelperRegPriceMonth" MinimumValue="0" MaximumValue="25000" LowerValue="0" UpperValue="10000" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" BarHeight="10" LowerValueChanged="SetMinMonth" UpperValueChanged="SetMaxMonth" />
-                                        </Grid>
+                                    <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                            <local:ServiceButton x:Name="btnHelperRegPriceDayMin" Text="$ 0" IsEnabled="False"/>
+                                            <BoxView x:Name="bvHelperRegPriceDay" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="1" WidthRequest="2" BackgroundColor="#BCC1C4" Margin="15,0,15,0"/>
+                                            <local:ServiceButton x:Name="btnHelperRegPriceDayMax" Text="$ 500" IsEnabled="False"/>
+                                        </StackLayout>
                                     </Grid>
 
-                                    <Grid Grid.Row="12" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                        <Label Text="Optional" TextColor="#FF748C" FontAttributes="Bold" FontSize="Medium" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand"/>
+                                    <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                        <forms:RangeSlider x:Name="rsHelperRegPriceDay" MinimumValue="0" MaximumValue="1250" LowerValue="0" UpperValue="500" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" BarHeight="10" LowerValueChanged="SetMinDay" UpperValueChanged="SetMaxDay" />
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="11" x:Name="gridPriceMonth" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="False">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
+                                        <Label Text="Per month:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                     </Grid>
 
-                                    <Grid Grid.Row="13" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                        <Label Text="Scope:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                    <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                            <local:ServiceButton x:Name="btnHelperRegPriceMonthMin" Text="$ 0" IsEnabled="False"/>
+                                            <BoxView x:Name="bvHelperRegPriceMonth" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="1" WidthRequest="2" BackgroundColor="#BCC1C4" Margin="15,0,15,0"/>
+                                            <local:ServiceButton x:Name="btnHelperRegPriceMonthMax" Text="$ 10000" IsEnabled="False"/>
+                                        </StackLayout>
                                     </Grid>
 
-                                    <Grid Grid.Row="14" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,10">
-                                        <ScrollView>
-                                            <Grid x:Name="gridScopes" ColumnSpacing="10" RowSpacing="5">
-                                            </Grid>
-                                        </ScrollView>
+                                    <Grid Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
+                                        <forms:RangeSlider x:Name="rsHelperRegPriceMonth" MinimumValue="0" MaximumValue="25000" LowerValue="0" UpperValue="10000" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" BarHeight="10" LowerValueChanged="SetMinMonth" UpperValueChanged="SetMaxMonth" />
+                                    </Grid>
+                                </Grid>
 
-                                        <!--<StackLayout Orientation="Horizontal">
+                                <Grid Grid.Row="12" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Label Text="Optional" TextColor="#FF748C" FontAttributes="Bold" FontSize="Medium" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand"/>
+                                </Grid>
+
+                                <Grid Grid.Row="13" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Label Text="Scope:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Grid>
+
+                                <Grid Grid.Row="14" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,10">
+                                    <ScrollView>
+                                        <Grid x:Name="gridScopes" ColumnSpacing="10" RowSpacing="5">
+                                        </Grid>
+                                    </ScrollView>
+
+                                    <!--<StackLayout Orientation="Horizontal">
                                             <local:ServiceButton x:Name="btnHelperRegCatering" Text="Catering"/>
                                             <local:ServiceButton x:Name="btnHelperRegHomeWorkAssistance" Text="Homework assistance"/>
                                             <local:ServiceButton x:Name="btnHelperRegPickUpSchool" Text="Pick Up From School"/>
                                         </StackLayout>-->
-                                    </Grid>
-
-                                    <Grid Grid.Row="15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
-                                        <Label Text="Qualifications:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="16" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                        <local:CustomEntry x:Name="entryHelperRegQualifications" IsEnabled="True" Placeholder="Enter relevant qualifications, awarding bodies, etc." FontSize="Small" PlaceholderColor="#939BA0" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="17" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
-                                        <Label Text="Years of experience:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="18" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,10">
-                                        <local:ServiceButton x:Name="btnHelperRegExpCount" Text="15" HorizontalOptions="Center" IsEnabled="False"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="19" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                        <!--<Slider Minimum="0" Maximum="100" Value="15" HorizontalOptions="FillAndExpand" ValueChanged="SetYearOfExperience" />-->
-                                        <forms:RangeSlider MinimumValue="0" MaximumValue="100" MinThumbHidden="True" UpperValue="15" StepValue="0" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" BarHeight="10" UpperValueChanged="SetYearOfExperience" />
-                                    </Grid>
-
-                                    <Grid Grid.Row="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,15,0,0">
-                                        <Label Text="Target age group:" TextColor="#6F7281" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="21" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                            <local:ServiceButton x:Name="btnHelperRegAgeMin" Text="0" IsEnabled="False"/>
-                                            <BoxView x:Name="btnHelperRegAge" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="1" WidthRequest="2" BackgroundColor="#BCC1C4" Margin="15,0,15,0"/>
-                                            <local:ServiceButton x:Name="btnHelperRegAgeMax" Text="6" IsEnabled="False"/>
-                                        </StackLayout>
-                                    </Grid>
-
-                                    <Grid Grid.Row="22" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
-                                        <forms:RangeSlider x:Name="RangeSlider" MinimumValue="0" MaximumValue="10" LowerValue="0" UpperValue="6" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" BarHeight="10" LowerValueChanged="SetMinAge" UpperValueChanged="SetMaxAge" />
-                                    </Grid>
-
-                                    <Grid Grid.Row="23" HorizontalOptions="End" Margin="0,10,0,10">
-                                        <Button x:Name="btnHelperRegHelperServiceNext" Text="Next >" TextColor="White" BackgroundColor="#FF748C" Clicked="OnCallNextService" />
-                                    </Grid>
                                 </Grid>
-                            </ScrollView>
-                            <!--#endregion-->
-                        
+
+                                <Grid Grid.Row="15" HorizontalOptions="End" Margin="0,10,0,10">
+                                    <Button x:Name="btnHelperRegHelperServiceNext" Text="Next >" TextColor="White" BackgroundColor="#FF748C" Clicked="OnCallNextService" />
+                                </Grid>
+                            </Grid>
+                        </ScrollView>
                         <!--#endregion-->
-                        
+
+                        <!--#endregion-->
+
                         <!--#region  BuildTrust-->
                         <ScrollView x:Name="svHelperBuildTrust" IsVisible="False">
                             <Grid RowSpacing="0" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.1*"/>
                                     <RowDefinition Height="0.1*"/>
-                                    <RowDefinition Height="0.5*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.3*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="0.1*"/>
                                 </Grid.RowDefinitions>
 
@@ -556,23 +586,97 @@
                                             <ColumnDefinition Width="0.4*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Grid Grid.Column="0">
+                                        <Grid Grid.Column="0" Margin="0,10,0,10">
                                             <Label Text="Self introduction:" />
                                         </Grid>
 
-                                        <Grid Grid.Column="1">
+                                        <Grid Grid.Column="1" Margin="0,10,0,10">
                                             <Label Text="0/300" />
                                         </Grid>
                                     </Grid>
                                 </Grid>
+
+                                <Grid Grid.Row="3">
+                                    <Entry x:Name="entrySelfIntrodution" Text="" Placeholder="Describe yourself" PlaceholderColor="Gray" FontAttributes="Bold"/>
+                                </Grid>
+
+                                <Grid Grid.Row="4" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Helpa is built on trust. So please help others get to know you!" TextColor="#8F979C" FontAttributes="Bold" />
+                                </Grid>
+
+                                <Grid Grid.Row="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.6*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                        <ColumnDefinition Width="0.1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0">
+                                        <Label Text="Certificates:" FontSize="Medium" TextColor="#8F979C" FontAttributes="Bold" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" />
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <Button Text="Upload" TextColor="Gray" FontAttributes="Bold" Clicked="OnCertificateUpload" />
+                                    </Grid>
+
+                                    <Grid Grid.Column="2">
+                                        <Image Source="info.png" Aspect="AspectFit" Margin="5"/>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.6*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                        <ColumnDefinition Width="0.1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0">
+                                        <Label Text="ID Card:" FontSize="Medium" TextColor="#8F979C" FontAttributes="Bold" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" />
+                                    </Grid>
+
+                                    <Grid Grid.Column="1">
+                                        <Button Text="Upload" TextColor="Gray" FontAttributes="Bold" Clicked="OnIdCardUpload"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2">
+                                        <Image Source="info.png" Aspect="AspectFit" Margin="5"/>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="7">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.6*"/>
+                                            <ColumnDefinition Width="0.3*"/>
+                                            <ColumnDefinition Width="0.1*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="0">
+                                            <Label Text="Carousel:" FontSize="Medium" TextColor="#8F979C" FontAttributes="Bold" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" />
+                                        </Grid>
+
+                                        <Grid Grid.Column="1">
+                                            <Button Text="Upload" TextColor="Gray" FontAttributes="Bold" Clicked="OnCarouselUpload" />
+                                        </Grid>
+
+                                        <Grid Grid.Column="2">
+                                            <Image Source="info.png" Aspect="AspectFit" Margin="5"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="8" BackgroundColor="Green">
+                                    <Image x:Name="imgTrustDoc" IsVisible="True"></Image>
+                                </Grid>
                                 
-                                <Grid Grid.Row="3" HorizontalOptions="End" Margin="0,0,0,5">
-                                    <Button x:Name="btnHelperRegDone2" Text="Done >" TextColor="White" BackgroundColor="#FF748C" />
+                                <Grid Grid.Row="9" HorizontalOptions="End" Margin="0,5,0,5">
+                                    <Button x:Name="btnHelperRegDone2" Text="Done >" TextColor="White" BackgroundColor="#FF748C" Clicked="OnTrustUpload" />
                                 </Grid>
                             </Grid>
                         </ScrollView>
                         <!--#endregion-->
-                        
+
                     </Grid>
                 </Grid>
             </Grid>

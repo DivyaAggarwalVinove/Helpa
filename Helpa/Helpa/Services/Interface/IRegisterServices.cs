@@ -11,5 +11,8 @@ namespace Helpa.Services
         Task RegisterExternal(RegisterUserModel helpersModel);
         Task RegisterService(RegisterUserModel helpersModel);
         Task CompleteRegisterService(RegisterUserModel helpersModel);
+
+        Task FacebookSignUp(ExternalLoginViewModel externalDetail);
+        Task<IEnumerable<ExternalLoginViewModel>> GetExternalDetails();
     }
 }

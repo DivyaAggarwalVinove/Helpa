@@ -22,6 +22,7 @@ namespace Helpa.Models
         public bool IsCompleted { get; set; }
         public bool IsServiced { get; set; }
         public bool IsBuildTrusted { get; set; }
+        public bool isLoggedIn { get; set; }
     }
 
     enum Gender

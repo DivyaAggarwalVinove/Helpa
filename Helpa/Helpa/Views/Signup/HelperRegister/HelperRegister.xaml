@@ -7,8 +7,8 @@
         <ScrollView>
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" RowSpacing="0" Margin="10,0,10,0">
@@ -32,9 +32,9 @@
                     <Grid Grid.Row="2" Margin="0,5,0,5"  VerticalOptions="Center" HorizontalOptions="Center">
                         <Label Text="Create your account in 3 minutes!" TextColor="#FF748C" FontAttributes="Bold" />
                     </Grid>
-
+                    
                     <Grid Grid.Row="3" Margin="0,5,0,5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <local:FacebookLoginButton Text="Sign up with Facebook" TextColor="White" Margin="0,5,0,5" BackgroundColor="#3D5A98" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                        <Button Text="Sign up with Facebook" Clicked="OnFaceBookSignUp" TextColor="White" Margin="0,5,0,5" BackgroundColor="#3D5A98" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
                     </Grid>
 
                     <Grid Grid.Row="4" Padding="0,5,0,5">
@@ -65,9 +65,9 @@
                 <Grid Grid.Row="1" RowSpacing="0" Margin="10,5,10,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="0.15*"/>
-                        <RowDefinition Height="0.15*"/>
-                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -113,7 +113,7 @@
                     </Grid>
 
                     <Grid Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <Button Text="Login" TextColor="#72c6e5" BackgroundColor="Transparent" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                        <Button Text="Login" Clicked="OnClickLogin" TextColor="#72c6e5" BackgroundColor="Transparent" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                     </Grid>
 
                     <Grid Grid.Row="3" VerticalOptions="Center" HorizontalOptions="End">

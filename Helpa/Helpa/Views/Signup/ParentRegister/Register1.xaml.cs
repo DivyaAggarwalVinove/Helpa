@@ -1,4 +1,6 @@
-﻿using Helpa.Utility;
+﻿using Helpa.Models;
+using Helpa.Services;
+using Helpa.Utility;
 using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
@@ -14,20 +16,29 @@ namespace Helpa
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Register1 : ContentPage
     {
-        //RegisterViewModel1 vm = null;
+        RegisterUserModel currentUser;
+        private static Register1 instance;
+        public static Register1 Instance
+        {
+            get { return instance; }
+            set { instance = value; }
+        }
 
-        public Register1(string userName, string gender, string phoneNumber, string email)
+        public Register1(RegisterUserModel user)
         {
             InitializeComponent();
+
+            currentUser = user;
+            instance = this;
 
             NavigationPage.SetHasNavigationBar(this, false);
             IEnumerable<string> genderList = new List<string>() { "Male", "Female", "Rather no to say" };
             rgGender.ItemsSource = genderList;
-            rgGender.SelectedItem = Utils.ToTitleCase( gender);
+            rgGender.SelectedItem = Utils.ToTitleCase("Female");
 
-            entryRegUsername1.Text = userName;
-            entryRegPhone1.Text = phoneNumber;
-            entryRegEmail1.Text = email;
+            entryRegUsername1.Text = user.UserName;
+            entryRegPhone1.Text = user.MobileNumber;
+            entryRegEmail1.Text = user.Email;
 
             SetLocation();
 
@@ -81,12 +92,50 @@ namespace Helpa
                 gridLocation.BackgroundColor = Color.FromHex("#FF748C");
                 svBasicInfo.IsVisible = false;
                 svLocationInfo.IsVisible = true;
-                //Navigation.PushAsync(new Register1());
+
+                currentUser.IsVerified = true;
+                currentUser.UserName = entryRegUsername1.Text;
+                currentUser.MobileNumber = entryRegPhone1.Text;
+                try
+                {
+                    Gender g = (Gender)Enum.Parse(typeof(Gender), rgGender.SelectedItem.ToString());
+                    currentUser.Gender = (int)g;
+                }
+                catch (Exception e)
+                {
+                    Console.Write(e.StackTrace);
+                    currentUser.Gender = 3;
+                }
+                currentUser.Email = entryRegEmail1.Text;
+                currentUser.Role = "Parent".ToUpper();
             }
         }
 
-        void OnSignUpDone(object sender, EventArgs args)
+        async void OnSignUpDone(object sender, EventArgs args)
         {
+            if (entryRegSearch.Text.Equals(""))
+                await DisplayAlert("Warning", "Please select location.", "Ok");
+            else
+                await (new RegisterServices()).CompleteRegisterService(currentUser);
+        }
+
+        public void GotoNext(RegisterUserModel userModel)
+        {
+            DisplayAlert("Information", "Sign up successfully.", "Ok");
+            
+            List<Page> pages = Navigation.NavigationStack.ToList();
+            for (int i = pages.Count - 1; i > 0; i--)
+            {
+                if (!pages[i].ToString().Contains("Login"))
+                    Navigation.PopAsync();
+                else
+                    break;
+            }
+        }
+
+        public void ShowError(string error)
+        {
+            DisplayAlert("Error", error, "Ok");
         }
 
         protected override bool OnBackButtonPressed()
@@ -105,6 +154,7 @@ namespace Helpa
                 return base.OnBackButtonPressed();
             }
         }
+
         void OnFocus(object sender, EventArgs args)
         {
             Navigation.PushAsync(new Register2());

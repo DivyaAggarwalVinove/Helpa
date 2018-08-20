@@ -22,9 +22,8 @@ namespace Helpa.Droid
                 Control.SetBackgroundResource(Resource.Drawable.custom_entry_style);
                 Control.Gravity = Android.Views.GravityFlags.CenterVertical;
                 e.NewElement.Margin = new Thickness(0);
-
                 //Control.TextAlignment = Android.Views.TextAlignment.Center;
-                Control.SetPadding(0, 0, 0, 0);
+                Control.SetPadding(20, 15, 0, 15);
             }
         }
     }

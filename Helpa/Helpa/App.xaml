@@ -42,7 +42,7 @@
                     <!-- End Content -->
 
                     <!-- Begin Footer -->
-                    <Grid Grid.Row="1" Margin="0,0,5,0">
+                    <Grid x:Name="gridFooter" Grid.Row="1" BackgroundColor="White">
                         <Grid ColumnSpacing="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
@@ -62,6 +62,7 @@
                                     </Grid.RowDefinitions>
 
                                     <Grid Grid.Row="0">
+                                        <!--<Image x:Name="imgHelpers" Source="find_helpers_pink.png" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />-->
                                         <Image x:Name="imgHelpers" Source="find_helpers_pink.png" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                                     </Grid>
 

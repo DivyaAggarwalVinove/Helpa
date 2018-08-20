@@ -41,7 +41,12 @@ namespace Helpa
 
         public void GotoNext(RegisterUserModel userModel)
         {
-            //Navigation.PushAsync(new Register1(userModel));
+            Navigation.PushAsync(new Register1(userModel));
+        }
+
+        public void ShowError(string error)
+        {
+            DisplayAlert("Error", error, "Ok");
         }
 
         void OnSignUpEmailPhnClicked(object sender, EventArgs args)

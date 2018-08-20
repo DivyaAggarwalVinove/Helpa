@@ -1,135 +1,241 @@
 ﻿using Helpa.Models;
+using Helpa.Services;
+using Plugin.Geolocator;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace Helpa.ViewModels
 {
     public class HelpersViewModel : INotifyPropertyChanged
     {
         public IHelpersServices<HelperHomeModel> DataStore => DependencyService.Get<IHelpersServices<HelperHomeModel>>();
-        public ObservableCollection<HelperHome> HelperList { get; set; }
+        public ObservableCollection<HelperHomeModel> helperHomeList { get; set; }
+        public ObservableCollection<HelperHome> HelperFullList { get; set; }
+
+        ObservableCollection<HelperHome> helperHalfList=new ObservableCollection<HelperHome>();
+        public ObservableCollection<HelperHome> HelperHalfList
+        {
+            get
+            {
+                return helperHalfList;
+            }
+            set { SetProperty(ref helperHalfList, value); }
+        }
         public Command LoadItemsCommand { get; set; }
-        public Helpers context;
+
+        public CustomMap mapHelper;
+        public ActivityIndicator activityIndicator;
 
         public HelpersViewModel(Helpers helpers)
         {
-            HelperList = new ObservableCollection<HelperHome>();
-            context = helpers;
+            activityIndicator = Helpers.Instance.Content.FindByName<ActivityIndicator>("aiFindHelper");
+
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            //ExecuteLoadItemsCommand();
             LoadItemsCommand.Execute(null);
         }
 
-        private async Task ExecuteLoadItemsCommand()
-        //private void ExecuteLoadItemsCommand()
+        public async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
 
             IsBusy = true;
-
+            
             try
             {
-                HelperList.Clear();
+                HelperFullList = new ObservableCollection<HelperHome>();
+                HelperHalfList = new ObservableCollection<HelperHome>();
 
-                // Call api to get data from server.
-                //var helpers = await DataStore.GetHelpersList(10000, 28.4514279, 77.0704678);
-                var helpers = await (new HelpersServices()).GetHelpersList(10000, 28.4514279, 77.0704678);
-                HelperList = new ObservableCollection<HelperHome>(helpers.First().HelpersInLocalties);
+                #region Constant Data
+                #region Cluster 1
+                HelperHome helper = new HelperHome();
+                helper.Name = "Army Rose";
+                helper.Service = "Childcare";
+                helper.Price = "From $100 per hour";
+                helper.Status = "Available";
+                helper.ProfilePicture = "picture2.png";
+                helper.AverageRating = "4.3";
+                helper.AverageRatingCount = "4.3(" + "32)";
+                helper.ConnectionCount = 37;
+                helper.EnquiredUserCount = 44;
+                helper.Latitude = 28.4512804;
+                helper.Longitude = 77.0703797;
+                helper.LocationName = "Estel Technologies";
+                helper.UserId = 1;
+                helper.color = "#00FFFFFF";
+                HelperFullList.Add(helper);
+                HelperHalfList.Add(helper);
 
-                //HelpersModel helper = new HelpersModel();
-                //helper.userName = "Army Rose";
-                //helper.service = "Childcare";
-                //helper.HelpersInLocalties[0].price = "From $100 per hour";
-                //helper.LocalityName = "Carble Garden";
-                //helper.HelpersInLocalties[0].Status = "Available";
-                //helper.HelpersInLocalties[0].ProfilePicture = "picture2.png";
-                //helper.HelpersInLocalties[0].AverageRating = 4.3f;
-                //helper.HelpersInLocalties[0].AverageRatingCount = "4.3(" + "32)";
-                //helper.HelpersInLocalties[0].ConnectionCount = 37;
-                //helper.HelpersInLocalties[0].EnquiredUserCount = 44;
-                //helperList.Add(helper);
+                helper = new HelperHome();
+                helper.Name = "HSBC";
+                helper.Service = "Bank";
+                helper.Price = "That is reliable";
+                helper.Status = "Sponsored";
+                helper.ProfilePicture = "message_picture3.png";
+                helper.AverageRating = "0.0";
+                helper.AverageRatingCount = "0.0(" + "0)";
+                helper.ConnectionCount = 0;
+                helper.EnquiredUserCount = 0;
+                helper.Latitude = 28.4508911;
+                helper.Longitude = 77.0707457;
+                helper.LocationName = "FIITJEE";
+                helper.UserId = 2;
+                helper.color = "#00FFFFFF";
+                HelperFullList.Add(helper);
+                HelperHalfList.Add(helper);
 
-                //helper = new HelpersModel();
-                //helper.userName = "HSBC";
-                //helper.service = "Bank";
-                //helper.price = "That is reliable";
-                //helper.location = "Carble Garden";
-                //helper.status = "Sponsored";
-                //helper.profileImage = "message_picture3.png";
-                //helper.rating = 0;
-                //helper.rating_count = "0.0(" + "0)";
-                //helper.count1 = 0;
-                //helper.count2 = 0;
-                //helperList.Add(helper);
+                helper = new HelperHome();
+                helper.Name = "Emily Clarkson";
+                helper.Service = "Childcare";
+                helper.Price = "From $100 per hour";
+                helper.Status = "Not Available";
+                helper.ProfilePicture = "picture.png";
+                helper.AverageRating = "4.4";
+                helper.AverageRatingCount = "4.4(" + "19)";
+                helper.ConnectionCount = 23;
+                helper.EnquiredUserCount = 97;
+                helper.Latitude = 28.4512804;
+                helper.Longitude = 77.0703797;
+                helper.LocationName = "Estel Technologies";
+                helper.UserId = 3;
+                helper.color = "#00FFFFFF";
+                HelperFullList.Add(helper);
+                HelperHalfList.Add(helper);
 
-                //helper = new HelpersModel();
-                //helper.userName = "Emily Clarkson";
-                //helper.service = "Childcare";
-                //helper.price = "From $100 per hour";
-                //helper.location = "Carble Garden";
-                //helper.status = "Not Available";
-                //helper.profileImage = "picture.png";
-                //helper.rating = 4.4f;
-                //helper.rating_count = "4.4(" +"19)";
-                //helper.count1 = 23;
-                //helper.count2 = 97;
-                //helperList.Add(helper);
+                HelperHomeModel helpers = new HelperHomeModel();
+                helpers.LocalityName = "Policy Bazaar";
+                helpers.Latitude = 28.4510871;
+                helpers.Longitude = 77.070111;
+                helpers.LocationType = 'S';
+                helpers.NumberOfHelpersInLocality = 3;
+                helpers.HelpersInLocalties = HelperHalfList.ToList();
+                helperHomeList = new ObservableCollection<HelperHomeModel>();
+                helperHomeList.Add(helpers);
+                #endregion
 
-                //helper = new HelpersModel();
-                //helper.userName = "Army Rose";
-                //helper.service = "Childcare";
-                //helper.price = "From $100 per hour";
-                //helper.location = "Carble Garden";
-                //helper.status = "Available";
-                //helper.profileImage = "picture2.png";
-                //helper.rating = 4.3f;
-                //helper.rating_count = "4.3(" + "32)";
-                //helper.count1 = 37;
-                //helper.count2 = 44;
-                //helperList.Add(helper);
+                #region Cluster 2
+                HelperHalfList = new ObservableCollection<HelperHome>();
+                helper = new HelperHome();
+                helper.Name = "Army Rose";
+                helper.Service = "Childcare";
+                helper.Price = "From $100 per hour";
+                helper.Status = "Available";
+                helper.ProfilePicture = "picture2.png";
+                helper.AverageRating = "4.3";
+                helper.AverageRatingCount = "4.3(" + "32)";
+                helper.ConnectionCount = 37;
+                helper.EnquiredUserCount = 44;
+                helper.Latitude = 28.4608904;
+                helper.Longitude = 77.0700297;
+                helper.LocationName = "Oyster's Water";
+                helper.UserId = 4;
+                helper.color = "#00FFFFFF";
+                HelperFullList.Add(helper);
+                HelperHalfList.Add(helper);
 
-                //helper = new HelpersModel();
-                //helper.userName = "HSBC";
-                //helper.service = "Bank";
-                //helper.price = "That is reliable";
-                //helper.location = "Carble Garden";
-                //helper.status = "Sponsored";
-                //helper.profileImage = "message_picture3.png";
-                //helper.rating = 0;
-                //helper.rating_count = "0.0(" + "0)";
-                //helper.count1 = 0;
-                //helper.count2 = 0;
-                //helperList.Add(helper);
+                helper = new HelperHome();
+                helper.Name = "HSBC";
+                helper.Service = "Bank";
+                helper.Price = "That is reliable";
+                helper.Status = "Sponsored";
+                helper.ProfilePicture = "message_picture3.png";
+                helper.AverageRating = "0.0";
+                helper.AverageRatingCount = "0.0(" + "0)";
+                helper.ConnectionCount = 0;
+                helper.EnquiredUserCount = 0;
+                helper.Latitude = 28.4615457;
+                helper.Longitude = 77.0690201;
+                helper.LocationName = "Appu Ghar";
+                helper.UserId = 5;
+                helper.color = "#00FFFFFF";
+                HelperFullList.Add(helper);
+                HelperHalfList.Add(helper);
 
-                //helper = new HelpersModel();
-                //helper.userName = "Emily Clarkson";
-                //helper.service = "Childcare";
-                //helper.price = "From $100 per hour";
-                //helper.location = "Carble Garden";
-                //helper.status = "Not Available";
-                //helper.profileImage = "picture.png";
-                //helper.rating = 4.4f;
-                //helper.rating_count = "4.4(" + "19)";
-                //helper.count1 = 23;
-                //helper.count2 = 97;
-                //helperList.Add(helper);
-                /*foreach (var item in helpers)
+                helper = new HelperHome();
+                helper.Name = "Emily Clarkson";
+                helper.Service = "Childcare";
+                helper.Price = "From $100 per hour";
+                helper.Status = "Not Available";
+                helper.ProfilePicture = "picture.png";
+                helper.AverageRating = "4.4";
+                helper.AverageRatingCount = "4.4(" + "19)";
+                helper.ConnectionCount = 23;
+                helper.EnquiredUserCount = 97;
+                helper.Latitude = 28.4614138;
+                helper.Longitude = 77.0724419;
+                helper.LocationName = "Max Hospital";
+                helper.UserId = 6;
+                helper.color = "#00FFFFFF";
+                HelperFullList.Add(helper);
+                HelperHalfList.Add(helper);
+
+                helper = new HelperHome();
+                helper.Name = "Divya Clarkson";
+                helper.Service = "Banking";
+                helper.Price = "From $100 per hour";
+                helper.Status = "Not Available";
+                helper.ProfilePicture = "picture.png";
+                helper.AverageRating = "4.4";
+                helper.AverageRatingCount = "4.4(" + "19)";
+                helper.ConnectionCount = 23;
+                helper.EnquiredUserCount = 97;
+                helper.Latitude = 28.4566543;
+                helper.Longitude = 77.0705663;
+                helper.LocationName = "Fortis Hospital";
+                helper.UserId = 7;
+                helper.color = "#00FFFFFF";
+                HelperFullList.Add(helper);
+                HelperHalfList.Add(helper);
+
+                helpers = new HelperHomeModel();
+                helpers.LocalityName = "Huda City Center";
+                helpers.Latitude = 28.4591518;
+                helpers.Longitude = 77.070344;
+                helpers.LocationType = 'M';
+                helpers.NumberOfHelpersInLocality = 4;
+                helpers.HelpersInLocalties = HelperHalfList.ToList();
+
+                helperHomeList.Add(helpers);
+                #endregion
+                #endregion
+
+                SetLocationOnMap();
+
+                #region Check Location Permission
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                if (status == PermissionStatus.Granted)
                 {
-                    //Parse list
-                    //item.ImageUri = new UriImageSource { Uri = new Uri(item.ImageIcon) };
-                    //item.color = "#FFFFFF";
-                    //Items.Add(item);
-                }*/
+                    ProgressBar pb = new ProgressBar();
+                    
+                    activityIndicator.IsRunning = true;
 
-                //return null;
+                    //var position = await CrossGeolocator.Current.GetPositionAsync();
+                    var position = helperHomeList.ElementAt(0);
+                    mapHelper.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromKilometers(1)));
+                    mapHelper.IsShowingUser = true;
+                    mapHelper.MapType = MapType.Street;
+
+                    activityIndicator.IsRunning = false;
+
+                    #region Call api to get data from server
+                    // var helpers = await DataStore.GetHelpersList(10000, 28.4514279, 77.0704678);
+                    // var helpers = await (new HelpersServices()).GetHelpersList(2000000, position.Latitude, position.Longitude);
+                    // HelperList = new ObservableCollection<HelperHome>(helpers.First().HelpersInLocalties);
+                    #endregion
+                }
+                #endregion
+                
             }
             catch (Exception ex)
             {
@@ -138,6 +244,50 @@ namespace Helpa.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        public void SetLocationOnMap()
+        {
+            try
+            {
+                int i = 0;
+                var t = "0";
+                foreach (HelperHomeModel h in helperHomeList)
+                {
+                    mapHelper.selectedHelper = helperHomeList.ElementAt(i);
+                    var pin = new Pin()
+                    {
+                        Type = PinType.Place,
+                        Position = new Position(h.Latitude, h.Longitude),
+                        Label = h.LocalityName + " (" + h.NumberOfHelpersInLocality + ")",
+                        Address = i.ToString(),
+                        Id = i.ToString()
+                    };
+                    mapHelper.Pins.Add(pin);
+                    
+                    t = (int.Parse(t) + h.NumberOfHelpersInLocality).ToString();
+                    i++;
+                }
+
+                TotallHelpers = t;
+            }
+            catch (Exception e)
+            {
+                Debug.Write(e.Message);
+            }
+        }
+
+        string totalHelpers = "?";
+        public string TotallHelpers
+        {
+            get
+            {
+                return totalHelpers;
+            }
+            set
+            {
+                SetProperty(ref totalHelpers, value);
             }
         }
 

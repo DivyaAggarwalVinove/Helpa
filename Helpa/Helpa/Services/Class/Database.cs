@@ -56,6 +56,16 @@ namespace Helpa.Services
             return user;
         }
 
+        public RegisterUserModel GetRegisteredUser()
+        {
+            return database.Table<RegisterUserModel>().Where(i => i.IsCompleted == true).FirstOrDefaultAsync().Result;
+        }
+
+        public RegisterUserModel GetLoggedUser()
+        {
+            return database.Table<RegisterUserModel>().Where(i => i.isLoggedIn == true).FirstOrDefaultAsync().Result;
+        }
+
         /// <summary>
         /// GetRegisterUsersAsync: Read  user filter by id.
         /// </summary>
@@ -144,9 +154,18 @@ namespace Helpa.Services
         /// <returns></returns>
         public List<ServiceModel> GetServicesAsync()
         {
-            List<ServiceModel> services = database.Table<ServiceModel>().Where(i => i.isSelected == true).ToListAsync().Result;
+            List<ServiceModel> services = database.Table<ServiceModel>().ToListAsync().Result;
             
             return services;
+        }
+
+        /// <summary>
+        /// DeleteServiceAsync: Delete all services in the table.
+        /// </summary>
+        public void DeleteServiceAsync()
+        {
+            database.DropTableAsync<ServiceModel>().Wait();
+            database.CreateTableAsync<ServiceModel>().Wait();
         }
         #endregion
 
@@ -156,12 +175,12 @@ namespace Helpa.Services
         /// </summary>
         /// <param name="scopes"></param>
         /// <returns></returns>
-        public Task<int> SaveScopeAsync(IEnumerable<ScopeModel> scopes)
+        public Task<int> SaveScopeAsync(List<ScopeModel> scopes)
         {
             Task<int> result = null;
             foreach (ScopeModel scope in scopes)
             {
-                ScopeModel s = database.Table<ScopeModel>().Where(i => i.ScopeId == scope.ScopeId).FirstOrDefaultAsync().Result;
+                ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefaultAsync().Result;
                 if (s != null)
                 {
                     result = database.UpdateAsync(scope);
@@ -182,7 +201,7 @@ namespace Helpa.Services
         /// <returns></returns>
         public Task<int> SaveScopeAsync(ScopeModel scope)
         {
-            ScopeModel s = database.Table<ScopeModel>().Where(i => i.ScopeId == scope.ScopeId).FirstOrDefaultAsync().Result;
+            ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefaultAsync().Result;
             if (s != null)
             {
                 return database.UpdateAsync(scope);
@@ -199,11 +218,19 @@ namespace Helpa.Services
         /// <returns></returns>
         public List<ScopeModel> GetScopesAsync()
         {
-            List<ScopeModel> scopes = database.Table<ScopeModel>().Where(i => i.isSelected == true).ToListAsync().Result;
+            List<ScopeModel> scopes = database.Table<ScopeModel>().ToListAsync().Result;
 
             return scopes;
         }
 
+        /// <summary>
+        /// DeleteScopeAsync: Delete all scope from table.
+        /// </summary>
+        public void DeleteScopeAsync()
+        {
+            database.DropTableAsync<ScopeModel>().Wait();
+            database.CreateTableAsync<ScopeModel>().Wait();
+        }
         #endregion
     }
 }

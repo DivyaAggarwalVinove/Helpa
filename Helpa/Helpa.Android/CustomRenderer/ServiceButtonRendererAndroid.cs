@@ -59,9 +59,12 @@ namespace Helpa.Droid
                 Control.SetBackgroundResource(Resource.Drawable.service_selected_button_style);
                 Control.SetTextColor(Android.Graphics.Color.ParseColor("#FE7890"));
             }
+            
             serviceButton.isSelected = !serviceButton.isSelected;
             serviceButton.serviceName = Control.Text;
             serviceButton.OnOffServices(serviceButton.isSelected);
         }
+
+        
     }
 }

@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Plugin.Connectivity;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,10 +33,18 @@ namespace Helpa.Services
                     {
                         userModel.Id = int.Parse(message.Id);
                         userModel.IsRegistered = true;
-                        HelperRegister.Instance.GotoNext(userModel);
+                        if (userModel.Role.Equals("HELPER"))
+                            HelperRegister.Instance.GotoNext(userModel);
+                        else
+                            Register.Instance.GotoNext(userModel);
                     }
                     else
                     {
+                        if (userModel.Role.Equals("HELPER"))
+                            HelperRegister.Instance.ShowError(message.Message);
+                        else
+                            Register.Instance.ShowError(message.Message);
+
                         Console.Write(message.Message);
                     }
                 }
@@ -69,12 +79,9 @@ namespace Helpa.Services
                     }
                     else
                     {
-                        //string result = await response.Content.ReadAsStringAsync();
-                        //var errorMsg = JsonConvert.DeserializeObject<ResponseModel>(result);
-                        Console.Write(message.Message);
-                    }
-
-                    
+                        userModel.IsRegistered = true;
+                        HelperRegister.Instance.GotoNext(userModel);
+                    }                    
                 }
             }
             catch(Exception e)
@@ -103,10 +110,19 @@ namespace Helpa.Services
                     {
                         userModel.Id = int.Parse(message.Id);
                         userModel.IsCompleted = true;
-                        HelperCompleteRegister.Instance.GotoNext(userModel);
+
+                        if (userModel.Role.Equals("PARENT"))
+                            Register1.Instance.GotoNext(userModel);
+                        else
+                            HelperCompleteRegister.Instance.GotoNext(userModel);
+                        
                     }
                     else
                     {
+                        if (userModel.Role.Equals("PARENT"))
+                            Register1.Instance.ShowError(message.Message);
+                        else
+                            HelperCompleteRegister.Instance.ShowError(message.Message);
                         Console.Write(message.Message);
                     }
                 }
@@ -115,6 +131,66 @@ namespace Helpa.Services
             {
                 Console.Write(e.StackTrace);
             }
+        }
+
+        public async Task FacebookSignUp(ExternalLoginViewModel externalDetail)
+        {
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    //FormUrlEncodedContent
+                    var uri = new Uri(string.Concat(Constants.baseUrl, externalDetail.Url));
+
+                    var response = await httpClient.GetAsync(uri);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var result = response.Content.GetType();
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+        }
+
+        public async Task<IEnumerable<ExternalLoginViewModel>> GetExternalDetails()
+        {
+            IEnumerable<ExternalLoginViewModel> extrenalLoginDetail = new List<ExternalLoginViewModel>();
+
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true"));
+
+                    var response = await httpClient.GetAsync(uri);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        extrenalLoginDetail = JsonConvert.DeserializeObject<IEnumerable<ExternalLoginViewModel>>(result);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            return extrenalLoginDetail;
         }
     }
 }
