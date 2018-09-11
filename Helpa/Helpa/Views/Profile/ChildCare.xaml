@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Helpa"
+             xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             x:Class="Helpa.Views.Profile.ChildCare">
+    <ContentPage.Content>
+        <Grid x:Name="rootlayout">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="#F1F5F6">
+                <Image Source="back.png" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="20" WidthRequest="20" Margin="10,25,0,0"/>
+                <Label Text="Edit Profile" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="30,25,0,0"/>
+                <Button Text="Remove" VerticalOptions="End" HorizontalOptions="End" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="0,-28,5,0" BackgroundColor="Transparent"/>
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="#F1F5F6">
+                <Label Text="Childcare" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large" Margin="10,10,0,0"/>
+            </Grid>
+           
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

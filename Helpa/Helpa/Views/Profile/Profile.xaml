@@ -1,12 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Helpa.Profile">
+             x:Class="Helpa.Profile"
+             NavigationPage.HasNavigationBar="True">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Profile Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ContentView x:Name="MainView">
+        <Grid x:Name="rootlayout">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>            
+            <Grid Grid.Row="0" BackgroundColor="#F1F5F6">                
+                <Label Text="Edit Profile" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large" Margin="10,20,0,0"/>
+            </Grid>
+            <StackLayout Orientation="Vertical" BackgroundColor="#F1F5F6" Grid.Row="1">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ClickTap1" NumberOfTapsRequired="1"/>
+                </StackLayout.GestureRecognizers>
+                <Image Source="angle_grey_right.png" VerticalOptions="End" HorizontalOptions="End" HeightRequest="10" WidthRequest="10" Margin="0,20,10,-20"/>
+                <Label Text="Basic Info" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Black" Margin="10,0,0,0"/>
+            </StackLayout>            
+            <StackLayout Orientation="Vertical" BackgroundColor="#F1F5F6" Grid.Row="2">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ClickTap2" NumberOfTapsRequired="1"/>
+                </StackLayout.GestureRecognizers>
+                <Image Source="angle_grey_right.png" VerticalOptions="End" HorizontalOptions="End" HeightRequest="10" WidthRequest="10" Margin="0,20,10,-20"/>
+                <Label Text="Services" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Black" Margin="10,0,0,0"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" BackgroundColor="#F1F5F6" Grid.Row="3">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ClickTap3" NumberOfTapsRequired="1"/>
+                </StackLayout.GestureRecognizers>
+                <Image Source="angle_grey_right.png" VerticalOptions="End" HorizontalOptions="End" HeightRequest="10" WidthRequest="10" Margin="0,20,10,-20"/>
+                <Label Text="Verification" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Black" Margin="10,0,0,0"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" BackgroundColor="#F1F5F6" Grid.Row="4">
+                <!--<StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ClickTap1" NumberOfTapsRequired="1"/>
+                </StackLayout.GestureRecognizers>-->
+                
+            </StackLayout>
+        </Grid>
+        </ContentView>
     </ContentPage.Content>
 </ContentPage>

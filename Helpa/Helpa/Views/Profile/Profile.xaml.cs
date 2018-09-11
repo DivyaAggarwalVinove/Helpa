@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helpa.Views.Profile;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,20 @@ namespace Helpa
 		{
 			InitializeComponent ();
 		}
-	}
+        public void ClickTap1(object sender, EventArgs e)
+        {
+            var page = new EditBasicInfo();
+            MainView.Content = page.Content;
+        }
+        public void ClickTap2(object sender, EventArgs e)
+        {
+            var page = new Service();
+            MainView.Content = page.Content;
+        }
+        public void ClickTap3(object sender, EventArgs e)
+        {
+            var page = new ChildCare();
+            MainView.Content = page.Content;
+        }
+    }
 }
