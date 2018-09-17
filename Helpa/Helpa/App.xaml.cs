@@ -33,7 +33,7 @@ namespace Helpa
         int selectedPage = 0;
         List<KeyValuePair<string, string>> listTabs;
         List<string> imagesName;
-
+       public static NavigationPage NavigationPage { get; set; }
         public App()
         {
             try
@@ -57,8 +57,8 @@ namespace Helpa
                 {
                     "find_helpers" , "job_posts", "messages","notifications", "profile"
                 };
-
-                MainPage = new NavigationPage(new Helpers());
+                NavigationPage= new NavigationPage(new Helpers());
+                MainPage = NavigationPage;
                 JobPosts jobPosts = new JobPosts();
             }
             catch (Exception e)
@@ -102,38 +102,38 @@ namespace Helpa
 
         void OnMessagesPressed(object sender, EventArgs args)
         {
-            //if (selectedPage != 2)
-            //{
-            //    Grid grid = ((Grid)sender);
-            //    SelectTab(grid, selectedPage, 2);
+            if (selectedPage != 2)
+            {
+                Grid grid = ((Grid)sender);
+                SelectTab(grid, selectedPage, 2);
 
-            //    ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-            //    contentPresenter.Content = (new Messages()).Content;
-            //}
+                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+                contentPresenter.Content = (new Messages()).Content;
+            }
         }
 
         void OnNotificationsPressed(object sender, EventArgs args)
         {
-            //if (selectedPage != 3)
-            //{
-            //    Grid grid = ((Grid)sender);
-            //    SelectTab(grid, selectedPage, 3);
+            if (selectedPage != 3)
+            {
+                Grid grid = ((Grid)sender);
+                SelectTab(grid, selectedPage, 3);
 
-            //    ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-            //    contentPresenter.Content = (new Notifications()).Content;
-            //}
+                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+                contentPresenter.Content = (new Notifications()).Content;
+            }
         }
 
         void OnProfilePressed(object sender, EventArgs args)
         {
-            //if (selectedPage != 4)
-            //{
-            //    Grid grid = ((Grid)sender);
-            //    SelectTab(grid, selectedPage, 4);
+            if (selectedPage != 4)
+            {
+                Grid grid = ((Grid)sender);
+                SelectTab(grid, selectedPage, 4);
 
-            //    ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-            //    contentPresenter.Content = (new Profile()).Content;
-            //}
+                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+                contentPresenter.Content = (new Profile()).Content;
+            }
         }
 
         void SelectTab(Grid grid, int currentIndex, int newIndex)

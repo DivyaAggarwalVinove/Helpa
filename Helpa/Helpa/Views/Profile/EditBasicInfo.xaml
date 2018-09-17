@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
-             xmlns:local="clr-namespace:Helpa"             
+             xmlns:local="clr-namespace:Helpa"           
              x:Class="Helpa.Views.Profile.EditBasicInfo">
     <ContentPage.Content>
+        <ScrollView>
         <Grid x:Name="rootlayout">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height=".53*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>                
             </Grid.RowDefinitions>
@@ -34,7 +35,7 @@
                 
             <!--#region Helper Basic Information-->
             
-                <ScrollView x:Name="svHelperBasicInfo">
+                <!--<ScrollView x:Name="svHelperBasicInfo">-->
                     <Grid RowSpacing="0">
                         <Grid.RowDefinitions>
                             
@@ -202,9 +203,10 @@
                             <Label Text="Helpa is built on trust. So please help others get &#10;to know you!" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                         </Grid>
                     </Grid>
-                </ScrollView>
+                <!--</ScrollView>-->
             </Grid>
-
-        </Grid>
+                <ActivityIndicator x:Name="XFAIPageLoad" VerticalOptions="Center" HorizontalOptions="Center" IsRunning="True" IsVisible="False" Color="#FF746F"/>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

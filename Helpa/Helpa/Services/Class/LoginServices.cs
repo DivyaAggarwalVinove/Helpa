@@ -1,4 +1,5 @@
-﻿using Helpa.Models;
+﻿
+using Helpa.Models;
 using Helpa.Utility;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
@@ -40,8 +41,10 @@ namespace Helpa.Services
                             user = new RegisterUserModel();
 
                         user.Id = message.id;
+                        Settings.UserID = user.Id;
                         user.UserName = message.userName;
                         user.Token = message.access_token;
+                        Settings.TokenCode = user.Token;
                         user.isLoggedIn = true;
                         //user.Role = message.roles;
                         await App.Database.SaveUserAsync(user);

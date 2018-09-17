@@ -19,18 +19,23 @@ namespace Helpa
 		}
         public void ClickTap1(object sender, EventArgs e)
         {
-            var page = new EditBasicInfo();
-            MainView.Content = page.Content;
+            //var page = new EditBasicInfo();
+            //MainView.Content = page.Content;
+            App.NavigationPage.Navigation.PushAsync(new EditBasicInfo());
         }
         public void ClickTap2(object sender, EventArgs e)
         {
             var page = new Service();
-            MainView.Content = page.Content;
+
+            //MainView.Content = page.Content;
+            App.NavigationPage.Navigation.PushAsync(page);
         }
         public void ClickTap3(object sender, EventArgs e)
         {
             var page = new ChildCare();
-            MainView.Content = page.Content;
+           // Navigation.PushAsync(page);
+            // MainView.Content = page.Content;
+            App.NavigationPage.Navigation.PushAsync(page);
         }
     }
 }

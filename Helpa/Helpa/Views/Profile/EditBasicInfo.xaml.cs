@@ -1,4 +1,10 @@
 ﻿using AsNum.XFControls;
+using AsNum.XFControls.Services;
+using Helpa.Models;
+using Helpa.Services.ApiHandler;
+using Helpa.Services.ServiceEntity;
+using Helpa.Services.ServiceEntity.ResponseService;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +19,42 @@ namespace Helpa.Views.Profile
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditBasicInfo : ContentPage
 	{
-		public EditBasicInfo ()
+        #region Variable Declaration
+        private ProfileInfoResponse _objProfileInfoResponse;
+        private RestApi _apiService;
+        private string _baseUrl;
+        private HeaderModel _objHeaderModel;
+        #endregion
+        public EditBasicInfo ()
 		{
 			InitializeComponent ();
 
             IEnumerable<string> genders = new List<string>() { "Male", "Female", "Rather no to say" };
             SetRadioList(genders, rgGender);
+            NavigationPage.SetHasNavigationBar(this, false);
+            _objProfileInfoResponse = new ProfileInfoResponse();
+            _apiService = new RestApi();
+            _objHeaderModel = new HeaderModel();
+            _objHeaderModel.TokenCode = Settings.TokenCode;
+            _baseUrl = Domain.Url + Domain.GetProfileInfoApiConstant;
         }
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadPageData();
+        }
+        private async void LoadPageData()
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                DependencyService.Get<IToast>().Show("No Network!");
+            }
+            else
+            {
+                XFAIPageLoad.IsVisible = true;
+                _objProfileInfoResponse = await _apiService.GetAsyncData_GetApi(new Get_API_Url().GetProfileInfoApi(_baseUrl,Settings.UserID), true, _objHeaderModel, _objProfileInfoResponse);
+            }
+        }
         void SetRadioList(IEnumerable<string> genderList, RadioGroup radioGroup)
         {
             radioGroup.ItemsSource = genderList;

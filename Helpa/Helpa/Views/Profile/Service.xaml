@@ -4,8 +4,9 @@
              xmlns:local="clr-namespace:Helpa"
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
              xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             ControlTemplate="{StaticResource MainPageTemplate}"
              x:Class="Helpa.Views.Profile.Service">
-    <ContentPage.Content>
+      
         <Grid x:Name="rootlayout">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -116,5 +117,5 @@
                 </ScrollView>
             </Grid>
         </Grid>
-    </ContentPage.Content>
+       
 </ContentPage>
