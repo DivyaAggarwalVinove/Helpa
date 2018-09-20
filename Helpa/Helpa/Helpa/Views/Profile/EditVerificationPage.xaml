@@ -4,23 +4,141 @@
              xmlns:local="clr-namespace:Helpa"
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
              xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"            
-             x:Class="Helpa.Views.Profile.EditVerificationPage">
+             x:Class="Helpa.Views.Profile.EditVerificationPage"
+             BackgroundColor="#F1F5F6">
     <ContentPage.Content>
-        <Grid x:Name="rootlayout">
+        <Grid x:Name="rootlayout" BackgroundColor="#F1F5F6" Margin="20,10,20,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" BackgroundColor="#F1F5F6">
-                <Image Source="back.png" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="20" WidthRequest="20" Margin="10,25,0,0"/>
-                <Label Text="Edit Profile" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="30,25,0,0"/>
-                <Button Text="Remove" VerticalOptions="End" HorizontalOptions="End" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="0,-28,5,0" BackgroundColor="Transparent"/>
+                <StackLayout Orientation="Horizontal">
+                    <Image VerticalOptions="Center"
+                           Source="back.png"/>
+                    <Label Text="Edit Profile"
+                           TextColor="LightGray" 
+                           FontSize="Small" />
+                </StackLayout>
             </Grid>
             <Grid Grid.Row="1" BackgroundColor="#F1F5F6">
-                <Label Text="Childcare" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large" Margin="10,10,0,0"/>
+                <Label Text="Verification" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large" Margin="10,10,0,0"/>
             </Grid>
-           
+            <Grid Grid.Row="2" BackgroundColor="#F1F5F6">
+                <Label Text="verification Info" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="#FF738D" FontAttributes="None" FontSize="Medium" Margin="10,10,0,0"/>
+            </Grid>
+            <Grid Grid.Row="3" BackgroundColor="LightGray" RowSpacing="1" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" BackgroundColor="#F1F5F6">
+                    <Label Text="verified Info" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small" Margin="10,0,0,0"/>
+                </Grid>
+                <Grid Grid.Row="0" Grid.Column="1" BackgroundColor="#F1F5F6">
+                    <StackLayout Orientation="Horizontal" Padding="30,0,0,0" Spacing="15">
+                        <Button Text="Edit" BorderRadius="5" TextColor="#B7BBBE" BackgroundColor="#E5E5E5" VerticalOptions="Center"
+                                CornerRadius="5" Margin="0,10,0,10"/>
+                        <Image Source="info.png" VerticalOptions="Center"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="#F1F5F6">
+                    <Label Text="Google" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small" Margin="10,0,0,0"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="1" BackgroundColor="#F1F5F6">
+                    <StackLayout Orientation="Horizontal" Padding="30,0,0,0" Spacing="15">
+                        <Button Text="Disconnect" TextColor="#B7BBBE" BorderRadius="5" VerticalOptions="Center"
+                                CornerRadius="5" Margin="0,10,0,10"/>
+                        <!--<Image Source="info.png" VerticalOptions="Center"/>-->
+                    </StackLayout>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="4" BackgroundColor="#F1F5F6">
+                <Label Text="Not yet verified" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small" Margin="10,0,0,0"/>
+            </Grid>
+            <Grid Grid.Row="5" BackgroundColor="#F1F5F6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" >
+                    <local:CustomEntry x:Name="entryHelperRegCountryCode" Placeholder="+852" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <local:CustomEntry x:Name="entryHelperRegPhone1" Placeholder="Phone Number" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="6" BackgroundColor="#F1F5F6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="0,5,0,5">
+                    <Button x:Name="btnHelperSendCode" Text="Send SMS Code" FontSize="14" TextColor="White" BackgroundColor="#FF748C" />
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="0,5,0,5">
+                    <local:CustomEntry x:Name="entryHelperRegSmsCode1" Placeholder="Enter SMS code here" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="7" BackgroundColor="#F1F5F6">
+                <Label Text="You need to verify your phone number to enable the messaging function." FontSize="Micro" TextColor="#939BA0" />
+            </Grid>
+            <Grid Grid.Row="8"  BackgroundColor="LightGray" RowSpacing="1" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" BackgroundColor="#F1F5F6">
+                    <Label Text="Email" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small" Margin="10,0,0,0"/>
+                </Grid>
+                <Grid Grid.Row="0" Grid.Column="1" BackgroundColor="#F1F5F6">
+                    <StackLayout Orientation="Horizontal" Padding="30,0,0,0" Spacing="15">
+                        <Button Text="Verify email" BorderRadius="5" TextColor="#B7BBBE" BackgroundColor="#E5E5E5" VerticalOptions="Center"
+                                CornerRadius="5" Margin="0,10,0,10"/>
+                        <Image Source="info.png" VerticalOptions="Center"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="#F1F5F6">
+                    <Label Text="Facebook" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small" Margin="10,0,0,0"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="1" BackgroundColor="#F1F5F6">
+                    <StackLayout Orientation="Horizontal" Padding="30,0,0,0" Spacing="15">
+                        <Button Text="Connect" TextColor="#B7BBBE" BorderRadius="5" VerticalOptions="Center"
+                                CornerRadius="5" Margin="0,10,0,10"/>
+                        <!--<Image Source="info.png" VerticalOptions="Center"/>-->
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="0" BackgroundColor="#F1F5F6">
+                    <Label Text="Certificates" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small" Margin="10,0,0,0"/>
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="1" BackgroundColor="#F1F5F6">
+                    <StackLayout Orientation="Horizontal" Padding="30,0,0,0" Spacing="15">
+                        <Button Text="Upload" BorderRadius="5" TextColor="#B7BBBE" BackgroundColor="#E5E5E5" VerticalOptions="Center"
+                                CornerRadius="5" Margin="0,10,0,10"/>
+                        <Image Source="info.png" VerticalOptions="Center"/>
+                    </StackLayout>
+                </Grid>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

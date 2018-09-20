@@ -125,7 +125,7 @@
     <PackageReference Include="Xam.Plugins.Settings">
       <Version>3.1.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.637273" />
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>2.5.1.444934</Version>
     </PackageReference>
@@ -820,5 +820,19 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\verified%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\splash-screen.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\splash-screen1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
 </Project>
