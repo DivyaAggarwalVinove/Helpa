@@ -51,7 +51,7 @@
 	<key>CFBundleName</key>
 	<string>Helpa</string>
 	<key>XSLaunchImageAssets</key>
-	<string>Assets.xcassets/LaunchImages.launchimage</string>
+	<string>Resources/Assets.xcassets/LaunchImages.launchimage</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
 </dict>

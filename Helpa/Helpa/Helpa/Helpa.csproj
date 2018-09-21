@@ -10,8 +10,14 @@
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="Services\ApiHandler\**" />
+    <Compile Remove="Services\ServiceEntity\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="Services\ApiHandler\**" />
+    <EmbeddedResource Remove="Services\ServiceEntity\**" />
     <None Remove="bin\**" />
+    <None Remove="Services\ApiHandler\**" />
+    <None Remove="Services\ServiceEntity\**" />
   </ItemGroup>
 
   <ItemGroup>

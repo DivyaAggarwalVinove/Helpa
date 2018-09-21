@@ -1,25 +1,20 @@
-﻿using Android;
-using Android.OS;
-using Android.Support.Design.Widget;
+﻿using Android.OS;
 using Helpa.Droid;
 using Helpa.Services;
-using Plugin.Geolocator;
-using System;
-using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(PermissionServices))]
+[assembly: Dependency(typeof(PermissionServicesAndroid))]
 namespace Helpa.Droid
 {
-    public class PermissionServices : IPermissionServices
+    public class PermissionServicesAndroid : IPermissionServices
     {
         #region local variable
         public Page page;
         #endregion
 
         #region constructors
-        public PermissionServices()
+        public PermissionServicesAndroid()
         {
 
         }

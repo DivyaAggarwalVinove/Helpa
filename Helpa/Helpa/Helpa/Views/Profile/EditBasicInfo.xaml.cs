@@ -1,15 +1,9 @@
 ﻿using AsNum.XFControls;
 using AsNum.XFControls.Services;
 using Helpa.Models;
-using Helpa.Services.ApiHandler;
-using Helpa.Services.ServiceEntity;
-using Helpa.Services.ServiceEntity.ResponseService;
 using Plugin.Connectivity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,10 +14,10 @@ namespace Helpa.Views.Profile
 	public partial class EditBasicInfo : ContentPage
 	{
         #region Variable Declaration
-        private ProfileInfoResponse _objProfileInfoResponse;
-        private RestApi _apiService;
+        //private ProfileInfoResponse _objProfileInfoResponse;
+        //private RestApi _apiService;
         private string _baseUrl;
-        private HeaderModel _objHeaderModel;
+        //private HeaderModel _objHeaderModel;
         #endregion
         public EditBasicInfo ()
 		{
@@ -32,10 +26,10 @@ namespace Helpa.Views.Profile
             IEnumerable<string> genders = new List<string>() { "Male", "Female", "Rather no to say" };
             SetRadioList(genders, rgGender);
             NavigationPage.SetHasNavigationBar(this, false);
-            _objProfileInfoResponse = new ProfileInfoResponse();
-            _apiService = new RestApi();
-            _objHeaderModel = new HeaderModel();
-            _objHeaderModel.TokenCode = Settings.TokenCode;
+            //_objProfileInfoResponse = new ProfileInfoResponse();
+            //_apiService = new RestApi();
+            //_objHeaderModel = new HeaderModel();
+            //_objHeaderModel.TokenCode = Settings.TokenCode;
             _baseUrl = Domain.Url + Domain.GetProfileInfoApiConstant;
         }
         protected override void OnAppearing()

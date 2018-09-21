@@ -68,7 +68,7 @@ namespace Helpa.Droid
         };
         const int RequestLocationId = 0;
         
-        public async Task GetLocationPermissionAsync(PermissionServices permissionServices)
+        public async Task GetLocationPermissionAsync(PermissionServicesAndroid permissionServices)
         {
             // Check to see if any permission in our group is available, if one, then all are
             const string permission = Manifest.Permission.AccessFineLocation;

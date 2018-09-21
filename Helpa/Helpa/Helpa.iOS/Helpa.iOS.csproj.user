@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetiOSDevice />
     <ProjectView>ShowAllFiles</ProjectView>
-    <SelectedDevice>Device</SelectedDevice>
+    <SelectedDevice>Simulator</SelectedDevice>
+    <DefaultDevice>iPhone X iOS 11.4</DefaultDevice>
   </PropertyGroup>
 </Project>
