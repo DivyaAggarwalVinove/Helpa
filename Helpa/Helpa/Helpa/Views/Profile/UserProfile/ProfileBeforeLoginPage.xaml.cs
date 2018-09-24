@@ -17,5 +17,10 @@ namespace Helpa.Views.Profile.UserProfile
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
 		}
-	}
+
+        private void XFBtnLogin_Clicked(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PushAsync(new ProfileAfterLoginPage());
+        }
+    }
 }

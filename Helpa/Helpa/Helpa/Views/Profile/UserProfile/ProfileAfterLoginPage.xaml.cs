@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helpa.Views.Profile.ProfileSettings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,15 @@ namespace Helpa.Views.Profile.UserProfile
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
 		}
-	}
+
+        private void XFLBLViewProfile_Tapped(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PushAsync(new ProfilePage());
+        }
+
+        private void XFLBLSettings_Tapped(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PushAsync(new UserSettingsPage());
+        }
+    }
 }

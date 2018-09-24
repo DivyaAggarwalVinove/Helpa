@@ -22,7 +22,11 @@
             <Grid Grid.Row="0" BackgroundColor="#F1F5F6">
                 <StackLayout Orientation="Horizontal">
                     <Image VerticalOptions="Center"
-                           Source="back.png"/>
+                           Source="back.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                     <Label Text="Edit Profile"
                            TextColor="LightGray" 
                            FontSize="Small" />

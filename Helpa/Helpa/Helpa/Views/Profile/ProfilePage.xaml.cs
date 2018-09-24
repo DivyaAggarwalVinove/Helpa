@@ -11,12 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace Helpa
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Profile : ContentPage
+	public partial class ProfilePage : ContentPage
 	{
-		public Profile ()
+		public ProfilePage()
 		{
 			InitializeComponent ();
-		}
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
         public void ClickTap1(object sender, EventArgs e)
         {
             //var page = new EditBasicInfo();
@@ -36,6 +37,11 @@ namespace Helpa
            // Navigation.PushAsync(page);
             // MainView.Content = page.Content;
             App.NavigationPage.Navigation.PushAsync(page);
+        }
+
+        private void XFBackButton_Tapped(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PopAsync();
         }
     }
 }

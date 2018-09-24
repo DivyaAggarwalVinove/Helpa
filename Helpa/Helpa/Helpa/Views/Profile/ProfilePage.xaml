@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Helpa.Profile"
+             x:Class="Helpa.ProfilePage"
              NavigationPage.HasNavigationBar="True"             
              BackgroundColor="Gray">
     <ContentView x:Name="MainView" BackgroundColor="#F1F5F6">
@@ -18,7 +18,11 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Padding="0,0,0,10">
-                    <Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />
+                    <Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </Grid>
                 <Grid Grid.Row="1" Padding="0,10,0,10">
                     <Label Text="Edit Profile" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>

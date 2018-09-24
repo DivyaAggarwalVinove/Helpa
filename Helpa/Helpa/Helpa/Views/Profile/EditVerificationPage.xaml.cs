@@ -21,6 +21,11 @@ namespace Helpa.Views.Profile
             //SetPriceType();           
         }
 
+        private void XFBackButton_Tapped(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PopAsync();
+        }
+
         //void SetPriceType()
         //{
         //    List<string> price = new List<string> { "Hourly", "Daily", "Monthly", "TBD" };
@@ -106,6 +111,6 @@ namespace Helpa.Views.Profile
         //void SetMaxMonth(object sender, EventArgs args) =>
         //    btnHelperRegPriceMonthMax.Text = "$ " + ((RangeSlider)sender).UpperValue.ToString();       
 
-        
+
     }
 }

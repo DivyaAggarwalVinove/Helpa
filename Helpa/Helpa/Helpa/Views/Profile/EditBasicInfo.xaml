@@ -15,8 +15,12 @@
                 <RowDefinition Height="*"/>                
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" BackgroundColor="#F1F5F6">
-                <Image Source="back.png" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="20" WidthRequest="20" Margin="10,25,0,0"/>
-                <Label Text="Edit Profile" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="30,25,0,0"/>
+                    <Image Source="back.png" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="20" WidthRequest="20" Margin="10,25,0,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="Edit Profile" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="30,25,0,0"/>
                 <Button Text="Save" VerticalOptions="End" HorizontalOptions="End" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="0,-28,5,0" BackgroundColor="Transparent"/>
             </Grid>
             <Grid Grid.Row="1" BackgroundColor="#F1F5F6">

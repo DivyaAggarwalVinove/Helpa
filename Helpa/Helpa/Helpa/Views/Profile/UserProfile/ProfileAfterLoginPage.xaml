@@ -35,7 +35,11 @@
                                 <Label Text="Amy Rose" FontAttributes="Bold" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Row="1">
-                                <Label Text="View Profile" FontAttributes="None" FontSize="Small" TextColor="LightGray" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center" />
+                                <Label Text="View Profile" FontAttributes="None" FontSize="Small" TextColor="LightGray" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFLBLViewProfile" Tapped="XFLBLViewProfile_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </Grid>
                         </Grid>
                         <Grid Grid.Column="1">
@@ -72,9 +76,12 @@
                     </Grid>
                     <Grid Grid.Row="5" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Settings" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" />
-
+                            <Label Text="Settings" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" >
+                            </Label>
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFLBLSettings" Tapped="XFLBLSettings_Tapped"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
                     <Grid Grid.Row="6" BackgroundColor="#EFF3F6">

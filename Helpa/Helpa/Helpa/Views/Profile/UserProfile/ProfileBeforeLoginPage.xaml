@@ -42,6 +42,8 @@
                             BorderWidth="2"
                             BorderRadius="5"
                             HeightRequest="45"
+                            x:Name="XFBtnLogin"
+                            Clicked="XFBtnLogin_Clicked"
                             HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
             </Grid>

@@ -65,5 +65,10 @@ namespace Helpa.Views.Profile
                 rg.VerticalOptions = LayoutOptions.Center;
             }
         }
+
+        private void XFBackButton_Tapped(object sender, System.EventArgs e)
+        {
+            App.NavigationPage.Navigation.PopAsync();
+        }
     }
 }

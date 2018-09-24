@@ -17,5 +17,9 @@ namespace Helpa.Views.Profile.ProfileSettings
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
         }
-	}
+        private void XFBackButton_Tapped(object sender, EventArgs e)
+        {
+            App.NavigationPage.PopAsync();
+        }
+    }
 }

@@ -22,5 +22,10 @@ namespace Helpa.Views.Profile.ProfileSettings
         {
             App.NavigationPage.Navigation.PushAsync(new ForgotPasswordPage());
         }
+
+        private void XFBackButton_Tapped(object sender, EventArgs e)
+        {
+            App.NavigationPage.PopAsync();
+        }
     }
 }

@@ -135,7 +135,7 @@ namespace Helpa
                 SelectTab(grid, selectedPage, 4);
 
                 ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-                contentPresenter.Content = (new UserSettingsPage()).Content;
+                contentPresenter.Content = (new ProfileBeforeLoginPage()).Content;
             }
         }
 
