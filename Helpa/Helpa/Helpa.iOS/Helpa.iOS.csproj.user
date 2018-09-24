@@ -5,5 +5,7 @@
     <ProjectView>ShowAllFiles</ProjectView>
     <SelectedDevice>Simulator</SelectedDevice>
     <DefaultDevice>iPhone X iOS 11.4</DefaultDevice>
+    <DeveloperId />
+    <DevelopmentTeamId />
   </PropertyGroup>
 </Project>

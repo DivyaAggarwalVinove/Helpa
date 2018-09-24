@@ -214,7 +214,7 @@ namespace Helpa.ViewModels
 
                 #region Check Location Permission
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                if (status == PermissionStatus.Granted)
+                //if (status == PermissionStatus.Granted)
                 {
                     ProgressBar pb = new ProgressBar();
                     

@@ -47,11 +47,9 @@
 		<string>Icon-Small@3x</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>(not set)</string>
+	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>Helpa</string>
-	<key>XSLaunchImageAssets</key>
-	<string>Resources/Assets.xcassets/LaunchImages.launchimage</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
 </dict>

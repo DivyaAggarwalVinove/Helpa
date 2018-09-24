@@ -5,7 +5,6 @@ using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using Helpa.Droid;
-using Helpa.Models;
 using Helpa;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
