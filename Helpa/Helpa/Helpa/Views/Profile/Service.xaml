@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Helpa"
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
-             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
-             ControlTemplate="{StaticResource MainPageTemplate}"
+             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"           
              x:Class="Helpa.Views.Profile.Service">
       
         <Grid x:Name="rootlayout">

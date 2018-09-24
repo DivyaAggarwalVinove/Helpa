@@ -6,7 +6,7 @@
              x:Class="Helpa.Views.Profile.EditBasicInfo">
     <ContentPage.Content>
         <ScrollView>
-        <Grid x:Name="rootlayout">
+            <Grid x:Name="rootlayout" BackgroundColor="#F1F5F6" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>

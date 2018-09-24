@@ -18,6 +18,7 @@ namespace Helpa.Views.Profile
 		public Service ()
 		{
 			InitializeComponent ();
+            NavigationPage.SetHasNavigationBar(this, false);
             IEnumerable<string> statusList = new List<string>() { "Available", "Not available" };
             SetRadioList(statusList, rgStatusService);
             SetServices();

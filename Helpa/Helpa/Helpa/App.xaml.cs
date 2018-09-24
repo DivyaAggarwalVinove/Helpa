@@ -7,6 +7,7 @@ using Helpa.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Helpa.Views.Profile.UserProfile;
+using Helpa.Views.Profile.ProfileSettings;
 
 namespace Helpa
 {
@@ -134,7 +135,7 @@ namespace Helpa
                 SelectTab(grid, selectedPage, 4);
 
                 ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-                contentPresenter.Content = (new Profile()).Content;
+                contentPresenter.Content = (new UserSettingsPage()).Content;
             }
         }
 

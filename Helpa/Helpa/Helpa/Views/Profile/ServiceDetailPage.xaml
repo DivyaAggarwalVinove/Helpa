@@ -6,7 +6,7 @@
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
              x:Class="Helpa.Views.Profile.ServiceDetailPage">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView BackgroundColor="#F1F5F6">
         <Grid x:Name="RootLayout" Margin="20,10,20,10" RowSpacing="5" BackgroundColor="#F1F5F6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -60,12 +60,7 @@
                            HorizontalTextAlignment="Start" 
                            TextColor="Gray" 
                            FontSize="Small" />
-                    <!--<ctrls:RadioGroup
-                                        x:Name="rgGender"                                                    
-                                        Orientation="Horizontal"
-                                        OnImg="radio_close.png" 
-                                        OffImg="radio_button.png"
-                                        SelectedItem="Male"/>-->
+                   
                     <StackLayout Orientation="Horizontal">
                         <ctrls:CheckBox x:Name="rgHelperHomeLocation" Text="Helper's Home" ShowLabel="True" OnImg="radio_close.png" OffImg="radio_button.png" Checked="True" CheckChanged="OnHomeLocationSelected"/>
                         <ctrls:CheckBox x:Name="rgHelperMobileLocation" Text="Mobile Helper" ShowLabel="True" OnImg="radio_close.png" OffImg="radio_button.png" Checked="False" CheckChanged="OnMobileLocationSelected"/>

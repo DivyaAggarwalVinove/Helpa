@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Helpa.Views.Profile.ProfileSettings.MessagesSettingsPage"
+               xmlns:local="clr-namespace:Helpa" 
+             BackgroundColor="#F1F5F6">
+    <ContentPage.Content>
+        <!--<ContentView x:Name="MainView" BackgroundColor="#F1F5F6">-->
+        <Grid x:Name="rootlayout" RowSpacing="0" BackgroundColor="Transparent" Margin="20,20,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Padding="0,0,0,10">
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Image Source="back.png" VerticalOptions="Center"   />
+                        <Label Text="Settings" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Small"/>
+                        <!--<Label Text="Forgot password" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="#6E706F" FontAttributes="None" FontSize="Small"/>-->
+                    </StackLayout>
+                    <!--<Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />-->
+                </Grid>
+                <Grid Grid.Row="1" Padding="0,10,0,10">
+                    <Label Text="Messages" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="LightGray" RowSpacing="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0"   BackgroundColor="#F1F5F6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Text="Read receipt" TextColor="LightGray" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Switch VerticalOptions="Center" HorizontalOptions="End" />
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1"  BackgroundColor="#F1F5F6">
+                    <Label Text="Note: If you turn off read receipts, both you and the other users won't be able to see when your messages are read. " VerticalOptions="Center" HorizontalOptions="Start" TextColor="#939ba0" FontAttributes="Bold"
+                           FontSize="Micro"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" BackgroundColor="Transparent">
+                <BoxView HeightRequest="1" IsVisible="False" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray"/>
+            </Grid>
+            <Grid Grid.Row="3">
+
+            </Grid>
+            
+        </Grid>
+        <!--</ContentView>-->
+    </ContentPage.Content>
+</ContentPage>
