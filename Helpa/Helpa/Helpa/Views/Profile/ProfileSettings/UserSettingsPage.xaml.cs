@@ -20,7 +20,7 @@ namespace Helpa.Views.Profile.ProfileSettings
 
         private void XFLBLNotification_Tapped(object sender, EventArgs e)
         {
-           // App.NavigationPage.Navigation.PushAsync(new NotificationSettingsPage());
+            App.NavigationPage.Navigation.PushAsync(new NotificationSettingsPage());
         }
 
         private void XFLBLMessages_Tapped(object sender, EventArgs e)

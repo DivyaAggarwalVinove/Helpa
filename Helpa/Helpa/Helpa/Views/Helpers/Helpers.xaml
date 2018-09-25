@@ -4,6 +4,8 @@
              xmlns:custommap="clr-namespace:Helpa"
              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
              xmlns:local="clr-namespace:Helpa"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+            ios:Page.UseSafeArea="true"
              BackgroundColor="#EFF3F6"
              ControlTemplate="{StaticResource MainPageTemplate}"
              x:Class="Helpa.Helpers">

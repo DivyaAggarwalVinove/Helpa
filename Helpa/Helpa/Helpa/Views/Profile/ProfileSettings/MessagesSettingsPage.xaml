@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Helpa.Views.Profile.ProfileSettings.MessagesSettingsPage"
                xmlns:local="clr-namespace:Helpa" 
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+            ios:Page.UseSafeArea="true"
              BackgroundColor="#F1F5F6">
     <ContentPage.Content>
         <!--<ContentView x:Name="MainView" BackgroundColor="#F1F5F6">-->

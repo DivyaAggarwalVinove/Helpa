@@ -2,13 +2,208 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Helpa.Views.Profile.ProfileSettings.NotificationSettingsPage"
-             xmlns:local="clr-namespace:Helpa" 
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+            ios:Page.UseSafeArea="true"
+             xmlns:local="clr-namespace:Helpa"           
              BackgroundColor="#F1F5F6">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <Grid x:Name="rootlayout" RowSpacing="0" BackgroundColor="Transparent" Margin="20,20,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Padding="0,0,0,10">
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Image Source="back.png" VerticalOptions="Center" >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="Settings" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Small"/>
+                            <!--<Label Text="Forgot password" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="#6E706F" FontAttributes="None" FontSize="Small"/>-->
+                        </StackLayout>
+                        <!--<Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />-->
+                    </Grid>
+                    <Grid Grid.Row="1" Padding="0,10,0,10">
+                        <Label Text="Messages" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" BackgroundColor="LightGray" RowSpacing="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Padding="0,10,0,10"  BackgroundColor="#F1F5F6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Label Text="Push notifications" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Medium"/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Label Text="Off" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" HorizontalOptions="End" FontSize="Medium"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="To enable notification, go to " VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Micro"/>
+                                <Label Text="Settings" VerticalOptions="Center"  TextColor="#72C5E5" FontAttributes="None" FontSize="Micro"/>
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="1" Padding="0,10,0,10"  BackgroundColor="#F1F5F6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Label Text="New Connections" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Medium"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Label Text="Email" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Micro"/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Switch HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="2" Padding="0,10,0,10"  BackgroundColor="#F1F5F6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Label Text="New requests for exchanging contacts" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Medium"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Label Text="Email" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Micro"/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Switch HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="3" Padding="0,10,0,10"  BackgroundColor="#F1F5F6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Label Text="Request decline by users" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Medium"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Label Text="Email" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Micro"/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Switch HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="4" Padding="0,10,0,10"  BackgroundColor="#F1F5F6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Label Text="New ratings and reviews, and responses" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Medium"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Label Text="Email" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Micro"/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Switch HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="5" Padding="0,10,0,10"  BackgroundColor="#F1F5F6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Label Text="System updates" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Medium"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Label Text="Email" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Micro"/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Switch HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="6" Padding="0,10,0,10" BackgroundColor="#F1F5F6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Label Text="Admin messages" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Medium"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Label Text="Email" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Micro"/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Switch HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" BackgroundColor="Transparent">
+                    <BoxView HeightRequest="1" IsVisible="False" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray"/>
+                </Grid>
+                <Grid Grid.Row="3" BackgroundColor="#F1F5F6">
+
+                </Grid>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -5,6 +5,8 @@
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
              xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"            
              x:Class="Helpa.Views.Profile.EditVerificationPage"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+            ios:Page.UseSafeArea="true"
              BackgroundColor="#F1F5F6">
     <ContentPage.Content>
         <Grid x:Name="rootlayout" BackgroundColor="#F1F5F6" Margin="20,10,20,0">

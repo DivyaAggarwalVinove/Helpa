@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Helpa.ProfilePage"
-             NavigationPage.HasNavigationBar="True"             
+             NavigationPage.HasNavigationBar="True"  
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+            ios:Page.UseSafeArea="true"
              BackgroundColor="Gray">
     <ContentView x:Name="MainView" BackgroundColor="#F1F5F6">
         <Grid x:Name="rootlayout" BackgroundColor="Transparent" Margin="20,20,20,0">

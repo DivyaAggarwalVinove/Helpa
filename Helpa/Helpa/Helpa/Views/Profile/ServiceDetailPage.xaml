@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"   
              xmlns:local="clr-namespace:Helpa"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+            ios:Page.UseSafeArea="true"
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
              x:Class="Helpa.Views.Profile.ServiceDetailPage">
     <ContentPage.Content>

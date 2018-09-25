@@ -4,6 +4,8 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:custommap="clr-namespace:Helpa"
              xmlns:local="clr-namespace:Helpa"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+            ios:Page.UseSafeArea="true"
              x:Class="Helpa.Register3">
     
     <ContentPage.Content>
