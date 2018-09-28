@@ -66,8 +66,8 @@ namespace Helpa.iOS
             //    throw new Exception("Custom pin not found");
             //}
             MKPointAnnotation a = annotation as MKPointAnnotation;
-            
-            annotationView = mapView.DequeueReusableAnnotation(a.GetTitle());
+            if(a !=null)
+                annotationView = mapView.DequeueReusableAnnotation(a.GetTitle());
             //if (annotationView == null)
             //{
             //    annotationView = new CustomMKAnnotationView(annotation, customPin.Id.ToString());
