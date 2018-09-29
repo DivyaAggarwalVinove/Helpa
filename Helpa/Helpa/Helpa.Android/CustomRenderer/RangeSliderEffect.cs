@@ -1,13 +1,7 @@
 ﻿using Android.Content;
-using Android.Content.Res;
-using Android.Graphics;
-using Android.Graphics.Drawables;
-using Android.Support.V4.Content;
-using Android.Util;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.RangeSlider.Forms.Samples.Droid.PlattformEffects;
-using Android.Views;
 
 [assembly: ResolutionGroupName("EffectsSlider")]
 [assembly: ExportEffect(typeof(RangeSliderEffect), "RangeSliderEffect")]

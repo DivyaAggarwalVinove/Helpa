@@ -1,4 +1,4 @@
-﻿using Helpa.Models;
+using Helpa.Models;
 using Helpa.Services;
 using Helpa.Views.Profile.UserProfile;
 using System;
@@ -54,6 +54,20 @@ namespace Helpa
             else
             {
                 return base.OnBackButtonPressed();
+            }
+        }
+
+        public void OnBackPress(object sender, TappedEventArgs eventArgs)
+        {
+            if (slLoginEmailPhn.IsVisible)
+            {
+                btnLoginEmailPhn.IsVisible = true;
+                slLoginEmailPhn.IsVisible = false;
+                btnLoginSignUp.IsVisible = false;
+            }
+            else
+            {
+                Navigation.PopAsync();
             }
         }
 

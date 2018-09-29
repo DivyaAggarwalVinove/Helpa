@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Syncfusion.SfRating.XForms.iOS;
 using UIKit;
 
 namespace Helpa.iOS
@@ -24,7 +25,7 @@ namespace Helpa.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
-
+            new SfRatingRenderer();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
