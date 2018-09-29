@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Helpa.Views.JobPosts;
+using Helpa.Views.OtherPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +22,9 @@ namespace Helpa.Views.Profile.ProfileSettings
 
         private void XFLBLNotification_Tapped(object sender, EventArgs e)
         {
-            App.NavigationPage.Navigation.PushAsync(new NotificationSettingsPage());
+            
+           // App.NavigationPage.Navigation.PushAsync(new NotificationSettingsPage());
+            App.NavigationPage.Navigation.PushAsync(new MyJobPostPage());
         }
 
         private void XFLBLMessages_Tapped(object sender, EventArgs e)

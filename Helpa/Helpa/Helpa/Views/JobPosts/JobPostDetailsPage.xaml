@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Helpa.Views.JobPosts.JobPostDetailsPage"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+            BackgroundColor="#F1F5F6" >
+    <ContentPage.Content>
+        <Grid x:Name="RootLayout">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="#2EC5B6" Padding="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Image Source="arrow_left.png" VerticalOptions="Center" HorizontalOptions="Start">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Spacing="10">
+                            <Image Source="share_2.png" VerticalOptions="Center" />
+                            <Image Source="save_2.png" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing="10">
+                                <Image Source="pin2.png" VerticalOptions="Center" />
+                                <Label Text="Job post" TextColor="White" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing="10">
+                                <Image Source="home2.png" VerticalOptions="Center" />
+                                <Label Text="Childcare" TextColor="White" FontSize="Medium" FontAttributes="Bold"  VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Image VerticalOptions="Center" HorizontalOptions="End" Source="picture2.png" HeightRequest="60" WidthRequest="60" />
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" BackgroundColor="White" Padding="0,0,0,10" Margin="0,20,0,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width=".25*"/>
+                        <ColumnDefinition Width=".75*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Button Text="Urgent" TextColor="White" BackgroundColor="#F73C37" FontSize="Micro" BorderRadius="5" HeightRequest="35" HorizontalOptions="EndAndExpand" Margin="0,10,0,10"  VerticalOptions="Center"
+                                CornerRadius="5"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label Text="Tuen mun Childcare needed for my 4-Year-old son !!" HorizontalOptions="StartAndExpand" TextColor="#2F2F2F" FontAttributes="Bold" FontSize="Medium"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width=".40*"/>
+                        <ColumnDefinition Width=".60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Text="Description: " 
+                               HorizontalOptions="End" 
+                               TextColor="#2F2F2F" 
+                               FontAttributes="Bold" 
+                               FontSize="Small"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label Text="Hey guys! I am Looking for childcare very desperatley plz help me here  and i need it as soon as possible"
+                               HorizontalOptions="StartAndExpand" 
+                               TextColor="#B3B4B3" 
+                               FontAttributes="None"
+                               FontSize="Small"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width=".40*"/>
+                        <ColumnDefinition Width=".60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Text="Job post status:" 
+                               HorizontalOptions="End" 
+                               TextColor="#2F2F2F" 
+                               FontAttributes="Bold" 
+                               FontSize="Small"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label Text="Live - Remaining days: 28 /n Posted on 2018-10-11 "
+                               HorizontalOptions="StartAndExpand" 
+                               TextColor="#B3B4B3" 
+                               FontAttributes="None"
+                               FontSize="Small"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width=".40*"/>
+                        <ColumnDefinition Width=".60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Text="Scope:" 
+                               HorizontalOptions="End" 
+                               TextColor="#2F2F2F" 
+                               FontAttributes="Bold" 
+                               FontSize="Small"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                       
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width=".40*"/>
+                        <ColumnDefinition Width=".60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Text="Location:" 
+                               HorizontalOptions="End" 
+                               TextColor="#2F2F2F" 
+                               FontAttributes="Bold" 
+                               FontSize="Small"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label Text="Tuen Mun"
+                               HorizontalOptions="StartAndExpand" 
+                               TextColor="#B3B4B3" 
+                               FontAttributes="None"
+                               FontSize="Small"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width=".40*"/>
+                        <ColumnDefinition Width=".60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Text="Location info: " 
+                               HorizontalOptions="End" 
+                               TextColor="#2F2F2F" 
+                               FontAttributes="Bold" 
+                               FontSize="Small"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label Text="Helper's Home"
+                               HorizontalOptions="StartAndExpand" 
+                               TextColor="#B3B4B3" 
+                               FontAttributes="None"
+                               FontSize="Small"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width=".40*"/>
+                        <ColumnDefinition Width=".60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Text="Child info: " 
+                               HorizontalOptions="End" 
+                               TextColor="#2F2F2F" 
+                               FontAttributes="Bold" 
+                               FontSize="Small"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label Text="4 years old male"
+                               HorizontalOptions="StartAndExpand" 
+                               TextColor="#B3B4B3" 
+                               FontAttributes="None"
+                               FontSize="Small"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width=".40*"/>
+                        <ColumnDefinition Width=".60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Text="Time: " 
+                               HorizontalOptions="End" 
+                               TextColor="#2F2F2F" 
+                               FontAttributes="Bold" 
+                               FontSize="Small"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label 
+                               HorizontalOptions="StartAndExpand" 
+                               TextColor="#B3B4B3" 
+                               FontAttributes="None"
+                               FontSize="Small">
+                            <Label.Text>
+                             Sunday, Wednesday to Friday
+                             1700-1900
+                            </Label.Text>
+                        </Label>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width=".40*"/>
+                        <ColumnDefinition Width=".60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label Text="Price:" 
+                               HorizontalOptions="End" 
+                               TextColor="#2F2F2F" 
+                               FontAttributes="Bold" 
+                               FontSize="Small"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label Text="80-100 per hour 80-100 per hour"
+                               HorizontalOptions="StartAndExpand" 
+                               TextColor="#B3B4B3" 
+                               FontAttributes="None"
+                               FontSize="Small"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" BackgroundColor="White" Padding="20,0,20,40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="-25,0,-25,0">
+                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <StackLayout Orientation="Horizontal">
+                                <rating:SfRating x:Name="rating" ItemCount="5" Value="4.2" Precision="Exact" ItemSize="15" IsEnabled="False">
+                                    <rating:SfRating.RatingSettings>
+                                        <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
+                                    </rating:SfRating.RatingSettings>
+                                </rating:SfRating>
+
+                                <Label Text="4.2(32)" TextColor="#B3B4B3" FontSize="Micro"/>
+                            </StackLayout>
+                            
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="hands.png" Aspect="AspectFit"/>
+                                <Label Text="37"  TextColor="#494949"   />
+                            </StackLayout>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="question.png" Aspect="AspectFit"/>
+                                <Label Text="44"   TextColor="#494949"  />
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button Text="Messages"
+                            BackgroundColor="#FF738D"
+                            BorderColor="#FF738D"
+                            CornerRadius="5"
+                            BorderRadius="5"
+                            TextColor="White"
+                            HeightRequest="50"
+                                VerticalOptions="Center"
+                            HorizontalOptions="FillAndExpand"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

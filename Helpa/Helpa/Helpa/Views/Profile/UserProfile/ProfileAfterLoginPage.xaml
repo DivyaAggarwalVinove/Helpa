@@ -7,12 +7,29 @@
              BackgroundColor="#EFF3F6">
     <ContentPage.Content>
         <ScrollView>
-            <Grid x:Name="RootLayout" Margin="20,0,20,0">
+            <Grid x:Name="RootLayout" Margin="20,20,20,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" RowSpacing="1" BackgroundColor="LightGray">
+                <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Padding="0,0,0,10">
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Image Source="back.png" VerticalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="Profile" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Small"/>
+                        </StackLayout>
+                        <!--<Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />-->
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" RowSpacing="1" BackgroundColor="LightGray">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -95,7 +112,7 @@
                     </Grid>
                     <BoxView Grid.Row="7" HeightRequest="0.5" BackgroundColor="LightGray"/>
                 </Grid>
-                <Grid Grid.Row="1" RowSpacing="1" Margin="0,30,0,0" BackgroundColor="LightGray">
+                <Grid Grid.Row="2" RowSpacing="1" Margin="0,30,0,0" BackgroundColor="LightGray">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>

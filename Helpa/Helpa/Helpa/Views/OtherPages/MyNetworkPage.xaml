@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Helpa.Views.OtherPages.MyNetworkPage"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+            ios:Page.UseSafeArea="true"
+              xmlns:local="clr-namespace:Helpa" 
+             BackgroundColor="#F1F5F6">
+    <ContentPage.Content>
+        <Grid x:Name="rootlayout" RowSpacing="0" BackgroundColor="Transparent" Margin="10,20,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Padding="0,0,0,10">
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Image Source="back.png" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="Profile" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Small"/>
+                    </StackLayout>
+                    <!--<Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />-->
+                </Grid>
+                <Grid Grid.Row="1" Padding="0,10,0,10">
+                    <Label Text="My Network" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

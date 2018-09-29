@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Helpa.Views.OtherPages.MyJobPostPage"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+            ios:Page.UseSafeArea="true"
+              xmlns:local="clr-namespace:Helpa" 
+             BackgroundColor="#F1F5F6">
+    <ContentPage.Content>
+        <Grid x:Name="rootlayout" RowSpacing="0" BackgroundColor="Transparent" Margin="10,20,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Padding="0,0,0,10">
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Image Source="back.png" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="Profile" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Small"/>
+                        <Label Text="Filters" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="#6E706F" FontAttributes="None" FontSize="Small">
+                            <!--<Label.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFLBLForgotPassword" Tapped="XFLBLForgotPassword_Tapped"/>
+                            </Label.GestureRecognizers>-->
+                        </Label>
+                    </StackLayout>
+                    <!--<Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />-->
+                </Grid>
+                <Grid Grid.Row="1" Padding="0,10,0,10">
+                    <Label Text="My Jobs Posts" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <ListView x:Name="lvFullJobPost"  VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True"                              
+                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
+                              RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
+                              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
+                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}"
+                              >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell Height="120">
+                                    <StackLayout BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                        <StackLayout Margin="5" Padding="0,2,0,0" VerticalOptions="Center" BackgroundColor="White">
+                                            <Grid ColumnSpacing="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="0.6*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid Grid.Column="0" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                                    <!--<Image Source="{Binding ProfilePicture}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="80" HeightRequest="80"/>-->
+                                                    <Button Text="Urgent" VerticalOptions="Center" BorderRadius="05" CornerRadius="05" BackgroundColor="SeaGreen" Margin="0,5,0,5" />
+                                                </Grid>
+
+                                                <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="0.2*" />
+                                                        <RowDefinition Height="0.2*" />
+                                                        <RowDefinition Height="0.2*" />
+                                                        <RowDefinition Height="0.2*" />
+                                                    </Grid.RowDefinitions>
+
+                                                    <Grid Grid.Row="0" ColumnSpacing="0" BackgroundColor="Transparent">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="0.7*" />
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.1*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Label Text="central childcare for boy"  TextColor="Black" LineBreakMode="TailTruncation" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Image Source="share.png" Aspect="AspectFit" Margin="2"/>
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Image Source="save.png" Aspect="AspectFit" Margin="2"/>
+                                                        </Grid>
+                                                        <Grid Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Image Source="menu2.png" Aspect="AspectFit"/>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <Grid Grid.Row="1">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.3*" />
+                                                            <ColumnDefinition Width="0.6*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Image Source="childcare.png" Aspect="AspectFit"/>
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Label Text="Childcare" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Label Text="100 per hour" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <Grid Grid.Row="2">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.9*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Image Source="location2.png" Aspect="AspectFit"/>
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Label Text="Carble Garden"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
+                                                    </Grid>
+                                                    <Grid Grid.Row="3">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.9*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Image Source="calender.png" Aspect="AspectFit"/>
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Label Text="Live- Remaining days:1"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <local:CustomButton x:Name="btnBecomeHelper" Text="Post a Job" HorizontalOptions="Center" WidthRequest="160" HeightRequest="40" 
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = -80}"
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -60}" TextColor="White"/>
+                </RelativeLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -257,7 +257,7 @@
                             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=1, Constant = -60}"
                                         TextColor="White"/>
 
-                    <Image x:Name="imgHelpersList" Source="filter.png" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" 
+                    <Image x:Name="imgHelpersList" IsVisible="True" Source="filter.png" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" 
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnPostJob, Property=X, Factor=1, Constant = 200}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnPostJob, Property=Y, Factor=1, Constant = -5}">
                         <Image.GestureRecognizers>

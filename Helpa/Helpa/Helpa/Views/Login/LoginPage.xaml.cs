@@ -1,5 +1,6 @@
 ﻿using Helpa.Models;
 using Helpa.Services;
+using Helpa.Views.Profile.UserProfile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +76,14 @@ namespace Helpa
                 LoginErrorResponseModel response = await(new LoginServices()).Login(entryLoginUsername.Text, entryLoginEmail.Text, entryLoginPwd.Text);
                 if(response==null)
                 {
-                    await Navigation.PopAsync();
+                    if (App.selectedPage == 4)
+                    {
+                        ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage();
+                        await App.NavigationPage.Navigation.PushAsync(profileAfterLoginPage);
+                    }
+                    else {
+                        await Navigation.PopAsync();
+                    }
                 }
                 else
                 {

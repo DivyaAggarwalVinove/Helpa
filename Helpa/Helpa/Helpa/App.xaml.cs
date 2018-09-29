@@ -32,7 +32,7 @@ namespace Helpa
         }
         #endregion
         
-        int selectedPage = 0;
+       public static  int selectedPage = 0;
         List<KeyValuePair<string, string>> listTabs;
         List<string> imagesName;
        public static NavigationPage NavigationPage { get; set; }
@@ -40,7 +40,7 @@ namespace Helpa
         {
             try
             {
-                Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQwMTVAMzEzNjJlMzIyZTMwYzJHZDNOMUtsV1pPbVdKYU5taEp4T3BXMVZjc0lKTVBWV214dWMrT2VyMD0=");
+                //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQwMTVAMzEzNjJlMzIyZTMwYzJHZDNOMUtsV1pPbVdKYU5taEp4T3BXMVZjc0lKTVBWV214dWMrT2VyMD0=");
 
                 InitializeComponent();
 

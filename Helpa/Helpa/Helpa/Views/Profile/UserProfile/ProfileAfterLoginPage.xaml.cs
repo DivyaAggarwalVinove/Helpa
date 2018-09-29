@@ -28,5 +28,10 @@ namespace Helpa.Views.Profile.UserProfile
         {
             App.NavigationPage.Navigation.PushAsync(new UserSettingsPage());
         }
+
+        private void XFBackButton_Tapped(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PopAsync();
+        }
     }
 }
