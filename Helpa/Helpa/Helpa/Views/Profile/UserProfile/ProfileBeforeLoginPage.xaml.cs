@@ -21,7 +21,7 @@ namespace Helpa.Views.Profile.UserProfile
         private void XFBtnLogin_Clicked(object sender, EventArgs e)
         {
             App.NavigationPage.Navigation.PushAsync(new ProfileAfterLoginPage());
-           // App.NavigationPage.Navigation.PushAsync(new LoginPage());
+          //  App.NavigationPage.Navigation.PushAsync(new LoginPage());
         }
     }
 }

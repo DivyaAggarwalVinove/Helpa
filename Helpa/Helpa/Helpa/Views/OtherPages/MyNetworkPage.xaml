@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Helpa.Views.OtherPages.MyNetworkPage"
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-            ios:Page.UseSafeArea="true"
-              xmlns:local="clr-namespace:Helpa" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"            
+              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:local="clr-namespace:Helpa"                         
              BackgroundColor="#F1F5F6">
     <ContentPage.Content>
         <Grid x:Name="rootlayout" RowSpacing="0" BackgroundColor="Transparent" Margin="10,20,10,0">
@@ -33,7 +34,149 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
-                
+                <ListView x:Name="lvFullHelpa"  VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="115">
+                                <StackLayout x:Name="slOuterFull" BackgroundColor="{Binding color}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <StackLayout Margin="5" Padding="0,2,0,0" VerticalOptions="Center" BackgroundColor="White">
+                                        <Grid ColumnSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="0.6*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="0" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                                <Image Source="picture2.png" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="80" HeightRequest="80"/>
+                                            </Grid>
+
+                                            <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.15*" />
+                                                    <RowDefinition Height="0.15*" />
+                                                    <RowDefinition Height="0.15*" />
+                                                    <RowDefinition Height="0.15*" />
+                                                </Grid.RowDefinitions>
+
+                                                <Grid Grid.Row="0" ColumnSpacing="0" BackgroundColor="Transparent">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.7*" />
+                                                        <ColumnDefinition Width="0.1*" />
+                                                        <ColumnDefinition Width="0.1*" />
+                                                        <ColumnDefinition Width="0.1*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Label Text="Amy Rose"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                    </Grid>
+
+                                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Image Source="share.png" Aspect="AspectFit" Margin="2"/>
+                                                    </Grid>
+
+                                                    <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Image Source="save.png" Aspect="AspectFit" Margin="2"/>
+                                                    </Grid>
+                                                    <Grid Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Image Source="menu2.png" Aspect="AspectFit" Margin="2"/>
+                                                    </Grid>
+                                                </Grid>
+
+                                                <Grid Grid.Row="1">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.1*" />
+                                                        <ColumnDefinition Width="0.3*" />
+                                                        <ColumnDefinition Width="0.6*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <!--<Image Source="childcare.png" Aspect="AspectFit"/>-->
+                                                    </Grid>
+
+                                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Label Text="Service(2)." TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                    </Grid>
+
+                                                    <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Label Text="Job posts(2)" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                    </Grid>
+                                                </Grid>
+
+                                                <Grid Grid.Row="2">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.1*" />
+                                                        <ColumnDefinition Width="0.9*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Image Source="location2.png" Aspect="AspectFit"/>
+                                                    </Grid>
+
+                                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Label Text="Carble Garden"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                    </Grid>
+                                                </Grid>
+
+                                                <Grid Grid.Row="3" ColumnSpacing="2">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.12*" />
+                                                        <ColumnDefinition Width="0.08*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Grid Grid.Column="0" ColumnSpacing="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="0.72*" />
+                                                            <ColumnDefinition Width="0.38*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <rating:SfRating x:Name="rating" ItemCount="5" Value="4.2" Precision="Exact" ItemSize="15" IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                                <rating:SfRating.RatingSettings>
+                                                                    <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
+                                                                </rating:SfRating.RatingSettings>
+                                                            </rating:SfRating>
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Label Text="4.2(32)"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.1*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Image Source="hands.png" Aspect="AspectFit"/>
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Label Text="37"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Image Source="question.png" Aspect="AspectFit"/>
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                            <Label Text="44"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
             </Grid>
         </Grid>
     </ContentPage.Content>

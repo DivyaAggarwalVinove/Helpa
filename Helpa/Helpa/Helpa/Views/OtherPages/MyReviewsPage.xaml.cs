@@ -10,18 +10,27 @@ using Xamarin.Forms.Xaml;
 namespace Helpa.Views.OtherPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MyNetworkPage : ContentPage
+	public partial class MyReviewsPage : ContentPage
 	{
-		public MyNetworkPage ()
+		public MyReviewsPage ()
 		{
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
-            List<string> obj = new List<string>()
-                {
-                    "find_helpers" , "job_posts", "messages","notifications", "profile"
-                };
+		}
 
-            lvFullHelpa.ItemsSource = obj;
+        private void XFBoxviewAboutme_Tapped(object sender, EventArgs e)
+        {
+
+        }
+
+        private void XFBoxviewByMe_Tapped(object sender, EventArgs e)
+        {
+
+        }
+
+        private void XFBoxviewToReview_Tapped(object sender, EventArgs e)
+        {
+
         }
 
         private void XFBackButton_Tapped(object sender, EventArgs e)
