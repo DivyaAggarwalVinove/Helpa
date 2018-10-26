@@ -58,7 +58,7 @@
                         <ScrollView x:Name="svBasicInfo">
                             <Grid RowSpacing="0">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.34*"/>
+                                    <!--<RowDefinition Height="0.34*"/>
                                     <RowDefinition Height="0.1*"/>
                                     <RowDefinition Height="0.1*"/>
                                     <RowDefinition Height="0.11*"/>
@@ -70,30 +70,44 @@
                                     <RowDefinition Height="0.12*"/>
                                     <RowDefinition Height="0.1*"/>
                                     <RowDefinition Height="0.12*"/>
-                                    <RowDefinition Height="0.14*"/>
+                                    <RowDefinition Height="0.14*"/>-->
+
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0" Margin="0,10,0,0">
                                     <Image Source="picture.png"/>
                                 </Grid>
 
-                                <Grid Grid.Row="1">
+                                <Grid Grid.Row="1" Margin="0,10,0,0">
                                     <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="2">
+                                <Grid Grid.Row="2" Margin="0,10,0,0">
                                     <Label Text="Username:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="3">
+                                <Grid Grid.Row="3" Margin="0,5,0,0">
                                     <local:CustomEntry x:Name="entryRegUsername1" Placeholder="Username" PlaceholderColor="#939ba0" FontSize="14"/>
                                 </Grid>
 
-                                <Grid Grid.Row="4">
+                                <Grid Grid.Row="4" Margin="0,10,0,0">
                                     <Label Text="Gender:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="5" BackgroundColor="Transparent">
+                                <Grid Grid.Row="5" Margin="0,5,0,0" >
                                     <ctrls:RadioGroup 
                                         x:Name="rgGender"
                                         Orientation="Horizontal"                                     
@@ -103,18 +117,18 @@
                                         <!--SelectedItem="{Binding GenderCollection}-->
                                 </Grid>
 
-                                <Grid Grid.Row="6">
+                                <Grid Grid.Row="6" Margin="0,10,0,0">
                                     <Label Text="Contact Info:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="7">
+                                <Grid Grid.Row="7" Margin="0,5,0,5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="0.2*" />
                                         <ColumnDefinition Width="0.8*" />
                                     </Grid.ColumnDefinitions>
 
                                     <Grid Grid.Column="0" >
-                                        <local:CustomEntry x:Name="entryRegCountryCode" Placeholder="+852" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                        <local:CustomEntry x:Name="entryRegCountryCode" Placeholder="+852" PlaceholderColor="#BDBFC0" IsEnabled="False" FontSize="14"/>
                                     </Grid>
 
                                     <Grid Grid.Column="1">
@@ -122,18 +136,23 @@
                                     </Grid>
                                 </Grid>
 
-                                <Grid Grid.Row="8" ColumnSpacing="10">
+                                <Grid Grid.Row="8" ColumnSpacing="10" Margin="0,5,0,0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.4*" />
-                                        <ColumnDefinition Width="0.6*" />
+                                        <ColumnDefinition Width="0.38*" />
+                                        <ColumnDefinition Width="0.42*" />
+                                        <ColumnDefinition Width="0.2*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Grid Grid.Column="0">
-                                        <Button x:Name="btnSendCode" Text="Send SMS Code" FontSize="14" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
+                                    <Grid Grid.Column="0" Margin="0,5,0,0">
+                                        <Button x:Name="btnSendCode" Text="Send SMS Code" Clicked="OnClickSendSms" FontSize="14" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
                                     </Grid>
 
-                                    <Grid Grid.Column="1">
+                                    <Grid Grid.Column="1" Margin="0,5,0,0">
                                         <local:CustomEntry x:Name="entryRegSmsCode1" Placeholder="Enter SMS code here" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2" Margin="0,5,0,0">
+                                        <Button x:Name="btnVerifyCode" Text="Verify" Clicked="OnVerifyCode" FontSize="14" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
                                     </Grid>
                                 </Grid>
 
@@ -161,23 +180,27 @@
                                     </Grid>
                                 </Grid>
 
-                                <Grid Grid.Row="11" ColumnSpacing="0">
+                                <Grid Grid.Row="11" ColumnSpacing="0" Margin="0,5,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="0.9*"/>
                                         <ColumnDefinition Width="0.1*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <Grid Grid.Column="0" HorizontalOptions="FillAndExpand">
-                                        <local:CustomEntry x:Name="entryRegEmail1" Placeholder="Email" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                        <local:CustomEntry x:Name="entryRegEmail1" Placeholder="Email" IsEnabled="False" PlaceholderColor="#BDBFC0" FontSize="14"/>
                                     </Grid>
 
                                     <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="5,5,0,5">
-                                        <Image Source="info.png" Aspect="AspectFit"/>
+                                        <Image Source="info.png" Aspect="AspectFit">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnEmailInfo"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
                                     </Grid>
                                 </Grid>
 
-                                <Grid Grid.Row="12" HorizontalOptions="End" Margin="0,0,0,5">
-                                    <Button x:Name="btnRegNext" Clicked="OnSignUpNext" Text="Next >" TextColor="White" BackgroundColor="#FF748C" />
+                                <Grid Grid.Row="12" HorizontalOptions="End" Margin="0,10,0,10">
+                                    <Button x:Name="btnRegNext" Clicked="OnSignUpNext" Text="Next " VerticalOptions="CenterAndExpand" Image="angle_white_right.png" ContentLayout="Right,5" TextColor="White" BackgroundColor="#FF748C" />
                                 </Grid>
                             </Grid>
                         </ScrollView>
@@ -192,7 +215,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0" BackgroundColor="Transparent">
-                                    <Label Text="Required" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                                    <Label Text="Optional" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                                 </Grid>
 
                                 <Grid Grid.Row="1" BackgroundColor="Transparent">
@@ -207,7 +230,8 @@
                                 </Grid>
                                 
                                 <Grid Grid.Row="3" HorizontalOptions="End" Margin="0,0,0,5">
-                                    <Button x:Name="btnRegDone" Clicked="OnSignUpDone" Text="Done >" TextColor="White" BackgroundColor="#FF748C" />
+                                    <!--<Button x:Name="btnRegDone" Clicked="OnSignUpDone" Text="Done >" TextColor="White" BackgroundColor="#FF748C" />-->
+                                    <Button x:Name="btnRegDone" Clicked="OnSignUpDone" Text="Done " VerticalOptions="CenterAndExpand" Image="angle_white_right.png" ContentLayout="Right,5" TextColor="White" BackgroundColor="#FF748C" />
                                 </Grid>
                             </Grid>
                         </ScrollView>

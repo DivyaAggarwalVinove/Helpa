@@ -7,11 +7,16 @@ using System.Runtime.CompilerServices;
 
 namespace Helpa.Models
 {
-    class LocationModel : INotifyPropertyChanged
+    public class LocationModel : INotifyPropertyChanged
     {
+        public string LocationName { get; set; }
+        public int DisticeId { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        
         //public ObservableCollection<LocationModel> locations { get; set; } 
 
-        string address="";
+        string address = "";
         public string Address
         {
             get { return address; }
@@ -45,6 +50,5 @@ namespace Helpa.Models
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-
     }
 }

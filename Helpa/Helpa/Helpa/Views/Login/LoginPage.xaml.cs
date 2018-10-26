@@ -19,6 +19,8 @@ namespace Helpa
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+
+            entryLoginEmail.Completed += (s, e) => entryLoginPwd.Focus();
         }
 
         async void OnExternalLogin(object sender, EventArgs args)
@@ -77,25 +79,36 @@ namespace Helpa
             {
                 await DisplayAlert("Warning", "Please enter email or phone number.", "Ok");
             }
-            else if (string.IsNullOrEmpty(entryLoginUsername.Text))
-            {
-                await DisplayAlert("Warning", "Please enter username.", "Ok");
-            }
             else if (string.IsNullOrEmpty(entryLoginPwd.Text))
             {
                 await DisplayAlert("Warning", "Please enter password.", "Ok");
             }
             else
             {
-                LoginErrorResponseModel response = await(new LoginServices()).Login(entryLoginUsername.Text, entryLoginEmail.Text, entryLoginPwd.Text);
-                if(response==null)
+                LoginErrorResponseModel response = await(new LoginServices()).Login(entryLoginEmail.Text, entryLoginPwd.Text);
+                if (response == null)
                 {
                     if (App.selectedPage == 4)
                     {
-                        ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage();
-                        await App.NavigationPage.Navigation.PushAsync(profileAfterLoginPage);
+                        try
+                        {
+                            await Navigation.PopAsync();
+
+                            var loggedUser = App.Database.GetLoggedUser();
+
+                            ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage();
+                            profileAfterLoginPage.currentUser = loggedUser;
+
+                            var cp = App.app.contentPresenter;
+                            cp.Content = profileAfterLoginPage.Content;
+                        }
+                        catch(Exception e)
+                        {
+                            Console.Write(e.StackTrace);
+                        }
                     }
-                    else {
+                    else
+                    {
                         await Navigation.PopAsync();
                     }
                 }

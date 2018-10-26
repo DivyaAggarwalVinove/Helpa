@@ -13,7 +13,7 @@ namespace Helpa.Services
 {
     public class LoginServices : ILoginServices
     {
-        public async Task<LoginErrorResponseModel> Login(string username, string email, string pwd)
+        public async Task<LoginErrorResponseModel> Login(string email, string pwd)
         {
             LoginErrorResponseModel err_msg = new LoginErrorResponseModel();
             try
@@ -36,15 +36,18 @@ namespace Helpa.Services
                     if (res.IsSuccessStatusCode)
                     {
                         LoginResponseModel message = JsonConvert.DeserializeObject<LoginResponseModel>(result);
-                        RegisterUserModel user = await App.Database.GetUsersAsync(message.id);
+                        if(message!=null && !message.id.Equals(""))
+                        {
+                            message.userId = int.Parse(message.id);
+                        }
+
+                        RegisterUserModel user = await App.Database.GetUsersAsync(message.userId);
                         if (user == null)
                             user = new RegisterUserModel();
 
-                        user.Id = message.id;
-                        Settings.UserID = user.Id;
+                        user.Id = message.userId;
                         user.UserName = message.userName;
                         user.Token = message.access_token;
-                        Settings.TokenCode = user.Token;
                         user.isLoggedIn = true;
                         //user.Role = message.roles;
                         await App.Database.SaveUserAsync(user);
@@ -71,6 +74,5 @@ namespace Helpa.Services
 
             return err_msg;
         }
-        
     }
 }

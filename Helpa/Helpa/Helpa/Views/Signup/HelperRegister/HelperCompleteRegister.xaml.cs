@@ -172,12 +172,12 @@ namespace Helpa
 
                     if (isSelected)
                     {
-                        HelperScopes helperScope = new HelperScopes() { ScopeId = scope.Id };
+                        HelperScopes helperScope = new HelperScopes() { ScopeId = scope.ScopeId };
                         helperServices.Service[currentService].Scopes.Add(helperScope);
                     }
                     else
                     {
-                        HelperScopes helperScope = helperServices.Service[currentService].Scopes.Where(x => x.ScopeId == scope.Id).FirstOrDefault();
+                        HelperScopes helperScope = helperServices.Service[currentService].Scopes.Where(x => x.ScopeId == scope.ScopeId).FirstOrDefault();
                         helperServices.Service[currentService].Scopes.Remove(helperScope);
                     }
 
@@ -270,7 +270,9 @@ namespace Helpa
                 gridServices.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
             for (int i = 0; i < 3; i++)
-                gridServices.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                gridServices.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+            
+            gridServices.Padding = new Thickness(0, 0, 10, 0);
 
             ServiceButton serviceButton;
             for (int i = 0; i < servicesCount; i++)
@@ -278,7 +280,8 @@ namespace Helpa
                 serviceButton = new ServiceButton();
                 serviceButton.Text = services.ElementAt(i).ServiceName;
                 serviceButton.Margin = new Thickness(5, 5, 5, 5);
-
+                serviceButton.HorizontalOptions = LayoutOptions.FillAndExpand;
+                
                 Image image = new Image();
                 image.Source = "selected.png";
                 image.Aspect = Aspect.AspectFit;
@@ -437,6 +440,21 @@ namespace Helpa
         public void ShowError(string error)
         {
             DisplayAlert("Error", error, "Ok");
+        }
+
+        public void ShowSmsMessage(ResponseModel message, bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                entryHelperRegPhone1.IsEnabled = false;
+            }
+
+            DisplayAlert("", message.Message, "Ok");
+        }
+
+        public void ShowVerificationMessage(ResponseModel message, bool isSuccess)
+        {
+            DisplayAlert("", message.Message, "Ok");
         }
 
         void OnHelperRegEditServicesNext(object sender, EventArgs args)
@@ -699,7 +717,7 @@ namespace Helpa
             for (int i = pages.Count - 1; i > 0; i--)
             {
                 if (!pages[i].ToString().Contains("Login"))
-                    Navigation.PopAsync();
+                    await Navigation.PopAsync();
                 else
                     break;
             }

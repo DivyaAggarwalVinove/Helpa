@@ -50,7 +50,7 @@ namespace Helpa.Droid
 
         public bool OnMarkerClick(Marker marker)
         {
-            string selectedCluster = marker.Title.Substring(0, marker.Title.Length - 4);
+            string selectedCluster = marker.Title.Substring(0, marker.Title.Length - 4).Trim();
             customMap.ClickedOnPin(selectedCluster);
             return true; //disables info window from showing but now I can't check for clicks on the map and get the data from the marker
         }
@@ -64,9 +64,9 @@ namespace Helpa.Droid
 
             Android.Views.View v = null;
             LayoutInflater inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
-            if (customMap.selectedHelper.LocationType == 'S')
+            if (customMap.selectedHelper!=null && customMap.selectedHelper.LocationType == 'S')
                 v = inflater.Inflate(Resource.Layout.Home, null);
-            else if (customMap.selectedHelper.LocationType == 'M')
+            else if (customMap.selectedHelper != null && customMap.selectedHelper.LocationType == 'M')
                 v = inflater.Inflate(Resource.Layout.Mobile, null);
             else
                 v = inflater.Inflate(Resource.Layout.Job, null);

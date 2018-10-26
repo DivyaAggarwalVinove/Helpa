@@ -8,6 +8,6 @@ namespace Helpa.Services
 {
     public interface ILoginServices
     {
-        Task<LoginErrorResponseModel> Login(string username, string email, string pwd);
+        Task<LoginErrorResponseModel> Login(string email, string pwd);
     }
 }

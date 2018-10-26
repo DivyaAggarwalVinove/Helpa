@@ -138,7 +138,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Grid Grid.Column="0" >
-                                        <local:CustomEntry x:Name="entryHelperRegCountryCode" Placeholder="+852" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                        <local:CustomEntry x:Name="entryHelperRegCountryCode" Placeholder="+852" IsEnabled="False" PlaceholderColor="#BDBFC0" FontSize="14"/>
                                     </Grid>
 
                                     <Grid Grid.Column="1">
@@ -201,7 +201,8 @@
                                 </Grid>
 
                                 <Grid Grid.Row="12" HorizontalOptions="End" Margin="0,10,0,10">
-                                    <Button x:Name="btnHelperRegBasicInfoNext" Clicked="OnHelperRegBasicInfoNext" Text="Next >" TextColor="White" BackgroundColor="#FF748C" />
+                                    <Button x:Name="btnHelperRegBasicInfoNext" Clicked="OnHelperRegBasicInfoNext" Text="Next " VerticalOptions="CenterAndExpand" Image="angle_white_right.png" ContentLayout="Right,5" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
+                                    <!--<Button x:Name="btnHelperRegBasicInfoNext" Clicked="OnHelperRegBasicInfoNext" Text="Next" TextColor="White" BackgroundColor="#FF748C" />-->
                                 </Grid>
                             </Grid>
                         </ScrollView>
@@ -357,24 +358,24 @@
                                 <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0" >
                                     <Label Text="Service details of:" TextColor="#6F7281" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                 </Grid>
-
+                                
                                 <Grid Grid.Row="1" ColumnSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,0">
                                     <RelativeLayout BackgroundColor="#E8EDF1">
                                         <local:ServiceButton x:Name="btnHelperRegSelectedService" Text="Tutor" IsEnabled="False"
-                                                    RelativeLayout.XConstraint="10" 
-                                                    RelativeLayout.YConstraint="15"
-                                                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -30}" />
+                                                RelativeLayout.XConstraint="10"
+                                                RelativeLayout.YConstraint="10"
+                                                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -20}" />
 
-                                        <Image Source="selected.png" Aspect="AspectFit"
-                                                   RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnHelperRegSelectedService, Property=Width, Factor=1, Constant=0}" 
-                                                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnHelperRegSelectedService, Property=Height, Factor=0.6, Constant=0}" />
+                                        <Image Source="selected.png"
+                                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnHelperRegSelectedService, Property=Width, Factor=1, Constant=-5}" 
+                                               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnHelperRegSelectedService, Property=Height, Factor=0.25, Constant=10}" 
+                                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnHelperRegSelectedService, Property=Height, Factor=0.5, Constant=0}"/>
 
-                                        <Button Text="Remove" TextColor="Gray" BackgroundColor="#E5E5E5"
-                                                    VerticalOptions="Center"
-                                                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.65, Constant=0}" 
-                                                    RelativeLayout.YConstraint="15"
-                                                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -30}"
-                                                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.3, Constant=0}"/>
+                                        <Button Text="Remove" TextColor="Gray" BackgroundColor="#E5E5E5" VerticalOptions="Center"
+                                                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.65, Constant=0}" 
+                                                RelativeLayout.YConstraint="10"
+                                                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -20}"
+                                                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.3, Constant=0}"/>
                                     </RelativeLayout>
                                 </Grid>
 

@@ -2,18 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Helpa.Views.Profile.UserProfile.ProfileAfterLoginPage"
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-            ios:Page.UseSafeArea="true"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             ControlTemplate="{StaticResource MainPageTemplate}"
              BackgroundColor="#EFF3F6">
     <ContentPage.Content>
         <ScrollView>
-            <Grid x:Name="RootLayout" Margin="20,20,20,0">
+            <Grid x:Name="RootLayout" Margin="5,5,5,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
+                
+                <!--<Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
@@ -26,10 +28,11 @@
                             </Image>
                             <Label Text="Profile" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Small"/>
                         </StackLayout>
-                        <!--<Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />-->
+                        --><!--<Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />--><!--
                     </Grid>
-                </Grid>
-                <Grid Grid.Row="1" RowSpacing="1" BackgroundColor="LightGray">
+                </Grid>-->
+
+                <Grid Grid.Row="0" RowSpacing="1" BackgroundColor="#E0E1E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -54,7 +57,7 @@
                                 <Label Text="Amy Rose" FontAttributes="Bold" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                             </Grid>
                             <Grid Grid.Row="1">
-                                <Label Text="View Profile" FontAttributes="None" FontSize="Small" TextColor="LightGray" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center">
+                                <Label Text="View Profile" TextColor="#555958" FontSize="15" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFLBLViewProfile" Tapped="XFLBLViewProfile_Tapped"/>
                                     </Label.GestureRecognizers>
@@ -65,54 +68,74 @@
                             <Image VerticalOptions="Center" HorizontalOptions="End" Source="picture2.png" HeightRequest="60" WidthRequest="60" />
                         </Grid>
                     </Grid>
+
                     <Grid Grid.Row="1" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="My network" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
+                            <Label Text="My network"  TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
+                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
 
-                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
-                        </StackLayout>
-                    </Grid>
-                    <Grid Grid.Row="2" BackgroundColor="#EFF3F6">
-                        <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="My reviews" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
-
-                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
-                        </StackLayout>
-                    </Grid>
-                    <Grid Grid.Row="3" BackgroundColor="#EFF3F6">
-                        <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="My job posts" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
-
-                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
-                        </StackLayout>
-                    </Grid>
-                    <Grid Grid.Row="4" BackgroundColor="#EFF3F6">
-                        <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Saved items" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
-
-                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
-                        </StackLayout>
-                    </Grid>
-                    <Grid Grid.Row="5" BackgroundColor="#EFF3F6">
-                        <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Settings" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" >
-                            </Label>
-                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFLBLSettings" Tapped="XFLBLSettings_Tapped"/>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickMyNetwork"/>
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
+
+                    <Grid Grid.Row="2" BackgroundColor="#EFF3F6">
+                        <StackLayout Padding="10" Orientation="Horizontal">
+                            <Label Text="My reviews" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
+
+                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Grid.Row="3" BackgroundColor="#EFF3F6">
+                        <StackLayout Padding="10" Orientation="Horizontal">
+                            <Label Text="My job posts" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
+                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickMyJobPosts"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Grid.Row="4" BackgroundColor="#EFF3F6">
+                        <StackLayout Padding="10" Orientation="Horizontal">
+                            <Label Text="Saved items" TextColor="#555958" FontSize="15" FontAttributes="None" HorizontalOptions="StartAndExpand" />
+                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickSavedItem"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Grid.Row="5" BackgroundColor="#EFF3F6">
+                        <StackLayout Padding="10" Orientation="Horizontal">
+                            <Label Text="Settings" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
+                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickSetting"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Grid>
+
                     <Grid Grid.Row="6" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Language(English/)" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" />
+                            <Label Text="Language(English/)" TextColor="#555958" FontSize="15"  HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png" />
                         </StackLayout>
                     </Grid>
-                    <BoxView Grid.Row="7" HeightRequest="0.5" BackgroundColor="LightGray"/>
+
+                    <BoxView Grid.Row="7" HeightRequest="1" BackgroundColor="#E0E1E5"/>
                 </Grid>
-                <Grid Grid.Row="2" RowSpacing="1" Margin="0,30,0,0" BackgroundColor="LightGray">
+
+                <Grid Grid.Row="1" Margin="10,30,0,0"  BackgroundColor="#EFF3F6">
+                    <Label Text="Other" TextColor="#FF738D" BackgroundColor="Transparent" FontSize="15" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                </Grid>
+
+                <Grid Grid.Row="2" RowSpacing="1" BackgroundColor="#E0E1E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -121,60 +144,63 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Padding="20,0,0,0" BackgroundColor="#EFF3F6">
-                        <Label Text="Other" TextColor="#FF738D" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+
+                    <Grid Grid.Row="0" BackgroundColor="#EFF3F6">
+                        <StackLayout Padding="10" Orientation="Horizontal">
+                            <Label Text="Rate us on Play Store" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
+                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickRateUs"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
                     </Grid>
                     <Grid Grid.Row="1" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Rate us on App Store" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" />
-
+                            <Label Text="Like us on Facebook" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickLikeOnFacebook"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
                     <Grid Grid.Row="2" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Like us on Facebook" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" />
+                            <Label Text="About us" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
 
-                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
+                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png" />
                         </StackLayout>
                     </Grid>
                     <Grid Grid.Row="3" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="About us" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" />
+                            <Label Text="Contact us" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png" />
                         </StackLayout>
                     </Grid>
                     <Grid Grid.Row="4" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Contact us" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" />
+                            <Label Text="FAQ" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png" />
                         </StackLayout>
                     </Grid>
                     <Grid Grid.Row="5" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="FAQ" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" />
+                            <Label Text="Terms and Privacy" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png" />
                         </StackLayout>
                     </Grid>
-                    <Grid Grid.Row="6" BackgroundColor="#EFF3F6">
-                        <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Terms and Privacy" TextColor="Gray" FontSize="Small"  HorizontalOptions="StartAndExpand" />
-
-                            <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png" />
-                        </StackLayout>
-                    </Grid>
-                    <Grid Grid.Row="7" Padding="0,20,0,30" BackgroundColor="#EFF3F6">
-                        <Button Text="Become a Helper"
+                    <Grid Grid.Row="6" Padding="0,20,0,30" Margin="5,0,5,0" BackgroundColor="#EFF3F6">
+                        <Button Text="Log out"
                             BackgroundColor="#FF738D"
                             BorderColor="#FF738D"
                             CornerRadius="5"
                             BorderRadius="5"                                                                                              
-                                VerticalOptions="Center"
+                            VerticalOptions="Center"
                             TextColor="White"
                             HeightRequest="45"
                             HorizontalOptions="FillAndExpand"/>

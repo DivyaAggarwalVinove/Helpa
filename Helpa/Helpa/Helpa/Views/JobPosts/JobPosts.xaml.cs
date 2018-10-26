@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 namespace Helpa
@@ -42,28 +43,158 @@ namespace Helpa
 
             MessagingCenter.Subscribe<CustomMap, string>(this, "Hi", (sender, selectedCluster) =>
             {
-                //lvHalfHelpa.ScrollTo(helpersViewModel.helperList, ScrollToPosition., false);
-                //lvHalfHelpa.SelectedItem
-
                 // if (rlHalfView.IsVisible == false)
+                try
                 {
-                    rlHalfJobView.IsVisible = true;
+                    aiJobPost.IsRunning = true;
+                    ShowHelperHalfList(selectedCluster);
+                    aiJobPost.IsRunning = false;
+                    /*rlHalfJobView.IsVisible = true;
 
-                    var selectedHelpersInCluster = jobsViewModel.jobPostList.Where(h => h.LocalityName == (selectedCluster)).FirstOrDefault();
-                    jobsViewModel.JobPostHalfList = new ObservableCollection<HelperHome>(selectedHelpersInCluster.HelpersInLocalties);
+                    var selectedHelpersInCluster = jobsViewModel.jobPostList.Where(h => h.LocationName == (selectedCluster)).FirstOrDefault();
+                    
                     lvHalfJobs.ItemsSource = jobsViewModel.JobPostHalfList;
-                    lblJobsCount.Text = selectedHelpersInCluster.NumberOfHelpersInLocality + " Jobs found in " + selectedHelpersInCluster.LocalityName;
+                    lblJobsCount.Text = selectedHelpersInCluster.Count + " Helpers found in " + selectedHelpersInCluster.LocationName;
+                    */
                 }
-                // else
-                // rlHalfView.IsVisible = false;
+                catch(Exception e)
+                {
+                    Console.Write(e.StackTrace);
+                }
             });
         }
 
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
+        //protected override async void OnAppearing()
+        //{
+        //    base.OnAppearing();
 
-            await GetRuntimeLocationPermission(5000);
+        //    await GetRuntimeLocationPermission(5000);
+        //}
+
+
+        async void ShowHelperHalfList(string selectedCluster)
+        {
+            try
+            {
+                rlHalfJobView.IsVisible = true;
+
+                var selectedHelpersInCluster = jobsViewModel.jobPostList.Where(h => h.LocationName == (selectedCluster)).FirstOrDefault();
+                mapJob.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(selectedHelpersInCluster.Latitude - 0.0055, selectedHelpersInCluster.Longitude), Distance.FromKilometers(1)));
+
+                JobServices jobServices = new JobServices();
+                var js = await jobServices.GetJobsInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
+
+                for (int i = 0; i < js.Count(); i++)
+                {
+                    JobsHome j = js.ElementAt(i);
+                    if (j != null)
+                    {
+                        if (j.JobType == "N")
+                        {
+                            j.JobType = "Normal";
+                            j.JobBgColor = "#289EF5";
+                            j.JobTextColor = "#FFFFFF";
+                        }
+                        else if (j.JobType == "U")
+                        {
+                            j.JobType = "Urgent";
+                            j.JobBgColor = "#F63D38";
+                            j.JobTextColor = "#FFFFFF";
+                        }
+                        else
+                        {
+                            j.JobType = "Sponsored";
+                            j.JobBgColor = "#FCDC55";
+                            j.JobTextColor = "#000000";
+                        }
+                    }
+
+                    if (j.Location != null && j.Location.Count() > 0)
+                        j.JobLocationName = j.Location.ElementAt(0).LocationName;
+                    
+                    if (j.IsDaily)
+                        j.JobPriceLabel = "From $" + j.MinDailyPrice.Remove(j.MinDailyPrice.IndexOf(".")) + "-$" + j.MaxDailyPrice.Remove(j.MaxDailyPrice.IndexOf(".")) + "/Day";
+                    else
+                    if (j.IsMonthly)
+                        j.JobPriceLabel = "From $" + j.MinMonthlyPrice.Remove(j.MinMonthlyPrice.IndexOf(".")) + "-$" + j.MaxMonthlyPrice.Remove(j.MaxMonthlyPrice.IndexOf(".")) + "/Month";
+                    else
+                    if (j.IsHourly)
+                        j.JobPriceLabel = "From $" + j.MinHourlyPrice.Remove(j.MinHourlyPrice.IndexOf(".")) + "-$" + j.MaxHourlyPrice.Remove(j.MaxHourlyPrice.IndexOf(".")) + "/Hour";
+
+                    js.Select(x => x.JobId == j.JobId ? j : x);
+                }
+
+                jobsViewModel.JobPostHalfList = new ObservableCollection<JobsHome>(js);
+                lvHalfJobs.ItemsSource = jobsViewModel.JobPostHalfList;
+                lblJobsCount.Text = js.Count() + " Jobs found in " + selectedHelpersInCluster.LocationName;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+        }
+
+        async void ShowJobFullList()
+        {
+            try
+            {
+                aiJobPost.IsRunning = true;
+
+                JobServices jobServices = new JobServices();
+                var js = await jobServices.GetAllJobs(0);
+
+                lblJobFullCount.Text = js.Total + lblJobFullCount.Text;
+
+                for (int i = 0; i < js.Data.Count(); i++)
+                {
+                    JobsHome j = js.Data.ElementAt(i);
+                    if (j != null)
+                    {
+                        if (j.JobType == "N")
+                        {
+                            j.JobType = "Normal";
+                            j.JobBgColor = "#289EF5";
+                            j.JobTextColor = "#FFFFFF";
+                        }
+                        else if (j.JobType == "U")
+                        {
+                            j.JobType = "Urgent";
+                            j.JobBgColor = "#F63D38";
+                            j.JobTextColor = "#FFFFFF";
+                        }
+                        else
+                        {
+                            j.JobType = "Sponsored";
+                            j.JobBgColor = "#FCDC55";
+                            j.JobTextColor = "#000000";
+                        }
+                    }
+
+                    if (j.Location != null && j.Location.Count() > 0)
+                        j.JobLocationName = j.Location.ElementAt(0).LocationName;
+
+                    if (j.IsDaily)
+                        j.JobPriceLabel = "From $" + j.MinDailyPrice.Remove(j.MinDailyPrice.IndexOf(".")) + "-$" + j.MaxDailyPrice.Remove(j.MaxDailyPrice.IndexOf(".")) + "/Day";
+                    else
+                    if (j.IsMonthly)
+                        j.JobPriceLabel = "From $" + j.MinMonthlyPrice.Remove(j.MinMonthlyPrice.IndexOf(".")) + "-$" + j.MaxMonthlyPrice.Remove(j.MaxMonthlyPrice.IndexOf(".")) + "/Month";
+                    else
+                    if (j.IsHourly)
+                        j.JobPriceLabel = "From $" + j.MinHourlyPrice.Remove(j.MinHourlyPrice.IndexOf(".")) + "-$" + j.MaxHourlyPrice.Remove(j.MaxHourlyPrice.IndexOf(".")) + "/Hour";
+
+                    js.Data.Select(x => x.JobId == j.JobId ? j : x);
+                }
+
+                jobsViewModel.JobFullList = new ObservableCollection<JobsHome>(js.Data);
+                lvFullJobPost.ItemsSource = jobsViewModel.JobFullList;
+                //lblJobsCount.Text = js.Count() + " Jobs found in " + selectedHelpersInCluster.LocationName;
+            
+                aiJobPost.IsRunning = false;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
         }
 
         public async Task GetRuntimeLocationPermission(int milisec)
@@ -85,7 +216,8 @@ namespace Helpa
         {
             var selectedItem = (HelperHome)args.Item;
             int selectedIndex = jobsViewModel.JobFullList.IndexOf(jobsViewModel.JobFullList.Where(h => h.UserId == selectedItem.UserId).FirstOrDefault());
-            jobsViewModel.JobFullList.ElementAt(selectedIndex).color = "#FADC54";
+            //jobsViewModel.JobFullList.ElementAt(selectedIndex).color = "#FADC54";
+
             //slOuterFull.
             //lvFullHelpa.GetChildAt(args.)
         }
@@ -125,9 +257,11 @@ namespace Helpa
         {
             if (mapJob.IsVisible)
             {
-                lvFullJobPost.IsVisible = true;
+                slFullJobPost.IsVisible = true;
                 mapJob.IsVisible = false;
                 lblTotalJobsCount.IsVisible = false;
+
+                ShowJobFullList();
 
                 imgJobsList.Source = "location_filter.png";
             }

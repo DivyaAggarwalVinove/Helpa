@@ -8,7 +8,7 @@ namespace Helpa.Models
     {
         public string Message { get; set; }
         public string Id { get; set; }
-        public string Code { get; set; }
+        //public string Code { get; set; }
     }
 
     public class HelperResponseModel
@@ -24,8 +24,10 @@ namespace Helpa.Models
         public string token_type { get; set; }
         public int expires_in { get; set; }
         public string userName { get; set; }
-        public int id { get; set; }
-        public List<string> roles { get; set; }
+        public string id { get; set; }
+        public int userId { get; set; }
+        public string roles { get; set; }
+        //public List<string> roles { get; set; }
     }
 
     public class LoginErrorResponseModel

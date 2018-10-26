@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace Helpa.Services
 {
-    public interface IHelpersServices<T>
+    public interface IHelpersServices
     {
-        Task<IEnumerable<T>> GetHelpersList(int radius, double latitude, double longitude);
+        Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId);
+        Task<IEnumerable<HelperHome>> GetHelpersInLocation(double Latitude, double Longitude, int UserId);
+        Task<HHomeModel> GetAllHelpers(int UserId);
+        Task<NetworkModel> GetMyNetworks(int UserId);
+        Task<NetworkModel> GetSavedUsers(int UserId);
         Task<HelperServiceModel> SaveHelperServices(HelperServiceModel helperService);
     }
 }

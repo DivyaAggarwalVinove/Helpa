@@ -25,7 +25,7 @@ namespace Helpa.Utility
 
         public static bool IsValidMobileNo(string number)
         {
-            return Regex.Match(number, @"^(\+[0-9]{9})$").Success;
+            return Regex.Match(number, @"\+?[0-9]{8}").Success;
         }
 
         public static string ToTitleCase(string str)

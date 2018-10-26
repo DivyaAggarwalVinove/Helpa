@@ -34,7 +34,7 @@
                         </Image>
                     </StackLayout>
                     End Header -->
-
+                    
                     <!-- Begin Content -->
                     <Grid  Grid.Row="0">
                         <ContentPresenter x:Name="content" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />

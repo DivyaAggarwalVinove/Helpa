@@ -6,12 +6,18 @@ using System.Text;
 
 namespace Helpa.Models
 {
+    public class HHome
+    {
+        public IEnumerable<HelperHomeModel> Data { get; set; }
+        public int Total { get; set; }
+    }
+
     public class HelperHomeModel
     {
-        public string LocalityName { get; set; }
+        public string LocationName { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public int NumberOfHelpersInLocality { get; set; }
+        public int Count { get; set; }
         public char LocationType { get; set; }
         public List<HelperHome> HelpersInLocalties { get; set; }
         //public string price { get; set; }
@@ -24,19 +30,42 @@ namespace Helpa.Models
         //public int count2 { get; set; }
     }
 
+    public class HHomeModel
+    {
+        public IEnumerable<HelperHome> Data { get; set; }
+        public int Total { get; set; }
+    }
+
     public class HelperHome : INotifyPropertyChanged
     {
-        public string Price { get; set; }
         public int UserId { get; set; }
+        public int HelperId { get; set; }
         public string Name { get; set; }
+        public bool BookMark { get; set; }
         public string ProfilePicture { get; set; }
+
         public string AverageRating { get; set; }
+
         public string RatingCount { get; set; }
+
+        [DisplayName("RatingCount")]
         public string AverageRatingCount { get; set; }
-        public string Service { get; set; }
+
+        public string Price { get; set; }
+
+        public string ServiceName { get; set; }
+        public string ServicePriceLabel { get; set; }
+        public string ServiceLocationName { get; set; }
+
+        public IEnumerable<HService> Service { get; set; }
+
+        [DisplayName("no_of_connections")]
         public int ConnectionCount { get; set; }
+
+        [DisplayName("EnquireCount")]
         public int EnquiredUserCount { get; set; }
-        public string Status { get; set; }
+
+        public bool Status { get; set; }
         public string Description { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
@@ -44,12 +73,29 @@ namespace Helpa.Models
         public string JobType { get; set; }
         public string JobBgColor { get; set; }
 
-        string _color = "#00FFFFFF";
-        public string color
+        string _helperStatus="Available";
+        public string helperStatus
         {
-            get { return _color; }
+            get { return _helperStatus; }
+            set { SetProperty(ref _helperStatus, value); }
+        }
+
+        string _bgcolor = "#00FFFFFF";
+        public string bgcolor
+        {
+            get { return _bgcolor; }
             set {
-                SetProperty(ref _color, value);
+                SetProperty(ref _bgcolor, value);
+            }
+        }
+
+        string _textcolor = "#00FFFFFF";
+        public string textcolor
+        {
+            get { return _textcolor; }
+            set
+            {
+                SetProperty(ref _textcolor, value);
             }
         }
 
@@ -77,5 +123,25 @@ namespace Helpa.Models
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+    }
+
+    public class HService
+    {
+        public int ServiceId { get; set;}
+        public string ServiceName { get; set; }
+        public HSPrice price { get; set; }
+        public IEnumerable<ScopeModel> Scope { get; set; }
+        public IEnumerable<LocationModel> Location { get; set; }
+        public string LocationType { get; set; }
+    }
+
+    public class HSPrice
+    {
+        public bool Hours { get; set; }
+        public bool Monthly { get; set; }
+        public bool Daily { get; set; }
+
+        public string Min { get; set; }
+        public string Max { get; set; }
     }
 }

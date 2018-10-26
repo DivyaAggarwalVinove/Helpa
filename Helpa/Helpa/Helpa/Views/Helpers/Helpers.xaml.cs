@@ -3,6 +3,7 @@ using Helpa.Services;
 using Helpa.ViewModels;
 using Plugin.Geolocator;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -43,32 +44,170 @@ namespace Helpa
 
             MessagingCenter.Subscribe<CustomMap, string>(this, "Hi", (sender, selectedCluster) =>
             {
-                //lvHalfHelpa.ScrollTo(helpersViewModel.helperList, ScrollToPosition., false);
-                //lvHalfHelpa.SelectedItem
-
-               // if (rlHalfView.IsVisible == false)
+                try
                 {
-                    rlHalfView.IsVisible = true;
-                    
-                    var selectedHelpersInCluster = helpersViewModel.helperHomeList.Where(h => h.LocalityName == (selectedCluster)).FirstOrDefault();
-                    helpersViewModel.HelperHalfList = new ObservableCollection<HelperHome>(selectedHelpersInCluster.HelpersInLocalties);
-                    lvHalfHelpa.ItemsSource = helpersViewModel.HelperHalfList;
-                    lblHelperCount.Text = selectedHelpersInCluster.NumberOfHelpersInLocality + " Helpers found in " + selectedHelpersInCluster.LocalityName;
+                    aiFindHelper.IsRunning = true;
+                    ShowHelperHalfList(selectedCluster);
+                    aiFindHelper.IsRunning = false;
                 }
-               // else
-                   // rlHalfView.IsVisible = false;
+                catch(Exception e)
+                {
+                    Console.Write(e.StackTrace);
+                }
             });
-
-            //Action action = (async() =>  await GetRuntimeLocationPermission(5000));
         }
         
-        protected override async void OnAppearing()
+       /* protected override async void OnAppearing()
         {
             base.OnAppearing();
 
             await GetRuntimeLocationPermission(5000);
-        }
+        }*/
         
+
+        async void ShowHelperHalfList(string selectedCluster)
+        {
+            try
+            {
+                rlHalfView.IsVisible = true;
+
+                var selectedHelpersInCluster = helpersViewModel.helperHomeList.Where(h => h.LocationName == (selectedCluster)).FirstOrDefault();
+                mapHelper.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(selectedHelpersInCluster.Latitude - 0.0055, selectedHelpersInCluster.Longitude), Distance.FromKilometers(1)));
+                
+                HelpersServices helpersServices = new HelpersServices();
+                var hs = await helpersServices.GetHelpersInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
+
+                for (int i = 0; i < hs.Count(); i++)
+                {
+                    HelperHome h = hs.ElementAt(i);
+                    if (h.Service != null && h.Service.Count() != 0)
+                    {
+                        HService hserv = h.Service.Where(x => x.ServiceName == "ChildCare").FirstOrDefault();
+                        if (hserv == null)
+                        {
+                            hserv = h.Service.ElementAt(h.Service.Count() - 1);
+                            h.ServiceName = hserv.ServiceName;
+                            if (hserv.price.Daily)
+                                h.ServicePriceLabel = "from $" + hserv.price.Min.Remove(hserv.price.Min.IndexOf(".")) + "-$" + hserv.price.Max.Remove(hserv.price.Max.IndexOf(".")) + "/Day";
+                            else if (hserv.price.Monthly)
+                                h.ServicePriceLabel = "from $" + hserv.price.Min.Remove(hserv.price.Min.IndexOf(".")) + "-$" + hserv.price.Max.Remove(hserv.price.Max.IndexOf(".")) + "/Month";
+                            else if (hserv.price.Hours)
+                                h.ServicePriceLabel = "from $" + hserv.price.Min.Remove(hserv.price.Min.IndexOf(".")) + "-$" + hserv.price.Max.Remove(hserv.price.Max.IndexOf(".")) + "/Hour";
+
+                            if (hserv.Location != null && hserv.Location.Count() > 0)
+                                h.ServiceLocationName = hserv.Location.ElementAt(0).LocationName;
+                            /* source.Select(element => element == oldValue ? newValue : element) */
+
+                            if (h.AverageRatingCount == null)
+                            {
+                                h.AverageRatingCount = "(0)";
+                            }
+                            else
+                            {
+                                h.AverageRatingCount = "(" + h.AverageRatingCount + ")";
+                            }
+
+                            if (h.Status)
+                            {
+                                h.bgcolor = "#32BDA0";
+                                h.textcolor = "#FFFFFF";
+                                h.helperStatus = "Available";
+                            }
+                            else
+                            {
+                                h.bgcolor = "#EAE9E9";
+                                h.textcolor = "#000000";
+                                h.helperStatus = "Not Available";
+                            }
+
+                            hs.Select(x => x.Name == h.Name ? h : x);
+                        }
+                    }
+
+                }
+
+                helpersViewModel.HelperHalfList = new ObservableCollection<HelperHome>(hs);
+                lvHalfHelpa.ItemsSource = helpersViewModel.HelperHalfList;
+                lblHelperCount.Text = hs.Count() + " Helpers found in " + selectedHelpersInCluster.LocationName;
+            }
+            catch(Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+        }
+
+        async void ShowHelperFullList()
+        {
+            try
+            {
+                aiFindHelper.IsRunning = true;
+
+                HelpersServices helpersServices = new HelpersServices();
+                var hService = await helpersServices.GetAllHelpers(0);
+                var hs = hService.Data;
+
+                lblHelperFullCount.Text = hService.Total + lblHelperFullCount.Text;
+
+                for (int i = 0; i < hs.Count(); i++)
+                {
+                    HelperHome h = hs.ElementAt(i);
+                    if (h.Service != null && h.Service.Count() != 0)
+                    {
+                        HService hserv = h.Service.Where(x => x.ServiceName == "ChildCare").FirstOrDefault();
+                        if (hserv == null)
+                        {
+                            hserv = h.Service.ElementAt(h.Service.Count() - 1);
+                            h.ServiceName = hserv.ServiceName;
+                            if (hserv.price.Daily)
+                                h.ServicePriceLabel = "from $" + hserv.price.Min.Remove(hserv.price.Min.IndexOf(".")) + "-$" + hserv.price.Max.Remove(hserv.price.Max.IndexOf(".")) + "/Day";
+                            else if (hserv.price.Monthly)
+                                h.ServicePriceLabel = "from $" + hserv.price.Min.Remove(hserv.price.Min.IndexOf(".")) + "-$" + hserv.price.Max.Remove(hserv.price.Max.IndexOf(".")) + "/Month";
+                            else if (hserv.price.Hours)
+                                h.ServicePriceLabel = "from $" + hserv.price.Min.Remove(hserv.price.Min.IndexOf(".")) + "-$" + hserv.price.Max.Remove(hserv.price.Max.IndexOf(".")) + "/Hour";
+
+                            if (hserv.Location != null && hserv.Location.Count() > 0)
+                                h.ServiceLocationName = hserv.Location.ElementAt(0).LocationName;
+                            /* source.Select(element => element == oldValue ? newValue : element) */
+
+                            if (h.AverageRatingCount == null)
+                            {
+                                h.AverageRatingCount = "(0)";
+                            }
+                            else
+                            {
+                                h.AverageRatingCount = h.AverageRating + " (" + h.AverageRatingCount + ")";
+                            }
+
+                            if (h.Status)
+                            {
+                                h.bgcolor = "#32BDA0";
+                                h.textcolor = "#FFFFFF";
+                                h.helperStatus = "Available";
+                            }
+                            else
+                            {
+                                h.bgcolor = "#EAE9E9";
+                                h.textcolor = "#000000";
+                                h.helperStatus = "Not Available";
+                            }
+
+                            hs.Select(x => x.Name == h.Name ? h : x);
+                        }
+                    }
+                }
+
+                helpersViewModel.HelperFullList = new ObservableCollection<HelperHome>(hs);
+                lvFullHelpa.ItemsSource = helpersViewModel.HelperFullList;
+                //lblHelperCount.Text = hs.Count() + " Helpers found in " + selectedHelpersInCluster.LocationName;
+
+                aiFindHelper.IsRunning = false;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+        }
+
         public async Task GetRuntimeLocationPermission(int milisec)
         {
             await Task.Delay(milisec);
@@ -151,7 +290,8 @@ namespace Helpa
         {
             var selectedItem = (HelperHome)args.Item;
             int selectedIndex = helpersViewModel.HelperFullList.IndexOf(helpersViewModel.HelperFullList.Where(h => h.UserId == selectedItem.UserId).FirstOrDefault());
-            helpersViewModel.HelperFullList.ElementAt(selectedIndex).color = "#FADC54";
+            //helpersViewModel.HelperFullList.ElementAt(selectedIndex).bgcolor = "#FADC54";
+            
             //slOuterFull.
             //lvFullHelpa.GetChildAt(args.)
         }
@@ -177,14 +317,16 @@ namespace Helpa
         {
             if (mapHelper.IsVisible)
             {
-                lvFullHelpa.IsVisible = true;
+                slFullHelpa.IsVisible = true;
                 mapHelper.IsVisible = false;
                 lblCount.IsVisible = false;
+                
+                ShowHelperFullList();
 
                 imgHelpersList.Source = "location_filter.png";
             } else
             {
-                lvFullHelpa.IsVisible = false;
+                slFullHelpa.IsVisible = false;
                 mapHelper.IsVisible = true;
                 lblCount.IsVisible = true;
 

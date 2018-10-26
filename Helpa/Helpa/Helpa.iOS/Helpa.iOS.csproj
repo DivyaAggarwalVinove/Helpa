@@ -95,10 +95,9 @@
   <ItemGroup>
     <Compile Include="CustomRenderer\CustomButtonRendererIos.cs" />
     <Compile Include="CustomRenderer\CustomEntryRendererIos.cs" />
-    <Compile Include="CustomRenderer\CustomLabelRendererIos.cs" />
+    <Compile Include="CustomRenderer\CustomTotalHelpersIos.cs" />
     <Compile Include="CustomRenderer\CustomMapRendererIos.cs" />
     <Compile Include="CustomRenderer\CustomStackLayoutRendererIos.cs" />
-    <Compile Include="CustomRenderer\MultiLineLabelRendererIOS.cs" />
     <Compile Include="CustomRenderer\RangeSliderEffect.cs" />
     <Compile Include="CustomRenderer\ScopeButtonRendererIos.cs" />
     <Compile Include="CustomRenderer\ServiceButtonRendererIos.cs" />

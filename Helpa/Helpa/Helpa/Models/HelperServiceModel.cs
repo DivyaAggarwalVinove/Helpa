@@ -22,7 +22,7 @@ namespace Helpa.Models
 
         public List<HelperService> Service { get; set; }
     }
-
+    
     public class HelperService
     {
         public int ServiceId { get; set; }

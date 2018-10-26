@@ -45,6 +45,9 @@ namespace Helpa
                 await (new RegisterServices()).RegisterExternal(userModel);
                 //await GetFacebookProfileAsync(token);
             };
+
+            entryHelperRegEmail.Completed += (s, e) => entryHelperRegUsername.Focus();
+            entryHelperRegUsername.Completed += (s, e) => entryHelperRegPwd.Focus();
         }
 
         public void GotoNext(RegisterUserModel userModel)
@@ -57,7 +60,7 @@ namespace Helpa
         {
             DisplayAlert("Error", error, "Ok");
         }
-
+        
         void OnSignUpEmailPhnClicked(object sender, EventArgs args)
         {
             btnHelperSignUpEmailPhn.IsVisible = false;
@@ -86,7 +89,21 @@ namespace Helpa
                 return base.OnBackButtonPressed();
             }
         }
-        
+
+        public void OnBackPress(object sender, TappedEventArgs eventArgs)
+        {
+            if (slHelperSignUpEmailPhn.IsVisible)
+            {
+                btnHelperSignUpEmailPhn.IsVisible = true;
+                slHelperSignUpEmailPhn.IsVisible = false;
+                btnHelperSignUp.IsVisible = false;
+            }
+            else
+            {
+                Navigation.PopAsync();
+            }
+        }
+
         async void OnSignUp(object sender, EventArgs args)
         {
             if (string.IsNullOrEmpty(entryHelperRegEmail.Text))
@@ -132,7 +149,8 @@ namespace Helpa
 
         void OnClickLogin(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new LoginPage());
+            Navigation.PopAsync();
+            //Navigation.PushAsync(new LoginPage());
         }
 
         void ShowOrHidePassword(object sender, EventArgs args)

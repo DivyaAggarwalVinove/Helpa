@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,16 +7,34 @@ namespace Helpa.Views.Profile.UserProfile
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProfileBeforeLoginPage : ContentPage
 	{
+        public static bool isLogin;
+
 		public ProfileBeforeLoginPage ()
 		{
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
 		}
 
-        private void XFBtnLogin_Clicked(object sender, EventArgs e)
+        private void OnClickProfileLogin(object sender, EventArgs e)
         {
-            App.NavigationPage.Navigation.PushAsync(new ProfileAfterLoginPage());
-          //  App.NavigationPage.Navigation.PushAsync(new LoginPage());
+            App.NavigationPage.Navigation.PushAsync(new LoginPage());
+        }
+
+        private void OnClickProfileParentSignup(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PushAsync(new Register());
+        }
+
+        private void OnClickProfileHelperSignup(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PushAsync(new HelperRegister());
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+
         }
     }
 }

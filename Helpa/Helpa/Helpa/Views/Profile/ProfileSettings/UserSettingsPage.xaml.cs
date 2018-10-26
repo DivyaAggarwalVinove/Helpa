@@ -36,12 +36,12 @@ namespace Helpa.Views.Profile.ProfileSettings
             App.NavigationPage.Navigation.PushAsync(new BlockUserPage());
         }
 
-        private void XFLBLResetPassword_Tapped(object sender, EventArgs e)
+        private void OnClickResetPassword(object sender, EventArgs e)
         {
             App.NavigationPage.Navigation.PushAsync(new ResetPasswordPage());
         }
 
-        private void XFBackButton_Tapped(object sender, EventArgs e)
+        private void OnBackPress(object sender, EventArgs e)
         {
             App.NavigationPage.Navigation.PopAsync();
         }

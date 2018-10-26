@@ -25,7 +25,7 @@
                 <Grid Grid.Row="0" ColumnSpacing="0" Margin="5,0,5,0">
                     <local:CustomStackLayout Orientation="Horizontal"  Padding="10,5,10,5" >
                         <Image x:Name="imgSearch" Source="search.png"/>
-                        <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>
+                        <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Jobs by Location" FontSize="Small" PlaceholderColor="#676D70" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>
                         <Image x:Name="imgSend" Source="send.png"/>
                     </local:CustomStackLayout>
                 </Grid>
@@ -108,34 +108,41 @@
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
                               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}" />
 
-                    <ListView x:Name="lvFullJobPost" ItemsSource="{Binding JobFullList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False"
+                    <StackLayout x:Name="slFullJobPost" Orientation="Vertical" IsVisible="False"
+                                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
+                                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
+                                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
+                                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}">
+
+                        <Label Margin="5,0,0,0" x:Name="lblJobFullCount" BackgroundColor="Transparent" Text=" Job posts found" TextColor="#4BCAC0" />
+
+                        <ListView x:Name="lvFullJobPost" ItemsSource="{Binding JobFullList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True"
                               ItemTapped="JobSelectedFullList"
                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
                               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}">
 
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell Height="115">
-                                    <StackLayout BackgroundColor="{Binding color}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                        <StackLayout Margin="5" Padding="0,2,0,0" VerticalOptions="Center" BackgroundColor="White">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell Height="135">
+                                        <StackLayout Margin="5" VerticalOptions="Center" BackgroundColor="White">
                                             <Grid ColumnSpacing="0">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="0.6*" />
                                                 </Grid.ColumnDefinitions>
 
-                                                <Grid Grid.Column="0" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                                    <!--<Image Source="{Binding ProfilePicture}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="80" HeightRequest="80"/>-->
-                                                    <Button Text="{Binding JobType}" BackgroundColor="{Binding JobBgColor}" Margin="0,5,0,5" />
+                                                <Grid Grid.Column="0" Margin="5,10,5,30" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                                    <Button Text="{Binding JobType}" BackgroundColor="{Binding JobBgColor}" TextColor="{Binding JobTextColor}" CornerRadius="10" BorderRadius="10" VerticalOptions="CenterAndExpand" HeightRequest="40"/>
                                                 </Grid>
 
-                                                <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
+                                                <Grid Grid.Column="1" RowSpacing="5" Margin="0,5,0,5">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="0.2*" />
                                                         <RowDefinition Height="0.2*" />
                                                         <RowDefinition Height="0.2*" />
+                                                        <RowDefinition Height="0.4*" />
                                                     </Grid.RowDefinitions>
 
                                                     <Grid Grid.Row="0" ColumnSpacing="0" BackgroundColor="Transparent">
@@ -145,8 +152,8 @@
                                                             <ColumnDefinition Width="0.1*" />
                                                         </Grid.ColumnDefinitions>
 
-                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding Name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5,0,0,0">
+                                                            <Label Text="{Binding JobTitle}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
@@ -158,7 +165,7 @@
                                                         </Grid>
                                                     </Grid>
 
-                                                    <Grid Grid.Row="1">
+                                                    <Grid Grid.Row="1" BackgroundColor="Transparent">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="0.1*" />
                                                             <ColumnDefinition Width="0.3*" />
@@ -166,91 +173,58 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="childcare.png" Aspect="AspectFit"/>
+                                                            <Image Source="childcare.png" Aspect="AspectFit" Margin="0"/>
                                                         </Grid>
 
                                                         <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding Service}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding JobServicesName}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding Price}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding JobPriceLabel}" BackgroundColor="Transparent" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
                                                     </Grid>
 
-                                                    <Grid Grid.Row="2">
+                                                    <Grid Grid.Row="2"  BackgroundColor="Transparent">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="0.1*" />
                                                             <ColumnDefinition Width="0.9*" />
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="location2.png" Aspect="AspectFit"/>
+                                                            <Image Source="location2.png" Aspect="AspectFit"  Margin="0"/>
                                                         </Grid>
 
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding LocationName}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,0,5,0" >
+                                                            <Label Text="{Binding JobLocationName}" LineBreakMode="TailTruncation" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
                                                     </Grid>
 
-                                                    <!--<Grid Grid.Row="3" ColumnSpacing="2">
+                                                    <Grid Grid.Row="3"  BackgroundColor="Transparent">
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.12*" />
-                                                            <ColumnDefinition Width="0.08*" />
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.9*" />
                                                         </Grid.ColumnDefinitions>
 
-                                                        <Grid Grid.Column="0" ColumnSpacing="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="0.72*" />
-                                                                <ColumnDefinition Width="0.38*" />
-                                                            </Grid.ColumnDefinitions>
-
-                                                            <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <rating:SfRating x:Name="rating" ItemCount="5" Value="{Binding AverageRating}" Precision="Exact" ItemSize="15" IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                                                    <rating:SfRating.RatingSettings>
-                                                                        <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
-                                                                    </rating:SfRating.RatingSettings>
-                                                                </rating:SfRating>
-                                                            </Grid>
-
-                                                            <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding RatingCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                            </Grid>
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                                                            <Image Source="calender.png" Aspect="AspectFit" Margin="5"/>
                                                         </Grid>
 
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="0.1*" />
-                                                                <ColumnDefinition Width="0.1*" />
-                                                                <ColumnDefinition Width="0.1*" />
-                                                                <ColumnDefinition Width="0.1*" />
-                                                            </Grid.ColumnDefinitions>
-
-                                                            <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Image Source="hands.png" Aspect="AspectFit"/>
-                                                            </Grid>
-
-                                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding ConnectionCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                            </Grid>
-
-                                                            <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Image Source="question.png" Aspect="AspectFit"/>
-                                                            </Grid>
-
-                                                            <Grid Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding EnquiredUserCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                            </Grid>
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,0,5,0" >
+                                                            <StackLayout Orientation="Vertical" BackgroundColor="Transparent" Spacing="0">
+                                                                <Label Text="{Binding RemainingDays, StringFormat='Live - Remaining days: {0:F0}'}" BackgroundColor="Transparent" LineBreakMode="TailTruncation" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                <Label Text="{Binding CreateDate, StringFormat='Post: {0:N}'}" LineBreakMode="TailTruncation" BackgroundColor="Transparent" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,0,0,5" />
+                                                            </StackLayout>
                                                         </Grid>
-                                                    </Grid>-->
+                                                    </Grid>
                                                 </Grid>
                                             </Grid>
                                         </StackLayout>
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
 
                     <local:CustomButton x:Name="btnBecomeHelper" Text="Become a Helper" HorizontalOptions="Center" WidthRequest="160" HeightRequest="40" Clicked="OnClickBecomeHelper"
                             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=rlJobs, Property=Width, Factor=0.5, Constant = -80}"
@@ -266,7 +240,7 @@
                         </Image.GestureRecognizers>
                     </Image>
 
-                    <local:CustomLabel x:Name="lblTotalJobsCount" Text="{Binding TotallJobs}" TextColor="#FF4968" HeightRequest="60" WidthRequest="60" FontAttributes="Bold"
+                    <local:CustomTotalJobs x:Name="lblTotalJobsCount" Text="{Binding TotallJobs}" TextColor="#2EC4B6" HeightRequest="60" WidthRequest="60" FontAttributes="Bold"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=rlJobs, Property=Width, Factor=0.75, Constant = -30}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=rlJobs, Property=Height, Factor=0.75, Constant = -50}"/>
 
@@ -276,7 +250,7 @@
                                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView, ElementName=rlJobs, Property=Width, Factor=1, Constant = 0}"
                                  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, ElementName=rlJobs, Property=Height, Factor=0.6, Constant = 0}">
 
-                        <Label x:Name="lblJobsCount" Text=" Jobs found in " TextColor="#FF748C" BackgroundColor="Transparent" VerticalTextAlignment="Center"
+                        <Label x:Name="lblJobsCount" Text=" Jobs found in " TextColor="#4BCAC0" BackgroundColor="Transparent" VerticalTextAlignment="Center"
                                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 10}"
                                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}"
                                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.7, Constant = 0}"
@@ -296,7 +270,7 @@
 
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <ViewCell Height="115">
+                                    <ViewCell Height="135">
                                         <StackLayout Margin="5" VerticalOptions="Center" BackgroundColor="White">
                                             <Grid ColumnSpacing="0">
                                                 <Grid.ColumnDefinitions>
@@ -304,17 +278,16 @@
                                                     <ColumnDefinition Width="0.6*" />
                                                 </Grid.ColumnDefinitions>
 
-                                                <Grid Grid.Column="0" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                                    <!--<Image Source="{Binding ProfilePicture}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="80" HeightRequest="80"/>-->
-                                                    <Button Text="{Binding JobType}" BackgroundColor="{Binding JobBgColor}" Margin="0,5,0,5" />
+                                                <Grid Grid.Column="0" Margin="10,0,10,30" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                                    <Button Text="{Binding JobType}" BackgroundColor="{Binding JobBgColor}" TextColor="{Binding JobTextColor}" VerticalOptions="Start" Margin="0,10,0,10" />
                                                 </Grid>
 
-                                                <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
+                                                <Grid Grid.Column="1" RowSpacing="5" Margin="0,5,0,5">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="0.2*" />
                                                         <RowDefinition Height="0.2*" />
                                                         <RowDefinition Height="0.2*" />
-                                                        
+                                                        <RowDefinition Height="0.4*" />
                                                     </Grid.RowDefinitions>
 
                                                     <Grid Grid.Row="0" ColumnSpacing="0" BackgroundColor="Transparent">
@@ -324,8 +297,8 @@
                                                             <ColumnDefinition Width="0.1*" />
                                                         </Grid.ColumnDefinitions>
 
-                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding Name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5,0,0,0">
+                                                            <Label Text="{Binding JobTitle}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
@@ -337,7 +310,7 @@
                                                         </Grid>
                                                     </Grid>
 
-                                                    <Grid Grid.Row="1">
+                                                    <Grid Grid.Row="1" BackgroundColor="Transparent">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="0.1*" />
                                                             <ColumnDefinition Width="0.3*" />
@@ -345,33 +318,50 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="childcare.png" Aspect="AspectFit"/>
+                                                            <Image Source="childcare.png" Aspect="AspectFit" Margin="0"/>
                                                         </Grid>
 
                                                         <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding Service}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding JobServicesName}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
 
                                                         <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding Price}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Label Text="{Binding JobPriceLabel}" BackgroundColor="Transparent" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
                                                     </Grid>
 
-                                                    <Grid Grid.Row="2">
+                                                    <Grid Grid.Row="2"  BackgroundColor="Transparent">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="0.1*" />
                                                             <ColumnDefinition Width="0.9*" />
                                                         </Grid.ColumnDefinitions>
 
                                                         <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="location2.png" Aspect="AspectFit"/>
+                                                            <Image Source="location2.png" Aspect="AspectFit"  Margin="0"/>
                                                         </Grid>
 
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding LocationName}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,0,5,0" >
+                                                            <Label Text="{Binding JobLocationName}" LineBreakMode="TailTruncation" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                         </Grid>
                                                     </Grid>
 
+                                                    <Grid Grid.Row="3"  BackgroundColor="Transparent">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="0.1*" />
+                                                            <ColumnDefinition Width="0.9*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
+                                                            <Image Source="calender.png" Aspect="AspectFit" Margin="5"/>
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,0,5,0" >
+                                                            <StackLayout Orientation="Vertical" BackgroundColor="Transparent" Spacing="0">
+                                                                <Label Text="{Binding RemainingDays, StringFormat='Live - Remaining days: {0:F0}'}" BackgroundColor="Transparent" LineBreakMode="TailTruncation" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                <Label Text="{Binding CreateDate, StringFormat='Post: {0:N}'}" LineBreakMode="TailTruncation" BackgroundColor="Transparent" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,0,0,5" />
+                                                            </StackLayout>
+                                                        </Grid>
+                                                    </Grid>
                                                     <!--<Grid Grid.Row="3" ColumnSpacing="2">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="0.12*" />

@@ -152,6 +152,8 @@ namespace Helpa.Droid
             }
             catch (Exception ex)
             {
+                Console.Write(ex.Message);
+                
                 //textLocation.Text = "Unable to get location: " + ex.ToString();
             }
         }

@@ -17,24 +17,19 @@ namespace Helpa
     public partial class Register1 : ContentPage
     {
         RegisterUserModel currentUser;
-        private static Register1 instance;
-        public static Register1 Instance
-        {
-            get { return instance; }
-            set { instance = value; }
-        }
+        public static Register1 Instance { get; set; }
 
         public Register1(RegisterUserModel user)
         {
             InitializeComponent();
 
+            Instance = this;
             currentUser = user;
-            instance = this;
-
+            
             NavigationPage.SetHasNavigationBar(this, false);
             IEnumerable<string> genderList = new List<string>() { "Male", "Female", "Rather no to say" };
             rgGender.ItemsSource = genderList;
-            rgGender.SelectedItem = Utils.ToTitleCase("Female");
+            rgGender.SelectedItem = Utils.ToTitleCase("Male");
 
             entryRegUsername1.Text = user.UserName;
             entryRegPhone1.Text = user.MobileNumber;
@@ -78,7 +73,7 @@ namespace Helpa
             {
                 DisplayAlert("Warning", "Please enter email", "Ok");
             }
-            else if (Utils.IsValidMobileNo(entryRegPhone1.Text))
+            else if (!Utils.IsValidMobileNo(entryRegPhone1.Text))
             {
                 DisplayAlert("Warning", "Please enter valid mobile number", "Ok");
             }
@@ -138,6 +133,26 @@ namespace Helpa
             DisplayAlert("Error", error, "Ok");
         }
 
+        public void ShowSmsMessage(ResponseModel message, bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                entryRegPhone1.IsEnabled = false;
+            }
+
+            DisplayAlert("", message.Message, "Ok");
+        }
+
+        public void ShowVerificationMessage(ResponseModel message, bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                entryRegSmsCode1.IsEnabled = false;
+            }
+
+            DisplayAlert("", message.Message, "Ok");
+        }
+
         protected override bool OnBackButtonPressed()
         {
             if (svLocationInfo.IsVisible)
@@ -158,6 +173,39 @@ namespace Helpa
         void OnFocus(object sender, EventArgs args)
         {
             Navigation.PushAsync(new Register2());
+        }
+
+        void OnEmailInfo(object sender, EventArgs args)
+        {
+            DisplayAlert("", "User registered id", "OK");
+        }
+
+        async void OnClickSendSms(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(entryRegPhone1.Text))
+            {
+                await DisplayAlert("Warning", "Please enter phone number", "Ok");
+            }
+            else if (!Utils.IsValidMobileNo(entryRegPhone1.Text))
+            {
+                await DisplayAlert("Warning", "Please enter valid mobile number", "Ok");
+            }
+            else
+            {
+                await (new RegisterServices()).SendSmsCode(currentUser.Id, entryRegPhone1.Text, "PARENT");
+            }
+        }
+
+        async void OnVerifyCode(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(entryRegSmsCode1.Text))
+            {
+                await DisplayAlert("Warning", "Please enter verification code", "Ok");
+            }
+            else
+            {
+                await(new RegisterServices()).VerifyOtp(currentUser.Id, entryRegSmsCode1.Text, "PARENT");
+            }
         }
     }
 }

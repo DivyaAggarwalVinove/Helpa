@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Helpa.Services
 {
-    public class HelpersServices : IHelpersServices<HelperHomeModel>
+    public class HelpersServices : IHelpersServices
     {
-        public async Task<IEnumerable<HelperHomeModel>> GetHelpersList(int radius, double latitude, double longitude)
+        public async Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId)
         {
             IEnumerable<HelperHomeModel> helpers = new List<HelperHomeModel>();
 
@@ -21,13 +21,14 @@ namespace Helpa.Services
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     HttpClient httpClient = new HttpClient();
-                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/HelpersHome?Radius=" + radius + "&Latitude=" + latitude + "&Longitude=" + longitude));
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/HomeCount?UserId=" + UserId));
 
                     var response = await httpClient.GetAsync(uri);
                     if (response.IsSuccessStatusCode)
                     {
                         string result = await response.Content.ReadAsStringAsync();
-                        helpers = JsonConvert.DeserializeObject<IEnumerable<HelperHomeModel>>(result);
+                        var h = JsonConvert.DeserializeObject<HHome>(result);
+                        helpers = h.Data;
                     }
                     else
                     {
@@ -40,6 +41,126 @@ namespace Helpa.Services
             }
 
             return helpers;
+        }
+
+        public async Task<IEnumerable<HelperHome>> GetHelpersInLocation(double Latitude, double Longitude, int UserId)
+        {
+            IEnumerable<HelperHome> helpers = new List<HelperHome>();
+
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/HelpersHomeMap?Latitude=" + Latitude + "&Longitude=" + Longitude +"&UserId=" + UserId ));
+
+                    var response = await httpClient.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        helpers = JsonConvert.DeserializeObject<IEnumerable<HelperHome>>(result);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            return helpers;
+        }
+
+        public async Task<HHomeModel> GetAllHelpers(int UserId)
+        {
+            HHomeModel helpers = new HHomeModel();
+
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Home?UserId=" + UserId + "&PageNo=0"));
+
+                    var response = await httpClient.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        helpers = JsonConvert.DeserializeObject<HHomeModel>(result);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            return helpers;
+        }
+
+        public async Task<NetworkModel> GetMyNetworks(int UserId)
+        {
+            NetworkModel myNetwork = new NetworkModel();
+            UserId = 1257;
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Favourates/MyNetwork?Id=" + UserId + "&PageNo=0"));
+
+                    var response = await httpClient.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        myNetwork = JsonConvert.DeserializeObject<NetworkModel>(result);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            return myNetwork;
+        }
+
+        public async Task<NetworkModel> GetSavedUsers(int UserId)
+        {
+            NetworkModel savedUsers = new NetworkModel();
+
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Helpers/GetSavedUsers?UserId=" + UserId + "&PageNo=1"));
+
+                    var response = await httpClient.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        savedUsers = JsonConvert.DeserializeObject<NetworkModel>(result);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            return savedUsers;
         }
 
         public async Task<HelperServiceModel> SaveHelperServices(HelperServiceModel helperService)
@@ -89,3 +210,5 @@ namespace Helpa.Services
         }
     }
 }
+ 
+ 

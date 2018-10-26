@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Helpa.Droid</string>
   <string name="fb_app_id">172211350107196</string>
   <string name="fb_app_name">Helpa</string>

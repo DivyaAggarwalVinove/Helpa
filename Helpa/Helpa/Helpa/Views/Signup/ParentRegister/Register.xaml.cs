@@ -37,6 +37,9 @@ namespace Helpa
 
                 await GetFacebookProfileAsync(token);
             };
+
+            entryRegEmail.Completed += (s, e) => entryRegUsername.Focus();
+            entryRegUsername.Completed += (s, e) => entryRegPwd.Focus();
         }
 
         public void GotoNext(RegisterUserModel userModel)
@@ -69,6 +72,20 @@ namespace Helpa
             else
             {
                 return base.OnBackButtonPressed();
+            }
+        }
+
+        public void OnBackPress(object sender, TappedEventArgs eventArgs)
+        {
+            if (slSignUpEmailPhn.IsVisible)
+            {
+                btnSignUpEmailPhn.IsVisible = true;
+                slSignUpEmailPhn.IsVisible = false;
+                btnSignUp.IsVisible = false;
+            }
+            else
+            {
+                Navigation.PopAsync();
             }
         }
 
@@ -178,7 +195,7 @@ namespace Helpa
                     userModel.MobileNumber = entryRegEmail.Text;
                     userModel.UserName = entryRegUsername.Text;
                     userModel.Password = entryRegPwd.Text;
-                    userModel.Role = "Helper".ToUpper();
+                    userModel.Role = "Parent".ToUpper();
 
                     await (new RegisterServices()).RegisterService(userModel);
                     //Navigation.PushAsync(new Register1());
@@ -190,16 +207,24 @@ namespace Helpa
                 userModel.Email = entryRegEmail.Text;
                 userModel.UserName = entryRegUsername.Text;
                 userModel.Password = entryRegPwd.Text;
-                userModel.Role = "Helper".ToUpper();
+                userModel.Role = "Parent".ToUpper();
 
                 await (new RegisterServices()).RegisterService(userModel);
                 //Navigation.PushAsync(new Register1());
             }
         }
 
+        void OnClickLogin(object sender, EventArgs args)
+        {
+            Navigation.PopAsync();
+            //Navigation.PushAsync(new LoginPage());
+        }
+
         void ShowOrHidePassword(object sender, EventArgs args)
         {
             entryRegPwd.IsPassword = !entryRegPwd.IsPassword;
         }
+
+        
     }
 }

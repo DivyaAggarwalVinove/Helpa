@@ -1,11 +1,13 @@
 ﻿using SQLite;
+using System.ComponentModel;
 
 namespace Helpa.Models
 {
     public class ScopeModel
     {
         [PrimaryKey]
-        public int Id { get; set; }
+        [DisplayName("Id")]
+        public int ScopeId { get; set; }
         public int ServiceId { get; set; }
         public string ScopeName { get; set; }
     }

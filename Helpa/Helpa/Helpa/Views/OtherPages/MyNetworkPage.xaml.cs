@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helpa.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,15 +17,11 @@ namespace Helpa.Views.OtherPages
 		{
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
-            List<string> obj = new List<string>()
-                {
-                    "find_helpers" , "job_posts", "messages","notifications", "profile"
-                };
 
-            lvFullHelpa.ItemsSource = obj;
+            BindingContext = new MyNetworkViewModel();
         }
 
-        private void XFBackButton_Tapped(object sender, EventArgs e)
+        private void OnBackPress(object sender, EventArgs e)
         {
             App.NavigationPage.Navigation.PopAsync();
         }

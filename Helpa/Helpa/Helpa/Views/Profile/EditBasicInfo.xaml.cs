@@ -37,7 +37,8 @@ namespace Helpa.Views.Profile
             base.OnAppearing();
             LoadPageData();
         }
-        private async void LoadPageData()
+
+        private void LoadPageData()
         {
             if (!CrossConnectivity.Current.IsConnected)
             {

@@ -2,41 +2,52 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Helpa.Views.Profile.UserProfile.ProfileBeforeLoginPage"
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-            ios:Page.UseSafeArea="true"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             ControlTemplate="{StaticResource MainPageTemplate}"
              BackgroundColor="#EFF3F6">
     <ContentPage.Content>
         <ScrollView>
-            <Grid x:Name="RootLayout" Padding=" 20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" >
-                <StackLayout Orientation="Vertical" Spacing="20">
-                    <Label Text="Welcome to Helpa!"
+            <Grid x:Name="RootLayout" Padding="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <StackLayout Orientation="Vertical" Spacing="20">
+                        <Label 
+                           Text="Welcome to Helpa!"
                            TextColor="Black" 
                            FontAttributes="Bold" 
                            FontSize="Large" 
                            HorizontalOptions="Center"
                            HorizontalTextAlignment="Center"/>
-                    <Button Text="Become a Helper"
+                        
+                        <Button 
+                            Text="Become a Helper"
                             BackgroundColor="#FF738D"
                             BorderColor="#FF738D"
                             CornerRadius="5"
                             BorderRadius="5"
                             TextColor="White"
                             HeightRequest="45"
+                            Clicked="OnClickProfileHelperSignup"
                             HorizontalOptions="FillAndExpand"/>
-                    <Button Text="Parent Sign up"
+                        
+                        <Button 
+                            Text="Parent Sign up"
                             BackgroundColor="#72C5E5"
                             BorderColor="#72C5E5"
                             CornerRadius="5"
                             TextColor="White"
                             BorderRadius="5"
                             HeightRequest="45"
+                            Clicked="OnClickProfileParentSignup"
                             HorizontalOptions="FillAndExpand"/>
-                    <Button Text="Login"
+                        
+                        <Button 
+                            Text="Login"
                             BackgroundColor="#FFFFFF"
                             BorderColor="LightGray"
                             CornerRadius="5"
@@ -44,12 +55,12 @@
                             BorderWidth="2"
                             BorderRadius="5"
                             HeightRequest="45"
-                            x:Name="XFBtnLogin"
-                            Clicked="XFBtnLogin_Clicked"
+                            Clicked="OnClickProfileLogin"
                             HorizontalOptions="FillAndExpand"/>
-                </StackLayout>
-            </Grid>
-                <Grid Grid.Row="1" Margin="0,20,0,0" RowSpacing="1" BackgroundColor="LightGray">
+                    </StackLayout>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0,20,0,0" RowSpacing="1" BackgroundColor="#EFF3F6">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -60,63 +71,65 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+
                     <Grid Grid.Row="0" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Language(English/)" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
+                            <Label Text="Language (English/)" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png" />
-                        </StackLayout> 
+                        </StackLayout>
                     </Grid>
+
                     <Grid Grid.Row="1" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Rate us on App Store" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
+                            <Label Text="Rate us on App Store" TextColor="#555958" FontSize="15" FontAttributes="None" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
                         </StackLayout>
                     </Grid>
+
                     <Grid Grid.Row="2" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Like us on Facebook" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
+                            <Label Text="Like us on Facebook" TextColor="#555958" FontSize="15" FontAttributes="None" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
                         </StackLayout>
                     </Grid>
+
                     <Grid Grid.Row="3" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="About us" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
+                            <Label Text="About us" TextColor="#555958" FontSize="15" FontAttributes="None" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
                         </StackLayout>
                     </Grid>
+
                     <Grid Grid.Row="4" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Contact us" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
+                            <Label Text="Contact us" TextColor="#555958" FontSize="15" FontAttributes="None" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
                         </StackLayout>
                     </Grid>
+
                     <Grid Grid.Row="5" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="FAQ" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
+                            <Label Text="FAQ" TextColor="#555958" FontSize="15" FontAttributes="None" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
                         </StackLayout>
 
                     </Grid>
+
                     <Grid Grid.Row="6" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
-                            <Label Text="Terms and privacy" TextColor="Gray" FontSize="Small" FontAttributes="None" HorizontalOptions="StartAndExpand" />
+                            <Label Text="Terms and privacy" TextColor="#555958" FontSize="15" FontAttributes="None" HorizontalOptions="StartAndExpand" />
 
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
                         </StackLayout>
                     </Grid>
-                    <Grid Grid.Row="7" BackgroundColor="#EFF3F6">
-                        <!--<StackLayout Orientation="Horizontal">
-                            <Label Text="Language(English/)" TextColor="#585C5D" FontSize="Medium" FontAttributes="None" HorizontalOptions="StartAndExpand" />
 
-                            <Image HorizontalOptions="EndAndExpand" />
-                        </StackLayout>-->
-                    </Grid>
+                    <Grid Grid.Row="7" BackgroundColor="#EFF3F6"/>
                 </Grid>
             </Grid>
         </ScrollView>

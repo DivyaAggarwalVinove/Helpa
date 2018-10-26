@@ -1,5 +1,4 @@
-﻿//using Helpa.CustomControl;
-using Helpa;
+﻿using Helpa;
 using Helpa.Droid;
 using Android.Content;
 using Xamarin.Forms;

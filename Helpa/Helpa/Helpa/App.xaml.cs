@@ -4,10 +4,7 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
 using Helpa.Services;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Helpa.Views.Profile.UserProfile;
-using Helpa.Views.Profile.ProfileSettings;
 
 namespace Helpa
 {
@@ -31,11 +28,23 @@ namespace Helpa
             }
         }
         #endregion
-        
-       public static  int selectedPage = 0;
+
+        static App _app;
+        public static App app
+        {
+            get
+            {
+                
+                return app;
+            }
+        }
+
+        public static int selectedPage = 0;
         List<KeyValuePair<string, string>> listTabs;
         List<string> imagesName;
+
        public static NavigationPage NavigationPage { get; set; }
+
         public App()
         {
             try
@@ -59,10 +68,13 @@ namespace Helpa
                 {
                     "find_helpers" , "job_posts", "messages","notifications", "profile"
                 };
-               // NavigationPage = new NavigationPage(new ProfileAfterLoginPage());              
-                NavigationPage= new NavigationPage(new Helpers());
+
+                _app = this;
+
+                NavigationPage = new NavigationPage(new Helpers());
                 MainPage = NavigationPage;
-                JobPosts jobPosts = new JobPosts();
+
+                //JobPosts jobPosts = new JobPosts();
             }
             catch (Exception e)
             {
@@ -70,36 +82,28 @@ namespace Helpa
             }
         }
 
-        async void OnFindHelperPressed(object sender, EventArgs args)
+        public ContentPresenter contentPresenter;
+        void OnFindHelperPressed(object sender, EventArgs args)
         {
             if (selectedPage != 0)
             {
                 Grid grid = ((Grid)sender);
                 SelectTab(grid, selectedPage, 0);
 
-                //MainPage = new NavigationPage(Helpers.Instance);
-                //MainPage = Helpers.Instance;
-                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-                //Helpers helper = new Helpers();
+                contentPresenter = grid.FindByName<ContentPresenter>("content");
                 contentPresenter.Content = (new Helpers()).Content;
-
-                await Helpers.Instance.GetRuntimeLocationPermission(5000);
             }
         }
         
-        async void OnJobPostPressed(object sender, EventArgs args)
+        void OnJobPostPressed(object sender, EventArgs args)
         {
             if (selectedPage != 1)
             {
-                //MainPage = new NavigationPage(JobPosts.Instance);
-
                 Grid grid = ((Grid)sender);
                 SelectTab(grid, selectedPage, 1);
 
-                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+                contentPresenter = grid.FindByName<ContentPresenter>("content");
                 contentPresenter.Content = (new JobPosts()).Content;
-
-                await JobPosts.Instance.GetRuntimeLocationPermission(5000);
             }
         }
 
@@ -110,7 +114,7 @@ namespace Helpa
                 Grid grid = ((Grid)sender);
                 SelectTab(grid, selectedPage, 2);
 
-                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+                contentPresenter = grid.FindByName<ContentPresenter>("content");
                 contentPresenter.Content = (new Messages()).Content;
             }
         }
@@ -122,20 +126,29 @@ namespace Helpa
                 Grid grid = ((Grid)sender);
                 SelectTab(grid, selectedPage, 3);
 
-                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
+                contentPresenter = grid.FindByName<ContentPresenter>("content");
                 contentPresenter.Content = (new Notifications()).Content;
             }
         }
 
-        void OnProfilePressed(object sender, EventArgs args)
+        public void OnProfilePressed(object sender, EventArgs args)
         {
             if (selectedPage != 4)
             {
                 Grid grid = ((Grid)sender);
                 SelectTab(grid, selectedPage, 4);
 
-                ContentPresenter contentPresenter = grid.FindByName<ContentPresenter>("content");
-                contentPresenter.Content = (new ProfileBeforeLoginPage()).Content;
+                contentPresenter = grid.FindByName<ContentPresenter>("content");
+
+                var loggedUser = Database.GetLoggedUser();
+                if (loggedUser == null)
+                    contentPresenter.Content = (new ProfileBeforeLoginPage()).Content;
+                else
+                {
+                    ProfileAfterLoginPage profileAfterLogin = new ProfileAfterLoginPage();
+                    profileAfterLogin.currentUser = loggedUser;
+                    contentPresenter.Content = (profileAfterLogin).Content;
+                }
             }
         }
 

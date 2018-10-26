@@ -2,6 +2,7 @@
 using Xamarin.Forms.Maps;
 using Xamarin.Forms;
 using Helpa.Models;
+using System;
 
 namespace Helpa
 {
@@ -9,10 +10,18 @@ namespace Helpa
     {
         //public List<string> SiteList;
         public HelperHomeModel selectedHelper;
+        public JobsHomeModel selectedJob;
 
         public void ClickedOnPin(string selectedCluster)
         {
-            MessagingCenter.Send<CustomMap, string>(this, "Hi", selectedCluster);
+            try
+            {
+                MessagingCenter.Send<CustomMap, string>(this, "Hi", selectedCluster);
+            }
+            catch(Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
         }
     }
 }

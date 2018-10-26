@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Helpa.Models;
+using Helpa.Services;
+using Helpa.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +20,27 @@ namespace Helpa.Views.Profile.ProfileSettings
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
         }
-        private void XFBackButton_Tapped(object sender, EventArgs e)
+
+        private void OnBackPress(object sender, EventArgs e)
         {
             App.NavigationPage.PopAsync();
+        }
+
+        private async void OnSendLink(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(entryForgotEmail.Text))
+            {
+                await DisplayAlert("Warning", "Please enter email.", "Ok");
+            }
+            else if (!Utils.IsValidEmail(entryForgotEmail.Text))
+            {
+                await DisplayAlert("Warning", "Please enter valid email.", "Ok");
+            }
+            else
+            {
+                ResponseModel response = await (new RegisterServices()).SendLink(entryForgotEmail.Text);
+                await DisplayAlert("", response.Message, "OK");
+            }
         }
     }
 }

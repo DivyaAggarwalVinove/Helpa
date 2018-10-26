@@ -13,22 +13,29 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                
                 <Grid Grid.Row="0" Padding="0,0,0,10">
-                    <Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  >
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
-                        </Image.GestureRecognizers>
-                    </Image>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnBackPress"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="Profile" TextColor="#A2AAAD" BackgroundColor="Transparent" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
                 </Grid>
+                
                 <Grid Grid.Row="1" Padding="0,10,0,10">
                     <Label Text="Settings" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
                 </Grid>
             </Grid>
+            
             <Grid Grid.Row="1" BackgroundColor="LightGray" RowSpacing="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -36,45 +43,50 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                
                 <Grid Grid.Row="0" Padding="0,20,0,20" BackgroundColor="#F1F5F6">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Notifications" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#6E706F" />
+                        <Label Text="Notifications" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  TextColor="#4F5252" FontSize="15" />
                         <Image Source="angle_grey_right.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="10" WidthRequest="10" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer x:Name="XFLBLNotification" Tapped="XFLBLNotification_Tapped"  NumberOfTapsRequired="1"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </Grid>
+                
                 <Grid Grid.Row="1" Padding="0,20,0,20" BackgroundColor="#F1F5F6">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Messages" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#6E706F" />
+                        <Label Text="Messages" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  TextColor="#4F5252" FontSize="15"/>
                         <Image Source="angle_grey_right.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="10" WidthRequest="10" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer x:Name="XFLBLMessages" Tapped="XFLBLMessages_Tapped"  NumberOfTapsRequired="1"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </Grid>
+                
                 <Grid Grid.Row="2" Padding="0,20,0,20" BackgroundColor="#F1F5F6">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Block users" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#6E706F" />
+                        <Label Text="Block users" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#4F5252" FontSize="15"/>
                         <Image Source="angle_grey_right.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="10" WidthRequest="10" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer x:Name="XFLBLBlockUser" Tapped="XFLBLBlockUser_Tapped"  NumberOfTapsRequired="1"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </Grid>
+                
                 <Grid Grid.Row="3" Padding="0,20,0,20" BackgroundColor="#F1F5F6">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Reset Password" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#6E706F" />
+                        <Label Text="Reset Password" VerticalOptions="Center" HorizontalOptions="StartAndExpand"  TextColor="#4F5252" FontSize="15"/>
                         <Image Source="angle_grey_right.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="10" WidthRequest="10" />
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="XFLBLResetPassword"  Tapped="XFLBLResetPassword_Tapped"  NumberOfTapsRequired="1"/>
+                            <TapGestureRecognizer Tapped="OnClickResetPassword"  NumberOfTapsRequired="1"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </Grid>
             </Grid>
+            
             <Grid Grid.Row="2" BackgroundColor="Transparent">
-                <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray"/>
+                <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="#F1F5F6"/>
             </Grid>
         </Grid>
     </ContentView>
