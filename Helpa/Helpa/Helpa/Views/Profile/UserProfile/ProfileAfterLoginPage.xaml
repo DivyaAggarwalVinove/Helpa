@@ -1,12 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Helpa.Views.Profile.UserProfile.ProfileAfterLoginPage"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true"
-             ControlTemplate="{StaticResource MainPageTemplate}"
              BackgroundColor="#EFF3F6">
-    <ContentPage.Content>
+    <ContentView.Content>
         <ScrollView>
             <Grid x:Name="RootLayout" Margin="5,5,5,0">
                 <Grid.RowDefinitions>
@@ -59,7 +56,7 @@
                             <Grid Grid.Row="1">
                                 <Label Text="View Profile" TextColor="#555958" FontSize="15" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center">
                                     <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFLBLViewProfile" Tapped="XFLBLViewProfile_Tapped"/>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickViewProfile"/>
                                     </Label.GestureRecognizers>
                                 </Label>
                             </Grid>
@@ -83,8 +80,11 @@
                     <Grid Grid.Row="2" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
                             <Label Text="My reviews" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
-
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickMyReview"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
 
@@ -195,7 +195,8 @@
                         </StackLayout>
                     </Grid>
                     <Grid Grid.Row="6" Padding="0,20,0,30" Margin="5,0,5,0" BackgroundColor="#EFF3F6">
-                        <Button Text="Log out"
+                        <Button 
+                            Text="Log out"
                             BackgroundColor="#FF738D"
                             BorderColor="#FF738D"
                             CornerRadius="5"
@@ -203,10 +204,11 @@
                             VerticalOptions="Center"
                             TextColor="White"
                             HeightRequest="45"
-                            HorizontalOptions="FillAndExpand"/>
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="OnClickLogout"/>
                     </Grid>
                 </Grid>
             </Grid>
         </ScrollView>
-    </ContentPage.Content>
-</ContentPage>
+    </ContentView.Content>
+</ContentView>

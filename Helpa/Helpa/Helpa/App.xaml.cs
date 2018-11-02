@@ -131,25 +131,38 @@ namespace Helpa
             }
         }
 
+        //public void OnProfilePressed(object sender, EventArgs args)
+        //{
+        //    if (selectedPage != 4)
+        //    {
+        //        Grid grid = ((Grid)sender);
+        //        SelectTab(grid, selectedPage, 4);
+
+        //        contentPresenter = grid.FindByName<ContentPresenter>("content");
+
+        //        var loggedUser = Database.GetLoggedUser();
+        //        if (loggedUser == null)
+        //            contentPresenter.Content = (new ProfileBeforeLoginPage()).Content;
+        //        else
+        //        {
+        //            ProfileAfterLoginPage profileAfterLogin = new ProfileAfterLoginPage();
+        //            profileAfterLogin.currentUser = loggedUser;
+        //            contentPresenter.Content = (profileAfterLogin).Content;
+        //        }
+        //    }
+        //}
+
         public void OnProfilePressed(object sender, EventArgs args)
         {
-            if (selectedPage != 4)
-            {
-                Grid grid = ((Grid)sender);
-                SelectTab(grid, selectedPage, 4);
+            if (App.selectedPage == 4)
+                return;
 
-                contentPresenter = grid.FindByName<ContentPresenter>("content");
+            Grid grid = (Grid)sender;
+            SelectTab(grid, App.selectedPage, 4);
 
-                var loggedUser = Database.GetLoggedUser();
-                if (loggedUser == null)
-                    contentPresenter.Content = (new ProfileBeforeLoginPage()).Content;
-                else
-                {
-                    ProfileAfterLoginPage profileAfterLogin = new ProfileAfterLoginPage();
-                    profileAfterLogin.currentUser = loggedUser;
-                    contentPresenter.Content = (profileAfterLogin).Content;
-                }
-            }
+            contentPresenter = grid.FindByName<ContentPresenter>("content");
+           // contentPresenter = NameScopeExtensions.FindByName<ContentPresenter>(grid, "content");
+            contentPresenter.Content = new ProfilePage().Content;
         }
 
         void SelectTab(Grid grid, int currentIndex, int newIndex)

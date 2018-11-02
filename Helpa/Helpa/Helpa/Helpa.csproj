@@ -108,6 +108,9 @@
     <EmbeddedResource Update="Views\Profile\UserProfile\ProfileBeforeLoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Profile\UserProfile\ProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Signup\ParentRegister\Register1.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -128,6 +131,9 @@
   <ItemGroup>
     <Compile Update="Views\Profile\EditVerificationPage.xaml.cs">
       <DependentUpon>EditVerificationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Profile\EditProfilePage.xaml.cs">
+      <DependentUpon>EditProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Signup\HelperRegister\HelperRegister.xaml.cs">
       <DependentUpon>HelperRegister.xaml</DependentUpon>

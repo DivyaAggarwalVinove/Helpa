@@ -5,7 +5,7 @@ using Xamarin.Forms.Xaml;
 namespace Helpa.Views.Profile.UserProfile
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProfileBeforeLoginPage : ContentPage
+	public partial class ProfileBeforeLoginPage : ContentView
 	{
         public static bool isLogin;
 
@@ -28,13 +28,6 @@ namespace Helpa.Views.Profile.UserProfile
         private void OnClickProfileHelperSignup(object sender, EventArgs e)
         {
             App.NavigationPage.Navigation.PushAsync(new HelperRegister());
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-
         }
     }
 }

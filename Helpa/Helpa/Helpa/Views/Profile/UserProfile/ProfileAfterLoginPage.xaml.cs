@@ -13,7 +13,7 @@ using Xamarin.Forms.Xaml;
 namespace Helpa.Views.Profile.UserProfile
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProfileAfterLoginPage : ContentPage
+	public partial class ProfileAfterLoginPage : ContentView
 	{
         public RegisterUserModel currentUser { get; set; }
 
@@ -30,9 +30,9 @@ namespace Helpa.Views.Profile.UserProfile
             }
 		}
 
-        private void XFLBLViewProfile_Tapped(object sender, EventArgs e)
+        private void OnClickViewProfile(object sender, EventArgs e)
         {
-            App.NavigationPage.Navigation.PushAsync(new ProfilePage());
+            App.NavigationPage.Navigation.PushAsync(new EditProfilePage());
         }
 
         private void OnClickSetting(object sender, EventArgs e)
@@ -50,6 +50,11 @@ namespace Helpa.Views.Profile.UserProfile
             App.NavigationPage.Navigation.PushAsync(new MyJobPostPage());
         }
 
+        private void OnClickMyReview(object sender, EventArgs e)
+        {
+            App.NavigationPage.Navigation.PushAsync(new MyReviewsPage());
+        }
+
         private void OnClickMyNetwork(object sender, EventArgs e)
         {
             App.NavigationPage.Navigation.PushAsync(new MyNetworkPage());
@@ -62,12 +67,24 @@ namespace Helpa.Views.Profile.UserProfile
 
         private void OnClickRateUs(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("market://details?id=com.vinove.Helpa"));
+            //Device.OpenUri(new Uri("market://details?id=com.vinove.Helpa"));
         }
 
         private void OnClickLikeOnFacebook(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("fb://page/108972495813848"));
+            //Device.OpenUri(new Uri("fb://page/108972495813848"));
+        }
+
+        private void OnClickLogout(object sender, EventArgs e)
+        {
+            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+            if (loggedUser == null)
+                return;
+
+            loggedUser.isLoggedIn = false;
+            App.Database.SaveUserAsync(loggedUser);
+
+            ProfilePage.pcv.Content = (new ProfileBeforeLoginPage()).Content;
         }
     }
 }

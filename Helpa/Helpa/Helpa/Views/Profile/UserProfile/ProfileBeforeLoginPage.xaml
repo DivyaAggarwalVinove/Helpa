@@ -1,12 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Helpa.Views.Profile.UserProfile.ProfileBeforeLoginPage"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true"
-             ControlTemplate="{StaticResource MainPageTemplate}"
              BackgroundColor="#EFF3F6">
-    <ContentPage.Content>
+    <ContentView.Content>
         <ScrollView>
             <Grid x:Name="RootLayout" Padding="20">
                 <Grid.RowDefinitions>
@@ -133,5 +130,5 @@
                 </Grid>
             </Grid>
         </ScrollView>
-    </ContentPage.Content>
-</ContentPage>
+    </ContentView.Content>
+</ContentView>

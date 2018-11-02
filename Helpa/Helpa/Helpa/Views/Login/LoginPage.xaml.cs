@@ -88,29 +88,29 @@ namespace Helpa
                 LoginErrorResponseModel response = await(new LoginServices()).Login(entryLoginEmail.Text, entryLoginPwd.Text);
                 if (response == null)
                 {
-                    if (App.selectedPage == 4)
-                    {
-                        try
-                        {
-                            await Navigation.PopAsync();
+                    //if (App.selectedPage == 4)
+                    //{
+                    //    try
+                    //    {
+                    //        await Navigation.PopAsync();
 
-                            var loggedUser = App.Database.GetLoggedUser();
+                    //        var loggedUser = App.Database.GetLoggedUser();
 
-                            ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage();
-                            profileAfterLoginPage.currentUser = loggedUser;
+                    //        ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage();
+                    //        profileAfterLoginPage.currentUser = loggedUser;
 
-                            var cp = App.app.contentPresenter;
-                            cp.Content = profileAfterLoginPage.Content;
-                        }
-                        catch(Exception e)
-                        {
-                            Console.Write(e.StackTrace);
-                        }
-                    }
-                    else
-                    {
+                    //        var cp = App.app.contentPresenter;
+                    //        cp.Content = profileAfterLoginPage.Content;
+                    //    }
+                    //    catch (Exception e)
+                    //    {
+                    //        Console.Write(e.StackTrace);
+                    //    }
+                    //}
+                    //else
+                    //{
                         await Navigation.PopAsync();
-                    }
+                    //}
                 }
                 else
                 {

@@ -33,7 +33,7 @@
                         <!--<Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />-->
                     </Grid>
                     <Grid Grid.Row="1" Padding="0,10,0,10">
-                        <Label Text="Messages" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="Notifications" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1" BackgroundColor="LightGray" RowSpacing="1">

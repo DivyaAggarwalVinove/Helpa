@@ -1,6 +1,7 @@
 ﻿using Helpa.Models;
 using Helpa.Services;
 using Helpa.ViewModels;
+using Helpa.Views.Profile.UserProfile;
 using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
@@ -57,12 +58,23 @@ namespace Helpa
             });
         }
         
-       /* protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            await GetRuntimeLocationPermission(5000);
-        }*/
+            if (App.selectedPage != 4)
+                return;
+
+            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+            if (loggedUser == null)
+                return;
+
+            ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage();
+            profileAfterLoginPage.currentUser = loggedUser;
+            ProfilePage.pcv.Content = profileAfterLoginPage.Content;
+
+            //await GetRuntimeLocationPermission(5000);
+        }
         
 
         async void ShowHelperHalfList(string selectedCluster)

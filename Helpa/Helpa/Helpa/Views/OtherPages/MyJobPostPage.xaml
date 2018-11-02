@@ -41,7 +41,7 @@
                 <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <ListView x:Name="lvMyJobPost" ItemsSource="{Binding MyJobsList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True"
                               BackgroundColor="Transparent"
-                              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -90}"
+                              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
                               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 20}">
@@ -153,9 +153,9 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <local:CustomButton x:Name="btnBecomeHelper" Text="Post a Job" HorizontalOptions="Center" WidthRequest="160" HeightRequest="40" 
+                    <!--<local:CustomButton x:Name="btnBecomeHelper" Text="Post a Job" HorizontalOptions="Center" WidthRequest="160" HeightRequest="40" 
                             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = -80}"
-                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -60}" TextColor="White"/>
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -60}" TextColor="White"/>-->
                 </RelativeLayout>
             </Grid>
         </Grid>
