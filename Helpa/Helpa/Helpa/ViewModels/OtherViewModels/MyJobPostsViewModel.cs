@@ -92,6 +92,7 @@ namespace Helpa.ViewModels.OtherViewModels
                         j.JobPriceLabel = "From $" + j.MinHourlyPrice.Remove(j.MinHourlyPrice.IndexOf(".")) + "-$" + j.MaxHourlyPrice.Remove(j.MaxHourlyPrice.IndexOf(".")) + "/Hour";
 
                     j.createDate = j.CreateDate.Substring(0, 10);
+
                     js.Data.Select(x => x.JobId == j.JobId ? j : x);
                 }
 

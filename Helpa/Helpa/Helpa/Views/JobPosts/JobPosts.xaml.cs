@@ -43,19 +43,16 @@ namespace Helpa
 
             MessagingCenter.Subscribe<CustomMap, string>(this, "Hi", (sender, selectedCluster) =>
             {
-                // if (rlHalfView.IsVisible == false)
                 try
                 {
                     aiJobPost.IsRunning = true;
-                    ShowHelperHalfList(selectedCluster);
-                    aiJobPost.IsRunning = false;
-                    /*rlHalfJobView.IsVisible = true;
 
-                    var selectedHelpersInCluster = jobsViewModel.jobPostList.Where(h => h.LocationName == (selectedCluster)).FirstOrDefault();
-                    
-                    lvHalfJobs.ItemsSource = jobsViewModel.JobPostHalfList;
-                    lblJobsCount.Text = selectedHelpersInCluster.Count + " Helpers found in " + selectedHelpersInCluster.LocationName;
-                    */
+                    lvHalfJobs.ItemsSource = null;
+                    lblJobsCount.Text = " Jobs found in ";
+
+                    ShowHelperHalfList(selectedCluster);
+
+                    aiJobPost.IsRunning = false;
                 }
                 catch(Exception e)
                 {
@@ -121,6 +118,8 @@ namespace Helpa
                     if (j.IsHourly)
                         j.JobPriceLabel = "From $" + j.MinHourlyPrice.Remove(j.MinHourlyPrice.IndexOf(".")) + "-$" + j.MaxHourlyPrice.Remove(j.MaxHourlyPrice.IndexOf(".")) + "/Hour";
 
+                    j.createDate = j.CreateDate.Substring(0, 10);
+
                     js.Select(x => x.JobId == j.JobId ? j : x);
                 }
 
@@ -182,6 +181,8 @@ namespace Helpa
                     if (j.IsHourly)
                         j.JobPriceLabel = "From $" + j.MinHourlyPrice.Remove(j.MinHourlyPrice.IndexOf(".")) + "-$" + j.MaxHourlyPrice.Remove(j.MaxHourlyPrice.IndexOf(".")) + "/Hour";
 
+                    j.createDate = j.CreateDate.Substring(0, 10);
+
                     js.Data.Select(x => x.JobId == j.JobId ? j : x);
                 }
 
@@ -211,17 +212,7 @@ namespace Helpa
         {
             rlHalfJobView.IsVisible = false;
         }
-
-        void JobSelectedFullList(object sender, ItemTappedEventArgs args)
-        {
-            var selectedItem = (HelperHome)args.Item;
-            int selectedIndex = jobsViewModel.JobFullList.IndexOf(jobsViewModel.JobFullList.Where(h => h.UserId == selectedItem.UserId).FirstOrDefault());
-            //jobsViewModel.JobFullList.ElementAt(selectedIndex).color = "#FADC54";
-
-            //slOuterFull.
-            //lvFullHelpa.GetChildAt(args.)
-        }
-
+        
         async void OnClickBecomeHelper(object sender, EventArgs args)
         {
             var user = App.Database.GetLoggedUser();
@@ -270,6 +261,9 @@ namespace Helpa
                 slFullJobPost.IsVisible = false;
                 mapJob.IsVisible = true;
                 lblTotalJobsCount.IsVisible = true;
+
+                lvFullJobPost.ItemsSource = null;
+                lblJobFullCount.Text = " Job posts found";
 
                 imgJobsList.Source = "filter.png";
             }
