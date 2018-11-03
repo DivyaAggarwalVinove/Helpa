@@ -6,7 +6,7 @@ namespace Helpa.Models
     public class ScopeModel
     {
         [PrimaryKey]
-        [DisplayName("Id")]
+        //[DisplayName("Id")]
         public int ScopeId { get; set; }
         public int ServiceId { get; set; }
         public string ScopeName { get; set; }

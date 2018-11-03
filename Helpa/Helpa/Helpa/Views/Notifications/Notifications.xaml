@@ -1,14 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-            ios:Page.UseSafeArea="true"
-             x:Class="Helpa.Notifications">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+    ios:Page.UseSafeArea="true"
+    xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    x:Class="Helpa.Notifications">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Notification Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <RelativeLayout>
+            <Grid x:Name="rootlayout" RowSpacing="0" BackgroundColor="Transparent" Margin="10,20,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Padding="0,0,0,10">
+                        <Label Text="More" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="#A2AAAD">
+                        </Label>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Padding="0,5,0,10">
+                        <Label Text="Notifications" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <ListView ItemsSource="{Binding NotificationList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" SelectionMode="None" SeparatorVisibility="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell Height="115">
+                                    <Frame VerticalOptions="Center" CornerRadius="5" HasShadow="True" Padding="0,0,2,2" BackgroundColor="#a8aaa9">
+                                        <Frame VerticalOptions="Center" BackgroundColor="White" CornerRadius="5" HasShadow="True" Padding="0,5,0,0">
+                                            <Grid ColumnSpacing="0" Padding="10,0,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="0.55*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid Grid.Column="0" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                                    <RelativeLayout BackgroundColor="Transparent" WidthRequest="90" HeightRequest="90">
+                                                        <!--Source="{Binding SenderImage}"-->
+                                                        <controls:CircleImage 
+                                                            Source="picture.png" 
+                                                            BackgroundColor="Transparent" 
+                                                            Aspect="Fill" 
+                                                            HorizontalOptions="Center" 
+                                                            VerticalOptions="Center" 
+                                                            WidthRequest="80" 
+                                                            HeightRequest="80"/>
+
+                                                        <Image Source="hands2.png" WidthRequest="35" HeightRequest="35"
+                                                                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = -40}"
+                                                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant = 0}"/>
+
+                                                    </RelativeLayout>
+                                                </Grid>
+
+                                                <Grid Grid.Column="1" RowSpacing="10" VerticalOptions="CenterAndExpand" Padding="5,0,5,0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="0.15*" />
+                                                        <RowDefinition Height="0.1*" />
+                                                    </Grid.RowDefinitions>
+
+                                                    <Grid Grid.Row="0" BackgroundColor="Transparent">
+                                                        <Label Text="{Binding Message}" BackgroundColor="Transparent" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="5,0,5,0"/>
+                                                    </Grid>
+
+                                                    <Grid Grid.Row="1" BackgroundColor="Transparent">
+                                                        <Label Text="{Binding DateLabel}" BackgroundColor="Transparent" TextColor="#494949" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" Margin="5,0,5,0"/>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Frame>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Grid>
+
+            <ActivityIndicator 
+                x:Name="aiNotification" 
+                IsRunning="False" 
+                Color="#FF4968"  
+                HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="CenterAndExpand"/>
+        </RelativeLayout>
     </ContentPage.Content>
 </ContentPage>

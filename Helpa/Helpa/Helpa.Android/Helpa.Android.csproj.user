@@ -5,6 +5,6 @@
     <DefaultDevice>Nexus_5</DefaultDevice>
     <ProjectView>ShowAllFiles</ProjectView>
     <AndroidDesignerPreferredDevice>Nexus 10</AndroidDesignerPreferredDevice>
-    <AndroidDesignerPreferredTheme>Theme.DeviceDefault</AndroidDesignerPreferredTheme>
+    <AndroidDesignerPreferredTheme>Theme.DeviceDefault.NoActionBar.Fullscreen</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>

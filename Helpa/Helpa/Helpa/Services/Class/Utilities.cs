@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,6 +69,43 @@ namespace Helpa.Services
             }
 
             return services;
+        }
+
+        public async Task<NotificationResponseModel> GetNotification(int userId)
+        {
+            NotificationResponseModel notifications = new NotificationResponseModel();
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                    notifications = JsonConvert.DeserializeObject<NotificationResponseModel>(await (await new HttpClient().GetAsync(new Uri(Constants.baseUrl + ("api/Notifications?Id=" + (object)userId)))).Content.ReadAsStringAsync());
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.StackTrace);
+                notifications.Message = ex.StackTrace;
+            }
+            return notifications;
+        }
+
+        public async Task<string> SearchPlaceFromGoogle(string strUri)
+        {
+            WebClient webclient = new WebClient();
+            string str;
+            try
+            {
+                str = await webclient.DownloadStringTaskAsync(new Uri(strUri));
+                Console.WriteLine(str);
+            }
+            catch
+            {
+                str = "Exception";
+            }
+            finally
+            {
+                webclient.Dispose();
+                webclient = (WebClient)null;
+            }
+            return str;
         }
     }
 }

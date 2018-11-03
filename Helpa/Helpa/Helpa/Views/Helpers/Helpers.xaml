@@ -117,21 +117,25 @@
 
                         <Label Margin="5,0,0,0" x:Name="lblHelperFullCount" BackgroundColor="Transparent" Text=" Helpers found" TextColor="#FD8095" />
 
-                        <ListView x:Name="lvFullHelpa" ItemsSource="{Binding HelperFullList}" VerticalOptions="FillAndExpand" HasUnevenRows="true"
-                              ItemTapped="HelperSelectedFullList">
+                        <ListView 
+                            x:Name="lvFullHelpa" ItemsSource="{Binding HelperFullList}" 
+                            VerticalOptions="FillAndExpand" 
+                            HasUnevenRows="true" SelectionMode="None" SeparatorVisibility="None"
+                            ItemTapped="HelperSelectedFullList">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell Height="135">
-                                        <Frame Margin="5" VerticalOptions="Center" BackgroundColor="White" CornerRadius="5" HasShadow="True" Padding="0,5,0,0">
-                                            <Grid ColumnSpacing="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="0.55*" />
-                                                </Grid.ColumnDefinitions>
+                                        <Frame Margin="5" VerticalOptions="Center" CornerRadius="5" HasShadow="True" Padding="0,0,2,2" BackgroundColor="#a8aaa9">
+                                            <Frame VerticalOptions="Center" BackgroundColor="White" CornerRadius="5" HasShadow="True" Padding="0,5,0,0">
+                                                <Grid ColumnSpacing="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="0.55*" />
+                                                    </Grid.ColumnDefinitions>
 
-                                                <Grid Grid.Column="0" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-                                                    <RelativeLayout BackgroundColor="Transparent" WidthRequest="90" HeightRequest="90">
-                                                        <controls:CircleImage 
+                                                    <Grid Grid.Column="0" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                                        <RelativeLayout BackgroundColor="Transparent" WidthRequest="90" HeightRequest="90">
+                                                            <controls:CircleImage 
                                                             Source="{Binding ProfilePicture}" 
                                                             BackgroundColor="Transparent" 
                                                             Aspect="Fill" 
@@ -140,267 +144,137 @@
                                                             WidthRequest="80" 
                                                             HeightRequest="80"/>
 
-                                                        <Image Source="hands2.png" WidthRequest="35" HeightRequest="35"
+                                                            <Image Source="hands2.png" WidthRequest="35" HeightRequest="35"
                                                                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = -40}"
                                                                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant = 0}"/>
 
-                                                        <local:CustomHelperStatus x:Name="lblHalfHelperStatus"
+                                                            <local:CustomHelperStatus x:Name="lblHalfHelperStatus"
                                                             Text="{Binding helperStatus}" FontSize="10" TextColor="{Binding textcolor}" IsEnabled="False" Margin="5"
                                                             BackgroundColor="{Binding bgcolor}" HorizontalOptions="Center" HeightRequest="20"
                                                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                                                             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0, Constant = 0}"
                                                             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -50}"/>
-                                                    </RelativeLayout>
-                                                </Grid>
-
-                                                <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="0.15*" />
-                                                        <RowDefinition Height="0.15*" />
-                                                        <RowDefinition Height="0.15*" />
-                                                        <RowDefinition Height="0.15*" />
-                                                    </Grid.RowDefinitions>
-
-                                                    <Grid Grid.Row="0" ColumnSpacing="0" BackgroundColor="Transparent">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.8*" />
-                                                            <ColumnDefinition Width="0.1*" />
-                                                            <ColumnDefinition Width="0.1*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5,0,0,0">
-                                                            <Label Text="{Binding Name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="share.png" Aspect="AspectFit" Margin="2"/>
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="save.png" Aspect="AspectFit" Margin="2"/>
-                                                        </Grid>
+                                                        </RelativeLayout>
                                                     </Grid>
 
-                                                    <Grid Grid.Row="1">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.1*" />
-                                                            <ColumnDefinition Width="0.3*" />
-                                                            <ColumnDefinition Width="0.6*" />
-                                                        </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="0.15*" />
+                                                            <RowDefinition Height="0.15*" />
+                                                            <RowDefinition Height="0.15*" />
+                                                            <RowDefinition Height="0.15*" />
+                                                        </Grid.RowDefinitions>
 
-                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="childcare.png" Aspect="AspectFit"/>
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding ServiceName}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding ServicePriceLabel}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-                                                    </Grid>
-
-                                                    <Grid Grid.Row="2">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.1*" />
-                                                            <ColumnDefinition Width="0.9*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="location2.png" Aspect="AspectFit"/>
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding ServiceLocationName}" LineBreakMode="TailTruncation" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-                                                    </Grid>
-
-                                                    <Grid Grid.Row="3" ColumnSpacing="2" BackgroundColor="Transparent">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.12*" />
-                                                            <ColumnDefinition Width="0.08*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Grid Grid.Column="0" ColumnSpacing="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid Grid.Row="0" ColumnSpacing="0" BackgroundColor="Transparent">
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="0.72*" />
-                                                                <ColumnDefinition Width="0.38*" />
+                                                                <ColumnDefinition Width="0.7*" />
+                                                                <ColumnDefinition Width="0.15*" />
+                                                                <ColumnDefinition Width="0.15*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <rating:SfRating x:Name="halfRating" ItemCount="5" Value="{Binding AverageRating}"  IsEnabled="False" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                                                    <rating:SfRating.RatingSettings>
-                                                                        <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
-                                                                    </rating:SfRating.RatingSettings>
-                                                                </rating:SfRating>
+                                                            <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5,0,0,0">
+                                                                <Label Text="{Binding Name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                             </Grid>
 
-                                                            <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding AverageRatingCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Image Source="share.png" Aspect="AspectFit" Margin="2"/>
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Image Source="save.png" Aspect="AspectFit" Margin="2"/>
                                                             </Grid>
                                                         </Grid>
 
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid Grid.Row="1">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="0.1*" />
-                                                                <ColumnDefinition Width="0.1*" />
-                                                                <ColumnDefinition Width="0.1*" />
-                                                                <ColumnDefinition Width="0.1*" />
+                                                                <ColumnDefinition Width="0.3*" />
+                                                                <ColumnDefinition Width="0.6*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Image Source="hands.png" Aspect="AspectFit"/>
+                                                            <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Image Source="childcare.png" Aspect="AspectFit"/>
                                                             </Grid>
 
-                                                            <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding ConnectionCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Label Text="{Binding ServiceName}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                             </Grid>
 
-                                                            <Grid Grid.Column="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Image Source="question.png" Aspect="AspectFit"/>
+                                                            <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Label Text="{Binding ServicePriceLabel}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            </Grid>
+                                                        </Grid>
+
+                                                        <Grid Grid.Row="2">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="0.1*" />
+                                                                <ColumnDefinition Width="0.9*" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Image Source="location2.png" Aspect="AspectFit"/>
                                                             </Grid>
 
-                                                            <Grid Grid.Column="3" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding EnquiredUserCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Label Text="{Binding ServiceLocationName}" LineBreakMode="TailTruncation" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            </Grid>
+                                                        </Grid>
+
+                                                        <Grid Grid.Row="3" ColumnSpacing="2" BackgroundColor="Transparent">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="0.12*" />
+                                                                <ColumnDefinition Width="0.08*" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Grid Grid.Column="0" ColumnSpacing="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="0.72*" />
+                                                                    <ColumnDefinition Width="0.38*" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <rating:SfRating x:Name="halfRating" ItemCount="5" Value="{Binding AverageRating}"  IsEnabled="False" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                                        <rating:SfRating.RatingSettings>
+                                                                            <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
+                                                                        </rating:SfRating.RatingSettings>
+                                                                    </rating:SfRating>
+                                                                </Grid>
+
+                                                                <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Label Text="{Binding AverageRatingCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                </Grid>
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="0.1*" />
+                                                                    <ColumnDefinition Width="0.1*" />
+                                                                    <ColumnDefinition Width="0.1*" />
+                                                                    <ColumnDefinition Width="0.1*" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Image Source="hands.png" Aspect="AspectFit"/>
+                                                                </Grid>
+
+                                                                <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Label Text="{Binding ConnectionCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                </Grid>
+
+                                                                <Grid Grid.Column="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Image Source="question.png" Aspect="AspectFit"/>
+                                                                </Grid>
+
+                                                                <Grid Grid.Column="3" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Label Text="{Binding EnquiredUserCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                </Grid>
                                                             </Grid>
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>
-                                            </Grid>
+                                            </Frame>
                                         </Frame>
                                     </ViewCell>
-                                    <!--<ViewCell Height="115">
-                                    <StackLayout x:Name="slOuterFull" BackgroundColor="{Binding color}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                    <StackLayout Margin="5" Padding="0,2,0,0" VerticalOptions="Center" BackgroundColor="White">
-                                        <Grid ColumnSpacing="0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="0.6*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                                <Image Source="{Binding ProfilePicture}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="80" HeightRequest="80"/>
-                                            </Grid>
-                                            
-                                            <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="0.15*" />
-                                                    <RowDefinition Height="0.15*" />
-                                                    <RowDefinition Height="0.15*" />
-                                                    <RowDefinition Height="0.15*" />
-                                                </Grid.RowDefinitions>
-
-                                                <Grid Grid.Row="0" ColumnSpacing="0" BackgroundColor="Transparent">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="0.8*" />
-                                                        <ColumnDefinition Width="0.1*" />
-                                                        <ColumnDefinition Width="0.1*" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Label Text="{Binding Name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                    </Grid>
-
-                                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Image Source="share.png" Aspect="AspectFit" Margin="2"/>
-                                                    </Grid>
-
-                                                    <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Image Source="save.png" Aspect="AspectFit" Margin="2"/>
-                                                    </Grid>
-                                                </Grid>
-
-                                                <Grid Grid.Row="1">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="0.1*" />
-                                                        <ColumnDefinition Width="0.3*" />
-                                                        <ColumnDefinition Width="0.6*" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Image Source="childcare.png" Aspect="AspectFit"/>
-                                                    </Grid>
-
-                                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Label Text="{Binding Service}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />                                                        
-                                                    </Grid>
-
-                                                    <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Label Text="{Binding Price}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                    </Grid>
-                                                </Grid>
-
-                                                <Grid Grid.Row="2">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="0.1*" />
-                                                        <ColumnDefinition Width="0.9*" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Image Source="location2.png" Aspect="AspectFit"/>
-                                                    </Grid>
-
-                                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Label Text="{Binding LocationName}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                    </Grid>
-                                                </Grid>
-
-                                                <Grid Grid.Row="3" ColumnSpacing="2">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="0.12*" />
-                                                        <ColumnDefinition Width="0.08*" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <Grid Grid.Column="0" ColumnSpacing="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.72*" />
-                                                            <ColumnDefinition Width="0.38*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <rating:SfRating x:Name="rating" ItemCount="5" Value="{Binding AverageRating}" Precision="Exact" ItemSize="15" IsEnabled="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                                                <rating:SfRating.RatingSettings>
-                                                                    <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
-                                                                </rating:SfRating.RatingSettings>
-                                                            </rating:SfRating>
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding RatingCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-                                                    </Grid>
-
-                                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.1*" />
-                                                            <ColumnDefinition Width="0.1*" />
-                                                            <ColumnDefinition Width="0.1*" />
-                                                            <ColumnDefinition Width="0.1*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="hands.png" Aspect="AspectFit"/>
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding ConnectionCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="question.png" Aspect="AspectFit"/>
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding EnquiredUserCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </StackLayout>
-                                    </StackLayout>
-                                </ViewCell>-->
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
@@ -443,7 +317,7 @@
                                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.2, Constant = 0}"
                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.15, Constant = 0}"/>
 
-                        <ListView x:Name="lvHalfHelpa" ItemsSource="{Binding HelperHalfList}" VerticalOptions="FillAndExpand" HasUnevenRows="True"
+                        <ListView x:Name="lvHalfHelpa" ItemsSource="{Binding HelperHalfList}" VerticalOptions="FillAndExpand" HasUnevenRows="True" SelectionMode="None" SeparatorVisibility="None"
                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
@@ -452,16 +326,17 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell Height="135">
-                                        <Frame Margin="5" VerticalOptions="Center" BackgroundColor="White" CornerRadius="5" HasShadow="True" Padding="0,5,0,0">
-                                            <Grid ColumnSpacing="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="0.55*" />
-                                                </Grid.ColumnDefinitions>
+                                        <Frame Margin="5" VerticalOptions="Center" CornerRadius="5" HasShadow="True" Padding="0,0,2,2" BackgroundColor="#a8aaa9">
+                                            <Frame VerticalOptions="Center" BackgroundColor="White" CornerRadius="5" HasShadow="True" Padding="0,5,0,0">
+                                                <Grid ColumnSpacing="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="0.55*" />
+                                                    </Grid.ColumnDefinitions>
 
-                                                <Grid Grid.Column="0" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-                                                    <RelativeLayout BackgroundColor="Transparent" WidthRequest="90" HeightRequest="90">
-                                                        <controls:CircleImage 
+                                                    <Grid Grid.Column="0" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                                        <RelativeLayout BackgroundColor="Transparent" WidthRequest="90" HeightRequest="90">
+                                                            <controls:CircleImage 
                                                             Source="{Binding ProfilePicture}" 
                                                             BackgroundColor="Transparent" 
                                                             Aspect="Fill" 
@@ -470,141 +345,148 @@
                                                             WidthRequest="80" 
                                                             HeightRequest="80"/>
 
-                                                        <Image Source="hands2.png" WidthRequest="35" HeightRequest="35"
+                                                            <Image Source="hands2.png" WidthRequest="35" HeightRequest="35"
                                                                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = -30}"
                                                                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant = 0}"/>
 
-                                                        <local:CustomHelperStatus x:Name="lblHalfHelperStatus"
+                                                            <local:CustomHelperStatus x:Name="lblHalfHelperStatus"
                                                             Text="{Binding helperStatus}" FontSize="10" TextColor="{Binding textcolor}" IsEnabled="False" Margin="5"
                                                             BackgroundColor="{Binding bgcolor}" HorizontalOptions="Center" HeightRequest="20"
                                                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                                                             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0, Constant = 0}"
                                                             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -50}"/>
-                                                    </RelativeLayout>
-                                                </Grid>
-
-                                                <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="0.15*" />
-                                                        <RowDefinition Height="0.15*" />
-                                                        <RowDefinition Height="0.15*" />
-                                                        <RowDefinition Height="0.15*" />
-                                                    </Grid.RowDefinitions>
-
-                                                    <Grid Grid.Row="0" ColumnSpacing="0" BackgroundColor="Transparent">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.8*" />
-                                                            <ColumnDefinition Width="0.1*" />
-                                                            <ColumnDefinition Width="0.1*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5,0,0,0">
-                                                            <Label Text="{Binding Name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="share.png" Aspect="AspectFit" Margin="2"/>
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="save.png" Aspect="AspectFit" Margin="2"/>
-                                                        </Grid>
+                                                        </RelativeLayout>
                                                     </Grid>
 
-                                                    <Grid Grid.Row="1">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.1*" />
-                                                            <ColumnDefinition Width="0.3*" />
-                                                            <ColumnDefinition Width="0.6*" />
-                                                        </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Column="1" RowSpacing="5" Margin="0,0,0,5">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="0.15*" />
+                                                            <RowDefinition Height="0.15*" />
+                                                            <RowDefinition Height="0.15*" />
+                                                            <RowDefinition Height="0.15*" />
+                                                        </Grid.RowDefinitions>
 
-                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="childcare.png" Aspect="AspectFit"/>
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding ServiceName}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding ServicePriceLabel}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-                                                    </Grid>
-
-                                                    <Grid Grid.Row="2">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.1*" />
-                                                            <ColumnDefinition Width="0.9*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Image Source="location2.png" Aspect="AspectFit"/>
-                                                        </Grid>
-
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                            <Label Text="{Binding ServiceLocationName}" LineBreakMode="TailTruncation" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                        </Grid>
-                                                    </Grid>
-
-                                                    <Grid Grid.Row="3" ColumnSpacing="2" BackgroundColor="Transparent">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="0.12*" />
-                                                            <ColumnDefinition Width="0.08*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Grid Grid.Column="0" ColumnSpacing="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid Grid.Row="0" ColumnSpacing="0" BackgroundColor="Transparent">
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="0.72*" />
-                                                                <ColumnDefinition Width="0.38*" />
+                                                                <ColumnDefinition Width="0.7*" />
+                                                                <ColumnDefinition Width="0.15*" />
+                                                                <ColumnDefinition Width="0.15*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <rating:SfRating x:Name="halfRating" ItemCount="5" Value="{Binding AverageRating}"  IsEnabled="False" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                                                    <rating:SfRating.RatingSettings>
-                                                                        <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
-                                                                    </rating:SfRating.RatingSettings>
-                                                                </rating:SfRating>
+                                                            <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5,0,0,0">
+                                                                <Label Text="{Binding Name}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                             </Grid>
 
-                                                            <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding AverageRatingCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Image Source="share.png" Aspect="AspectFit" Margin="2"/>
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Image Source="save.png" Aspect="AspectFit" Margin="2"/>
                                                             </Grid>
                                                         </Grid>
 
-                                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                        <Grid Grid.Row="1">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="0.1*" />
-                                                                <ColumnDefinition Width="0.1*" />
-                                                                <ColumnDefinition Width="0.1*" />
-                                                                <ColumnDefinition Width="0.1*" />
+                                                                <ColumnDefinition Width="0.3*" />
+                                                                <ColumnDefinition Width="0.6*" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Image Source="hands.png" Aspect="AspectFit"/>
+                                                            <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Image Source="childcare.png" Aspect="AspectFit"/>
                                                             </Grid>
 
-                                                            <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding ConnectionCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Label Text="{Binding ServiceName}" TextColor="#FF748C" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                             </Grid>
 
-                                                            <Grid Grid.Column="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Image Source="question.png" Aspect="AspectFit"/>
+                                                            <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Label Text="{Binding ServicePriceLabel}" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            </Grid>
+                                                        </Grid>
+
+                                                        <Grid Grid.Row="2">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="0.1*" />
+                                                                <ColumnDefinition Width="0.9*" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Image Source="location2.png" Aspect="AspectFit"/>
                                                             </Grid>
 
-                                                            <Grid Grid.Column="3" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Label Text="{Binding EnquiredUserCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Label Text="{Binding ServiceLocationName}" LineBreakMode="TailTruncation" TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            </Grid>
+                                                        </Grid>
+
+                                                        <Grid Grid.Row="3" ColumnSpacing="2" BackgroundColor="Transparent">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="0.12*" />
+                                                                <ColumnDefinition Width="0.08*" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Grid Grid.Column="0" ColumnSpacing="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="0.72*" />
+                                                                    <ColumnDefinition Width="0.38*" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <rating:SfRating x:Name="halfRating" ItemCount="5" Value="{Binding AverageRating}"  IsEnabled="False" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                                        <rating:SfRating.RatingSettings>
+                                                                            <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
+                                                                        </rating:SfRating.RatingSettings>
+                                                                    </rating:SfRating>
+                                                                </Grid>
+
+                                                                <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Label Text="{Binding AverageRatingCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                </Grid>
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="0.1*" />
+                                                                    <ColumnDefinition Width="0.1*" />
+                                                                    <ColumnDefinition Width="0.1*" />
+                                                                    <ColumnDefinition Width="0.1*" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Grid Grid.Column="0" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Image Source="hands.png" Aspect="AspectFit"/>
+                                                                </Grid>
+
+                                                                <Grid Grid.Column="1" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Label Text="{Binding ConnectionCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                </Grid>
+
+                                                                <Grid Grid.Column="2" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Image Source="question.png" Aspect="AspectFit"/>
+                                                                </Grid>
+
+                                                                <Grid Grid.Column="3" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                    <Label Text="{Binding EnquiredUserCount}"  TextColor="#494949" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                </Grid>
                                                             </Grid>
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>
-                                            </Grid>
+                                            </Frame>
                                         </Frame>
                                     </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
+
+                        <ActivityIndicator 
+                            x:Name="aiFindHalfHelper" IsRunning="True" Color="#FF4968"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = 0}"
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5, Constant = 0}"/>
                     </RelativeLayout>
                 </RelativeLayout>
+                
                 <ActivityIndicator x:Name="aiFindHelper" IsRunning="False" Color="#FF4968"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             </Grid>
         </Grid>

@@ -47,9 +47,14 @@ namespace Helpa
             {
                 try
                 {
-                    aiFindHelper.IsRunning = true;
+                    aiFindHalfHelper.IsRunning = true;
+
+                    lvHalfHelpa.ItemsSource = null;
+                    lblHelperCount.Text = " Helpers found in ";
+
                     ShowHelperHalfList(selectedCluster);
-                    aiFindHelper.IsRunning = false;
+
+                    aiFindHalfHelper.IsRunning = false;
                 }
                 catch(Exception e)
                 {
@@ -158,7 +163,7 @@ namespace Helpa
                 var hService = await helpersServices.GetAllHelpers(0);
                 var hs = hService.Data;
 
-                lblHelperFullCount.Text = hService.Total + lblHelperFullCount.Text;
+                lblHelperFullCount.Text = hService.Total + " Helpers found";
 
                 for (int i = 0; i < hs.Count(); i++)
                 {
@@ -217,6 +222,7 @@ namespace Helpa
             catch (Exception e)
             {
                 Console.Write(e.StackTrace);
+                aiFindHelper.IsRunning = false;
             }
         }
 
@@ -341,6 +347,9 @@ namespace Helpa
                 slFullHelpa.IsVisible = false;
                 mapHelper.IsVisible = true;
                 lblCount.IsVisible = true;
+
+                lvFullHelpa.ItemsSource = null;
+                lblHelperFullCount.Text = " Helpers found";
 
                 imgHelpersList.Source = "filter.png";
             }

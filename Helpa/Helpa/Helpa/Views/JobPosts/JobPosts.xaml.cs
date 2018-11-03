@@ -143,7 +143,7 @@ namespace Helpa
                 JobServices jobServices = new JobServices();
                 var js = await jobServices.GetAllJobs(0);
 
-                lblJobFullCount.Text = js.Total + lblJobFullCount.Text;
+                lblJobFullCount.Text = js.Total + " Job posts found";
 
                 for (int i = 0; i < js.Data.Count(); i++)
                 {
@@ -267,7 +267,7 @@ namespace Helpa
             }
             else
             {
-                lvFullJobPost.IsVisible = false;
+                slFullJobPost.IsVisible = false;
                 mapJob.IsVisible = true;
                 lblTotalJobsCount.IsVisible = true;
 
