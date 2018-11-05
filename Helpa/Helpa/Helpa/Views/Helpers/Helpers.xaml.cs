@@ -1,13 +1,10 @@
 ﻿using Helpa.Models;
 using Helpa.Services;
 using Helpa.ViewModels;
+using Helpa.Views.Helpers;
 using Helpa.Views.Profile.UserProfile;
-using Plugin.Geolocator;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -327,7 +324,7 @@ namespace Helpa
             // await Navigation.PushAsync(new LoginPage());
             else
             {
-                //post a job
+                await Application.Current.MainPage.Navigation.PushAsync(new PostJobPage());
             }
         }
 

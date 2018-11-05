@@ -20,7 +20,7 @@
 &lt;/plist&gt;
 </TargetiOSDevice>
     <ProjectView>ShowAllFiles</ProjectView>
-    <SelectedDevice>Simulator</SelectedDevice>
+    <SelectedDevice>Device</SelectedDevice>
     <DefaultDevice>iPhone X iOS 11.4</DefaultDevice>
     <DeveloperId />
     <DevelopmentTeamId />

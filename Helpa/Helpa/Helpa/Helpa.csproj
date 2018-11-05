@@ -10,12 +10,15 @@
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="Helpers\**" />
     <Compile Remove="Services\ApiHandler\**" />
     <Compile Remove="Services\ServiceEntity\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="Helpers\**" />
     <EmbeddedResource Remove="Services\ApiHandler\**" />
     <EmbeddedResource Remove="Services\ServiceEntity\**" />
     <None Remove="bin\**" />
+    <None Remove="Helpers\**" />
     <None Remove="Services\ApiHandler\**" />
     <None Remove="Services\ServiceEntity\**" />
   </ItemGroup>
@@ -35,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DurianCode.PlacesSearchBar" Version="2.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
@@ -44,14 +48,29 @@
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Facebook" Version="4.4.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
-    <PackageReference Include="Xamarin.Forms.Maps" Version="3.3.0.967583" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="3.1.0.697729" />
     <PackageReference Include="Xamarin.Forms.RangeSlider" Version="0.7.36" />
     <PackageReference Include="XFControls" Version="1.0.0.6" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="AsNum.XFControls">
+      <HintPath>C:\Users\vinove\.nuget\packages\xfcontrols\1.0.0.6\lib\portable-net45+win8+wp8+wpa81+MonoAndroid10+Xamarin.iOS10+MonoTouch10\AsNum.XFControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.RangeSlider.Common">
+      <HintPath>C:\Users\vinove\.nuget\packages\xamarin.rangeslider\0.8.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.RangeSlider.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.RangeSlider.Forms">
+      <HintPath>C:\Users\vinove\.nuget\packages\xamarin.forms.rangeslider\0.8.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.RangeSlider.Forms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\Helpers\Helpers.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Helpers\PostJobPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\JobPosts\JobPostDetailsPage.xaml">

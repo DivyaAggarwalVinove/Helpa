@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Helpa"
+             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             x:Class="Helpa.Views.Helpers.PostJobPage">
+    <ContentPage.Content>
+        <RelativeLayout>
+            <ScrollView>
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.8*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" RowSpacing="0" BackgroundColor="#2ec5b6" Padding="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.7*"/>
+                                <ColumnDefinition Width="0.2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Image Source="arrow_left.png" Aspect="AspectFit" Margin="10">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnBackPress"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+
+                            <Grid Grid.Column="2">
+                                <Label Text="Save draft" TextColor="White" VerticalOptions="CenterAndExpand"/>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Row="1" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.9*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Image Source="job_pin.png" Margin="5"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <Label Text="Post a job" TextColor="White" VerticalOptions="CenterAndExpand"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" BackgroundColor="#f1f5f6" Padding="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                            <Label Text="Required" TextColor="#FF748C" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                            <Label Text="Status:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                            <ctrls:RadioGroup
+                                    x:Name="rgPJJobStatus"                                                    
+                                    Orientation="Horizontal"
+                                    OnImg="radio_close.png" 
+                                    OffImg="radio_button.png"
+                                    SelectedItem="Urgent"/>
+                        </Grid>
+
+                        <Grid Grid.Row="3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                            <Label Text="Select service(s):" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                            <ScrollView>
+                                <Grid x:Name="gridPJServices" ColumnSpacing="10" RowSpacing="5">
+                                </Grid>
+                            </ScrollView>
+                        </Grid>
+
+                        <Grid Grid.Row="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                            <Label Text="Title:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="6" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                            <local:CustomEntry x:Name="entryPJTitle" FontSize="Small" IsEnabled="True" Placeholder="E.g. Kwun Tong childcare for 6-year-old girl" PlaceholderColor="#939BA0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,30,0,30"/>
+                        </Grid>
+
+                        <Grid Grid.Row="7" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                            <Label Text="Location Type:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="8" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                            <ctrls:RadioGroup
+                                    x:Name="rgPJHelperType"                                                    
+                                    Orientation="Horizontal"
+                                    OnImg="radio_close.png" 
+                                    OffImg="radio_button.png">
+                            </ctrls:RadioGroup>
+                        </Grid>
+
+                        <Grid Grid.Row="9" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                            <Label Text="Location:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                            <local:CustomEntry x:Name="entryPJLocation" IsEnabled="True" Placeholder="E.g. Tsui Estate, Kwun Tong" Focused="OnFocus" FontSize="Small" PlaceholderColor="#939BA0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                            <Button x:Name="btnHelperRegDistrict" Text="Select district(s) you can cover" TextColor="White" BackgroundColor="#FF748C" IsVisible="False" VerticalOptions="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="11" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                            
+                        </Grid>
+                        
+                        <Grid Grid.Row="12"></Grid>
+                        <Grid Grid.Row="13"></Grid>
+                        <Grid Grid.Row="14"></Grid>
+
+                        <Grid Grid.Row="15"></Grid>
+                        <Grid Grid.Row="16"></Grid>
+                        <Grid Grid.Row="17"></Grid>
+                        <Grid Grid.Row="18"></Grid>
+                        <Grid Grid.Row="19"></Grid>
+
+                        <Grid Grid.Row="20"></Grid>
+                        <Grid Grid.Row="21"></Grid>
+                        <Grid Grid.Row="22"></Grid>
+                        <Grid Grid.Row="23"></Grid>
+                        <Grid Grid.Row="24"></Grid>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>

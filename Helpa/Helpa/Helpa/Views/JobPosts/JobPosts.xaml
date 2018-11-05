@@ -117,7 +117,8 @@
                         <Label Margin="5,0,0,0" x:Name="lblJobFullCount" BackgroundColor="Transparent" Text=" Job posts found" TextColor="#4BCAC0" />
 
                         <ListView 
-                            x:Name="lvFullJobPost" ItemsSource="{Binding JobFullList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True"
+                            x:Name="lvFullJobPost" ItemsSource="{Binding JobFullList}" 
+                            VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True"
                             SelectionMode="None" SeparatorVisibility="None"    
                             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"

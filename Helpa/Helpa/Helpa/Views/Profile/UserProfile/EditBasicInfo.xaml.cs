@@ -1,14 +1,17 @@
 ﻿using AsNum.XFControls;
-using AsNum.XFControls.Services;
 using Helpa.Models;
+using Helpa.Services;
 using Plugin.Connectivity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Helpa.Views.Profile
+namespace Helpa.Views.Profile.UserProfile
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditBasicInfo : ContentPage
@@ -19,9 +22,9 @@ namespace Helpa.Views.Profile
         private string _baseUrl;
         //private HeaderModel _objHeaderModel;
         #endregion
-        public EditBasicInfo ()
-		{
-			InitializeComponent ();
+        public EditBasicInfo()
+        {
+            InitializeComponent();
 
             IEnumerable<string> genders = new List<string>() { "Male", "Female", "Rather no to say" };
             SetRadioList(genders, rgGender);
@@ -32,6 +35,7 @@ namespace Helpa.Views.Profile
             //_objHeaderModel.TokenCode = Settings.TokenCode;
             _baseUrl = Domain.Url + Domain.GetProfileInfoApiConstant;
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -42,7 +46,7 @@ namespace Helpa.Views.Profile
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
-                DependencyService.Get<IToast>().Show("No Network!");
+                //DependencyService.Get<ITrust>().Show("No Network!");
             }
             else
             {
@@ -51,6 +55,7 @@ namespace Helpa.Views.Profile
                 XFAIPageLoad.IsVisible = false;
             }
         }
+
         void SetRadioList(IEnumerable<string> genderList, RadioGroup radioGroup)
         {
             radioGroup.ItemsSource = genderList;

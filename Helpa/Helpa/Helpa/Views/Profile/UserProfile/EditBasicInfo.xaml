@@ -2,64 +2,43 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
-             xmlns:local="clr-namespace:Helpa" 
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-            ios:Page.UseSafeArea="true"
-             x:Class="Helpa.Views.Profile.EditBasicInfo">
+             xmlns:local="clr-namespace:Helpa"
+             x:Class="Helpa.Views.Profile.UserProfile.EditBasicInfo">
     <ContentPage.Content>
         <ScrollView>
             <Grid x:Name="rootlayout" BackgroundColor="#F1F5F6" RowSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="*"/>                
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" BackgroundColor="#F1F5F6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" BackgroundColor="#F1F5F6">
                     <Image Source="back.png" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="20" WidthRequest="20" Margin="10,25,0,0">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
                         </Image.GestureRecognizers>
                     </Image>
                     <Label Text="Edit Profile" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="30,25,0,0"/>
-                <Button Text="Save" VerticalOptions="End" HorizontalOptions="End" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="0,-28,5,0" BackgroundColor="Transparent"/>
-            </Grid>
-            <Grid Grid.Row="1" BackgroundColor="#F1F5F6">
-                <Label Text="Basic Info" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large" Margin="10,10,0,0"/>
-            </Grid>
-            <Grid Grid.Row="2" BackgroundColor="#F1F5F6">                
-                <Image Source="Background.png" VerticalOptions="Center" HorizontalOptions="Center" Aspect="Fill"/>
-                <Image Source="back_white.png" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="20" WidthRequest="20" Margin="10,65,0,0"/>
-                <Image Source="angle_white_right.png" VerticalOptions="End" HorizontalOptions="End" HeightRequest="20" WidthRequest="20" Margin="0,0,10,60"/>
-            </Grid>
-            <Grid Grid.Row="3" BackgroundColor="#F1F5F6">
-                <Image Source="picture.png" Aspect="AspectFit" Margin="0,-65,0,0"/>
-            </Grid>
-                
-            <Grid Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="10,0,10,0">
-                
-            <!--#region Helper Basic Information-->
-            
-                <!--<ScrollView x:Name="svHelperBasicInfo">-->
+                    <Button Text="Save" VerticalOptions="End" HorizontalOptions="End" TextColor="#DADEDF" FontAttributes="Bold" FontSize="Small" Margin="0,-28,5,0" BackgroundColor="Transparent"/>
+                </Grid>
+                <Grid Grid.Row="1" BackgroundColor="#F1F5F6">
+                    <Label Text="Basic Info" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large" Margin="10,10,0,0"/>
+                </Grid>
+                <Grid Grid.Row="2" BackgroundColor="#F1F5F6">
+                    <Image Source="Background.png" VerticalOptions="Center" HorizontalOptions="Center" Aspect="Fill"/>
+                    <Image Source="back_white.png" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="20" WidthRequest="20" Margin="10,65,0,0"/>
+                    <Image Source="angle_white_right.png" VerticalOptions="End" HorizontalOptions="End" HeightRequest="20" WidthRequest="20" Margin="0,0,10,60"/>
+                </Grid>
+                <Grid Grid.Row="3" BackgroundColor="#F1F5F6">
+                    <Image Source="picture.png" Aspect="AspectFit" Margin="0,-65,0,0"/>
+                </Grid>
+
+                <Grid Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="10,0,10,0">
                     <Grid RowSpacing="0">
                         <Grid.RowDefinitions>
-                            
-            <RowDefinition Height="0.3*"/>
-                                    <!--<RowDefinition Height="0.1*"/>
-                                    <RowDefinition Height="0.1*"/>
-                                    <RowDefinition Height="0.11*"/>
-                                    <RowDefinition Height="0.1*"/>
-                                    <RowDefinition Height="0.1*"/>
-                                    <RowDefinition Height="0.1*"/>
-                                    <RowDefinition Height="0.12*"/>
-                                    <RowDefinition Height="0.15*"/>
-                                    <RowDefinition Height="0.12*"/>
-                                    <RowDefinition Height="0.1*"/>
-                                    <RowDefinition Height="0.12*"/>
-                                    <RowDefinition Height="0.14*"/>-->
-            
-
+                            <RowDefinition Height="0.3*"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -78,10 +57,6 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-
-                        <!--<Grid Grid.Row="0" Margin="0,10,0,0">
-                            <Image Source="picture.png" Aspect="AspectFit"/>
-                        </Grid>-->
 
                         <Grid Grid.Row="1" Margin="0,10,0,0">
                             <Label Text="Required" FontSize="Medium" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
@@ -182,7 +157,7 @@
                         </Grid>
 
                         <Grid Grid.Row="12" Margin="0,10,0,0">
-                            <Label Text="Optional" FontSize="Medium" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>                            
+                            <Label Text="Optional" FontSize="Medium" TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Row="13" Margin="0,10,0,0">
                             <Label Text="Location" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
@@ -209,8 +184,7 @@
                             <Label Text="Helpa is built on trust. So please help others get &#10;to know you!" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                         </Grid>
                     </Grid>
-                <!--</ScrollView>-->
-            </Grid>
+                </Grid>
                 <ActivityIndicator x:Name="XFAIPageLoad" VerticalOptions="Center" HorizontalOptions="Center" IsRunning="True" IsVisible="False" Color="#FF746F"/>
             </Grid>
         </ScrollView>
