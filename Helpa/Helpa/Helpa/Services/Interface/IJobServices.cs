@@ -13,6 +13,8 @@ namespace Helpa.Services
         Task<JHomeModel> GetAllJobs(int UserId);
         Task<JHomeModel> GetMyJobs(int UserId);
         Task<JHomeModel> GetSavedJobs(int UserId);
+
+        Task<bool> SaveJob(JobPostModel jobPost);
         //Task<HelperServiceModel> SaveHelperServices(HelperServiceModel helperService);
     }
 }

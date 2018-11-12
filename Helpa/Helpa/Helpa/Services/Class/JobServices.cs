@@ -163,6 +163,29 @@ namespace Helpa.Services
             return jobs;
         }
 
+        public async Task<bool> SaveJob(JobPostModel jobPost)
+        {
+            bool flag = false;
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    Uri uri1 = new Uri(Constants.baseUrl + "api/Jobs");
+                    StringContent stringContent1 = new StringContent(JsonConvert.SerializeObject((object)jobPost), Encoding.UTF8, "application/json");
+                    Uri uri2 = uri1;
+                    StringContent stringContent2 = stringContent1;
+                    flag = (await httpClient.PostAsync(uri2, (HttpContent)stringContent2)).IsSuccessStatusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.StackTrace);
+                flag = false;
+            }
+            return flag;
+        }
+
         //public async Task<HelperServiceModel> SaveHelperServices(HelperServiceModel helperService)
         //{
         //    HelperResponseModel helpers = new HelperResponseModel();

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
+             xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             x:Class="Helpa.Views.Helpers.ChildView">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Text="Child gender:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+
+            <ctrls:RadioGroup Grid.Row="1"
+                x:Name="rgPJChildGender"                                                    
+                Orientation="Horizontal"
+                OnImg="radio_close.png" 
+                OffImg="radio_button.png"/>
+
+            <Label Grid.Row="2" Text="Child age:" TextColor="#5E6071" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+
+            <Button Grid.Row="3"
+                x:Name="btnPJChildAge" Text="6" TextColor="#FE7890" IsEnabled="False"
+                HorizontalOptions="Center"
+                BackgroundColor="#F1F5F6"
+                BorderColor="#BCC1C4"
+                CornerRadius="3"
+                BorderWidth="1"/>
+
+            <forms:RangeSlider Grid.Row="4" x:Name="rsPJChildAge" MinimumValue="1" MaximumValue="144" UpperValue="72" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" BarHeight="10" MinThumbHidden="True" UpperValueChanged="SetChildAge" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>
