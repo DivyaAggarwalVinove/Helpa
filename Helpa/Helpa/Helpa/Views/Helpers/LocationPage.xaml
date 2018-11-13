@@ -15,6 +15,7 @@
             <Frame BackgroundColor="White" CornerRadius="10" BorderColor="LightGray" HasShadow="True" Margin="10" Padding="2">
                 <places:PlacesBar 
                     Grid.Row="0"
+                    
                     x:Name="pbPJLocation"
                     Type="All"
                     Placeholder="Enter location"

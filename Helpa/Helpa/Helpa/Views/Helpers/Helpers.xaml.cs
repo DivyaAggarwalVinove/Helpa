@@ -1,9 +1,11 @@
 ﻿using Helpa.Models;
 using Helpa.Services;
+using Helpa.Utility;
 using Helpa.ViewModels;
 using Helpa.Views.Helpers;
 using Helpa.Views.Profile.UserProfile;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,6 +41,8 @@ namespace Helpa
             helpersViewModel = new HelpersViewModel(this);
             helpersViewModel.mapHelper = mapHelper;
             BindingContext = helpersViewModel;
+
+            entrySearch.ApiKey = Constants.googlePlaceApiKey;
 
             MessagingCenter.Subscribe<CustomMap, string>(this, "Hi", (sender, selectedCluster) =>
             {
@@ -352,15 +356,36 @@ namespace Helpa
             }
         }
 
-        private void OnClickServiceFilter(object sender, EventArgs e)
+        private async void OnClickServiceFilter(object sender, EventArgs e)
         {
-            DisplayActionSheet("Select Service", "Cancel", null, "s1", "s2", "s3");
+            aiFindHelper.IsRunning = true;
+            IList<ServiceModel> servicesAsync = (await new Utilities().GetServicesAsync());
+            var servicesName = servicesAsync.Select(x => x.ServiceName);
+            var result = await DisplayActionSheet("Select Service", "Cancel", null, servicesName.ToArray());
+            aiFindHelper.IsRunning = false;
+        }
+        
+        private async void OnClickLocationFilter(object sender, EventArgs e)
+        {
+            var result = await DisplayActionSheet("Select Service", "Cancel", null, "Home Helper", "Mobile's Helper", "All");
+
+            if (result.Equals("Home Helper"))
+            {
+                var filteredList = helpersViewModel.helperHomeList.Where(x => x.LocationType == 'S');
+                helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+            }
+            else
+            if (result.Equals("All"))
+            {
+                helpersViewModel.SetLocationOnMap(helpersViewModel.helperHomeList);
+            }
+            else
+            {
+                var filteredList = helpersViewModel.helperHomeList.Where(x => x.LocationType.Equals('M'));
+                helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+            }
         }
 
-        private void OnClickLocationFilter(object sender, EventArgs e)
-        {
-
-        }
 
         private void OnClickScopeFilter(object sender, EventArgs e)
         {

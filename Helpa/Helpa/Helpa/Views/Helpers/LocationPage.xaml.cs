@@ -26,7 +26,7 @@ namespace Helpa.Views.Helpers
             this.page = page;
             pbPJLocation.ApiKey = Constants.googlePlaceApiKey;
             pbPJLocation.Text = selectedLoc;
-
+            var parent = pbPJLocation.Parent;
             NavigationPage.SetHasNavigationBar(this, false);
         }
 

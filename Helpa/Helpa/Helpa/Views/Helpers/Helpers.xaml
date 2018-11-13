@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:custommap="clr-namespace:Helpa"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:places="clr-namespace:DurianCode.PlacesSearchBar;assembly=PlacesSearchBar"
              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
              xmlns:local="clr-namespace:Helpa"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
@@ -25,8 +26,18 @@
 
                 <Grid Grid.Row="0" ColumnSpacing="0" Margin="5,0,5,0">
                     <local:CustomStackLayout Orientation="Horizontal"  Padding="10,5,10,5" >
-                        <Image x:Name="imgSearch" Source="search.png"/>
-                        <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>
+                        <!--<Image x:Name="imgSearch" Source="search.png"/>
+                        <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>-->
+                        <places:PlacesBar
+                            x:Name="entrySearch"
+                            BackgroundColor="Transparent"
+                            Placeholder="Search Helpers by Location"
+                            FontSize="Small" 
+                            PlaceholderColor="#676D70" 
+                            VerticalOptions="CenterAndExpand" 
+                            HorizontalOptions="FillAndExpand"
+                            Margin="-20,0,0,0" />
+
                         <Image x:Name="imgSend" Source="send.png"/>
                     </local:CustomStackLayout>
                 </Grid>

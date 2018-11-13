@@ -219,7 +219,7 @@ namespace Helpa.ViewModels
                 //    helperHomeList.ElementAt(i).LocationType = 'S';
                 //}
 
-                SetLocationOnMap();
+                SetLocationOnMap(helperHomeList);
 
                 activityIndicator.IsRunning = false;
 
@@ -258,12 +258,14 @@ namespace Helpa.ViewModels
             }
         }
 
-        public void SetLocationOnMap()
+        public void SetLocationOnMap(ObservableCollection<HelperHomeModel> helperHomeList)
         {
             try
             {
                 int i = 0;
                 var t = "0";
+                mapHelper.Pins.Clear();
+
                 foreach (HelperHomeModel h in helperHomeList)
                 {
                     mapHelper.selectedHelper = helperHomeList.ElementAt(i);
