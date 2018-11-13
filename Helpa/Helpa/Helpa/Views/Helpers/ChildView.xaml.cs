@@ -41,7 +41,7 @@ namespace Helpa.Views.Helpers
         private void SetChildAge(object sender, EventArgs e)
         {
             var rs = (RangeSlider)sender;
-            btnPJChildAge.Text = (rs.UpperValue / 12) + "." + (rs.UpperValue % 12);
+            btnPJChildAge.Text = ((int)rs.UpperValue / 12) + "." + ((int)rs.UpperValue % 12);
         }
     }
 }

@@ -180,7 +180,7 @@ namespace Helpa.Services
             Task<int> result = null;
             foreach (ScopeModel scope in scopes)
             {
-                ScopeModel s = database.Table<ScopeModel>().Where(i => i.ScopeId == scope.ScopeId).FirstOrDefaultAsync().Result;
+                ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefaultAsync().Result;
                 if (s != null)
                 {
                     result = database.UpdateAsync(scope);
@@ -201,7 +201,7 @@ namespace Helpa.Services
         /// <returns></returns>
         public Task<int> SaveScopeAsync(ScopeModel scope)
         {
-            ScopeModel s = database.Table<ScopeModel>().Where(i => i.ScopeId == scope.ScopeId).FirstOrDefaultAsync().Result;
+            ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefaultAsync().Result;
             if (s != null)
             {
                 return database.UpdateAsync(scope);

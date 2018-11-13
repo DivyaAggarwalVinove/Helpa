@@ -34,7 +34,7 @@
                 CornerRadius="3"
                 BorderWidth="1"/>
 
-            <forms:RangeSlider Grid.Row="4" x:Name="rsPJChildAge" MinimumValue="1" MaximumValue="144" UpperValue="72" StepValue="0" StepValueContinuously="False" VerticalOptions="Center" TextSize="15" BarHeight="10" MinThumbHidden="True" UpperValueChanged="SetChildAge" />
+            <forms:RangeSlider Grid.Row="4" x:Name="rsPJChildAge" MinimumValue="1" MaximumValue="144" UpperValue="72" StepValue="1" StepValueContinuously="True" VerticalOptions="Center" TextSize="15" BarHeight="10" MinThumbHidden="True" UpperValueChanged="SetChildAge" />
         </Grid>
     </ContentView.Content>
 </ContentView>

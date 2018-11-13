@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Helpa"
              xmlns:ctrls="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
              x:Class="Helpa.Views.Helpers.PostJobPage">
     <ContentPage.Content>
@@ -28,13 +28,13 @@
 
                     <Grid Grid.Row="0" ColumnSpacing="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.1*"/>
-                            <ColumnDefinition Width="0.7*"/>
-                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.06*"/>
+                            <ColumnDefinition Width="0.72*"/>
+                            <ColumnDefinition Width="0.22*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Image Source="arrow_left.png" BackgroundColor="Green" Aspect="AspectFit" Margin="10">
+                        <Grid Grid.Column="0" BackgroundColor="Transparent">
+                            <Image Source="arrow_left.png" BackgroundColor="Transparent" HeightRequest="10" Aspect="AspectFit">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnBackPress"/>
                                 </Image.GestureRecognizers>
@@ -315,11 +315,15 @@
                         </Grid>
 
                         <Grid Grid.Row="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
-                            <Editor x:Name="entryPJDescription" HeightRequest="100" VerticalOptions="FillAndExpand" TextColor="#BCC1C4" BackgroundColor="White" MaxLength="300" TextChanged="OnDescriptionChange"/>
+                            <Frame BackgroundColor="White" CornerRadius="10" BorderColor="White" HasShadow="True" HeightRequest="100" Margin="0" Padding="2">
+                                <Editor 
+                                    x:Name="entryPJDescription" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                     TextColor="Gray" BackgroundColor="White" MaxLength="300" TextChanged="OnDescriptionChange" />
+                            </Frame>
                         </Grid>
 
                         <Grid x:Name="gridChildCare" Grid.Row="21">
-                            <Button x:Name="btnAddMoreChild" Text="Add more child" BackgroundColor="#e5e5e5" TextColor="#bec2c5" IsVisible="False"/>
+                            <Button x:Name="btnAddMoreChild" Text="Add more child" BackgroundColor="#e5e5e5" TextColor="#bec2c5" IsVisible="False" Clicked="ClickOnAddMoreChild"/>
                         </Grid>
                         
                         <Grid Grid.Row="22" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
@@ -413,7 +417,7 @@
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                     <local:ServiceButton x:Name="btnPJStartTime" Text="0003" IsEnabled="False"/>
                                     <BoxView HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="1" WidthRequest="2" BackgroundColor="#BCC1C4" Margin="15,0,15,0"/>
-                                    <local:ServiceButton x:Name="btnPJEndTime" Text="$ 2236" IsEnabled="False"/>
+                                    <local:ServiceButton x:Name="btnPJEndTime" Text="2236" IsEnabled="False"/>
                                 </StackLayout>
                             </Grid>
 

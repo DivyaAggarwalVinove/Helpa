@@ -52,6 +52,10 @@
                         <Grid Grid.Column="1">
                             <Image Source="drop_down.png" Margin="0,2,0,0" VerticalOptions="CenterAndExpand"/>
                         </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickServiceFilter"/>
+                        </Grid.GestureRecognizers>
                     </Grid>
 
                     <Grid Grid.Column="1" ColumnSpacing="0" BackgroundColor="Transparent">
@@ -67,6 +71,10 @@
                         <Grid Grid.Column="1">
                             <Image Source="drop_down.png" Margin="0,2,0,0" VerticalOptions="CenterAndExpand"/>
                         </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickLocationFilter"/>
+                        </Grid.GestureRecognizers>
                     </Grid>
 
                     <Grid Grid.Column="2" ColumnSpacing="0" BackgroundColor="Transparent">
@@ -82,6 +90,10 @@
                         <Grid Grid.Column="1">
                             <Image Source="drop_down.png" Margin="0,2,0,0" VerticalOptions="CenterAndExpand"/>
                         </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickScopeFilter"/>
+                        </Grid.GestureRecognizers>
                     </Grid>
 
                     <Grid Grid.Column="3" ColumnSpacing="0" BackgroundColor="Transparent">
@@ -97,6 +109,10 @@
                         <Grid Grid.Column="1">
                             <Image Source="drop_down.png" Margin="0,2,0,0" VerticalOptions="CenterAndExpand"/>
                         </Grid>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickSortByFilter"/>
+                        </Grid.GestureRecognizers>
                     </Grid>
                 </Grid>
             </Grid>

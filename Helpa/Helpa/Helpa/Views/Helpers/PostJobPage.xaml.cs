@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using System.Collections;
 using System;
 using Helpa.Services;
+using Helpa.Utility;
 
 namespace Helpa.Views.Helpers
 {
@@ -58,10 +59,9 @@ namespace Helpa.Views.Helpers
 
         private async void SetServices()
         {
-            //PostJob postJob = this;
-            IList<ServiceModel> servicesAsync = await new Helpa.Services.Utilities().GetServicesAsync();
+            IList<ServiceModel> servicesAsync = await new Utilities().GetServicesAsync();
             services = servicesAsync;
-            int num1 = services.Count<ServiceModel>();
+            int num1 = services.Count();
 
             for (int index = 0; index < (num1 - 1) / 3 + 1; ++index)
                 gridPJServices.RowDefinitions.Add(new RowDefinition()
@@ -86,10 +86,8 @@ namespace Helpa.Views.Helpers
                 button.HorizontalOptions = LayoutOptions.FillAndExpand;
                 button.Margin = new Thickness(5.0, 0.0);
                 button.TextColor = Color.FromHex("BCC1C4");
-                button.Text = services.ElementAt<ServiceModel>(index).ServiceName;
+                button.Text = services.ElementAt(index).ServiceName;
 
-                // ISSUE: reference to a compiler-generated method
-                //button.Clicked += new EventHandler(postJob.\u003CSetServices\u003Eb__5_0);
                 button.Clicked += (sender, e) =>
                  {
                      Button btn = (Button)sender;
@@ -97,6 +95,8 @@ namespace Helpa.Views.Helpers
                      if (btn.BorderColor == Color.FromHex("BCC1C4"))
                      {
                          Grid grid = (Grid)btn.Parent;
+
+                         // Unselect previous selected Service
                          Button btnSelectedService = (Button)grid.Children.ElementAt(selectedService * 2);
                          btnSelectedService.BorderColor = Color.FromHex("BCC1C4");
                          btnSelectedService.TextColor = Color.FromHex("BCC1C4");
@@ -104,6 +104,20 @@ namespace Helpa.Views.Helpers
                          Image imgSelected = (Image)grid.Children.ElementAt(selectedService * 2 + 1);
                          imgSelected.IsVisible = false;
 
+                         if (btnSelectedService.Text.Equals("Child Care"))
+                         {
+                             for (int i = gridChildCare.Children.Count - 2; i >= 0; i--)
+                             {
+                                 ChildView content = (ChildView)gridChildCare.Children[i];
+                                 gridChildCare.Children.Remove(content);
+                                 gridChildCare.RowDefinitions.RemoveAt(i);
+                             }
+
+                             gridChildCare.RowDefinitions.RemoveAt(0);
+                             btnAddMoreChild.IsVisible = false;
+                         }
+
+                         // Select Service
                          btn.BorderColor = Color.FromHex("FE7890");
                          btn.TextColor = Color.FromHex("FE7890");
 
@@ -113,33 +127,21 @@ namespace Helpa.Views.Helpers
 
                          SetScopes(services.ElementAt(selectedService).Id);
 
-                         if(btn.Text.Equals("Child Care"))
+                         if (btn.Text.Equals("Child Care"))
                          {
                              btnAddMoreChild.IsVisible = true;
-                             btnAddMoreChild.Clicked += (sender1, e1) =>
-                             {
-                                 gridChildCare.RowDefinitions.Add(new RowDefinition()
-                                 {
-                                     Height = GridLength.Auto
-                                 });
-                                 gridChildCare.Children.Remove(btnAddMoreChild);
-
-                                 ChildView cv1 = new ChildView();
-                                 gridChildCare.Children.Add(cv1, 0, gridChildCare.RowDefinitions.Count-2);
-                                 gridChildCare.Children.Add(btnAddMoreChild, 0, gridChildCare.RowDefinitions.Count-1);
-                             };
-
-                             gridChildCare.RowDefinitions.Add(new RowDefinition()
-                             {
-                                 Height = GridLength.Auto
-                             });
-
-                             gridChildCare.RowDefinitions.Add(new RowDefinition()
-                             {
-                                 Height = GridLength.Auto
-                             });
-
                              
+                             gridChildCare.RowDefinitions.Add(new RowDefinition()
+                             {
+                                 Height = GridLength.Auto
+                             });
+
+                             gridChildCare.RowDefinitions.Add(new RowDefinition()
+                             {
+                                 Height = GridLength.Auto
+                             });
+
+
                              gridChildCare.Children.Remove(btnAddMoreChild);
 
                              ChildView cv = new ChildView();
@@ -167,12 +169,26 @@ namespace Helpa.Views.Helpers
             int num2 = await App.Database.SaveServicesAsync((IEnumerable<ServiceModel>)services);
         }
 
+        private void ClickOnAddMoreChild(object sender, EventArgs e)
+        {
+            gridChildCare.RowDefinitions.Add(new RowDefinition()
+            {
+                Height = GridLength.Auto
+            });
+            gridChildCare.Children.Remove(btnAddMoreChild);
+
+            ChildView cv = new ChildView();
+            gridChildCare.Children.Add(cv, 0, gridChildCare.RowDefinitions.Count - 2);
+            gridChildCare.Children.Add(btnAddMoreChild, 0, gridChildCare.RowDefinitions.Count - 1);
+        }
+
         private void RemoveScope()
         {
             foreach (View view in this.gridPJScopes.Children.ToList<View>())
-                this.gridPJScopes.Children.Remove(view);
-            this.gridPJScopes.RowDefinitions = new RowDefinitionCollection();
-            this.gridPJScopes.ColumnDefinitions = new ColumnDefinitionCollection();
+                gridPJScopes.Children.Remove(view);
+
+            gridPJScopes.RowDefinitions = new RowDefinitionCollection();
+            gridPJScopes.ColumnDefinitions = new ColumnDefinitionCollection();
         }
 
         private async void SetScopes(int selectedServiceId)
@@ -477,6 +493,19 @@ namespace Helpa.Views.Helpers
 
         private void OnFocus(object sender, FocusEventArgs e)
         {
+            Navigation.PushAsync(new LocationPage(this)
+            {
+                selectedLoc = entryPJLocation.Text
+            });
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (selectedLocation == null)
+                return;
+
+            entryPJLocation.Text = selectedLocation;
         }
 
         private void OnBackPress(object sender, EventArgs e)
@@ -517,8 +546,7 @@ namespace Helpa.Views.Helpers
             if (endTimeMinute.ToString().Length == 1)
                 btnPJEndTime.Text = btnPJEndTime.Text + "0" + endTimeMinute;
             else
-                btnPJEndTime.Text = btnPJEndTime
-.Text + endTimeMinute;
+                btnPJEndTime.Text = btnPJEndTime.Text + endTimeMinute;
         }
 
         private async void OnClickPostJob(object sender, EventArgs e)
@@ -542,25 +570,23 @@ namespace Helpa.Views.Helpers
                 }
                 else
                 {
-                    /*
                     try
                     {
                         Place place = await Places.GetPlace(selectedPrediction.Place_ID, Constants.googlePlaceApiKey);
                         jpm.Location = new List<LocationModel>()
                         {
-                          new LocationModel()
-                          {
-                            LocationName = l,
-                            Latitude = place.Latitude.ToString(),
-                            Longitude = place.Longitude.ToString()
-                          }
+                            new LocationModel()
+                             {
+                               LocationName = l,
+                               Latitude = place.Latitude.ToString(),
+                               Longitude = place.Longitude.ToString()
+                             }
                         };
                     }
                     catch (Exception ex)
                     {
                         Console.Write(ex.StackTrace);
                     }
-                    */
 
                     jpm.JobType = !rgPJJobStatus.SelectedItem.ToString().ToLower().Equals("normal") ? "U" : "N";
 
@@ -568,15 +594,25 @@ namespace Helpa.Views.Helpers
                     jpm.JobServicesId = serviceModel.Id;
                     jpm.JobServicesName = serviceModel.ServiceName;
 
-                    /*if (serviceModel.ServiceName.Equals("Child Care"))
+                    if (serviceModel.ServiceName.Equals("Child Care"))
                     {
-                        for (int index = 0; index < gridChildCare.Children.Count - 1; ++index)
+                        jpm.Receivers = new List<Receiver>();
+
+                        for (int i = 0; i < gridChildCare.Children.Count - 1; i++)
                         {
-                            Grid content = (Grid)((ContentView)gridChildCare.Children[index]).Content;
-                            RadioGroup radioGroup = (RadioGroup)((Grid)content.Children.ElementAt<View>(1)).Children.ElementAt<View>(0);
-                            Button button = (Button)((Grid)content.Children.ElementAt<View>(3)).Children.ElementAt<View>(0);
+                            ChildView content = (ChildView)gridChildCare.Children[i];
+                            Grid grid = (Grid)content.Children.ElementAt(0);
+                            RadioGroup radioGroup = (RadioGroup)grid.Children.ElementAt(1);
+                            Button button = (Button)grid.Children.ElementAt(3);
+                            int gender = (new List<string>()
+                                          {
+                                            "Male",
+                                            "Female",
+                                            "N/A"
+                                          }).IndexOf(radioGroup.SelectedItem.ToString());
+                            jpm.Receivers.Add(new Receiver() { ReceiverAge = (int) float.Parse(button.Text), ReceiverGender = gender+1 });
                         }
-                    }*/
+                    }
 
                     jpm.HelperType = !cbPJHelperHome.Checked ? "M" : "S";
 
@@ -618,16 +654,19 @@ namespace Helpa.Views.Helpers
                     if (btnPJSat.BorderColor == Color.FromHex("FE7890"))
                         jpm.IsSaturday = true;
 
-                    jpm.StartTime = rsPJTime.LowerValue / 60 + ":" + rsPJTime.LowerValue % 60 + ":00";
-                    jpm.EndTime = rsPJTime.UpperValue / 60 + ":" + rsPJTime.UpperValue % 60 + ":00";
+                    //jpm.StartTime = rsPJTime.LowerValue / 60 + ":" + rsPJTime.LowerValue % 60 + ":00";
+                    //jpm.EndTime = rsPJTime.UpperValue / 60 + ":" + rsPJTime.UpperValue % 60 + ":00";
+                    jpm.StartTime = btnPJStartTime.Text.Substring(0, 2) + ":" + btnPJStartTime.Text.Substring(2, 2) + ":00";
+                    jpm.EndTime = btnPJEndTime.Text.Substring(0, 2) + ":" + btnPJEndTime.Text.Substring(2, 2) + ":00";
 
-                    jpm.JobScope = new List<ScopeModel>();
-                    foreach (Button button in gridPJScopes.Children.ToList<View>())
+                    jpm.JobScope = new List<JobScopes>();
+                    foreach (Button button in gridPJScopes.Children.ToList())
                     {
                         if (button.BorderColor == Color.FromHex("FE7890"))
                         {
                             string scope = button.Text;
-                            jpm.JobScope.Add(scopes.Where<ScopeModel>((Func<ScopeModel, bool>)(x => x.ScopeName == scope)).FirstOrDefault<ScopeModel>());
+                            var s = scopes.Where((x => x.ScopeName == scope)).FirstOrDefault();
+                            jpm.JobScope.Add(new JobScopes() { ScopeId = s.Id.ToString(), ScopeName = s.ScopeName });
                         }
                     }
                     jpm.UserId = loggedUser.Id;

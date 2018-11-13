@@ -45,7 +45,7 @@ namespace Helpa.Models
 
         public string Longitude { get; set; }
 
-        public List<ScopeModel> JobScope { get; set; }
+        public List<JobScopes> JobScope { get; set; }
 
         public List<Receiver> Receivers { get; set; }
 
@@ -86,6 +86,12 @@ namespace Helpa.Models
         public string MinMonthlyPrice { get; set; }
 
         public string MaxMonthlyPrice { get; set; }
+    }
+
+    public class JobScopes
+    {
+        public string ScopeId { get; set; }
+        public string ScopeName { get; set; }
     }
 
     public class Receiver

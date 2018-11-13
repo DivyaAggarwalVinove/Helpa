@@ -324,7 +324,7 @@ namespace Helpa
             // await Navigation.PushAsync(new LoginPage());
             else
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PostJobPage());
+                await Application.Current.MainPage.Navigation.PushAsync(new PostJobPage() { loggedUser = user });
             }
         }
 
@@ -350,6 +350,26 @@ namespace Helpa
 
                 imgHelpersList.Source = "filter.png";
             }
+        }
+
+        private void OnClickServiceFilter(object sender, EventArgs e)
+        {
+            DisplayActionSheet("Select Service", "Cancel", null, "s1", "s2", "s3");
+        }
+
+        private void OnClickLocationFilter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClickScopeFilter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClickSortByFilter(object sender, EventArgs e)
+        {
+
         }
     }
 }

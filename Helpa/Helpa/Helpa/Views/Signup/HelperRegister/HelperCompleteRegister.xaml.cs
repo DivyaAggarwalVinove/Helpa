@@ -172,12 +172,12 @@ namespace Helpa
 
                     if (isSelected)
                     {
-                        HelperScopes helperScope = new HelperScopes() { ScopeId = scope.ScopeId };
+                        HelperScopes helperScope = new HelperScopes() { ScopeId = scope.Id };
                         helperServices.Service[currentService].Scopes.Add(helperScope);
                     }
                     else
                     {
-                        HelperScopes helperScope = helperServices.Service[currentService].Scopes.Where(x => x.ScopeId == scope.ScopeId).FirstOrDefault();
+                        HelperScopes helperScope = helperServices.Service[currentService].Scopes.Where(x => x.ScopeId == scope.Id).FirstOrDefault();
                         helperServices.Service[currentService].Scopes.Remove(helperScope);
                     }
 
