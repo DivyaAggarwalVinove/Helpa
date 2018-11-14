@@ -1,4 +1,5 @@
-﻿using Helpa.Models;
+﻿using DurianCode.PlacesSearchBar;
+using Helpa.Models;
 using Helpa.Services;
 using Helpa.Utility;
 using Helpa.ViewModels;
@@ -44,6 +45,8 @@ namespace Helpa
 
             entrySearch.ApiKey = Constants.googlePlaceApiKey;
 
+            listView.ItemsSource = null;
+
             MessagingCenter.Subscribe<CustomMap, string>(this, "Hi", (sender, selectedCluster) =>
             {
                 try
@@ -57,13 +60,13 @@ namespace Helpa
 
                     aiFindHalfHelper.IsRunning = false;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.Write(e.StackTrace);
                 }
             });
         }
-        
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -81,7 +84,7 @@ namespace Helpa
 
             //await GetRuntimeLocationPermission(5000);
         }
-        
+
 
         async void ShowHelperHalfList(string selectedCluster)
         {
@@ -91,7 +94,7 @@ namespace Helpa
 
                 var selectedHelpersInCluster = helpersViewModel.helperHomeList.Where(h => h.LocationName == (selectedCluster)).FirstOrDefault();
                 mapHelper.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(selectedHelpersInCluster.Latitude - 0.0055, selectedHelpersInCluster.Longitude), Distance.FromKilometers(1)));
-                
+
                 HelpersServices helpersServices = new HelpersServices();
                 var hs = await helpersServices.GetHelpersInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
 
@@ -148,7 +151,7 @@ namespace Helpa
                 lvHalfHelpa.ItemsSource = helpersViewModel.HelperHalfList;
                 lblHelperCount.Text = hs.Count() + " Helpers found in " + selectedHelpersInCluster.LocationName;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.Write(e.StackTrace);
             }
@@ -310,7 +313,7 @@ namespace Helpa
             var selectedItem = (HelperHome)args.Item;
             int selectedIndex = helpersViewModel.HelperFullList.IndexOf(helpersViewModel.HelperFullList.Where(h => h.UserId == selectedItem.UserId).FirstOrDefault());
             //helpersViewModel.HelperFullList.ElementAt(selectedIndex).bgcolor = "#FADC54";
-            
+
             //slOuterFull.
             //lvFullHelpa.GetChildAt(args.)
         }
@@ -339,11 +342,12 @@ namespace Helpa
                 slFullHelpa.IsVisible = true;
                 mapHelper.IsVisible = false;
                 lblCount.IsVisible = false;
-                
+
                 ShowHelperFullList();
 
                 imgHelpersList.Source = "location_filter.png";
-            } else
+            }
+            else
             {
                 slFullHelpa.IsVisible = false;
                 mapHelper.IsVisible = true;
@@ -356,6 +360,11 @@ namespace Helpa
             }
         }
 
+
+        string filteredService = "";
+        string filteredScope = "";
+        char filteredLocationType = '\0';
+        string filteredSortBy = "";
         private async void OnClickServiceFilter(object sender, EventArgs e)
         {
             aiFindHelper.IsRunning = true;
@@ -364,7 +373,7 @@ namespace Helpa
             var result = await DisplayActionSheet("Select Service", "Cancel", null, servicesName.ToArray());
             aiFindHelper.IsRunning = false;
         }
-        
+
         private async void OnClickLocationFilter(object sender, EventArgs e)
         {
             var result = await DisplayActionSheet("Select Service", "Cancel", null, "Home Helper", "Mobile's Helper", "All");
@@ -373,19 +382,21 @@ namespace Helpa
             {
                 var filteredList = helpersViewModel.helperHomeList.Where(x => x.LocationType == 'S');
                 helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+                filteredLocationType = 'S';
             }
             else
             if (result.Equals("All"))
             {
                 helpersViewModel.SetLocationOnMap(helpersViewModel.helperHomeList);
+                filteredLocationType = '\0';
             }
             else
             {
                 var filteredList = helpersViewModel.helperHomeList.Where(x => x.LocationType.Equals('M'));
                 helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+                filteredLocationType = 'M';
             }
         }
-
 
         private void OnClickScopeFilter(object sender, EventArgs e)
         {
@@ -395,6 +406,99 @@ namespace Helpa
         private void OnClickSortByFilter(object sender, EventArgs e)
         {
 
+        }
+
+        bool flag = true;
+        List<AutoCompletePrediction> selectedPrediction;
+        private void OnPlacesRetrieved(object sender, AutoCompleteResult result)
+        {
+            if (flag)
+            {
+                var searchBar = (PlacesBar)sender;
+                if (!(result.Status == "OK"))
+                    return;
+
+                if (string.IsNullOrEmpty(searchBar.Text))
+                {
+                    listView.IsVisible = false;
+                    listView.SelectedItem = null;
+
+                    return;
+                }
+
+                IList<string> description = new List<string>();
+                selectedPrediction = result.AutoCompletePlaces;
+                foreach (AutoCompletePrediction autoCompletePlace in result.AutoCompletePlaces)
+                {
+                    //SfAutoCompleteItem autoCompleteItem = new SfAutoCompleteItem(autoCompletePlace.Description, "location.png");
+                    description.Add(autoCompletePlace.Description);
+                }
+
+                if (description.Count == 0)
+                    return;
+
+                listView.IsVisible = true;
+                listView.TranslationY = gridSearchBar.Height;
+                listView.TranslationX = gridSearchBar.X;
+
+                listView.ItemsSource = description;
+            }
+            else
+            {
+                flag = true;
+            }
+        }
+
+        private async void OnLocationSelected(object sender, ItemTappedEventArgs e)
+        {
+            string selectedLoc = ((ListView)sender).SelectedItem.ToString();
+            entrySearch.Text = selectedLoc;
+
+            listView.IsVisible = false;
+            listView.SelectedItem = null;
+
+            flag = false;
+        }
+
+        private async void OnHelperSearch(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(entrySearch.Text))
+            {
+                listView.IsVisible = false;
+                listView.SelectedItem = null;
+
+                string selectedLoc = entrySearch.Text;
+                //selectedLoc = selectedLoc.Split(',')[0];
+                var loc = selectedPrediction.Where(x => x.Description == selectedLoc).FirstOrDefault();
+                Place place = await Places.GetPlace(loc.Place_ID, Constants.googlePlaceApiKey);
+
+                /*var latitude = place.Latitude;
+                var longitude = place.Longitude;
+                IList<HelperHomeModel> filterList = helpersViewModel.helperHomeList.Where(x => (x.Latitude == latitude)).ToList();
+                var c = filterList.Where(x => x.Longitude == longitude).ToList();*/
+
+                var filterList = helpersViewModel.helperHomeList.Where(x => x.Latitude == place.Latitude && x.Longitude == place.Longitude);
+
+                //filterList = filterList.Where(x => x.Longitude == longitude);
+                //if (!string.IsNullOrEmpty(filteredService))
+                //    filterList = filterList.Where(x =>);
+
+                //if (!string.IsNullOrEmpty(filteredScope))
+                //    filterList = filterList.Where(x =>);
+
+                //if (!string.IsNullOrEmpty(filteredSortby))
+                //    filterList = filterList.Where(x =>);
+
+                //helpersViewModel.SetLocationOnMap(helpersViewModel.helperHomeList);
+
+                if (filteredLocationType != '\0')
+                {
+                    //filterList = filterList.Where(x => x.LocationType.Equals(filteredLocationType));
+                }
+
+                if (filterList != null && filterList.Count() != 0)
+                    helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filterList));
+            }
         }
     }
 }
