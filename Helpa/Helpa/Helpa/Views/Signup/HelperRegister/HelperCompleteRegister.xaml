@@ -66,7 +66,7 @@
 
                     <Grid Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                         <!--#region Helper Basic Information-->
-                        <ScrollView x:Name="svHelperBasicInfo">
+                        <ScrollView x:Name="svHelperBasicInfo" IsClippedToBounds="True">
                             <Grid RowSpacing="0">
                                 <Grid.RowDefinitions>
                                     <!--<RowDefinition Height="0.3*"/>
@@ -209,7 +209,7 @@
                         <!--#endregion-->
 
                         <!--#region Helper Edit Service-->
-                        <ScrollView x:Name="svHelperEditServices" IsVisible="False">
+                        <ScrollView x:Name="svHelperEditServices" IsVisible="False" IsClippedToBounds="True">
                             <Grid RowSpacing="0" >
                                 <Grid.RowDefinitions>
                                     <!--<RowDefinition Height="0.1*"/>
@@ -319,7 +319,7 @@
                         </ScrollView>
 
                         <!--#region HelperServices-->
-                        <ScrollView x:Name="svHelperRegHelperHome" IsVisible="False">
+                        <ScrollView x:Name="svHelperRegHelperHome" IsVisible="False" IsClippedToBounds="True">
                             <Grid RowSpacing="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -553,11 +553,10 @@
                             </Grid>
                         </ScrollView>
                         <!--#endregion-->
-
                         <!--#endregion-->
 
                         <!--#region  BuildTrust-->
-                        <ScrollView x:Name="svHelperBuildTrust" IsVisible="False">
+                        <ScrollView x:Name="svHelperBuildTrust" IsVisible="False" IsClippedToBounds="True">
                             <Grid RowSpacing="0" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.1*"/>

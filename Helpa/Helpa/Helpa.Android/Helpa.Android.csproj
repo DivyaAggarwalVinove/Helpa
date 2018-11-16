@@ -983,5 +983,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\menu2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\carousel.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

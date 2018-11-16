@@ -19,7 +19,7 @@ namespace Helpa
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Helpers : ContentPage
     {
-        HelpersViewModel helpersViewModel;
+        public HelpersViewModel helpersViewModel;
 
         #region HelperInstance
         static Helpers instance;

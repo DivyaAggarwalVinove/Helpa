@@ -289,7 +289,7 @@ namespace Helpa.ViewModels
                 mapHelper.IsShowingUser = true;
                 mapHelper.MapType = MapType.Street;
 
-                TotallHelpers = t;
+                TotalHelpers = t;
             }
             catch (Exception e)
             {
@@ -298,7 +298,7 @@ namespace Helpa.ViewModels
         }
 
         string totalHelpers = "?";
-        public string TotallHelpers
+        public string TotalHelpers
         {
             get
             {

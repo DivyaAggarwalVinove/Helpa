@@ -74,5 +74,35 @@ namespace Helpa.Services
 
             return err_msg;
         }
+
+        public async Task<UserModel> GetUserBasicInfo(int UserId)
+        {
+            UserModel savedUsers = new UserModel();
+
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/GetBasic?id=" + UserId));
+
+                    var response = await httpClient.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        savedUsers = JsonConvert.DeserializeObject<UserModel>(result);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            return savedUsers;
+        }
     }
 }

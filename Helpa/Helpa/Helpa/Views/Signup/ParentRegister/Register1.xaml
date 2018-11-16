@@ -55,7 +55,7 @@
                     </Grid>
 
                     <Grid Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <ScrollView x:Name="svBasicInfo">
+                        <ScrollView x:Name="svBasicInfo" IsClippedToBounds="True">
                             <Grid RowSpacing="0">
                                 <Grid.RowDefinitions>
                                     <!--<RowDefinition Height="0.34*"/>
@@ -205,7 +205,7 @@
                             </Grid>
                         </ScrollView>
 
-                        <ScrollView x:Name="svLocationInfo" IsVisible="False">
+                        <ScrollView x:Name="svLocationInfo" IsClippedToBounds="True" IsVisible="False">
                             <Grid RowSpacing="0" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.1*"/>

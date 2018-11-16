@@ -91,7 +91,9 @@ namespace Helpa
                 SelectTab(grid, selectedPage, 0);
 
                 contentPresenter = grid.FindByName<ContentPresenter>("content");
-                contentPresenter.Content = (new Helpers()).Content;
+                // contentPresenter.Content = (new Helpers()).Content;
+                // Helpers.Instance.helpersViewModel.TotalHelpers = Helpers.Instance.helpersViewModel.TotalHelpers;
+                contentPresenter.Content = Helpers.Instance.Content;
             }
         }
         
@@ -103,7 +105,11 @@ namespace Helpa
                 SelectTab(grid, selectedPage, 1);
 
                 contentPresenter = grid.FindByName<ContentPresenter>("content");
-                contentPresenter.Content = (new JobPosts()).Content;
+                //contentPresenter.Content = (new JobPosts()).Content;
+                if (JobPosts.Instance != null)
+                    contentPresenter.Content = JobPosts.Instance.Content;
+                else
+                    contentPresenter.Content = (new JobPosts()).Content;
             }
         }
 

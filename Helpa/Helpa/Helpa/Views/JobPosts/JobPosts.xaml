@@ -2,12 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:custommap="clr-namespace:Helpa"
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-            ios:Page.UseSafeArea="true"
-             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
              xmlns:local="clr-namespace:Helpa"
              BackgroundColor="#EFF3F6"
-             ControlTemplate="{StaticResource MainPageTemplate}"
              x:Class="Helpa.JobPosts">
     <ContentView>
         <Grid RowSpacing="0">

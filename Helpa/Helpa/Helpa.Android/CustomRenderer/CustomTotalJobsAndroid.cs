@@ -18,7 +18,7 @@ namespace Helpa.Droid
             base.OnElementChanged(e);
             if (Control != null)
             {
-                Control.SetBackgroundResource(Resource.Drawable.custom_total_helper_style);
+                Control.SetBackgroundResource(Resource.Drawable.custom_total_job_style);
                 //Control.TextAlignment = Android.Views.TextAlignment.Center;
                 Control.Gravity = Android.Views.GravityFlags.Center;
                 //Control.InputType = Android.Text.InputTypes.TextFlagCapSentences;

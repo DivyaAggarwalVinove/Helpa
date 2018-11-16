@@ -9,5 +9,6 @@ namespace Helpa.Services
     public interface ILoginServices
     {
         Task<LoginErrorResponseModel> Login(string email, string pwd);
+        Task<UserModel> GetUserBasicInfo(int UserId);
     }
 }
