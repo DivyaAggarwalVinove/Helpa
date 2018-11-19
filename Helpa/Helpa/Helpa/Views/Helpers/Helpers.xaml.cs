@@ -4,7 +4,7 @@ using Helpa.Services;
 using Helpa.Utility;
 using Helpa.ViewModels;
 using Helpa.Views.Helpers;
-using Helpa.Views.Profile.UserProfile;
+using Helpa.Views.Profile;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

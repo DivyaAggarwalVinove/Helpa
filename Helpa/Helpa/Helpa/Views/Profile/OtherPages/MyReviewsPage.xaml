@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Helpa.Views.Profile.OtherPages.MyReviewsPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:local="clr-namespace:Helpa" 
+             BackgroundColor="#F1F5F6">
+    <ContentPage.Content>
+        <Grid x:Name="rootlayout" RowSpacing="0" BackgroundColor="Transparent" Margin="10,20,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Padding="0,0,0,10">
+                    <StackLayout Orientation="Horizontal" Spacing="10">
+                        <Image Source="back.png" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="Profile" VerticalOptions="Center"  TextColor="#6E706F" FontAttributes="None" FontSize="Small"/>
+                    </StackLayout>
+                    <!--<Image Source="back.png" VerticalOptions="Center" HorizontalOptions="Start"  />-->
+                </Grid>
+                <Grid Grid.Row="1" Padding="0,10,0,10">
+                    <Label Text="My Reviews" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" RowSpacing="0" Margin="1" Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Padding="20,0,20,0">
+                        <Label Text="About me" x:Name="XFLblAboutMe" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" x:Name="XFBoxviewAboutme" BackgroundColor="Red" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFGRIDboutme" Tapped="XFBoxviewAboutme_Tapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <Grid Grid.Column="1" Padding="20,0,20,0">
+                        <Label Text="By me" x:Name="XFLblByMe" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" x:Name="XFBoxviewByMe"  HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFGRIDJobByMe" Tapped="XFBoxviewByMe_Tapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <Grid Grid.Column="2" Padding="20,0,20,0">
+                        <Label Text="To-review" x:Name="XFLblToReview" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" x:Name="XFBoxviewToReview"  HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFGRIDToReview" Tapped="XFBoxviewToReview_Tapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <BoxView  HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

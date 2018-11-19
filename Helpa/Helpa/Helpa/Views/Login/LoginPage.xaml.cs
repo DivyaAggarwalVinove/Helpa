@@ -1,6 +1,5 @@
 using Helpa.Models;
 using Helpa.Services;
-using Helpa.Views.Profile.UserProfile;
 using System;
 using System.Collections.Generic;
 using System.Linq;

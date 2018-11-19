@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
 using Helpa.Services;
-using Helpa.Views.Profile.UserProfile;
+using Helpa.Views.Profile;
 
 namespace Helpa
 {

@@ -75,6 +75,12 @@ namespace Helpa.Services
             return err_msg;
         }
 
+        /* 
+Helpa/Helpa/Helpa/Views/Profile/EditProfilePage.xaml
+
+Helpa.Views.Profile
+         */
+
         public async Task<UserModel> GetUserBasicInfo(int UserId)
         {
             UserModel savedUsers = new UserModel();

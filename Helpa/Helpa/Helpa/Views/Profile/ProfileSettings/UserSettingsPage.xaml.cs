@@ -1,5 +1,4 @@
 ﻿using Helpa.Views.JobPosts;
-using Helpa.Views.OtherPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;

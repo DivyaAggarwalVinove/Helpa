@@ -6,7 +6,7 @@
             ios:Page.UseSafeArea="true"
              x:Class="Helpa.LoginPage">
     <ContentPage.Content BackgroundColor="#F1F5F6">
-        <ScrollView>
+        <ScrollView IsClippedToBounds="true">
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

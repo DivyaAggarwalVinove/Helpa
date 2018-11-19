@@ -60,6 +60,7 @@ namespace Helpa.iOS
             if (annotation is MKUserLocation)
                 return null;
 
+
             //var customPin = GetCustomPin(annotation as MKPointAnnotation);
             //if (customPin == null)
             //{

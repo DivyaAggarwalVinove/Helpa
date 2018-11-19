@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Helpa"
@@ -62,7 +62,7 @@
                     </Grid>
                 </Grid>
 
-                <ScrollView Grid.Row="1" BackgroundColor="#f1f5f6" Padding="5">
+                <ScrollView Grid.Row="1" IsClippedToBounds="true" BackgroundColor="#f1f5f6" Padding="5">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -115,7 +115,7 @@
                         </Grid>
 
                         <Grid Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
-                            <ScrollView>
+                            <ScrollView IsClippedToBounds="true">
                                 <Grid x:Name="gridPJServices" ColumnSpacing="10" RowSpacing="5">
                                 </Grid>
                             </ScrollView>
@@ -301,7 +301,7 @@
                         </Grid>
 
                         <Grid Grid.Row="18" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
-                            <ScrollView>
+                            <ScrollView IsClippedToBounds="true">
                                 <Grid x:Name="gridPJScopes" ColumnSpacing="10" RowSpacing="5">
                                 </Grid>
                             </ScrollView>

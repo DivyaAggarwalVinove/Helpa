@@ -265,7 +265,7 @@
                                 </Grid>
 
                                 <Grid Grid.Row="4" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                    <ScrollView>
+                                    <ScrollView IsClippedToBounds="true">
                                         <Grid x:Name="gridServices" ColumnSpacing="10" RowSpacing="5">
                                         </Grid>
                                     </ScrollView>
@@ -535,7 +535,7 @@
                                 </Grid>
 
                                 <Grid Grid.Row="14" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,10,0,10">
-                                    <ScrollView>
+                                    <ScrollView IsClippedToBounds="true">
                                         <Grid x:Name="gridScopes" ColumnSpacing="10" RowSpacing="5">
                                         </Grid>
                                     </ScrollView>

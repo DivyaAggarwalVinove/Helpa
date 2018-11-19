@@ -5,7 +5,6 @@
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
-		<integer>2</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
@@ -23,7 +22,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>InUses Description</string>
 	<key>MinimumOSVersion</key>
-	<string>10.3</string>
+	<string>12.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>Helpa</string>
 	<key>CFBundleVersion</key>
@@ -36,8 +35,6 @@
 	<string>test.vinove.com</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>Custom Property</key>
 	<string></string>
 	<key>CFBundleDocumentTypes</key>
