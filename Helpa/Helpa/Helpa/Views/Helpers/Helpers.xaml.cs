@@ -78,8 +78,8 @@ namespace Helpa
             if (loggedUser == null)
                 return;
 
-            ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage();
-            profileAfterLoginPage.currentUser = loggedUser;
+            ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage() { currentUser = loggedUser };
+            profileAfterLoginPage.BindingContext = new ProfileAfterLoginViewModel(loggedUser);
             ProfilePage.pcv.Content = profileAfterLoginPage.Content;
 
             //await GetRuntimeLocationPermission(5000);

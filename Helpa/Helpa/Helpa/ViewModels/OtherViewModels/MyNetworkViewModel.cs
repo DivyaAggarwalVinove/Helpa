@@ -39,6 +39,7 @@ namespace Helpa.ViewModels
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             LoadItemsCommand.Execute(null);
         }
+
         public async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
@@ -109,6 +110,7 @@ namespace Helpa.ViewModels
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
+
         protected bool SetProperty<T>(ref T backingStore, T value,
           [CallerMemberName]string propertyName = "",
           Action onChanged = null)
@@ -120,6 +122,7 @@ namespace Helpa.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")

@@ -40,19 +40,23 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="0.5"/>
                     </Grid.RowDefinitions>
+                    
                     <Grid Grid.Row="0" Padding="20" BackgroundColor="#EFF3F6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
+                        
                         <Grid Grid.Column="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
+                            
                             <Grid Grid.Row="0">
-                                <Label Text="Amy Rose" FontAttributes="Bold" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                <Label x:Name="lblUserProfileName" Text="{Binding CurrentUser.UserName}" FontAttributes="Bold" FontSize="Medium" TextColor="Black" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                             </Grid>
+                            
                             <Grid Grid.Row="1">
                                 <Label Text="View Profile" TextColor="#555958" FontSize="15" HorizontalOptions="Start" HorizontalTextAlignment="Start" VerticalOptions="Center" VerticalTextAlignment="Center">
                                     <Label.GestureRecognizers>
@@ -61,10 +65,12 @@
                                 </Label>
                             </Grid>
                         </Grid>
+                        
                         <Grid Grid.Column="1">
-                            <Image VerticalOptions="Center" HorizontalOptions="End" Source="picture2.png" HeightRequest="60" WidthRequest="60" />
+                            <Image x:Name="imgUserProfilePicture" VerticalOptions="Center" HorizontalOptions="End" Source="picture2.png" HeightRequest="60" WidthRequest="60" />
                         </Grid>
                     </Grid>
+                    
                      <Grid Grid.Row="1" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
                             <Label Text="My network"  TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
@@ -74,6 +80,7 @@
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
+                    
                      <Grid Grid.Row="2" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
                             <Label Text="My reviews" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
@@ -83,7 +90,8 @@
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
-                     <Grid Grid.Row="3" BackgroundColor="#EFF3F6">
+                     
+                    <Grid Grid.Row="3" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
                             <Label Text="My job posts" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
                             <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png"/>
@@ -92,6 +100,7 @@
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
+                    
                      <Grid Grid.Row="4" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
                             <Label Text="Saved items" TextColor="#555958" FontSize="15" FontAttributes="None" HorizontalOptions="StartAndExpand" />
@@ -101,6 +110,7 @@
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
+                    
                      <Grid Grid.Row="5" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
                             <Label Text="Settings" TextColor="#555958" FontSize="15" HorizontalOptions="StartAndExpand" />
@@ -110,7 +120,8 @@
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
-                     <Grid Grid.Row="6" BackgroundColor="#EFF3F6">
+                   
+                    <Grid Grid.Row="6" BackgroundColor="#EFF3F6">
                         <StackLayout Padding="10" Orientation="Horizontal">
                             <Label Text="Language(English/)" TextColor="#555958" FontSize="15"  HorizontalOptions="StartAndExpand" />
                              <Image HorizontalOptions="EndAndExpand" Source="angle_grey_right.png" />
@@ -118,10 +129,12 @@
                     </Grid>
                      <BoxView Grid.Row="7" HeightRequest="1" BackgroundColor="#E0E1E5"/>
                 </Grid>
+                
                  <Grid Grid.Row="1" Margin="10,30,0,0"  BackgroundColor="#EFF3F6">
                     <Label Text="Other" TextColor="#FF738D" BackgroundColor="Transparent" FontSize="15" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
                 </Grid>
-                 <Grid Grid.Row="2" RowSpacing="1" BackgroundColor="#E0E1E5">
+                
+                <Grid Grid.Row="2" RowSpacing="1" BackgroundColor="#E0E1E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>

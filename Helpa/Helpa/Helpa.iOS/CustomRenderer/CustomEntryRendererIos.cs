@@ -21,7 +21,6 @@ namespace Helpa.iOS
             {
                 Control.BorderStyle = UITextBorderStyle.None;
                 Control.LayoutMargins = new UIEdgeInsets(0,5,0,5);
-
                 Control.Layer.CornerRadius = 10.0f;
                 Control.BackgroundColor = UIColor.White;
                 Control.VerticalAlignment = UIControlContentVerticalAlignment.Center;

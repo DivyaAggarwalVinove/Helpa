@@ -23,19 +23,55 @@
     <None Remove="Services\ServiceEntity\**" />
     <None Remove="App.xaml" />
     <None Remove="Views\Helpers\HelpersList.xaml" />
+    <None Remove="Views\Helpers\ChildView.xaml" />
+    <None Remove="Views\Helpers\Helpers.xaml" />
+    <None Remove="Views\Helpers\LocationPage.xaml" />
+    <None Remove="Views\Helpers\PostJobPage.xaml" />
+    <None Remove="Views\JobPosts\JobPostDetailsPage.xaml" />
+    <None Remove="Views\JobPosts\JobPosts.xaml" />
+    <None Remove="Views\Login\LoginPage.xaml" />
+    <None Remove="Views\Messages\Messages.xaml" />
+    <None Remove="Views\Notifications\Notifications.xaml" />
+    <None Remove="Views\Profile\ProfileAfterLoginPage.xaml" />
+    <None Remove="Views\Profile\ProfileBeforeLoginPage.xaml" />
+    <None Remove="Views\Profile\ProfilePage.xaml" />
+    <None Remove="Views\Profile\EditProfile\EditBasicInfo.xaml" />
+    <None Remove="Views\Profile\EditProfile\EditProfilePage.xaml" />
+    <None Remove="Views\Profile\EditProfile\EditService.xaml" />
+    <None Remove="Views\Profile\EditProfile\EditVerificationPage.xaml" />
+    <None Remove="Views\Profile\EditProfile\ServiceDetailPage.xaml" />
+    <None Remove="Views\Profile\OtherPages\MyJobPostPage.xaml" />
+    <None Remove="Views\Profile\OtherPages\MyNetworkPage.xaml" />
+    <None Remove="Views\Profile\OtherPages\MyReviewsPage.xaml" />
+    <None Remove="Views\Profile\OtherPages\SavedItemsUsersPage.xaml" />
+    <None Remove="Views\Profile\ProfileSettings\BlockUserPage.xaml" />
+    <None Remove="Views\Profile\ProfileSettings\ForgotPasswordPage.xaml" />
+    <None Remove="Views\Profile\ProfileSettings\MessagesSettingsPage.xaml" />
+    <None Remove="Views\Profile\ProfileSettings\NotificationSettingsPage.xaml" />
+    <None Remove="Views\Profile\ProfileSettings\ResetPasswordPage.xaml" />
+    <None Remove="Views\Profile\ProfileSettings\UserSettingsPage.xaml" />
+    <None Remove="Views\Signup\HelperRegister\HelperCompleteRegister.xaml" />
+    <None Remove="Views\Signup\HelperRegister\HelperRegister.xaml" />
+    <None Remove="Views\Signup\HelperRegister\HelperRegister2.xaml" />
+    <None Remove="Views\Signup\HelperRegister\HelperRegister3.xaml" />
+    <None Remove="Views\Signup\ParentRegister\Register.xaml" />
+    <None Remove="Views\Signup\ParentRegister\Register1.xaml" />
+    <None Remove="Views\Signup\ParentRegister\Register2.xaml" />
+    <None Remove="Views\Signup\ParentRegister\Register3.xaml" />
+    <EmbeddedResource Remove="Views\Helpers\HelpersList.xaml" />
+    <Compile Remove="Views\Helpers\HelpersList.xaml.cs" />
+    <None Remove="Views\Profile\.DS_Store" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="MainPage.xaml.cs" />
     <Compile Remove="Models\Domain.cs" />
     <Compile Remove="Views\DashboardPage.xaml.cs" />
-    <Compile Remove="Views\Helpers\HelpersList.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="MainPage.xaml" />
     <EmbeddedResource Remove="Views\DashboardPage.xaml" />
-    <EmbeddedResource Remove="Views\Helpers\HelpersList.xaml" />
   </ItemGroup>
   
   <ItemGroup>
@@ -72,30 +108,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Profile\OtherPages\MyJobPostPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Profile\OtherPages\MyNetworkPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Profile\OtherPages\MyReviewsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Profile\OtherPages\SavedItemsUsersPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Profile\EditProfile\ServiceDetailPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Profile\ProfileAfterLoginPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Profile\ProfileBeforeLoginPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Profile\ProfilePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Profile\Profile.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -111,48 +123,8 @@
     <Compile Update="Views\Profile\EditProfile\EditService.xaml.cs">
       <DependentUpon>EditService.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Signup\HelperRegister\HelperRegister.xaml.cs">
-      <DependentUpon>HelperRegister.xaml</DependentUpon>
-      <Link>Views\Views\Signup\HelperRegister\HelperRegister.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Signup\HelperRegister\HelperCompleteRegister.xaml.cs">
-      <DependentUpon>HelperCompleteRegister.xaml</DependentUpon>
-      <Link>Views\Views\Signup\HelperRegister\HelperCompleteRegister.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Signup\HelperRegister\HelperRegister2.xaml.cs">
-      <DependentUpon>HelperRegister2.xaml</DependentUpon>
-      <Link>Views\Views\Signup\HelperRegister\HelperRegister2.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Signup\HelperRegister\HelperRegister3.xaml.cs">
-      <DependentUpon>HelperRegister3.xaml</DependentUpon>
-      <Link>Views\Views\Signup\HelperRegister\HelperRegister3.xaml.cs</Link>
-    </Compile>
     <Compile Update="Views\Helpers\ChildView.xaml.cs">
       <Link>Views\Views\Helpers\ChildView.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Helpers\Helpers.xaml.cs">
-      <Link>Views\Views\Helpers\Helpers.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Helpers\LocationPage.xaml.cs">
-      <Link>Views\Views\Helpers\LocationPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Helpers\PostJobPage.xaml.cs">
-      <Link>Views\Views\Helpers\PostJobPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\JobPosts\JobPostDetailsPage.xaml.cs">
-      <Link>Views\Views\JobPosts\JobPostDetailsPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\JobPosts\JobPosts.xaml.cs">
-      <Link>Views\Views\JobPosts\JobPosts.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Login\LoginPage.xaml.cs">
-      <Link>Views\Views\Login\LoginPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Messages\Messages.xaml.cs">
-      <Link>Views\Views\Messages\Messages.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Notifications\Notifications.xaml.cs">
-      <Link>Views\Views\Notifications\Notifications.xaml.cs</Link>
     </Compile>
     <Compile Update="Views\Profile\ProfileSettings\BlockUserPage.xaml.cs">
       <Link>Views\Views\Profile\ProfileSettings\BlockUserPage.xaml.cs</Link>
@@ -171,18 +143,6 @@
     </Compile>
     <Compile Update="Views\Profile\ProfileSettings\UserSettingsPage.xaml.cs">
       <Link>Views\Views\Profile\ProfileSettings\UserSettingsPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Signup\ParentRegister\Register.xaml.cs">
-      <Link>Views\Views\Signup\ParentRegister\Register.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Signup\ParentRegister\Register1.xaml.cs">
-      <Link>Views\Views\Signup\ParentRegister\Register1.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Signup\ParentRegister\Register2.xaml.cs">
-      <Link>Views\Views\Signup\ParentRegister\Register2.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Signup\ParentRegister\Register3.xaml.cs">
-      <Link>Views\Views\Signup\ParentRegister\Register3.xaml.cs</Link>
     </Compile>
   </ItemGroup>
 
@@ -266,5 +226,6 @@
     <Folder Include="ViewModels\OtherViewModels\" />
     <Folder Include="Views\Profile\OtherPages\" />
     <Folder Include="Views\Profile\EditProfile\" />
+    <Folder Include="ViewModels\ProfileViewModel\" />
   </ItemGroup>
 </Project>

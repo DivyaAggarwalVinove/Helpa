@@ -1,4 +1,5 @@
-﻿using Helpa.Views.Profile;
+﻿using Helpa.Models;
+using Helpa.Views.Profile;
 using Helpa.Views.Profile.UserProfile;
 using System;
 using Xamarin.Forms;
@@ -9,6 +10,8 @@ namespace Helpa.Views.Profile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditProfilePage : ContentPage
     {
+        public RegisterUserModel LoggedinUser { get; set; }
+
         public EditProfilePage()
         {
             InitializeComponent();
@@ -17,7 +20,7 @@ namespace Helpa.Views.Profile
 
         public void OnClickBasicInfo(object sender, EventArgs e)
         {
-            App.NavigationPage.Navigation.PushAsync(new EditBasicInfo());
+            App.NavigationPage.Navigation.PushAsync(new EditBasicInfo() { LoggedinUser = this.LoggedinUser});
         }
 
         public void OnClickServices(object sender, EventArgs e)

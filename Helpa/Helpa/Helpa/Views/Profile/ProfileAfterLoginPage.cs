@@ -1,4 +1,5 @@
 ﻿using Helpa.Models;
+using Helpa.ViewModels;
 using Helpa.Views.Profile.OtherPages;
 using Helpa.Views.Profile.ProfileSettings;
 using System;
@@ -18,6 +19,7 @@ namespace Helpa.Views.Profile
         public ProfileAfterLoginPage()
         {
             InitializeComponent();
+
             try
             {
                 NavigationPage.SetHasNavigationBar(this, false);
@@ -26,11 +28,13 @@ namespace Helpa.Views.Profile
             {
                 Console.Write(e.StackTrace);
             }
+
+            //BindingContext = new ProfileAfterLoginViewModel();
         }
 
         private void OnClickViewProfile(object sender, EventArgs e)
         {
-            App.NavigationPage.Navigation.PushAsync(new EditProfilePage());
+            App.NavigationPage.Navigation.PushAsync(new EditProfilePage() { LoggedinUser = currentUser });
         }
 
         private void OnClickSetting(object sender, EventArgs e)
@@ -62,14 +66,17 @@ namespace Helpa.Views.Profile
         {
             App.NavigationPage.Navigation.PushAsync(new SavedItemsUsersPage());
         }
+
         private void OnClickRateUs(object sender, EventArgs e)
         {
             //Device.OpenUri(new Uri("market://details?id=com.vinove.Helpa"));
         }
+
         private void OnClickLikeOnFacebook(object sender, EventArgs e)
         {
             //Device.OpenUri(new Uri("fb://page/108972495813848"));
         }
+
         private void OnClickLogout(object sender, EventArgs e)
         {
             RegisterUserModel loggedUser = App.Database.GetLoggedUser();

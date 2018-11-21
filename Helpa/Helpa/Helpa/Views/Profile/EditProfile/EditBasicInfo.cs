@@ -18,7 +18,8 @@ namespace Helpa.Views.Profile.UserProfile
         //private ProfileInfoResponse _objProfileInfoResponse;
         //private RestApi _apiService;
         private string _baseUrl;
-        //private HeaderModel _objHeaderModel;
+        public RegisterUserModel LoggedinUser { get; set; }
+
         #endregion
         public EditBasicInfo()
         {
@@ -32,12 +33,14 @@ namespace Helpa.Views.Profile.UserProfile
             //_objHeaderModel.TokenCode = Settings.TokenCode;
             //_baseUrl = Domain.Url + Domain.GetProfileInfoApiConstant;
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
             LoadPageData();
         }
-        private void LoadPageData()
+
+        private async void LoadPageData()
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
@@ -45,6 +48,7 @@ namespace Helpa.Views.Profile.UserProfile
             }
             else
             {
+                var userBasicInfo = await (new LoginServices()).GetUserBasicInfo(LoggedinUser.Id);
                // XFAIPageLoad.IsVisible = true;
                 //  _objProfileInfoResponse = await _apiService.GetAsyncData_GetApi(new Get_API_Url().GetProfileInfoApi(_baseUrl,Settings.UserID), true, _objHeaderModel, _objProfileInfoResponse);
               //  XFAIPageLoad.IsVisible = false;
