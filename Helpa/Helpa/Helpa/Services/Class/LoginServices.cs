@@ -49,7 +49,8 @@ namespace Helpa.Services
                         user.UserName = message.userName;
                         user.Token = message.access_token;
                         user.isLoggedIn = true;
-                        //user.Role = message.roles;
+                        user.Role = message.roles;
+                        user.profileImage = message.profileImage;
                         await App.Database.SaveUserAsync(user);
 
                         return null;

@@ -15,9 +15,6 @@ namespace Helpa.Views.Profile.UserProfile
     public partial class EditBasicInfo : ContentPage
     {
         #region Variable Declaration
-        //private ProfileInfoResponse _objProfileInfoResponse;
-        //private RestApi _apiService;
-        private string _baseUrl;
         public RegisterUserModel LoggedinUser { get; set; }
 
         #endregion

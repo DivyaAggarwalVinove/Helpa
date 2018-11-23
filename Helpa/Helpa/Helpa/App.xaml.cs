@@ -73,8 +73,6 @@ namespace Helpa
 
                 NavigationPage = new NavigationPage(new Helpers());
                 MainPage = NavigationPage;
-
-                //JobPosts jobPosts = new JobPosts();
             }
             catch (Exception e)
             {
@@ -93,6 +91,8 @@ namespace Helpa
                 contentPresenter = grid.FindByName<ContentPresenter>("content");
                 // contentPresenter.Content = (new Helpers()).Content;
                 // Helpers.Instance.helpersViewModel.TotalHelpers = Helpers.Instance.helpersViewModel.TotalHelpers;
+                var lbl = Helpers.Instance.FindByName<Label>("lblCount");
+                lbl.Text = Helpers.Instance.helpersViewModel.TotalHelpers;
                 contentPresenter.Content = Helpers.Instance.Content;
             }
         }
@@ -106,8 +106,14 @@ namespace Helpa
 
                 contentPresenter = grid.FindByName<ContentPresenter>("content");
                 //contentPresenter.Content = (new JobPosts()).Content;
+
                 if (JobPosts.Instance != null)
+                {
+                    var lbl = JobPosts.Instance.FindByName<Label>("lblTotalJobsCount");
+                    lbl.Text = JobPosts.Instance.jobsViewModel.TotallJobs;
+
                     contentPresenter.Content = JobPosts.Instance.Content;
+                }
                 else
                     contentPresenter.Content = (new JobPosts()).Content;
             }

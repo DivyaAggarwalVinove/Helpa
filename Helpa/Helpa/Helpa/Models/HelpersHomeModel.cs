@@ -42,6 +42,7 @@ namespace Helpa.Models
         public int HelperId { get; set; }
         public string Name { get; set; }
         public bool BookMark { get; set; }
+        public string BookmarkImage { get; set; }
         public string ProfilePicture { get; set; }
 
         public string AverageRating { get; set; }

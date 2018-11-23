@@ -21,7 +21,6 @@
     <None Remove="Helpers\**" />
     <None Remove="Services\ApiHandler\**" />
     <None Remove="Services\ServiceEntity\**" />
-    <None Remove="App.xaml" />
     <None Remove="Views\Helpers\HelpersList.xaml" />
     <None Remove="Views\Helpers\ChildView.xaml" />
     <None Remove="Views\Helpers\Helpers.xaml" />
@@ -59,6 +58,7 @@
     <None Remove="Views\Signup\ParentRegister\Register2.xaml" />
     <None Remove="Views\Signup\ParentRegister\Register3.xaml" />
     <EmbeddedResource Remove="Views\Helpers\HelpersList.xaml" />
+    <Compile Remove="ViewModels\ProfileViewModel\ProfileAfterLoginViewModel.cs" />
     <Compile Remove="Views\Helpers\HelpersList.xaml.cs" />
     <None Remove="Views\Profile\.DS_Store" />
   </ItemGroup>
@@ -82,6 +82,7 @@
     <PackageReference Include="DurianCode.PlacesSearchBar" Version="2.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Plugin.Share" Version="7.1.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="15.4.0.20" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
@@ -123,98 +124,101 @@
     <Compile Update="Views\Profile\EditProfile\EditService.xaml.cs">
       <DependentUpon>EditService.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Helpers\ChildView.xaml.cs">
-      <Link>Views\Views\Helpers\ChildView.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Profile\ProfileSettings\BlockUserPage.xaml.cs">
-      <Link>Views\Views\Profile\ProfileSettings\BlockUserPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Profile\ProfileSettings\ForgotPasswordPage.xaml.cs">
-      <Link>Views\Views\Profile\ProfileSettings\ForgotPasswordPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Profile\ProfileSettings\MessagesSettingsPage.xaml.cs">
-      <Link>Views\Views\Profile\ProfileSettings\MessagesSettingsPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Profile\ProfileSettings\NotificationSettingsPage.xaml.cs">
-      <Link>Views\Views\Profile\ProfileSettings\NotificationSettingsPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Profile\ProfileSettings\ResetPasswordPage.xaml.cs">
-      <Link>Views\Views\Profile\ProfileSettings\ResetPasswordPage.xaml.cs</Link>
-    </Compile>
-    <Compile Update="Views\Profile\ProfileSettings\UserSettingsPage.xaml.cs">
-      <Link>Views\Views\Profile\ProfileSettings\UserSettingsPage.xaml.cs</Link>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="App.xaml" />
     <None Include="Views\Helpers\ChildView.xaml">
       <Link>Views\Views\Helpers\ChildView.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Helpers\Helpers.xaml">
       <Link>Views\Views\Helpers\Helpers.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Helpers\LocationPage.xaml">
       <Link>Views\Views\Helpers\LocationPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Helpers\PostJobPage.xaml">
       <Link>Views\Views\Helpers\PostJobPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\JobPosts\JobPostDetailsPage.xaml">
       <Link>Views\Views\JobPosts\JobPostDetailsPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\JobPosts\JobPosts.xaml">
       <Link>Views\Views\JobPosts\JobPosts.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Login\LoginPage.xaml">
       <Link>Views\Views\Login\LoginPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Messages\Messages.xaml">
       <Link>Views\Views\Messages\Messages.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Notifications\Notifications.xaml">
       <Link>Views\Views\Notifications\Notifications.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Profile\ProfileSettings\BlockUserPage.xaml">
       <Link>Views\Views\Profile\ProfileSettings\BlockUserPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Profile\ProfileSettings\ForgotPasswordPage.xaml">
       <Link>Views\Views\Profile\ProfileSettings\ForgotPasswordPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Profile\ProfileSettings\MessagesSettingsPage.xaml">
       <Link>Views\Views\Profile\ProfileSettings\MessagesSettingsPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Profile\ProfileSettings\NotificationSettingsPage.xaml">
       <Link>Views\Views\Profile\ProfileSettings\NotificationSettingsPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Profile\ProfileSettings\ResetPasswordPage.xaml">
       <Link>Views\Views\Profile\ProfileSettings\ResetPasswordPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Profile\ProfileSettings\UserSettingsPage.xaml">
       <Link>Views\Views\Profile\ProfileSettings\UserSettingsPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Signup\HelperRegister\HelperCompleteRegister.xaml">
       <Link>Views\Views\Signup\HelperRegister\HelperCompleteRegister.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Signup\HelperRegister\HelperRegister.xaml">
       <Link>Views\Views\Signup\HelperRegister\HelperRegister.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Signup\HelperRegister\HelperRegister2.xaml">
       <Link>Views\Views\Signup\HelperRegister\HelperRegister2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Signup\HelperRegister\HelperRegister3.xaml">
       <Link>Views\Views\Signup\HelperRegister\HelperRegister3.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Signup\ParentRegister\Register.xaml">
       <Link>Views\Views\Signup\ParentRegister\Register.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Signup\ParentRegister\Register1.xaml">
       <Link>Views\Views\Signup\ParentRegister\Register1.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Signup\ParentRegister\Register2.xaml">
       <Link>Views\Views\Signup\ParentRegister\Register2.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Views\Signup\ParentRegister\Register3.xaml">
       <Link>Views\Views\Signup\ParentRegister\Register3.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
   <ItemGroup>

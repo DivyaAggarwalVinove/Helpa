@@ -13,5 +13,15 @@ namespace Helpa.Droid
             System.Threading.Thread.Sleep(2000);
             StartActivity(typeof(MainActivity));
         }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+        }
     }
 }

@@ -60,6 +60,32 @@ namespace Helpa.Droid
             }
         }
 
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+        }
+
         #region Requesting Runtime Location Permissions
         readonly string[] PermissionsLocation =
         {

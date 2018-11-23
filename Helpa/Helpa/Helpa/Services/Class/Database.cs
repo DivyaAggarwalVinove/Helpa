@@ -63,7 +63,8 @@ namespace Helpa.Services
 
         public RegisterUserModel GetLoggedUser()
         {
-            return database.Table<RegisterUserModel>().Where(i => i.isLoggedIn == true).FirstOrDefaultAsync().Result;
+            var user = database.Table<RegisterUserModel>().Where(i => i.isLoggedIn == true).FirstOrDefaultAsync().Result;
+            return user;
         }
 
         /// <summary>

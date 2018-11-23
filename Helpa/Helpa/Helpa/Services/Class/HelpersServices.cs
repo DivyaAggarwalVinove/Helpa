@@ -208,6 +208,63 @@ namespace Helpa.Services
 
             return helperService;
         }
+
+        public async Task<bool> BookMarkHelper(int userId, int helperId)
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                HttpClient httpClient = new HttpClient();
+
+                // http://180.151.232.92:127/api/Helpers/BookMarkHelper?UserId=1376&HelperUserId=1374
+                var uri = new Uri(string.Concat(Constants.baseUrl, "api/Helpers/BookMarkHelper?UserId=" + userId + "&HelperUserId=" + helperId));
+
+                var json = JsonConvert.SerializeObject("");
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await httpClient.PutAsync(uri, content);
+                string result = await response.Content.ReadAsStringAsync();
+                var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        public async Task<bool> UnBookMarkHelper(int userId, int helperId)
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                HttpClient httpClient = new HttpClient();
+
+                var uri = new Uri(string.Concat(Constants.baseUrl, "api/Helpers/UnBookMarkHelper?UserId=" + userId + "&HelperUserId=" + helperId));
+
+                var json = JsonConvert.SerializeObject("");
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await httpClient.PutAsync(uri, content);
+                string result = await response.Content.ReadAsStringAsync();
+                var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
     }
 }
  

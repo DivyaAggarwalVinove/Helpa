@@ -16,7 +16,7 @@ namespace Helpa.Views.Profile
     public partial class ProfileAfterLoginPage : ContentView
     {
         public RegisterUserModel currentUser { get; set; }
-        public ProfileAfterLoginPage()
+        public ProfileAfterLoginPage(RegisterUserModel currentUser)
         {
             InitializeComponent();
 
@@ -29,7 +29,10 @@ namespace Helpa.Views.Profile
                 Console.Write(e.StackTrace);
             }
 
-            //BindingContext = new ProfileAfterLoginViewModel();
+            this.currentUser = currentUser;
+            lblUserProfileName.Text = currentUser.UserName;
+            imgUserProfilePicture.Source = currentUser.profileImage;
+            //BindingContext = new ProfileAfterLoginViewModel(currentUser);
         }
 
         private void OnClickViewProfile(object sender, EventArgs e)

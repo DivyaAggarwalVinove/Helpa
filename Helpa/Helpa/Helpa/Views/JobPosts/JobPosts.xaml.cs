@@ -1,6 +1,8 @@
 ﻿using Helpa.Models;
 using Helpa.Services;
 using Helpa.ViewModels;
+using Plugin.Share;
+using Plugin.Share.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +19,7 @@ namespace Helpa
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class JobPosts : ContentPage
 	{
-        JobPostViewModel jobsViewModel;
+        public JobPostViewModel jobsViewModel;
 
         #region JobInstance
         static JobPosts instance;
@@ -267,6 +269,35 @@ namespace Helpa
 
                 imgJobsList.Source = "filter.png";
             }
+        }
+
+        private async void OnClickBookmark(object sender, EventArgs e)
+        {
+            aiJobPost.IsRunning = true;
+
+            var imgBookmark = ((Image)sender);
+
+            if (imgBookmark.Source.ToString().Contains("save.png"))
+            {
+                imgBookmark.Source = "save_filled.png";
+                bool isSuccess = await (new HelpersServices()).BookMarkHelper(1376, 1374);
+            }
+            else
+            {
+                imgBookmark.Source = "save.png";
+                bool isSuccess = await (new HelpersServices()).UnBookMarkHelper(1376, 1374);
+            }
+
+            aiJobPost.IsRunning = false;
+        }
+
+        private void OnClickShare(object sender, EventArgs e)
+        {
+            aiJobPost.IsRunning = true;
+
+            CrossShare.Current.Share(new ShareMessage { Text = "Test", Title = "Test Title", Url = "www.google.com" });
+
+            aiJobPost.IsRunning = false;
         }
     }
 }

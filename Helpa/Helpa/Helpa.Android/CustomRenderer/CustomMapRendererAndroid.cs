@@ -43,6 +43,7 @@ namespace Helpa.Droid
         {
             base.OnMapReady(map);
 
+            //ClusterManager cm = new ClusterManager();
             map.SetOnMarkerClickListener(this);
             //NativeMap.InfoWindowClick += OnInfoWindowClick;
             //NativeMap.SetInfoWindowAdapter(this);

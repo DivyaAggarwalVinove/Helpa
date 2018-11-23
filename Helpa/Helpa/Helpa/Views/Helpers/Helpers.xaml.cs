@@ -5,6 +5,8 @@ using Helpa.Utility;
 using Helpa.ViewModels;
 using Helpa.Views.Helpers;
 using Helpa.Views.Profile;
+using Plugin.Share;
+using Plugin.Share.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -78,8 +80,8 @@ namespace Helpa
             if (loggedUser == null)
                 return;
 
-            ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage() { currentUser = loggedUser };
-            profileAfterLoginPage.BindingContext = new ProfileAfterLoginViewModel(loggedUser);
+            ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage(loggedUser);
+            //profileAfterLoginPage.BindingContext = new ProfileAfterLoginViewModel(loggedUser);
             ProfilePage.pcv.Content = profileAfterLoginPage.Content;
 
             //await GetRuntimeLocationPermission(5000);
@@ -95,8 +97,16 @@ namespace Helpa
                 var selectedHelpersInCluster = helpersViewModel.helperHomeList.Where(h => h.LocationName == (selectedCluster)).FirstOrDefault();
                 mapHelper.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(selectedHelpersInCluster.Latitude - 0.0055, selectedHelpersInCluster.Longitude), Distance.FromKilometers(1)));
 
+                IEnumerable<HelperHome> hs = new List<HelperHome>();
                 HelpersServices helpersServices = new HelpersServices();
-                var hs = await helpersServices.GetHelpersInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
+
+                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+                if (loggedUser == null)
+                    hs = await helpersServices.GetHelpersInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
+                else
+                    hs = await helpersServices.GetHelpersInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, loggedUser.Id);
+
+               // var hs = await helpersServices.GetHelpersInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
 
                 for (int i = 0; i < hs.Count(); i++)
                 {
@@ -163,8 +173,16 @@ namespace Helpa
             {
                 aiFindHelper.IsRunning = true;
 
+                HHomeModel hService = new HHomeModel();
                 HelpersServices helpersServices = new HelpersServices();
-                var hService = await helpersServices.GetAllHelpers(0);
+
+                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+                if (loggedUser == null)
+                    hService = await helpersServices.GetAllHelpers(0);
+                else
+                    hService = await helpersServices.GetAllHelpers(loggedUser.Id);
+
+                 
                 var hs = hService.Data;
 
                 lblHelperFullCount.Text = hService.Total + " Helpers found";
@@ -172,6 +190,12 @@ namespace Helpa
                 for (int i = 0; i < hs.Count(); i++)
                 {
                     HelperHome h = hs.ElementAt(i);
+
+                    if (h.BookMark)
+                        h.BookmarkImage = "save_filled.png";
+                    else
+                        h.BookmarkImage = "save.png";
+
                     if (h.Service != null && h.Service.Count() != 0)
                     {
                         HService hserv = h.Service.Where(x => x.ServiceName == "ChildCare").FirstOrDefault();
@@ -370,7 +394,8 @@ namespace Helpa
             aiFindHelper.IsRunning = true;
             IList<ServiceModel> servicesAsync = (await new Utilities().GetServicesAsync());
             var servicesName = servicesAsync.Select(x => x.ServiceName);
-            var result = await DisplayActionSheet("Select Service", "Cancel", null, servicesName.ToArray());
+            filteredService = await DisplayActionSheet("Select Service", "Cancel", null, servicesName.ToArray());
+            lblServiceFilter.Text = filteredService;
             aiFindHelper.IsRunning = false;
         }
 
@@ -449,7 +474,7 @@ namespace Helpa
             }
         }
 
-        private async void OnLocationSelected(object sender, ItemTappedEventArgs e)
+        private void OnLocationSelected(object sender, ItemTappedEventArgs e)
         {
             string selectedLoc = ((ListView)sender).SelectedItem.ToString();
             entrySearch.Text = selectedLoc;
@@ -499,6 +524,50 @@ namespace Helpa
                 if (filterList != null && filterList.Count() != 0)
                     helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filterList));
             }
+        }
+
+        private async void OnClickBookmark(object sender, TappedEventArgs e)
+        {
+            aiFindHelper.IsRunning = true;
+
+            var imgBookmark = ((Image)sender);
+            if (imgBookmark.Source.ToString().Contains("save.png"))
+            {
+                if (e.Parameter != null)
+                {
+                    int helperId = int.Parse(e.Parameter.ToString());
+
+                    RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+                    if (loggedUser == null)
+                        return;
+
+                    bool isSuccess = await (new HelpersServices()).BookMarkHelper(loggedUser.Id, helperId);
+                    imgBookmark.Source = "save_filled.png";
+                }
+            }
+            else
+            {
+                
+                int helperId = int.Parse(e.Parameter.ToString());
+
+                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+                if (loggedUser == null)
+                    return;
+
+                bool isSuccess = await (new HelpersServices()).UnBookMarkHelper(loggedUser.Id, helperId);
+                imgBookmark.Source = "save.png";
+            }
+
+            aiFindHelper.IsRunning = false;
+        }
+
+        private void OnClickShare(object sender, EventArgs e)
+        {
+            aiFindHelper.IsRunning = true;
+
+            CrossShare.Current.Share(new ShareMessage {  Text="Test", Title="Test Title", Url="www.google.com"});
+
+            aiFindHelper.IsRunning = false;
         }
     }
 }

@@ -9,7 +9,19 @@ namespace Helpa.ViewModels
 {
     public class ProfileAfterLoginViewModel : INotifyPropertyChanged
     {
-        //public RegisterUserModel currentUser { get; set; }
+        string userName = "";
+        public string Username
+        {
+            get
+            {
+                return userName;
+            }
+
+            set
+            {
+                SetProperty(ref userName, value);
+            }
+        }
 
         RegisterUserModel currentUser = new RegisterUserModel();
         public RegisterUserModel CurrentUser
@@ -18,12 +30,16 @@ namespace Helpa.ViewModels
             {
                 return currentUser;
             }
-            set { SetProperty(ref currentUser, value); }
+            set
+            {
+                SetProperty(ref currentUser, value);
+            }
         }
+        
 
         public ProfileAfterLoginViewModel(RegisterUserModel user)
         {
-            CurrentUser = user;
+            Username = user.UserName;
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
@@ -40,13 +56,14 @@ namespace Helpa.ViewModels
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var changed = PropertyChanged;
             if (changed == null)
                 return;
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
     }
 }

@@ -27,7 +27,7 @@ namespace Helpa.Models
         public string id { get; set; }
         public int userId { get; set; }
         public string roles { get; set; }
-        //public List<string> roles { get; set; }
+        public string profileImage { get; set; }
     }
 
     public class LoginErrorResponseModel

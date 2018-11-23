@@ -14,5 +14,7 @@ namespace Helpa.Services
         Task<NetworkModel> GetMyNetworks(int UserId);
         Task<NetworkModel> GetSavedUsers(int UserId);
         Task<HelperServiceModel> SaveHelperServices(HelperServiceModel helperService);
+        Task<bool> BookMarkHelper(int userId, int helperId);
+        Task<bool> UnBookMarkHelper(int userId, int helperId);
     }
 }
