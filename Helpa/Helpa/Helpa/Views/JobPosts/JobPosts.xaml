@@ -117,7 +117,7 @@
                         <ListView 
                             x:Name="lvFullJobPost" ItemsSource="{Binding JobFullList}" 
                             VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True"
-                            SelectionMode="None" SeparatorVisibility="None"    
+                            SelectionMode="None" SeparatorVisibility="None" CachingStrategy="RecycleElementAndDataTemplate" 
                             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
@@ -168,7 +168,7 @@
                                                             <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                                                                 <Image Source="save.png" Aspect="AspectFit" Margin="2">
                                                                     <Image.GestureRecognizers>
-                                                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickBookmark" CommandParameter="" />
+                                                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickBookmark" CommandParameter="{Binding UserId}" />
                                                                     </Image.GestureRecognizers>
                                                                 </Image>
                                                             </Grid>
@@ -274,7 +274,7 @@
 
                         <ListView 
                             x:Name="lvHalfJobs" ItemsSource="{Binding JobPostHalfList}" VerticalOptions="FillAndExpand" HasUnevenRows="True"
-                            SeparatorVisibility="None" SelectionMode="None"
+                            SeparatorVisibility="None" SelectionMode="None" CachingStrategy="RecycleElementAndDataTemplate"
                             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
@@ -325,7 +325,7 @@
                                                             <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                                                                 <Image Source="save.png" Aspect="AspectFit" Margin="2">
                                                                     <Image.GestureRecognizers>
-                                                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickBookmark" />
+                                                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickBookmark" CommandParameter="{Binding UserId}" />
                                                                     </Image.GestureRecognizers>
                                                                 </Image>
                                                             </Grid>

@@ -47,7 +47,7 @@ namespace Helpa.Droid
                 FacebookSdk.SdkInitialize(this.ApplicationContext);
                 AsNumAssemblyHelper.HoldAssembly();
 
-                global::Xamarin.Forms.Forms.Init(this, bundle);
+                Forms.Init(this, bundle);
                 Xamarin.FormsMaps.Init(this, bundle);
 
                 instance = this;

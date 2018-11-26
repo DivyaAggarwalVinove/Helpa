@@ -4776,26 +4776,26 @@ namespace Helpa.Droid
 			// aapt resource value: 0x7f020059
 			public const int avd_hide_password = 2130837593;
 			
-			// aapt resource value: 0x7f02019d
-			public const int avd_hide_password_1 = 2130837917;
-			
 			// aapt resource value: 0x7f02019e
-			public const int avd_hide_password_2 = 2130837918;
+			public const int avd_hide_password_1 = 2130837918;
 			
 			// aapt resource value: 0x7f02019f
-			public const int avd_hide_password_3 = 2130837919;
+			public const int avd_hide_password_2 = 2130837919;
+			
+			// aapt resource value: 0x7f0201a0
+			public const int avd_hide_password_3 = 2130837920;
 			
 			// aapt resource value: 0x7f02005a
 			public const int avd_show_password = 2130837594;
 			
-			// aapt resource value: 0x7f0201a0
-			public const int avd_show_password_1 = 2130837920;
-			
 			// aapt resource value: 0x7f0201a1
-			public const int avd_show_password_2 = 2130837921;
+			public const int avd_show_password_1 = 2130837921;
 			
 			// aapt resource value: 0x7f0201a2
-			public const int avd_show_password_3 = 2130837922;
+			public const int avd_show_password_2 = 2130837922;
+			
+			// aapt resource value: 0x7f0201a3
+			public const int avd_show_password_3 = 2130837923;
 			
 			// aapt resource value: 0x7f02005b
 			public const int back = 2130837595;
@@ -5658,11 +5658,11 @@ namespace Helpa.Droid
 			// aapt resource value: 0x7f020179
 			public const int notification_icon_background = 2130837881;
 			
-			// aapt resource value: 0x7f02019b
-			public const int notification_template_icon_bg = 2130837915;
-			
 			// aapt resource value: 0x7f02019c
-			public const int notification_template_icon_low_bg = 2130837916;
+			public const int notification_template_icon_bg = 2130837916;
+			
+			// aapt resource value: 0x7f02019d
+			public const int notification_template_icon_low_bg = 2130837917;
 			
 			// aapt resource value: 0x7f02017a
 			public const int notification_tile_bg = 2130837882;
@@ -5692,76 +5692,79 @@ namespace Helpa.Droid
 			public const int profile = 2130837890;
 			
 			// aapt resource value: 0x7f020183
-			public const int profile_pink = 2130837891;
+			public const int profile_default = 2130837891;
 			
 			// aapt resource value: 0x7f020184
-			public const int question = 2130837892;
+			public const int profile_pink = 2130837892;
 			
 			// aapt resource value: 0x7f020185
-			public const int radio_button = 2130837893;
+			public const int question = 2130837893;
 			
 			// aapt resource value: 0x7f020186
-			public const int radio_close = 2130837894;
+			public const int radio_button = 2130837894;
 			
 			// aapt resource value: 0x7f020187
-			public const int save = 2130837895;
+			public const int radio_close = 2130837895;
 			
 			// aapt resource value: 0x7f020188
-			public const int save_2 = 2130837896;
+			public const int save = 2130837896;
 			
 			// aapt resource value: 0x7f020189
-			public const int save_filled = 2130837897;
+			public const int save_2 = 2130837897;
 			
 			// aapt resource value: 0x7f02018a
-			public const int scrubber_control_normal_holo = 2130837898;
+			public const int save_filled = 2130837898;
 			
 			// aapt resource value: 0x7f02018b
-			public const int search = 2130837899;
+			public const int scrubber_control_normal_holo = 2130837899;
 			
 			// aapt resource value: 0x7f02018c
-			public const int search2 = 2130837900;
+			public const int search = 2130837900;
 			
 			// aapt resource value: 0x7f02018d
-			public const int selected = 2130837901;
+			public const int search2 = 2130837901;
 			
 			// aapt resource value: 0x7f02018e
-			public const int send = 2130837902;
+			public const int selected = 2130837902;
 			
 			// aapt resource value: 0x7f02018f
-			public const int send_message = 2130837903;
+			public const int send = 2130837903;
 			
 			// aapt resource value: 0x7f020190
-			public const int service_button_style = 2130837904;
+			public const int send_message = 2130837904;
 			
 			// aapt resource value: 0x7f020191
-			public const int service_selected_button_style = 2130837905;
+			public const int service_button_style = 2130837905;
 			
 			// aapt resource value: 0x7f020192
-			public const int service_unselected_button_style = 2130837906;
+			public const int service_selected_button_style = 2130837906;
 			
 			// aapt resource value: 0x7f020193
-			public const int share = 2130837907;
+			public const int service_unselected_button_style = 2130837907;
 			
 			// aapt resource value: 0x7f020194
-			public const int share_2 = 2130837908;
+			public const int share = 2130837908;
 			
 			// aapt resource value: 0x7f020195
-			public const int share_black = 2130837909;
+			public const int share_2 = 2130837909;
 			
 			// aapt resource value: 0x7f020196
-			public const int splash = 2130837910;
+			public const int share_black = 2130837910;
 			
 			// aapt resource value: 0x7f020197
-			public const int splash_screen = 2130837911;
+			public const int splash = 2130837911;
 			
 			// aapt resource value: 0x7f020198
-			public const int toggle_off = 2130837912;
+			public const int splash_screen = 2130837912;
 			
 			// aapt resource value: 0x7f020199
-			public const int toggle_on = 2130837913;
+			public const int toggle_off = 2130837913;
 			
 			// aapt resource value: 0x7f02019a
-			public const int verified = 2130837914;
+			public const int toggle_on = 2130837914;
+			
+			// aapt resource value: 0x7f02019b
+			public const int verified = 2130837915;
 			
 			static Drawable()
 			{

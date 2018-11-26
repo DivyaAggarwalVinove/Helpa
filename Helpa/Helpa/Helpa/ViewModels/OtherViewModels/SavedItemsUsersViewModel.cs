@@ -72,6 +72,7 @@ namespace Helpa.ViewModels
                 }
                 SavedUserList = new ObservableCollection<MyNetworkModel>(n);
                 #endregion
+
                 #region get saved job posts
                 JobServices jobServices = new JobServices();
                 var js = await jobServices.GetSavedJobs(user.Id);

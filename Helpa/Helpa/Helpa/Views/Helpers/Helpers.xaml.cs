@@ -86,8 +86,6 @@ namespace Helpa
 
             //await GetRuntimeLocationPermission(5000);
         }
-
-
         async void ShowHelperHalfList(string selectedCluster)
         {
             try
@@ -181,8 +179,7 @@ namespace Helpa
                     hService = await helpersServices.GetAllHelpers(0);
                 else
                     hService = await helpersServices.GetAllHelpers(loggedUser.Id);
-
-                 
+                
                 var hs = hService.Data;
 
                 lblHelperFullCount.Text = hService.Total + " Helpers found";
@@ -190,6 +187,8 @@ namespace Helpa
                 for (int i = 0; i < hs.Count(); i++)
                 {
                     HelperHome h = hs.ElementAt(i);
+                    if (h.ProfilePicture == null)
+                        h.ProfilePicture = "profile_default.png";
 
                     if (h.BookMark)
                         h.BookmarkImage = "save_filled.png";
@@ -332,9 +331,9 @@ namespace Helpa
         //}
         */
 
-        void HelperSelectedFullList(object sender, ItemTappedEventArgs args)
+        void HelperSelectedFullList(object sender, SelectedItemChangedEventArgs args)
         {
-            var selectedItem = (HelperHome)args.Item;
+            var selectedItem = args.SelectedItem as HelperHome;
             int selectedIndex = helpersViewModel.HelperFullList.IndexOf(helpersViewModel.HelperFullList.Where(h => h.UserId == selectedItem.UserId).FirstOrDefault());
             //helpersViewModel.HelperFullList.ElementAt(selectedIndex).bgcolor = "#FADC54";
 
@@ -530,32 +529,31 @@ namespace Helpa
         {
             aiFindHelper.IsRunning = true;
 
-            var imgBookmark = ((Image)sender);
-            if (imgBookmark.Source.ToString().Contains("save.png"))
+            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+            if (loggedUser == null)
             {
-                if (e.Parameter != null)
-                {
-                    int helperId = int.Parse(e.Parameter.ToString());
-
-                    RegisterUserModel loggedUser = App.Database.GetLoggedUser();
-                    if (loggedUser == null)
-                        return;
-
-                    bool isSuccess = await (new HelpersServices()).BookMarkHelper(loggedUser.Id, helperId);
-                    imgBookmark.Source = "save_filled.png";
-                }
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
             }
             else
             {
-                
-                int helperId = int.Parse(e.Parameter.ToString());
+                var imgBookmark = ((Image)sender);
+                if (imgBookmark.Source.ToString().Contains("save.png"))
+                {
+                    if (e.Parameter != null)
+                    {
+                        int helperId = int.Parse(e.Parameter.ToString());
 
-                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
-                if (loggedUser == null)
-                    return;
-
-                bool isSuccess = await (new HelpersServices()).UnBookMarkHelper(loggedUser.Id, helperId);
-                imgBookmark.Source = "save.png";
+                        bool isSuccess = await (new HelpersServices()).BookMarkHelper(loggedUser.Id, helperId);
+                        imgBookmark.Source = "save_filled.png";
+                    }
+                }
+                else
+                {
+                    int helperId = int.Parse(e.Parameter.ToString());
+                    
+                    bool isSuccess = await (new HelpersServices()).UnBookMarkHelper(loggedUser.Id, helperId);
+                    imgBookmark.Source = "save.png";
+                }
             }
 
             aiFindHelper.IsRunning = false;

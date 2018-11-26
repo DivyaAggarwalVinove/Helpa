@@ -153,10 +153,10 @@
                             <Label Margin="5,0,0,0" x:Name="lblHelperFullCount" BackgroundColor="Transparent" Text=" Helpers found" TextColor="#FD8095" />
 
                             <ListView 
-                                x:Name="lvFullHelpa" ItemsSource="{Binding HelperFullList}" 
-                                VerticalOptions="FillAndExpand" HasUnevenRows="true" SelectionMode="None" 
-                                SeparatorVisibility="None" ItemTapped="HelperSelectedFullList">
-                                
+                                x:Name="lvFullHelpa" ItemsSource="{Binding HelperFullList}" CachingStrategy="RecycleElementAndDataTemplate"
+                                VerticalOptions="FillAndExpand" HasUnevenRows="True" SelectionMode="None" 
+                                SeparatorVisibility="None" ItemSelected="HelperSelectedFullList">
+
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell Height="135">
@@ -360,7 +360,7 @@
                                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.2, Constant = 0}"
                                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.15, Constant = 0}"/>
 
-                            <ListView x:Name="lvHalfHelpa" ItemsSource="{Binding HelperHalfList}" VerticalOptions="FillAndExpand" HasUnevenRows="True" SelectionMode="None" SeparatorVisibility="None"
+                            <ListView x:Name="lvHalfHelpa" ItemsSource="{Binding HelperHalfList}" VerticalOptions="FillAndExpand" HasUnevenRows="True" SelectionMode="None" SeparatorVisibility="None" CachingStrategy="RecycleElementAndDataTemplate"
                                   RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                                   RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"

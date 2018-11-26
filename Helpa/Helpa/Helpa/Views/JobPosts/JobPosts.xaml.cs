@@ -271,21 +271,35 @@ namespace Helpa
             }
         }
 
-        private async void OnClickBookmark(object sender, EventArgs e)
+        private async void OnClickBookmark(object sender, TappedEventArgs e)
         {
             aiJobPost.IsRunning = true;
 
-            var imgBookmark = ((Image)sender);
-
-            if (imgBookmark.Source.ToString().Contains("save.png"))
+            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+            if (loggedUser == null)
             {
-                imgBookmark.Source = "save_filled.png";
-                bool isSuccess = await (new HelpersServices()).BookMarkHelper(1376, 1374);
+                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
             }
             else
             {
-                imgBookmark.Source = "save.png";
-                bool isSuccess = await (new HelpersServices()).UnBookMarkHelper(1376, 1374);
+                var imgBookmark = ((Image)sender);
+                if (imgBookmark.Source.ToString().Contains("save.png"))
+                {
+                    if (e.Parameter != null)
+                    {
+                        int helperId = int.Parse(e.Parameter.ToString());
+
+                        bool isSuccess = await (new HelpersServices()).BookMarkHelper(loggedUser.Id, helperId);
+                        imgBookmark.Source = "save_filled.png";
+                    }
+                }
+                else
+                {
+                    int helperId = int.Parse(e.Parameter.ToString());
+
+                    bool isSuccess = await (new HelpersServices()).UnBookMarkHelper(loggedUser.Id, helperId);
+                    imgBookmark.Source = "save.png";
+                }
             }
 
             aiJobPost.IsRunning = false;
