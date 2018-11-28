@@ -12,9 +12,16 @@ namespace Helpa
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Messages : ContentPage
 	{
-		public Messages ()
-		{
-			InitializeComponent ();
-		}
+        public Messages()
+        {
+            InitializeComponent();
+
+            var user = App.Database.GetLoggedUser();
+
+            if (user != null)
+                wvMessage.Source = "http://180.151.232.92:151/Login.aspx?Email=" + user.Email;
+            else
+                DisplayAlert("", "You are logged-in. Please login for Message funactionality", "Ok");
+        }
 	}
 }

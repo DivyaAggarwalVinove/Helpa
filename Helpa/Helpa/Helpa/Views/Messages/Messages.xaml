@@ -5,10 +5,8 @@
             ios:Page.UseSafeArea="true"
              x:Class="Helpa.Messages">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Message Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <WebView x:Name="wvMessage" BackgroundColor="Green" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            
+        </WebView>
     </ContentPage.Content>
 </ContentPage>
