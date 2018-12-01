@@ -11,13 +11,14 @@ using Android.Util;
 using Android.Widget;
 using AsNum.XFControls.Droid;
 using Plugin.Geolocator;
+using Plugin.Media;
 using Xamarin.Facebook;
 using Xamarin.Forms;
 
 namespace Helpa.Droid
 {
     [Activity(Label = "Helpa", Icon = "@drawable/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
         public static ICallbackManager CallbackManager = CallbackManagerFactory.Create();
         public static readonly string[] PERMISSIONS = new[] { "publish_actions" };
@@ -35,17 +36,19 @@ namespace Helpa.Droid
         }
         #endregion
         
-        protected override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
             try
             {
-                TabLayoutResource = Resource.Layout.Tabbar;
-                ToolbarResource = Resource.Layout.Toolbar;
+                //TabLayoutResource = Resource.Layout.Tabbar;
+                //ToolbarResource = Resource.Layout.Toolbar;
 
                 base.OnCreate(bundle);
 
                 FacebookSdk.SdkInitialize(this.ApplicationContext);
                 AsNumAssemblyHelper.HoldAssembly();
+
+                await CrossMedia.Current.Initialize();
 
                 Forms.Init(this, bundle);
                 Xamarin.FormsMaps.Init(this, bundle);
@@ -58,32 +61,6 @@ namespace Helpa.Droid
             {
                 Log.Debug("Error", e.Message);
             }
-        }
-
-
-        protected override void OnStart()
-        {
-            base.OnStart();
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-        }
-
-        protected override void OnPause()
-        {
-            base.OnPause();
-        }
-
-        protected override void OnStop()
-        {
-            base.OnStop();
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
         }
 
         #region Requesting Runtime Location Permissions
@@ -160,6 +137,10 @@ namespace Helpa.Droid
                             instance.Finish();
                         }
                     }
+                    break;
+
+                default:
+                    Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
                     break;
             }
         }

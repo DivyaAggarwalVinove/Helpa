@@ -1,34 +1,51 @@
 ﻿using DurianCode.PlacesSearchBar;
 using Helpa.Utility;
+using Helpa.Views.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Helpa.Views.Helpers
+namespace Helpa.Views.Profile.EditProfile
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LocationPage : ContentPage
-	{
+	public partial class EditLocationPage : ContentPage, INotifyPropertyChanged
+    {
         private Page page;
-        public string selectedLoc;
+
+        string selectedLoc = "";
+        public string SelectedLoc
+        {
+            get
+            {
+                return selectedLoc;
+            }
+
+            set
+            {
+                SetProperty(ref selectedLoc, value);
+            }
+        }
+
         private List<AutoCompletePrediction> selectedPrediction;
         private List<string> description { get; set; }
         
-        public LocationPage (Page page)
+        public EditLocationPage(Page page)
 		{
 			InitializeComponent ();
 
             this.page = page;
-            pbPJLocation.ApiKey = Constants.googlePlaceApiKey;
-            pbPJLocation.Text = selectedLoc;
-            pbPJLocation.Focus();
-
+            pbEPLocation.ApiKey = Constants.googlePlaceApiKey;
+            
             NavigationPage.SetHasNavigationBar(this, false);
+
+            BindingContext = this;
         }
 
         private void OnPlacesRetrieved(object sender, AutoCompleteResult result)
@@ -50,9 +67,9 @@ namespace Helpa.Views.Helpers
         private void OnLocationSelected(object sender, SelectedItemChangedEventArgs e)
         {
             string selectedLoc = ((ListView)sender).SelectedItem.ToString();
-            pbPJLocation.Text = selectedLoc;
+            pbEPLocation.Text = selectedLoc;
 
-            PostJobPage page = (PostJobPage)this.page;
+            EditBasicInfo page = (EditBasicInfo)this.page;
             page.selectedLocation = selectedLoc;
             page.selectedPrediction = selectedPrediction.Where(x => x.Description == selectedLoc).FirstOrDefault();
 
@@ -60,5 +77,30 @@ namespace Helpa.Views.Helpers
 
             Navigation.PopAsync();
         }
+
+        protected bool SetProperty<T>(ref T backingStore, T value,
+           [CallerMemberName]string propertyName = "",
+           Action onChanged = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+                return false;
+
+            backingStore = value;
+            onChanged?.Invoke();
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            var changed = PropertyChanged;
+            if (changed == null)
+                return;
+
+            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }

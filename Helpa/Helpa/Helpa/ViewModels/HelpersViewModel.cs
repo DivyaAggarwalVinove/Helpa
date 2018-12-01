@@ -60,7 +60,10 @@ namespace Helpa.ViewModels
                 HelpersServices helpersServices = new HelpersServices();
                 var h = await helpersServices.GetHelpersList(0);
                 if (h != null && (h.Count() > 0))
+                {
+                    mapHelper.helperList = h.ToList();
                     helperHomeList = new ObservableCollection<HelperHomeModel>(h.ToList());
+                }
                 //var HelperList = new ObservableCollection<HelperHome>(((new HelpersServices()).GetHelpersList(2000000, 28.4514279, 77.0704678)).Result.First().HelpersInLocalties);
                 //for(int i=0;i<helperHomeList.Count;i++)
                 //{
@@ -125,7 +128,7 @@ namespace Helpa.ViewModels
                         Address = i.ToString(),
                         Id = i.ToString()
                     };
-                    mapHelper.Pins.Add(pin);
+                    //mapHelper.Pins.Add(pin);
                     
                     t = (int.Parse(t) + h.Count).ToString();
                     i++;

@@ -49,14 +49,14 @@
     <None Remove="Views\Profile\ProfileSettings\NotificationSettingsPage.xaml" />
     <None Remove="Views\Profile\ProfileSettings\ResetPasswordPage.xaml" />
     <None Remove="Views\Profile\ProfileSettings\UserSettingsPage.xaml" />
-    <None Remove="Views\Signup\HelperRegister\HelperCompleteRegister.xaml" />
-    <None Remove="Views\Signup\HelperRegister\HelperRegister.xaml" />
-    <None Remove="Views\Signup\HelperRegister\HelperRegister2.xaml" />
-    <None Remove="Views\Signup\HelperRegister\HelperRegister3.xaml" />
-    <None Remove="Views\Signup\ParentRegister\Register.xaml" />
-    <None Remove="Views\Signup\ParentRegister\Register1.xaml" />
-    <None Remove="Views\Signup\ParentRegister\Register2.xaml" />
-    <None Remove="Views\Signup\ParentRegister\Register3.xaml" />
+    <None Remove="Views\Profile\Signup\HelperRegister\HelperCompleteRegister.xaml" />
+    <None Remove="Views\Profile\Signup\HelperRegister\HelperRegister.xaml" />
+    <None Remove="Views\Profile\Signup\HelperRegister\HelperRegister2.xaml" />
+    <None Remove="Views\Profile\Signup\HelperRegister\HelperRegister3.xaml" />
+    <None Remove="Views\Profile\Signup\ParentRegister\Register.xaml" />
+    <None Remove="Views\Profile\Signup\ParentRegister\Register1.xaml" />
+    <None Remove="Views\Profile\Signup\ParentRegister\Register2.xaml" />
+    <None Remove="Views\Profile\Signup\ParentRegister\Register3.xaml" />
     <EmbeddedResource Remove="Views\Helpers\HelpersList.xaml" />
     <Compile Remove="ViewModels\ProfileViewModel\ProfileAfterLoginViewModel.cs" />
     <Compile Remove="Views\Helpers\HelpersList.xaml.cs" />
@@ -87,6 +87,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="15.4.0.20" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Facebook" Version="4.4.0.2" />
@@ -123,6 +124,9 @@
     </Compile>
     <Compile Update="Views\Profile\EditProfile\EditService.xaml.cs">
       <DependentUpon>EditService.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Profile\EditProfile\EditLocationPage.xaml.cs">
+      <DependentUpon>EditLocationPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -229,7 +233,5 @@
   <ItemGroup>
     <Folder Include="ViewModels\OtherViewModels\" />
     <Folder Include="Views\Profile\OtherPages\" />
-    <Folder Include="Views\Profile\EditProfile\" />
-    <Folder Include="ViewModels\ProfileViewModel\" />
   </ItemGroup>
 </Project>

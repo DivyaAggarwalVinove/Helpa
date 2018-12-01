@@ -12,7 +12,7 @@ namespace Helpa.Services
 {
     public class HelpersServices : IHelpersServices
     {
-        public async Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId)
+        public async Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId, int ServiceId=0)
         {
             IEnumerable<HelperHomeModel> helpers = new List<HelperHomeModel>();
 
@@ -174,14 +174,6 @@ namespace Helpa.Services
                     HttpClient httpClient = new HttpClient();
 
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/HelperServices"));
-                    //object obj = new {
-                    //                UserId = 1054,
-                    //                Status = true,
-                    //                Qualification = "MCA",
-                    //                MinAge = 25,
-                    //                MaxAge = 40,
-                    //                Service = serviceModels
-                    //};
 
                     var json = JsonConvert.SerializeObject(helperService);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");

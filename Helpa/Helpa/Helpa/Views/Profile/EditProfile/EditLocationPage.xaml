@@ -4,7 +4,7 @@
              xmlns:places="clr-namespace:DurianCode.PlacesSearchBar;assembly=PlacesSearchBar"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
-             x:Class="Helpa.Views.Helpers.LocationPage">
+             x:Class="Helpa.Views.Profile.EditProfile.EditLocationPage">
     <ContentPage.Content>
         <Grid BackgroundColor="#f1f5f6" RowSpacing="0">
             <Grid.RowDefinitions>
@@ -14,11 +14,11 @@
 
             <Frame BackgroundColor="White" CornerRadius="10" BorderColor="LightGray" HasShadow="True" Margin="10" Padding="2">
                 <places:PlacesBar Grid.Row="0"
-                    x:Name="pbPJLocation"
+                    x:Name="pbEPLocation"
                     Type="All"
                     Placeholder="Enter location"
                     PlaceholderColor="Gray"
-                    TextColor="Gray"
+                    TextColor="Gray" Text="{Binding SelectedLoc}"
                     BackgroundColor="Transparent"
                     PlacesRetrieved="OnPlacesRetrieved"
                     HorizontalOptions="FillAndExpand"

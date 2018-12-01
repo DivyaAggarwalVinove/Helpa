@@ -50,6 +50,7 @@ namespace Helpa.Services
                         user.Token = message.access_token;
                         user.isLoggedIn = true;
                         user.Role = message.roles;
+                        user.Email = email;
                         user.profileImage = message.profileImage;
                         await App.Database.SaveUserAsync(user);
 
@@ -75,12 +76,6 @@ namespace Helpa.Services
 
             return err_msg;
         }
-
-        /* 
-Helpa/Helpa/Helpa/Views/Profile/EditProfilePage.xaml
-
-Helpa.Views.Profile
-         */
 
         public async Task<UserModel> GetUserBasicInfo(int UserId)
         {
@@ -110,6 +105,43 @@ Helpa.Views.Profile
             }
 
             return savedUsers;
+        }
+
+        public async Task<bool> SaveUserBasicInfo(UserModel userInfo)
+        {
+            bool flag = false;
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "/api/Helpers?id=" + userInfo.UserId));
+
+                    var json = JsonConvert.SerializeObject(userInfo);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var response = await httpClient.PutAsync(uri, content);
+                    string result = await response.Content.ReadAsStringAsync();
+                    var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = await response.Content.ReadAsStringAsync();
+                        //helpers = JsonConvert.DeserializeObject<HelperResponseModel>(result);
+                        //helperService.HelperId = helpers.helperid;
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            return flag;
         }
     }
 }

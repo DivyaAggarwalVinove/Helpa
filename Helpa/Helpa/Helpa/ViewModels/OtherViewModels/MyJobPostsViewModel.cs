@@ -25,7 +25,9 @@ namespace Helpa.ViewModels.OtherViewModels
         {
             if (IsBusy)
                 return;
+
             IsBusy = true;
+
             try
             {
                 await SetMyJobPostsList();

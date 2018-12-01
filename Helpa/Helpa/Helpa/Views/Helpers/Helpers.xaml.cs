@@ -391,10 +391,21 @@ namespace Helpa
         private async void OnClickServiceFilter(object sender, EventArgs e)
         {
             aiFindHelper.IsRunning = true;
+
             IList<ServiceModel> servicesAsync = (await new Utilities().GetServicesAsync());
             var servicesName = servicesAsync.Select(x => x.ServiceName);
-            filteredService = await DisplayActionSheet("Select Service", "Cancel", null, servicesName.ToArray());
-            lblServiceFilter.Text = filteredService;
+
+            if (servicesName != null)
+            {
+                filteredService = await DisplayActionSheet("Select Service", "Cancel", null, servicesName.ToArray());
+                lblServiceFilter.Text = filteredService;
+
+                /*
+                    var filteredList = helpersViewModel.helperHomeList.Where(x => x.Servicename == filteredService);
+                    helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+                */
+            }
+
             aiFindHelper.IsRunning = false;
         }
 
@@ -422,9 +433,25 @@ namespace Helpa
             }
         }
 
-        private void OnClickScopeFilter(object sender, EventArgs e)
+        private async void OnClickScopeFilter(object sender, EventArgs e)
         {
+            aiFindHelper.IsRunning = true;
 
+            IList<ScopeModel> scopeAsync = (await new Utilities().GetScpoesAsync(123));
+            var scopesName = scopeAsync.Select(x => x.ScopeName);
+
+            if (scopesName != null)
+            {
+                filteredScope = await DisplayActionSheet("Select Service", "Cancel", null, scopesName.ToArray());
+                lblScopeFilter.Text = filteredScope;
+
+                /*
+                    var filteredList = helpersViewModel.helperHomeList.Where(x => x.Servicename == filteredService);
+                    helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+                */
+            }
+
+            aiFindHelper.IsRunning = false;
         }
 
         private void OnClickSortByFilter(object sender, EventArgs e)
@@ -496,7 +523,8 @@ namespace Helpa
                 var loc = selectedPrediction.Where(x => x.Description == selectedLoc).FirstOrDefault();
                 Place place = await Places.GetPlace(loc.Place_ID, Constants.googlePlaceApiKey);
 
-                /*var latitude = place.Latitude;
+                /*
+                var latitude = place.Latitude;
                 var longitude = place.Longitude;
                 IList<HelperHomeModel> filterList = helpersViewModel.helperHomeList.Where(x => (x.Latitude == latitude)).ToList();
                 var c = filterList.Where(x => x.Longitude == longitude).ToList();*/

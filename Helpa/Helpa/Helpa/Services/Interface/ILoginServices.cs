@@ -10,5 +10,6 @@ namespace Helpa.Services
     {
         Task<LoginErrorResponseModel> Login(string email, string pwd);
         Task<UserModel> GetUserBasicInfo(int UserId);
+        Task<bool> SaveUserBasicInfo(UserModel userInfo);
     }
 }

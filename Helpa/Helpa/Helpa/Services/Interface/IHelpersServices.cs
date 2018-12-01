@@ -8,7 +8,7 @@ namespace Helpa.Services
 {
     public interface IHelpersServices
     {
-        Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId);
+        Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId, int ServiceId=0);
         Task<IEnumerable<HelperHome>> GetHelpersInLocation(double Latitude, double Longitude, int UserId);
         Task<HHomeModel> GetAllHelpers(int UserId);
         Task<NetworkModel> GetMyNetworks(int UserId);

@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Helpa.Views.Profile.OtherPages.MyJobPostPage"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true"
-             xmlns:local="clr-namespace:Helpa" 
+             ios:Page.UseSafeArea="true" 
              BackgroundColor="#F1F5F6">
     
     <ContentPage.Content>
@@ -13,13 +12,13 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <Grid Grid.Row="0" Padding="0,0,0,10">
                     <StackLayout Orientation="Horizontal" Spacing="10">
                         <Image Source="back.png" VerticalOptions="Center" Margin="2">
@@ -32,15 +31,16 @@
                         </Label>
                     </StackLayout>
                 </Grid>
-                 <Grid Grid.Row="1" Padding="0,10,0,10">
+
+                <Grid Grid.Row="1" Padding="0,10,0,10">
                     <Label Text="My Job Posts" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
                 </Grid>
             </Grid>
-            
+
             <Grid Grid.Row="1">
                 <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <ListView x:Name="lvMyJobPost" ItemsSource="{Binding MyJobsList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True"
-                              BackgroundColor="Transparent"
+                              BackgroundColor="Transparent" CachingStrategy="RecycleElementAndDataTemplate" SelectionMode="None"
                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
@@ -75,10 +75,18 @@
                                                         <Label Text="{Binding JobTitle}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                                                     </Grid>
                                                      <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Image Source="share.png" Aspect="AspectFit" Margin="2"/>
+                                                        <Image Source="share.png" Aspect="AspectFit" Margin="2">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickShare" />
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
                                                     </Grid>
                                                      <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                        <Image Source="save.png" Aspect="AspectFit" Margin="2"/>
+                                                        <Image Source="save.png" Aspect="AspectFit" Margin="2">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickBookmark" CommandParameter="{Binding UserId}" />
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
                                                     </Grid>
                                                      <Grid Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                                                         <Image Source="menu2.png" Aspect="AspectFit" Margin="2"/>
@@ -138,6 +146,8 @@
                             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = -80}"
                             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = -60}" TextColor="White"/>-->
                 </RelativeLayout>
+
+                <ActivityIndicator x:Name="aiMyJobPost" IsRunning="False" Color="#FF4968"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

@@ -11,6 +11,7 @@ namespace Helpa
         //public List<string> SiteList;
         public HelperHomeModel selectedHelper;
         public JobsHomeModel selectedJob;
+        public List<HelperHomeModel> helperList { get; set; }
 
         public void ClickedOnPin(string selectedCluster)
         {

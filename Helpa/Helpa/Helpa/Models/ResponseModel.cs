@@ -25,6 +25,7 @@ namespace Helpa.Models
         public int expires_in { get; set; }
         public string userName { get; set; }
         public string id { get; set; }
+        public string Email { get; set; }
         public int userId { get; set; }
         public string roles { get; set; }
         public string profileImage { get; set; }

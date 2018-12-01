@@ -1,6 +1,5 @@
 ﻿using Helpa.Models;
-using Helpa.Views.Profile;
-using Helpa.Views.Profile.UserProfile;
+using Helpa.Views.Profile.EditProfile;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

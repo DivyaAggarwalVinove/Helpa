@@ -65,7 +65,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
-                                <Label x:Name="lblServiceFilter" Text="Services" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                <Label x:Name="lblServiceFilter" Text="Services" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" LineBreakMode="TailTruncation" VerticalTextAlignment="Center"/>
                             </Grid>
 
                             <Grid Grid.Column="1">
@@ -84,7 +84,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
-                                <Label x:Name="lblLocationFilter"  Text="Location types" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                <Label x:Name="lblLocationFilter"  Text="Location types" TextColor="#494949" FontSize="12" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
                             </Grid>
 
                             <Grid Grid.Column="1">
@@ -103,7 +103,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
-                                <Label Text="Scope" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                <Label x:Name="lblScopeFilter" Text="Scope" TextColor="#494949" FontSize="12" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
                             </Grid>
 
                             <Grid Grid.Column="1">
@@ -122,7 +122,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
-                                <Label Text="Sort by" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                <Label Text="Sort by" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" LineBreakMode="TailTruncation" VerticalTextAlignment="Center"/>
                             </Grid>
 
                             <Grid Grid.Column="1">
