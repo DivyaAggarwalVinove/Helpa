@@ -26,6 +26,9 @@ namespace Helpa.Utility
 
         public static bool IsValidMobileNo(string number)
         {
+            if (number.Length != 6)
+                return false;
+
             return Regex.Match(number, @"\+?[0-9]{6}").Success;
         }
 

@@ -9,7 +9,14 @@ namespace Helpa.Services
     public interface ILoginServices
     {
         Task<LoginErrorResponseModel> Login(string email, string pwd);
+
+        #region User Basic Info Services 
         Task<UserModel> GetUserBasicInfo(int UserId);
         Task<bool> SaveUserBasicInfo(UserModel userInfo);
+        #endregion
+
+        #region User Verification Service
+        Task<VerificationInfoModel> GetVerificationInfo(int UserId);
+        #endregion
     }
 }

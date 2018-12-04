@@ -126,6 +126,9 @@
     <PackageReference Include="Xamarin.GooglePlayServices.Auth">
       <Version>42.1021.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.GooglePlayServices.Location">
+      <Version>42.1021.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderer\CustomHelperStatusAndroid.cs" />

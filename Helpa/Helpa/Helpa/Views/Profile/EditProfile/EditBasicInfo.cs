@@ -20,11 +20,14 @@ namespace Helpa.Views.Profile.EditProfile
     {
         #region Variable Declaration
         public RegisterUserModel LoggedinUser { get; set; }
-
+        public static EditBasicInfo Instance { get; set; }
         #endregion
         public EditBasicInfo()
         {
             InitializeComponent();
+
+            Instance = this;
+
             IEnumerable<string> genders = new List<string>() { "Male", "Female", "Rather no to say" };
             SetRadioList(genders, rgEditBasicInfoGender);
             NavigationPage.SetHasNavigationBar(this, false);
@@ -54,6 +57,58 @@ namespace Helpa.Views.Profile.EditProfile
         private void OnBackPress(object sender, EventArgs e)
         {
             App.NavigationPage.Navigation.PopAsync();
+        }
+
+        async void OnClickSendSms(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(entryEditBasicInfoPhone.Text))
+            {
+                await DisplayAlert("Warning", "Please enter phone number", "Ok");
+            }
+            else if (!Utils.IsValidMobileNo(entryEditBasicInfoPhone.Text))
+            {
+                await DisplayAlert("Warning", "Please enter valid mobile number", "Ok");
+            }
+            else
+            {
+                RegisterUserModel currentUser = App.Database.GetLoggedUser();
+                if (currentUser != null)
+                    await (new RegisterServices()).SendSmsCode(currentUser.Id, entryEditBasicInfoPhone.Text, "EDITINFO");
+            }
+        }
+
+        async void OnVerifyCode(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(entryEditBasicInfoSmsCode.Text))
+            {
+                await DisplayAlert("Warning", "Please enter verification code", "Ok");
+            }
+            else
+            {
+                RegisterUserModel currentUser = App.Database.GetLoggedUser();
+                if (currentUser != null)
+                    await (new RegisterServices()).VerifyOtp(currentUser.Id, entryEditBasicInfoSmsCode.Text, "EDITINFO");
+            }
+        }
+
+        public void ShowSmsMessage(ResponseModel message, bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                entryEditBasicInfoPhone.IsEnabled = false;
+            }
+
+            DisplayAlert("", message.Message, "Ok");
+        }
+
+        public void ShowVerificationMessage(ResponseModel message, bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                entryEditBasicInfoSmsCode.IsEnabled = false;
+            }
+
+            DisplayAlert("", message.Message, "Ok");
         }
 
         public string selectedLocation;

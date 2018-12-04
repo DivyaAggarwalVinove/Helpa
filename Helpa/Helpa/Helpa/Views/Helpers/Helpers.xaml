@@ -32,15 +32,15 @@
                             <!--<Image x:Name="imgSearch" Source="search.png"/>
                         <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>-->
                             <places:PlacesBar
-                            x:Name="entrySearch"
-                            BackgroundColor="Transparent"
-                            Placeholder="Search Helpers by Location"
-                            FontSize="Small" 
-                            PlaceholderColor="#676D70" 
-                            VerticalOptions="CenterAndExpand" 
-                            HorizontalOptions="FillAndExpand"
-                            PlacesRetrieved="OnPlacesRetrieved"
-                            Margin="-20,0,0,0" />
+                                x:Name="entrySearch"
+                                BackgroundColor="Transparent"
+                                Placeholder="Search Helpers by Location"
+                                FontSize="Small" 
+                                PlaceholderColor="#676D70" 
+                                VerticalOptions="CenterAndExpand" 
+                                HorizontalOptions="FillAndExpand"
+                                PlacesRetrieved="OnPlacesRetrieved"
+                                Margin="-20,0,0,0" />
 
                             <Image x:Name="imgSend" Source="send.png">
                                 <Image.GestureRecognizers>
@@ -138,7 +138,7 @@
 
                 <Grid x:Name="gridHelpersBody" Grid.Row="1">
                     <RelativeLayout x:Name="relativeLayout" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <custommap:CustomMap x:Name="mapHelper" MapType="Street"          
+                        <custommap:CustomMap x:Name="mapHelper" MapType="Street" BackgroundColor="Transparent"         
                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"

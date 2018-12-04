@@ -29,7 +29,7 @@ namespace Helpa.Views.Profile
 
         public void OnClickVerification(object sender, EventArgs e)
         {
-            App.NavigationPage.Navigation.PushAsync(new EditVerificationPage());
+            App.NavigationPage.Navigation.PushAsync(new EditVerificationPage() { LoggedinUser = this.LoggedinUser });
         }
 
         private void OnBackPress(object sender, EventArgs e)

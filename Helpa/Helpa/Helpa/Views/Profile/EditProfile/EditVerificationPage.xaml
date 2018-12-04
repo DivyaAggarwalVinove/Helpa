@@ -9,7 +9,284 @@
             ios:Page.UseSafeArea="true"
              BackgroundColor="#F1F5F6">
     <ContentPage.Content>
-        <Grid x:Name="rootlayout" BackgroundColor="#F1F5F6" Margin="20,10,20,0">
+        <RelativeLayout>
+            <Grid 
+                RowSpacing="0" BackgroundColor="#F1F5F6"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" BackgroundColor="Transparent" RowSpacing="0" Padding="10,20,10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Padding="0,0,0,10">
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Image Source="back.png" VerticalOptions="Center" Margin="2">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnBackPress"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="Edit Profile" VerticalOptions="Center"  TextColor="#A2AAAD"/>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Padding="0,10,0,10">
+                        <Label Text="Verification" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                    </Grid>
+                </Grid>
+
+                <ScrollView Grid.Row="2" IsClippedToBounds="True" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="0,10,0,0" BackgroundColor="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label 
+                                Grid.Row="0" Margin="10,0,10,0"
+                                Text="Verified info" BackgroundColor="Transparent" FontSize="Medium" 
+                                TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+
+                            <Grid Grid.Row="1" BackgroundColor="LightGray" Margin="5" RowSpacing="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid x:Name="gridVerifiedGoogle" Grid.Row="0" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label 
+                                        Grid.Column="0" Text="Google" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small"/>
+
+                                    <Button 
+                                        Grid.Column="1" Text="Disconnect" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                        BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                </Grid>
+
+                                <Grid x:Name="gridVerifiedFacebook" Grid.Row="1" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label 
+                                    Grid.Column="0" Text="Facebook" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small"/>
+
+                                    <Button 
+                                    Grid.Column="1" Text="Disconnect" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                    BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                </Grid>
+
+                                <Grid x:Name="gridVerifiedCertificate" Grid.Row="2" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label 
+                                        Grid.Column="0" Text="Certificates" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small"/>
+
+                                    <Button 
+                                        Grid.Column="1" Text="Edit" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                        BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                </Grid>
+
+                                <Grid x:Name="gridVerifiedIdCard" Grid.Row="3" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label 
+                                        Grid.Column="0" Text="ID card" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small"/>
+
+                                    <Button 
+                                        Grid.Column="1" Text="Edit" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                        BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                </Grid>
+
+                                <Grid Grid.Row="4" IsVisible="True"/>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,10,0,0" BackgroundColor="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label 
+                                Grid.Row="0" Margin="10,0,10,0"
+                                Text="Not yet verified" BackgroundColor="Transparent" FontSize="Medium" 
+                                TextColor="#FF748C" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+
+                            <Grid Grid.Row="1" BackgroundColor="LightGray" Margin="5" RowSpacing="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid x:Name="gridNotVerifiedIdMobile" Grid.Row="0" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid Grid.Row="0" Margin="0,5,0,5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.2*" />
+                                                <ColumnDefinition Width="0.8*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="0" >
+                                                <local:CustomEntry x:Name="entryEditVerifyCountryCode" Placeholder="+852" PlaceholderColor="#BDBFC0" IsEnabled="False" FontSize="14"/>
+                                            </Grid>
+
+                                            <Grid Grid.Column="1">
+                                                <local:CustomEntry x:Name="entryEditVerifyPhone" Placeholder="Phone Number" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                            </Grid>
+                                        </Grid>
+
+                                        <Grid Grid.Row="1" ColumnSpacing="10" Margin="0,5,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.38*" />
+                                                <ColumnDefinition Width="0.42*" />
+                                                <ColumnDefinition Width="0.2*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="0" Margin="0,5,0,0">
+                                                <Button x:Name="btnEditVerifySendCode" Text="Send SMS Code" Clicked="OnClickSendSms" FontSize="14" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
+                                            </Grid>
+
+                                            <Grid Grid.Column="1" Margin="0,5,0,0">
+                                                <local:CustomEntry x:Name="entryEditVerifySmsCode" Placeholder="Enter SMS code here" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                            </Grid>
+
+                                            <Grid Grid.Column="2" Margin="0,5,0,0">
+                                                <Button x:Name="btnEditVerifyInfoVerifyCode" Text="Verify" Clicked="OnVerifyCode" FontSize="14" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
+                                            </Grid>
+                                        </Grid>
+
+                                        <Grid Grid.Row="2">
+                                            <Label Text="You need to verify your phone number to enable the messaging function." TextColor="#939BA0" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+
+                                <Grid x:Name="gridNotVerifiedIdEmail" Grid.Row="1" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0" Margin="0,10,0,10">
+                                        <local:CustomEntry 
+                                            x:Name="entryEditVerifyEmail" Placeholder="Email" IsEnabled="False" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                    </Grid>
+
+                                    <Button 
+                                        Grid.Column="1" Text="Verify email" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                        Clicked="OnVerifyEmail" BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                </Grid>
+
+                                <Grid x:Name="gridNotVerifiedIdGoogle" Grid.Row="2" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label 
+                                        Grid.Column="0" Text="Google" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small"/>
+
+                                    <Button 
+                                        Grid.Column="1" Text="Connect" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                        BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                </Grid>
+
+                                <Grid x:Name="gridNotVerifiedIdFacebook" Grid.Row="3" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label 
+                                    Grid.Column="0" Text="Facebook" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small"/>
+
+                                    <Button 
+                                    Grid.Column="1" Text="Connect" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                    BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                </Grid>
+
+                                <Grid x:Name="gridNotVerifiedIdCertificate" Grid.Row="4" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label 
+                                        Grid.Column="0" Text="Certificates" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small"/>
+
+                                    <Button 
+                                        Grid.Column="1" Text="Upload" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                        BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                </Grid>
+
+                                <Grid x:Name="gridNotVerifiedIdIdCard" Grid.Row="5" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label 
+                                        Grid.Column="0" Text="ID card" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small"/>
+
+                                    <Button 
+                                        Grid.Column="1" Text="Upload" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                        BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                </Grid>
+
+                                <Grid Grid.Row="6" IsVisible="True"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ScrollView>
+            </Grid>
+
+            <ActivityIndicator
+                x:Name="aiEditVerification" IsRunning="False" Color="#FF4968"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = 0}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5, Constant = 0}"/>
+        </RelativeLayout>
+
+        <!--<Grid x:Name="rootlayout" BackgroundColor="#F1F5F6" Margin="20,10,20,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -21,25 +298,26 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            
             <Grid Grid.Row="0" BackgroundColor="#F1F5F6">
                 <StackLayout Orientation="Horizontal">
-                    <Image VerticalOptions="Center"
-                           Source="back.png">
+                    <Image VerticalOptions="Center" Source="back.png">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" x:Name="XFBackButton" Tapped="XFBackButton_Tapped"/>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnBackPress"/>
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Text="Edit Profile"
-                           TextColor="LightGray" 
-                           FontSize="Small" />
+                    <Label Text="Edit Profile" VerticalOptions="Center" TextColor="#A2AAAD"/>
                 </StackLayout>
             </Grid>
+            
             <Grid Grid.Row="1" BackgroundColor="#F1F5F6">
                 <Label Text="Verification" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="Black" FontAttributes="Bold" FontSize="Large" Margin="10,10,0,0"/>
             </Grid>
+            
             <Grid Grid.Row="2" BackgroundColor="#F1F5F6">
                 <Label Text="verification Info" VerticalOptions="StartAndExpand" HorizontalOptions="Start" TextColor="#FF738D" FontAttributes="None" FontSize="Medium" Margin="10,10,0,0"/>
             </Grid>
+            
             <Grid Grid.Row="3" BackgroundColor="LightGray" RowSpacing="1" ColumnSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -66,13 +344,17 @@
                     <StackLayout Orientation="Horizontal" Padding="30,0,0,0" Spacing="15">
                         <Button Text="Disconnect" TextColor="#B7BBBE" BorderRadius="5" VerticalOptions="Center"
                                 CornerRadius="5" Margin="0,10,0,10"/>
-                        <!--<Image Source="info.png" VerticalOptions="Center"/>-->
+                        -->
+        <!--<Image Source="info.png" VerticalOptions="Center"/>-->
+        <!--
                     </StackLayout>
                 </Grid>
             </Grid>
+            
             <Grid Grid.Row="4" BackgroundColor="#F1F5F6">
                 <Label Text="Not yet verified" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small" Margin="10,0,0,0"/>
             </Grid>
+            
             <Grid Grid.Row="5" BackgroundColor="#F1F5F6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.2*" />
@@ -85,6 +367,7 @@
                     <local:CustomEntry x:Name="entryHelperRegPhone1" Placeholder="Phone Number" PlaceholderColor="#BDBFC0" FontSize="14"/>
                 </Grid>
             </Grid>
+            
             <Grid Grid.Row="6" BackgroundColor="#F1F5F6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.4*" />
@@ -97,9 +380,11 @@
                     <local:CustomEntry x:Name="entryHelperRegSmsCode1" Placeholder="Enter SMS code here" PlaceholderColor="#BDBFC0" FontSize="14"/>
                 </Grid>
             </Grid>
+            
             <Grid Grid.Row="7" BackgroundColor="#F1F5F6">
                 <Label Text="You need to verify your phone number to enable the messaging function." FontSize="Micro" TextColor="#939BA0" />
             </Grid>
+            
             <Grid Grid.Row="8"  BackgroundColor="LightGray" RowSpacing="1" ColumnSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -127,7 +412,9 @@
                     <StackLayout Orientation="Horizontal" Padding="30,0,0,0" Spacing="15">
                         <Button Text="Connect" TextColor="#B7BBBE" BorderRadius="5" VerticalOptions="Center"
                                 CornerRadius="5" Margin="0,10,0,10"/>
-                        <!--<Image Source="info.png" VerticalOptions="Center"/>-->
+                        -->
+        <!--<Image Source="info.png" VerticalOptions="Center"/>-->
+        <!--
                     </StackLayout>
                 </Grid>
                 <Grid Grid.Row="2" Grid.Column="0" BackgroundColor="#F1F5F6">
@@ -141,6 +428,6 @@
                     </StackLayout>
                 </Grid>
             </Grid>
-        </Grid>
+        </Grid>-->
     </ContentPage.Content>
 </ContentPage> 

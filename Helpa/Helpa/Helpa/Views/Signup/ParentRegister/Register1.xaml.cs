@@ -1,7 +1,13 @@
-﻿using Helpa.Models;
+﻿using DurianCode.PlacesSearchBar;
+using Helpa.Models;
 using Helpa.Services;
 using Helpa.Utility;
 using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +24,6 @@ namespace Helpa
     {
         RegisterUserModel currentUser;
         public static Register1 Instance { get; set; }
-
         public Register1(RegisterUserModel user)
         {
             InitializeComponent();
@@ -35,28 +40,25 @@ namespace Helpa
             entryRegPhone1.Text = user.MobileNumber;
             entryRegEmail1.Text = user.Email;
 
-            SetLocation();
+            //SetLocation();
 
-            MessagingCenter.Subscribe<Register3, string>(this, "Selected Address", (sender, address) =>
+            MessagingCenter.Subscribe<Register3, LocationModel>(this, "Selected Address", (sender, loc) =>
             {
-                entryRegSearch.Text = address;
+                entryRegSearch.Text = loc.Address;
+
+                currentUser.locationName = loc.Address;
+                currentUser.latitude = loc.Latitude;
+                currentUser.longitude = loc.Longitude;
             });
 
-            MessagingCenter.Subscribe<Register2>(this, "Current Address", (sender) =>
+            MessagingCenter.Subscribe<Register2, LocationModel>(this, "Current Address", (sender, loc) =>
             {
-                SetLocation();
+                entryRegSearch.Text = loc.Address;
+
+                currentUser.locationName = loc.Address;
+                currentUser.latitude = loc.Latitude;
+                currentUser.longitude = loc.Longitude;
             });
-        }
-
-        async void SetLocation()
-        { 
-            var locator = CrossGeolocator.Current;
-            TimeSpan ts = TimeSpan.FromTicks(1000000);
-            Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(ts);
-            var addr = await locator.GetAddressesForPositionAsync(new Plugin.Geolocator.Abstractions.Position(position.Latitude, position.Longitude), "AIzaSyDminfXt_CoSb9UTXpPFZwQIG2lDduDMjs");
-
-            var a = addr.FirstOrDefault();
-            entryRegSearch.Text = a.FeatureName + "," + a.SubLocality + "," + a.Locality + "," + a.CountryName + "," + a.PostalCode;
         }
 
         void OnSignUpNext(object sender, EventArgs args)
@@ -108,9 +110,9 @@ namespace Helpa
 
         async void OnSignUpDone(object sender, EventArgs args)
         {
-            if (entryRegSearch.Text.Equals(""))
+            /*if (entryRegSearch.Text.Equals(""))
                 await DisplayAlert("Warning", "Please select location.", "Ok");
-            else
+            else*/
                 await (new RegisterServices()).CompleteRegisterService(currentUser);
         }
 
@@ -207,5 +209,41 @@ namespace Helpa
                 await(new RegisterServices()).VerifyOtp(currentUser.Id, entryRegSmsCode1.Text, "PARENT");
             }
         }
+
+        private async void OnClickCamera(object sender, EventArgs e)
+        {
+            Image profile = (Image)sender;
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("", ":( No camera avaialble.", "OK");
+                return;
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            {
+                PhotoSize = PhotoSize.Medium,
+                Directory = "Sample",
+                CustomPhotoSize = 100,
+                MaxWidthHeight = 100,
+                Name = "test" + DateTime.Today.ToString() + ".png"
+            });
+
+            if (file == null)
+                return;
+
+            imgEditBasicInfoProfile.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                //imgEditBasicInfoProfile.Source = file.Path;
+                // ((EditBasicInfoViewModel)BindingContext).UserInfo.ProfileImage = Utils.ConvertToBase64(file.GetStream());
+                // imgEditBasicInfoProfile.Source = stream;
+                file.Dispose();
+                file = null;
+
+                currentUser.profileImage = Utils.ConvertToBase64(stream);
+                return stream;
+            });
+        }
     }
 }
+ 

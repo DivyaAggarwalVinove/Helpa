@@ -77,6 +77,7 @@ namespace Helpa.Services
             return err_msg;
         }
 
+        #region User Basic Info Services 
         public async Task<UserModel> GetUserBasicInfo(int UserId)
         {
             UserModel savedUsers = new UserModel();
@@ -128,8 +129,44 @@ namespace Helpa.Services
                     if (response.IsSuccessStatusCode)
                     {
                         result = await response.Content.ReadAsStringAsync();
+
+                        flag = true;
                         //helpers = JsonConvert.DeserializeObject<HelperResponseModel>(result);
                         //helperService.HelperId = helpers.helperid;
+                    }
+                    else
+                    {
+                        flag = false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+                flag = false;
+            }
+
+            return flag;
+        }
+        #endregion
+
+        #region User Verification Service
+        public async Task<VerificationInfoModel> GetVerificationInfo(int UserId)
+        {
+            VerificationInfoModel VerificationInfo = new VerificationInfoModel();
+
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/editVerification?id=" + UserId));
+
+                    var response = await httpClient.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        VerificationInfo = JsonConvert.DeserializeObject<VerificationInfoModel>(result);
                     }
                     else
                     {
@@ -141,7 +178,9 @@ namespace Helpa.Services
                 Console.Write(e.StackTrace);
             }
 
-            return flag;
+            return VerificationInfo;
         }
+
+        #endregion
     }
 }

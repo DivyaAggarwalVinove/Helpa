@@ -8,5 +8,7 @@ namespace Helpa.Services
         #region Requesting Runtime Location Permissions
         Task GetPermission(Page page);
         #endregion
+
+        Task CheckAndTurnOnGPS(Page page);
     }
 }

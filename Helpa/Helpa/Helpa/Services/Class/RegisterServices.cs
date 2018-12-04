@@ -1,5 +1,7 @@
 ﻿using Helpa.Models;
 using Helpa.Utility;
+using Helpa.Views.Profile;
+using Helpa.Views.Profile.EditProfile;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using System;
@@ -233,32 +235,29 @@ namespace Helpa.Services
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     HttpClient httpClient = new HttpClient();
-                    
-                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Account/PhoneVerification?PhoneNo="+mobileno+"&UserId="+userId));
+
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Account/PhoneVerification?PhoneNo=" + mobileno + "&UserId=" + userId));
                     var json = JsonConvert.SerializeObject(new { user = userId });
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                     var response = await httpClient.PutAsync(uri, content);
                     string result = await response.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
-                    //if (response.IsSuccessStatusCode)
-                    //{
-                        if (role.Equals("HELPER"))
-                            HelperCompleteRegister.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
-                        else
-                        {
-                            Register1.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
-                        }
-                    //}
-                    //else
-                    //{
-                    //    if (role.Equals("HELPER"))
-                    //        HelperRegister.Instance.ShowError(message.Message);
-                    //    else
-                    //        Register.Instance.ShowError(message.Message);
 
-                    //    Console.Write(message.Message);
-                    //}
+                    if (role.Equals("HELPER"))
+                        HelperCompleteRegister.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
+                    else if (role.Equals("PARENT"))
+                    {
+                        Register1.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
+                    }
+                    else if (role.Equals("VERIFICATION"))
+                    {
+                        EditVerificationPage.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
+                    }
+                    else if (role.Equals("EDITINFO"))
+                    {
+                        EditBasicInfo.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
+                    }
                 }
             }
             catch (Exception e)
@@ -293,9 +292,17 @@ namespace Helpa.Services
                     //{
                     if (role.Equals("HELPER"))
                         HelperCompleteRegister.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
-                    else
+                    else if (role.Equals("PARENT"))
                     {
                         Register1.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
+                    }
+                    else if(role.Equals("VERIFICATION"))
+                    {
+                        EditVerificationPage.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
+                    }
+                    else if(role.Equals("EDITINFO"))
+                    {
+                        EditBasicInfo.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
                     }
                 }
             }
@@ -334,7 +341,7 @@ namespace Helpa.Services
             
             return message;
         }
-
+        
         public async Task<ResponseModel> ResetPassword(int userId, string oldpwd, string newpwd)
         {
             ResponseModel message = new ResponseModel();

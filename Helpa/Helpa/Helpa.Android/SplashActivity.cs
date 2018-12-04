@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.OS;
 
 namespace Helpa.Droid
@@ -10,8 +11,9 @@ namespace Helpa.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            System.Threading.Thread.Sleep(2000);
-            StartActivity(typeof(MainActivity));
+            System.Threading.Thread.Sleep(1000);
+            var intent = new Intent(this, typeof(MainActivity));
+            StartActivity(intent);
         }
 
         protected override void OnStart()

@@ -18,7 +18,7 @@ using Xamarin.Forms;
 namespace Helpa.Droid
 {
     [Activity(Label = "Helpa", Icon = "@drawable/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static ICallbackManager CallbackManager = CallbackManagerFactory.Create();
         public static readonly string[] PERMISSIONS = new[] { "publish_actions" };
@@ -49,6 +49,7 @@ namespace Helpa.Droid
                 AsNumAssemblyHelper.HoldAssembly();
 
                 await CrossMedia.Current.Initialize();
+                Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
 
                 Forms.Init(this, bundle);
                 Xamarin.FormsMaps.Init(this, bundle);
@@ -63,6 +64,7 @@ namespace Helpa.Droid
             }
         }
 
+
         #region Requesting Runtime Location Permissions
         readonly string[] PermissionsLocation =
         {
@@ -75,6 +77,7 @@ namespace Helpa.Droid
         {
             // Check to see if any permission in our group is available, if one, then all are
             const string permission = Manifest.Permission.AccessFineLocation;
+            Permission perm = CheckSelfPermission(permission);
             if (CheckSelfPermission(permission) == (int)Permission.Granted)
             {
                 await GetLocationAsync();
@@ -166,6 +169,9 @@ namespace Helpa.Droid
         }
         #endregion
 
+        #region Turned on GPS in Device setting programmatically
+
+        #endregion
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
         {
             base.OnActivityResult(requestCode, resultCode, intent);

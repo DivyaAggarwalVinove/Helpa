@@ -86,7 +86,7 @@
                                         HeightRequest="120" WidthRequest="120" 
                                         Aspect="AspectFill" Margin="0,-60,0,0"
                                         RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = -60}"/>
-
+                                    
                                     <Image 
                                         BackgroundColor="Transparent" Source="camera.png" HeightRequest="30" WidthRequest="30"
                                         RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = 30}"
@@ -166,14 +166,21 @@
 
                                 <Grid Grid.Row="7" ColumnSpacing="10" Margin="0,5,0,5">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.4*" />
-                                        <ColumnDefinition Width="0.6*" />
+                                        <ColumnDefinition Width="0.38*" />
+                                        <ColumnDefinition Width="0.42*" />
+                                        <ColumnDefinition Width="0.2*"/>
                                     </Grid.ColumnDefinitions>
+                                    
                                     <Grid Grid.Column="0" Margin="0,5,0,5">
-                                        <Button x:Name="btnEditBasicInfoSendCode" Text="Send SMS Code" FontSize="14" TextColor="White" BackgroundColor="#FF748C" />
+                                        <Button x:Name="btnEditBasicInfoSendCode" Text="Send SMS Code" Clicked="OnClickSendSms"  FontSize="14" TextColor="White" BackgroundColor="#FF748C" />
                                     </Grid>
+                                    
                                     <Grid Grid.Column="1" Margin="0,5,0,5">
                                         <local:CustomEntry x:Name="entryEditBasicInfoSmsCode" Placeholder="Enter SMS code here" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2" Margin="0,5,0,0">
+                                        <Button x:Name="btnEditBasicInfoCode" Text="Verify" Clicked="OnVerifyCode" FontSize="14" Margin="0,5,0,5" TextColor="White" BackgroundColor="#FF748C" />
                                     </Grid>
                                 </Grid>
 

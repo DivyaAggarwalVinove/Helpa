@@ -29,22 +29,99 @@
                 </Grid>
 
                 <Grid Grid.Column="2">
-                    <Label Text="Clear" TextColor="#929095" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                    <Label Text="Clear" TextColor="#929095" HorizontalTextAlignment="Center"  VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClearRecentSearch"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </Grid>
             </Grid>
 
             <Grid Grid.Row="1">
                 <Label x:Name="labelYourLocation" Text="Your Location" TextColor="#929095" FontSize="35" FontAttributes="Bold">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnClickYourLocation"/>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickYourLocation"/>
                     </Label.GestureRecognizers>
                 </Label>
             </Grid>
 
-            <Grid Grid.Row="2" BackgroundColor="Yellow">
+            <Grid Grid.Row="2">
+                <Grid RowSpacing="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid x:Name="gridRecent1" Grid.Row="0" BackgroundColor="Transparent" Padding="0,5,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.9*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image Source="clock.png" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnSetLocationOnMap"/>
+                            </Grid.GestureRecognizers>
+                            <Label x:Name="lblRecent1" Text="recent address 1" TextColor="#929095" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickRecentSearch" CommandParameter="0"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </Grid>
+
+                    <Grid x:Name="gridRecent2" Grid.Row="1" BackgroundColor="Transparent" Padding="0,5,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.9*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image Source="clock.png" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnSetLocationOnMap"/>
+                            </Grid.GestureRecognizers>
+                            <Label x:Name="lblRecent2" Text="recent address 2" TextColor="#929095" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickRecentSearch" CommandParameter="1"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </Grid>
+
+                    <Grid x:Name="gridRecent3" Grid.Row="2" BackgroundColor="Transparent" Padding="0,5,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition Width="0.9*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image Source="clock.png" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnSetLocationOnMap"/>
+                            </Grid.GestureRecognizers>
+                            <Label x:Name="lblRecent3" Text="recent address 3" TextColor="#929095" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickRecentSearch" CommandParameter="2"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Grid>
             
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="3" Margin=" 0,15,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.1*"/>
                     <ColumnDefinition Width="0.9*"/>
@@ -56,7 +133,7 @@
 
                 <Grid Grid.Column="1">
                     <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnSetLocationOnMap"/>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnSetLocationOnMap"/>
                     </Grid.GestureRecognizers>
                     <Label Text="Set Location on map" TextColor="#929095" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
                 </Grid>

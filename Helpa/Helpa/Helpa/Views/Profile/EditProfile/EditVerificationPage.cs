@@ -1,4 +1,6 @@
 ﻿using Helpa.Models;
+using Helpa.Services;
+using Helpa.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,83 +14,154 @@ namespace Helpa.Views.Profile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditVerificationPage : ContentPage
     {
+        public RegisterUserModel LoggedinUser { get; set; }
+        public static EditVerificationPage Instance { get; set; }
+
         public EditVerificationPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
-            //SetPriceType();           
+
+            Instance = this;
+            NavigationPage.SetHasNavigationBar(this, false);   
         }
-        private void XFBackButton_Tapped(object sender, EventArgs e)
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            VerificationInfoModel verificationInfo = await (new LoginServices()).GetVerificationInfo(LoggedinUser.Id);
+            if(verificationInfo.certificate==null)
+            {
+                gridVerifiedCertificate.IsVisible = false;
+                gridNotVerifiedIdCertificate.IsVisible = true;
+            }
+            else
+            {
+                gridVerifiedCertificate.IsVisible = true;
+                gridNotVerifiedIdCertificate.IsVisible = false;
+            }
+
+            if (verificationInfo.idcard == null)
+            {
+                gridVerifiedIdCard.IsVisible = false;
+                gridNotVerifiedIdIdCard.IsVisible = true;
+            }
+            else
+            {
+                gridVerifiedIdCard.IsVisible = true;
+                gridNotVerifiedIdIdCard.IsVisible = false;
+            }
+
+            if (!verificationInfo.Google)
+            {
+                gridVerifiedGoogle.IsVisible = false;
+                gridNotVerifiedIdGoogle.IsVisible = true;
+            }
+            else
+            {
+                gridVerifiedGoogle.IsVisible = true;
+                gridNotVerifiedIdGoogle.IsVisible = false;
+            }
+
+            if (!verificationInfo.Facebook)
+            {
+                gridVerifiedFacebook.IsVisible = false;
+                gridNotVerifiedIdFacebook.IsVisible = true;
+            }
+            else
+            {
+                gridVerifiedFacebook.IsVisible = true;
+                gridNotVerifiedIdFacebook.IsVisible = false;
+            }
+
+            if (!verificationInfo.emailconfirmed)
+            {
+                gridNotVerifiedIdEmail.IsVisible = true;
+                entryEditVerifyEmail.Text = verificationInfo.email;
+            }
+            else
+            {
+                gridNotVerifiedIdEmail.IsVisible = false;
+                //entryEditVerifyPhone.Text = verificationInfo.;
+            }
+
+            if (!verificationInfo.phonenumberconfirmed)
+            {
+                gridNotVerifiedIdMobile.IsVisible = true;
+            }
+            else
+            {
+                gridNotVerifiedIdMobile.IsVisible = false;
+            }
+        }
+        private void OnBackPress(object sender, EventArgs e)
         {
             App.NavigationPage.Navigation.PopAsync();
         }
-        //void SetPriceType()
-        //{
-        //    List<string> price = new List<string> { "Hourly", "Daily", "Monthly", "TBD" };
-        //    foreach (View gPrice in gridPriceType.Children.ToList())
-        //    {
-        //        gridPriceType.Children.Remove(gPrice);
-        //    }
-        //    gridPriceType.RowDefinitions = new RowDefinitionCollection();
-        //    gridPriceType.ColumnDefinitions = new ColumnDefinitionCollection();
-        //    gridPriceType.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-        //    foreach (string p in price)
-        //        gridPriceType.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-        //    ServiceButton priceButton;
-        //    for (int i = 0; i < price.Count; i++)
-        //    {
-        //        priceButton = new ServiceButton();
-        //        priceButton.Text = price.ElementAt(i);
-        //        priceButton.Margin = new Thickness(5, 5, 5, 5);
-        //        //Image image = new Image();
-        //        //image.Source = "selected.png";
-        //        //image.Aspect = Aspect.AspectFit;
-        //        //image.Margin = new Thickness(20, 15, 0, 15);
-        //        //image.HorizontalOptions = LayoutOptions.End;
-        //        //image.IsVisible = false;
-        //        gridPriceType.Children.Add(priceButton, i, 0);
-        //        //gridPriceType.Children.Add(image, i, 0);
-        //    }
-        //}
-        //void OnHomeLocationSelected(object sender, EventArgs args)
-        //{
-        //    //rgHelperHomeLocation.Checked = !rgHelperHomeLocation.Checked;
-        //    if (rgHelperHomeLocation.Checked)
-        //    {
-        //        rgHelperMobileLocation.Checked = !rgHelperMobileLocation.Checked;
-        //        btnHelperRegDistrict.IsVisible = false;
-        //        entryHelperRegLocation.IsVisible = true;
-        //    }
-        //    else
-        //        rgHelperHomeLocation.Checked = !rgHelperHomeLocation.Checked;
-        //}
-        //void OnMobileLocationSelected(object sender, EventArgs args)
-        //{
-        //    if (rgHelperMobileLocation.Checked)
-        //    {
-        //        rgHelperHomeLocation.Checked = !rgHelperHomeLocation.Checked;
-        //        btnHelperRegDistrict.IsVisible = true;
-        //        entryHelperRegLocation.IsVisible = false;
-        //    }
-        //    else
-        //        rgHelperMobileLocation.Checked = !rgHelperMobileLocation.Checked;
-        //    //rgHelperMobileLocation.Checked = !rgHelperMobileLocation.Checked;
-        //}
-        //void OnFocus(object sender, EventArgs args)
-        //{
-        //    Navigation.PushAsync(new HelperRegister2());
-        //}
-        //void SetMinHour(object sender, EventArgs args) =>
-        //   btnHelperRegPriceHrMin.Text = "$ " + ((RangeSlider)sender).LowerValue.ToString();
-        //void SetMaxHour(object sender, EventArgs args) =>
-        //    btnHelperRegPriceHrMax.Text = "$ " + ((RangeSlider)sender).UpperValue.ToString();
-        //void SetMinDay(object sender, EventArgs args) =>
-        //    btnHelperRegPriceDayMin.Text = "$ " + ((RangeSlider)sender).LowerValue.ToString();
-        //void SetMaxDay(object sender, EventArgs args) =>
-        //    btnHelperRegPriceDayMax.Text = "$ " + ((RangeSlider)sender).UpperValue.ToString();
-        //void SetMinMonth(object sender, EventArgs args) =>
-        //    btnHelperRegPriceMonthMin.Text = "$ " + ((RangeSlider)sender).LowerValue.ToString();
-        //void SetMaxMonth(object sender, EventArgs args) =>
-        //    btnHelperRegPriceMonthMax.Text = "$ " + ((RangeSlider)sender).UpperValue.ToString();       
+        async void OnClickSendSms(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(entryEditVerifyPhone.Text))
+            {
+                await DisplayAlert("Warning", "Please enter phone number", "Ok");
+            }
+            else if (!Utils.IsValidMobileNo(entryEditVerifyPhone.Text))
+            {
+                await DisplayAlert("Warning", "Please enter valid mobile number", "Ok");
+            }
+            else
+            {
+                if (LoggedinUser != null)
+                    await (new RegisterServices()).SendSmsCode(LoggedinUser.Id, entryEditVerifyPhone.Text, "VERIFICATION");
+            }
+        }
+
+        async void OnVerifyCode(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(entryEditVerifySmsCode.Text))
+            {
+                await DisplayAlert("Warning", "Please enter verification code", "Ok");
+            }
+            else
+            {
+                if (LoggedinUser != null)
+                    await (new RegisterServices()).VerifyOtp(LoggedinUser.Id, entryEditVerifySmsCode.Text, "VERIFICATION");
+            }
+        }
+
+        async void OnVerifyEmail(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(entryEditVerifyEmail.Text))
+            {
+                await DisplayAlert("", "Required email id to verify", "Ok");
+            }
+            else
+            {
+                if (LoggedinUser != null)
+                {
+                    //Call api to verify email id.
+                    //await (new RegisterServices()).VerifyOtp(LoggedinUser.Id, entryEditVerifySmsCode.Text, "VERIFICATION");
+                }
+            }
+        }
+
+        public void ShowSmsMessage(ResponseModel message, bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                entryEditVerifyPhone.IsEnabled = false;
+            }
+
+            DisplayAlert("", message.Message, "Ok");
+        }
+
+        public void ShowVerificationMessage(ResponseModel message, bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                entryEditVerifySmsCode.IsEnabled = false;
+            }
+
+            DisplayAlert("", message.Message, "Ok");
+        }
     }
 }
