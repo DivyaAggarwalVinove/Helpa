@@ -129,8 +129,12 @@
     <PackageReference Include="Xamarin.GooglePlayServices.Location">
       <Version>42.1021.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Plugin.FilePicker">
+      <Version>2.0.135</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderer\CustomReviewLabelAndroid.cs" />
     <Compile Include="CustomRenderer\CustomHelperStatusAndroid.cs" />
     <Compile Include="CustomRenderer\CustomTotalJobsAndroid.cs" />
     <Compile Include="CustomRenderer\RangeSliderEffect.cs" />
@@ -146,6 +150,7 @@
     <Compile Include="DependencyServices\PicturePickerAndroid.cs" />
     <Compile Include="FacebookActivity.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Model\CustomMarkerRenderer.cs" />
     <Compile Include="Model\MyItem.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,14 +1,10 @@
 ﻿using Helpa.Models;
 using Helpa.Services;
 using Helpa.Utility;
+using Plugin.FilePicker;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Xamarin.RangeSlider.Forms;
 namespace Helpa.Views.Profile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -30,7 +26,7 @@ namespace Helpa.Views.Profile
             base.OnAppearing();
 
             VerificationInfoModel verificationInfo = await (new LoginServices()).GetVerificationInfo(LoggedinUser.Id);
-            if(verificationInfo.certificate==null)
+            if (verificationInfo.certificate == null)
             {
                 gridVerifiedCertificate.IsVisible = false;
                 gridNotVerifiedIdCertificate.IsVisible = true;
@@ -88,6 +84,7 @@ namespace Helpa.Views.Profile
             if (!verificationInfo.phonenumberconfirmed)
             {
                 gridNotVerifiedIdMobile.IsVisible = true;
+                entryEditVerifyPhone.Text = verificationInfo.PhoneNumber;
             }
             else
             {
@@ -138,8 +135,25 @@ namespace Helpa.Views.Profile
             {
                 if (LoggedinUser != null)
                 {
+                    await (new RegisterServices()).EmailVerify(entryEditVerifyEmail.Text);
                     //Call api to verify email id.
                     //await (new RegisterServices()).VerifyOtp(LoggedinUser.Id, entryEditVerifySmsCode.Text, "VERIFICATION");
+                }
+            }
+        }
+
+        async void OnCertificateUpload(object sender, EventArgs e)
+        {
+            if (LoggedinUser != null)
+            {
+                var file = await CrossFilePicker.Current.PickFile();
+
+                if (file != null)
+                {
+                    var stream = Utils.ConvertByteToBase64(file.DataArray);
+
+                    //await (new LoginServices()).UploadCertificate(LoggedinUser.HelperId, stream);
+                    await (new LoginServices()).UploadCertificate(133, stream);
                 }
             }
         }
@@ -159,8 +173,19 @@ namespace Helpa.Views.Profile
             if (isSuccess)
             {
                 entryEditVerifySmsCode.IsEnabled = false;
+                gridNotVerifiedIdMobile.IsVisible = true;
             }
 
+            DisplayAlert("", message.Message, "Ok");
+        }
+
+        public void ShowEmailVerifyMessage(ResponseModel message, bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                entryEditVerifyEmail.IsEnabled = false;
+                gridNotVerifiedIdEmail.IsVisible = false;
+            }
             DisplayAlert("", message.Message, "Ok");
         }
     }

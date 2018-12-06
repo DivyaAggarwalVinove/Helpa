@@ -20,6 +20,7 @@ namespace Helpa.Models
         public bool phonenumberconfirmed { get; set; }
         public bool emailconfirmed { get; set; }
         public string email { get; set; }
+        public string PhoneNumber { get; set; }
         public bool Google { get; set; }
         public bool Facebook { get; set; }
         public Certificate certificate { get; set; }

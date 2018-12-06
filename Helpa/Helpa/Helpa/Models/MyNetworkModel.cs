@@ -23,6 +23,7 @@ namespace Helpa.Models
         public LocationModel Location { get; set; }
         public string UserName { get; set; }
         public int Rating { get; set; }
+        public string BookmarkImage { get;set;}
         public int NoOfConnetion { get; set; }
         public int Type { get; set; }
         public bool Status { get; set; }

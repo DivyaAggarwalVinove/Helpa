@@ -368,6 +368,30 @@ namespace Helpa.Services
 
             return message;
         }
+
+        public async Task EmailVerify(string Email)
+        {
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Account/EmailVerification?EmailId=" + Email));
+                    var json = JsonConvert.SerializeObject(new { user = Email });
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var response = await httpClient.PutAsync(uri, content);
+                    string result = await response.Content.ReadAsStringAsync();
+                    var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+                    EditVerificationPage.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+        }
         #endregion
     }
 }

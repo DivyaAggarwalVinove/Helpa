@@ -21,6 +21,7 @@ namespace Helpa.Services
         Task SendSmsCode(int userId, string mobileno, string role);
         Task VerifyOtp(int userId, string otp, string role);
         Task<ResponseModel> SendLink(string email);
+        Task EmailVerify(string Email);
         #endregion
     }
 }

@@ -80,7 +80,7 @@ namespace Helpa.ViewModels.ProfileViewModel.EditProfileViewModel
 
                 UserInfo.UserId = userid;
 
-                SelectedCarousel = "0/" + ((UserInfo.Carousel != null) ? UserInfo.Carousel.Count.ToString() : "0");
+                SelectedCarousel = "1/" + ((UserInfo.Carousel != null) ? UserInfo.Carousel.Count.ToString() : "0");
                 UserInfo.GenderName = (UserInfo.Gender == 1) ? "Male" : (UserInfo.Gender == 2) ? "Female" : "Rather no to say";
             }
         }

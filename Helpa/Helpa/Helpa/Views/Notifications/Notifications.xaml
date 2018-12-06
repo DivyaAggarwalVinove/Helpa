@@ -9,7 +9,10 @@
     
     <ContentPage.Content>
         <RelativeLayout>
-            <Grid x:Name="rootlayout" RowSpacing="0" BackgroundColor="Transparent" Margin="10,20,10,0">
+            <Grid 
+                x:Name="rootlayout" RowSpacing="0" BackgroundColor="Transparent" Margin="10,20,10,0"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>

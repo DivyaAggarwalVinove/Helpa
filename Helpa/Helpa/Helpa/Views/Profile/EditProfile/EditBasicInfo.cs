@@ -107,7 +107,6 @@ namespace Helpa.Views.Profile.EditProfile
             {
                 entryEditBasicInfoSmsCode.IsEnabled = false;
             }
-
             DisplayAlert("", message.Message, "Ok");
         }
 
@@ -132,10 +131,11 @@ namespace Helpa.Views.Profile.EditProfile
 
             var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             {
-                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
                 Directory = "Sample",
-                CustomPhotoSize = 100,
                 MaxWidthHeight = 100, 
+                CustomPhotoSize=50,
+                CompressionQuality=50,
                 Name = "test.jpg"
             });
 
@@ -147,7 +147,7 @@ namespace Helpa.Views.Profile.EditProfile
             imgEditBasicInfoProfile.Source = ImageSource.FromStream(() =>
             {
                 var stream = file.GetStream();
-
+                
                 ((EditBasicInfoViewModel)BindingContext).UserInfo.ProfileImage = Utils.ConvertToBase64(file.GetStream());
 
                 file.Dispose();
@@ -158,27 +158,6 @@ namespace Helpa.Views.Profile.EditProfile
         private async void OnSaveBasicInfo(object sender, EventArgs e)
         {
             aiEditBasicInfo.IsRunning = true;
-            /*
-             * {
-                  "UserName": "vishal",
-                  "UserId": "1378",
-                  "ProfileImage": "base64",
-                  "Carousel": [
-                    "http://180.151.232.92:127/Files/Documents/image-4cfb26cc-cefd-4299-8af2-fbaed80cd39d.jpg",
-                    "base64"
-                  ],
-                  "Gender": 1,
-                  "MobileNumber": null,
-                  "Email": "vishal@mail.vinove.com",
-                  "LocationName": "Jammu - Delhi Road, Huda, Panipat, Haryana, India",
-                  "Locality": null,
-                  "Distict": null,
-                  "Latitude": "29.3612542",
-                  "Longitude": "76.97783049999998",
-                  "selfintroduction": "test",
-                  "PhoneVerification": false
-                  }
-             */
 
             if (string.IsNullOrEmpty(entryEditBasicInfoPhone.Text))
             {
@@ -240,6 +219,7 @@ namespace Helpa.Views.Profile.EditProfile
                 bool result = await (new LoginServices()).SaveUserBasicInfo(ui);
 
                 if (result)
+
                     await Navigation.PopAsync();
                 else
                     await DisplayAlert("", "Please try again.", "Ok");

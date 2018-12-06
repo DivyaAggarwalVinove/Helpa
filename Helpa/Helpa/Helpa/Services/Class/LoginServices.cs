@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Helpa.Services
@@ -80,7 +81,7 @@ namespace Helpa.Services
         #region User Basic Info Services 
         public async Task<UserModel> GetUserBasicInfo(int UserId)
         {
-            UserModel savedUsers = new UserModel();
+            UserModel userInfo = new UserModel();
 
             try
             {
@@ -93,7 +94,23 @@ namespace Helpa.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string result = await response.Content.ReadAsStringAsync();
-                        savedUsers = JsonConvert.DeserializeObject<UserModel>(result);
+                        userInfo = JsonConvert.DeserializeObject<UserModel>(result);
+
+
+                        RegisterUserModel rum = App.Database.GetLoggedUser();
+
+                        rum.Id = UserId;
+                        rum.UserName = userInfo.UserName;
+                        rum.profileImage = userInfo.ProfileImage;
+                        rum.Role = userInfo.Role;
+                        rum.Gender = userInfo.Gender;
+                        rum.MobileNumber = userInfo.MobileNumber;
+                        rum.locationName = userInfo.LocationName;
+                        rum.latitude = userInfo.Latitude;
+                        rum.longitude = userInfo.Longitude;
+                        rum.description = userInfo.selfintroduction;
+
+                        await App.Database.SaveUserAsync(rum);
                     }
                     else
                     {
@@ -105,7 +122,7 @@ namespace Helpa.Services
                 Console.Write(e.StackTrace);
             }
 
-            return savedUsers;
+            return userInfo;
         }
 
         public async Task<bool> SaveUserBasicInfo(UserModel userInfo)
@@ -121,8 +138,12 @@ namespace Helpa.Services
 
                     var json = JsonConvert.SerializeObject(userInfo);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    httpClient.Timeout = Timeout.InfiniteTimeSpan;
 
-                    var response = await httpClient.PutAsync(uri, content);
+                    var tokenSource = new CancellationTokenSource();
+                    tokenSource.CancelAfter(TimeSpan.FromMilliseconds(Timeout.Infinite));
+
+                    var response = await httpClient.PutAsync(uri, content, tokenSource.Token);
                     string result = await response.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
 
@@ -131,8 +152,6 @@ namespace Helpa.Services
                         result = await response.Content.ReadAsStringAsync();
 
                         flag = true;
-                        //helpers = JsonConvert.DeserializeObject<HelperResponseModel>(result);
-                        //helperService.HelperId = helpers.helperid;
                     }
                     else
                     {
@@ -179,6 +198,42 @@ namespace Helpa.Services
             }
 
             return VerificationInfo;
+        }
+
+        public async Task UploadCertificate(int hid, string cert)
+        {
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/PostCertificates"));
+
+                    var json = JsonConvert.SerializeObject(new { HelperId = hid, certificate = cert });
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var response = await httpClient.PostAsync(uri, content);
+                    string result = await response.Content.ReadAsStringAsync();
+                    var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = await response.Content.ReadAsStringAsync();
+                        //helpers = JsonConvert.DeserializeObject<HelperResponseModel>(result);
+                        //helperService.HelperId = helpers.helperid;
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            //return helperService;
         }
 
         #endregion

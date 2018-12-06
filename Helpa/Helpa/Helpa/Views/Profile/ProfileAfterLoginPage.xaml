@@ -68,7 +68,13 @@
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <controls:CircleImage x:Name="imgUserProfilePicture" VerticalOptions="Center" HorizontalOptions="End" Source="picture2.png" HeightRequest="60" WidthRequest="60" />
+                            <controls:CircleImage x:Name="imgUserProfilePicture" 
+                                                  Aspect="AspectFill"
+                                                  VerticalOptions="Center" 
+                                                  HorizontalOptions="End" 
+                                                  Source="picture2.png" 
+                                                  HeightRequest="60" 
+                                                  WidthRequest="60" />
                         </Grid>
                     </Grid>
                     

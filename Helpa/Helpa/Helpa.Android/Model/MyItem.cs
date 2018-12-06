@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.Gms.Maps.Model;
 using Com.Google.Maps.Android.Clustering;
+using Com.Google.Maps.Android.Clustering.View;
 
 public class MyItem : Java.Lang.Object, IClusterItem
 {    private LatLng mPosition { get; set; }

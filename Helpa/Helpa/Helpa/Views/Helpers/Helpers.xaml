@@ -329,7 +329,7 @@
                                         TextColor="White"/>
 
                         <Image x:Name="imgHelpersList" IsVisible="True" Source="filter.png" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" 
-                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnPostJob, Property=X, Factor=1, Constant = 200}"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnPostJob, Property=X, Factor=1, Constant = 180}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btnPostJob, Property=Y, Factor=1, Constant = -5}">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer
@@ -429,7 +429,7 @@
                                                                 </Grid>
 
                                                                 <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                    <Image Source="save.png" Aspect="AspectFit" Margin="2">
+                                                                    <Image Source="{Binding BookmarkImage}" Aspect="AspectFit" Margin="2">
                                                                         <Image.GestureRecognizers>
                                                                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickBookmark" CommandParameter="{Binding UserId}" />
                                                                         </Image.GestureRecognizers>

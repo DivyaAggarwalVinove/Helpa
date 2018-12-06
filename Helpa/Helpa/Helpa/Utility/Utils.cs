@@ -50,5 +50,10 @@ namespace Helpa.Utility
             return base64;
         }
 
+        public static string ConvertByteToBase64(byte[] bytes)
+        {
+            string base64 = Convert.ToBase64String(bytes);
+            return base64;
+        }
     }
 }

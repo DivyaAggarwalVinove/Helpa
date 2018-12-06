@@ -17,6 +17,7 @@ namespace Helpa.Services
 
         #region User Verification Service
         Task<VerificationInfoModel> GetVerificationInfo(int UserId);
+        Task UploadCertificate(int hid, string cert);
         #endregion
     }
 }

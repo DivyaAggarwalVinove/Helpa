@@ -109,7 +109,7 @@
 
                                     <Button 
                                         Grid.Column="1" Text="Edit" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
-                                        BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
+                                        Clicked="OnCertificateUpload" BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
                                 </Grid>
 
                                 <Grid x:Name="gridVerifiedIdCard" Grid.Row="3" IsVisible="True" Padding="5" BackgroundColor="#F1F5F6">
@@ -171,7 +171,7 @@
                                             </Grid>
 
                                             <Grid Grid.Column="1">
-                                                <local:CustomEntry x:Name="entryEditVerifyPhone" Placeholder="Phone Number" PlaceholderColor="#BDBFC0" FontSize="14"/>
+                                                <local:CustomEntry x:Name="entryEditVerifyPhone" Placeholder="Phone Number" PlaceholderColor="#BDBFC0" IsEnabled="False" FontSize="14"/>
                                             </Grid>
                                         </Grid>
 
@@ -255,7 +255,7 @@
                                         Grid.Column="0" Text="Certificates" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Gray" FontAttributes="None" FontSize="Small"/>
 
                                     <Button 
-                                        Grid.Column="1" Text="Upload" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center"
+                                        Grid.Column="1" Text="Upload" TextColor="#9AA2A4" BorderRadius="5" VerticalOptions="Center" Clicked="OnCertificateUpload"
                                         BackgroundColor="#E5E5E5" CornerRadius="5" Margin="0,10,0,10"/>
                                 </Grid>
 
