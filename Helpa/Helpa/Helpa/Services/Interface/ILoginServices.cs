@@ -9,6 +9,7 @@ namespace Helpa.Services
     public interface ILoginServices
     {
         Task<LoginErrorResponseModel> Login(string email, string pwd);
+        Task<bool> ExternalLogin(ExternalUserModel userModel);
 
         #region User Basic Info Services 
         Task<UserModel> GetUserBasicInfo(int UserId);
@@ -17,7 +18,8 @@ namespace Helpa.Services
 
         #region User Verification Service
         Task<VerificationInfoModel> GetVerificationInfo(int UserId);
-        Task UploadCertificate(int hid, string cert);
+        Task<bool> UploadCertificate(int hid, string cert);
+        Task<bool> UploadID(int hid, string cert);
         #endregion
     }
 }

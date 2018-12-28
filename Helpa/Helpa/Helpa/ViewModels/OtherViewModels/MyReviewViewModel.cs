@@ -88,7 +88,7 @@ namespace Helpa.ViewModels
                 }
                 ToReviewList = new ObservableCollection<MyNetworkModel>(n);
                 #endregion
-
+                 
                 #region Get Review List by me
                 // byMeList = await (new MyReviewServices()).GetReviewByMe(user.Id);
                 #endregion
@@ -98,6 +98,9 @@ namespace Helpa.ViewModels
                 if(ReviewAboutMe.Total!=0)
                 {
                     AboutMeList = ReviewAboutMe.Data;
+
+                    AboutMeList.Where(x => (x.ReviewData == null || x.ReviewData.Count <= 0)).ToList().ForEach(y => y.isReplied = true);
+                    AboutMeList.Where(x => (x.ReviewData != null && x.ReviewData.Count > 0)).ToList().ForEach(y => y.isNotReplied = true);
                 }
                 #endregion
                 //aiFindHelper.IsRunning = false;

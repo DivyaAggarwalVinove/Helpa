@@ -3,6 +3,10 @@
 	<string name="app_name">Helpa.Droid</string>
   <string name="fb_app_id">172211350107196</string>
   <string name="fb_app_name">Helpa</string>
+
+  <string name="facebook_app_name">Helpa</string>
+  <string name="facebook_app_id">172211350107196</string>
+  <string name="fb_login_protocol_scheme">fbxxxxxxxxxxxxx</string>
   
   <string name="com_facebook_loginview_log_out_button">Sign up with Facebook</string>
   <string name="com_facebook_loginview_log_in_button">Sign up with Facebook</string>

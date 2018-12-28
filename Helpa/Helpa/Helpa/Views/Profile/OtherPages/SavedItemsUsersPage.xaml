@@ -78,7 +78,7 @@
                 </Grid>
                 
                 <Grid Grid.Row="2">
-                    <ListView x:Name="lvFullUsers" ItemsSource="{Binding SavedUserList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True">
+                    <ListView x:Name="lvFullUsers" ItemsSource="{Binding SavedUserList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" SelectionMode="None" IsVisible="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell Height="135">
@@ -200,7 +200,8 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                     <ListView x:Name="lvFullJobPost" ItemsSource="{Binding SavedJobPostsList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False">
+                    
+                     <ListView x:Name="lvFullJobPost" ItemsSource="{Binding SavedJobPostsList}" VerticalOptions="FillAndExpand" HasUnevenRows="true" SelectionMode="None" IsVisible="False">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell Height="135">

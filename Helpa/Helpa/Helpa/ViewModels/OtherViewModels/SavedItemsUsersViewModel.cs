@@ -43,10 +43,11 @@ namespace Helpa.ViewModels
         {
             if (IsBusy)
                 return;
+
             IsBusy = true;
             try
             {
-                var user = App.Database.GetLoggedUser();
+                var user = App.Database.GetLoggedUser().Result;
                 #region get saved user
                 HelpersServices helpersServices = new HelpersServices();
                 var savedUser = await helpersServices.GetSavedUsers(user.Id);

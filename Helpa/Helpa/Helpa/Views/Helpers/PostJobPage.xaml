@@ -9,7 +9,8 @@
              x:Class="Helpa.Views.Helpers.PostJobPage">
     <ContentPage.Content>
         <RelativeLayout>
-            <Grid RowSpacing="0"
+            <Grid 
+                RowSpacing="0"
                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant = 0}"
@@ -20,7 +21,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" RowSpacing="0" BackgroundColor="#2ec5b6" Padding="5">
+                <Grid Grid.Row="0" RowSpacing="20" BackgroundColor="#2ec5b6" Padding="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>

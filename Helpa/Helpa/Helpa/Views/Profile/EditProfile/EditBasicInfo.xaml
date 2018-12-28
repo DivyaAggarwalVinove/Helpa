@@ -46,7 +46,7 @@
                     </Grid>
                 </Grid>
 
-                <ScrollView Grid.Row="1" IsClippedToBounds="True">
+                <ScrollView x:Name="sv" Grid.Row="1" IsClippedToBounds="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <RelativeLayout>
                         <Grid RowSpacing="0">
                             <Grid.RowDefinitions>
@@ -56,7 +56,13 @@
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0" BackgroundColor="Transparent">
-                                <Image x:Name="imgCarousel" BackgroundColor="Transparent" Source="{Binding UserInfo.Carousel[0]}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" HeightRequest="130" Aspect="AspectFill"/>
+                                <Image 
+                                    x:Name="imgCarousel"
+                                    Source="{Binding UserInfo.Carousel[0]}" 
+                                    VerticalOptions="Center" 
+                                    HorizontalOptions="FillAndExpand" 
+                                    HeightRequest="130" 
+                                    Aspect="AspectFill"/>
                                 
                                 <Image BackgroundColor="Transparent" Source="back_white.png" VerticalOptions="Center" HorizontalOptions="Start" Margin="10,0,0,0" HeightRequest="20" WidthRequest="20">
                                     <Image.GestureRecognizers>

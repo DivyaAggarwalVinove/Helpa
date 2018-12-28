@@ -19,7 +19,14 @@ namespace Helpa.Views.Profile
 
         public void OnClickBasicInfo(object sender, EventArgs e)
         {
-            App.NavigationPage.Navigation.PushAsync(new EditBasicInfo() { LoggedinUser = this.LoggedinUser});
+            try
+            {
+                App.NavigationPage.Navigation.PushAsync(new EditBasicInfo(LoggedinUser));
+            }
+            catch(Exception ex)
+            {
+                Console.Write(ex.StackTrace);
+            }
         }
 
         public void OnClickServices(object sender, EventArgs e)

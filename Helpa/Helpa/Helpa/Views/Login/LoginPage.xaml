@@ -35,11 +35,12 @@
                     </Grid>
 
                     <Grid Grid.Row="2" Margin="0,5,0,5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        <Button Text="Login with Facebook" Clicked="OnExternalLogin" TextColor="White" Margin="0,5,0,5" BackgroundColor="#3D5A98" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                        <!--<Button Text="Login with Facebook" Clicked="OnExternalLogin" TextColor="White" Margin="0,5,0,5" BackgroundColor="#3D5A98" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>-->
+                        <Button Text="Login with Facebook" TextColor="White" Margin="0,5,0,5" BackgroundColor="#3D5A98" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Clicked="OnFacebookLogin"/>
                     </Grid>
 
                     <Grid Grid.Row="3" Padding="0,5,0,5">
-                        <Button Text="Login with Google" BackgroundColor="White" TextColor="#BDBFC0" Margin="0,5,0,5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                        <Button Text="Login with Google" BackgroundColor="White" TextColor="#BDBFC0" Margin="0,5,0,5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Clicked="OnGoogleLogin"/>
                     </Grid>
 
                     <Grid Grid.Row="4" ColumnSpacing="0" Margin="0,5,0,5">

@@ -10,6 +10,7 @@ using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,13 @@ namespace Helpa
             entryRegPhone1.Text = user.MobileNumber;
             entryRegEmail1.Text = user.Email;
 
+            if (user.profileImage != null)
+            {
+                imgRegProfile.Source = user.profileImage;
+
+                byte[] fileByte = Utilities.GetImage(user.profileImage);
+                user.profileImage = Utils.ConvertByteToBase64(fileByte);
+            }
             //SetLocation();
 
             MessagingCenter.Subscribe<Register3, LocationModel>(this, "Selected Address", (sender, loc) =>
@@ -215,23 +223,24 @@ namespace Helpa
             Image profile = (Image)sender;
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
             {
-                await DisplayAlert("", ":( No camera avaialble.", "OK");
+                await DisplayAlert("No Camera", ":( No camera avaialble.", "OK");
                 return;
             }
 
-            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             {
-                PhotoSize = PhotoSize.Medium,
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
                 Directory = "Sample",
-                CustomPhotoSize = 100,
                 MaxWidthHeight = 100,
-                Name = "test" + DateTime.Today.ToString() + ".png"
+                CustomPhotoSize = 50,
+                CompressionQuality = 50,
+                Name = "test.jpg"
             });
 
             if (file == null)
                 return;
 
-            imgEditBasicInfoProfile.Source = ImageSource.FromStream(() =>
+            imgRegProfile.Source = ImageSource.FromStream(() =>
             {
                 var stream = file.GetStream();
                 //imgEditBasicInfoProfile.Source = file.Path;
@@ -241,6 +250,7 @@ namespace Helpa
                 file = null;
 
                 currentUser.profileImage = Utils.ConvertToBase64(stream);
+
                 return stream;
             });
         }

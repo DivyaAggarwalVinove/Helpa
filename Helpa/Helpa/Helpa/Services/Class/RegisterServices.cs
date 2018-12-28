@@ -5,7 +5,6 @@ using Helpa.Views.Profile.EditProfile;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,10 +34,15 @@ namespace Helpa.Services
                     var json = JsonConvert.SerializeObject(userModel);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await httpClient.PostAsync(uri, content);
-                    string result = await response.Content.ReadAsStringAsync();
+                    //var response = await httpClient.PostAsync(uri, content);
+                    
+                    var requestTask = httpClient.PostAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
-                    if (response.IsSuccessStatusCode)
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
                         userModel.Id = int.Parse(message.Id);
                         userModel.IsRegistered = true;
@@ -88,6 +92,9 @@ namespace Helpa.Services
 
                     var response = await httpClient.PostAsync(uri, content);
 
+                    //var requestTask = httpClient.PostAsync(uri, content);
+                    //var response = Task.Run(() => requestTask);
+
                     string result = await response.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
                     if (response.IsSuccessStatusCode)
@@ -124,7 +131,7 @@ namespace Helpa.Services
         /// </summary>
         /// <param name="userModel"></param>
         /// <returns></returns>
-        public async Task RegisterExternal(RegisterUserModel userModel)
+        public async Task RegisterExternal(ExternalUserModel userModel)
         {
             try
             {
@@ -132,25 +139,44 @@ namespace Helpa.Services
                 {
                     HttpClient httpClient = new HttpClient();
 
-                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/Account/RegisterExternal"));
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "/api/Account/GoogleExternalSignUp"));
                     var json = JsonConvert.SerializeObject(userModel);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await httpClient.PostAsync(uri, content);
-                    string result = await response.Content.ReadAsStringAsync();
+                   // var response = await httpClient.PostAsync(uri, content);
+
+                    var requestTask = httpClient.PostAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        userModel.Id = int.Parse(message.Id);
-                        userModel.IsRegistered = true;
-                        HelperRegister.Instance.GotoNext(userModel);
+                        RegisterUserModel rum = new RegisterUserModel();
+
+                        rum.Id = int.Parse(message.Id);
+                        rum.UserName = userModel.name;
+                        rum.Email = userModel.email;
+                        rum.LoginProvider = userModel.LoginProvider;
+                        rum.Role = userModel.Role;
+                        rum.profileImage = userModel.profileImage;
+
+                        rum.IsRegistered = true;
+                        if (userModel.Role.Equals("HELPER"))
+                            HelperRegister.Instance.GotoNext(rum);
+                        else
+                            Register.Instance.GotoNext(rum);
                     }
                     else
                     {
-                        userModel.IsRegistered = true;
-                        HelperRegister.Instance.GotoNext(userModel);
-                    }                    
+                        if (userModel.Role.Equals("HELPER"))
+                            HelperRegister.Instance.ShowError(message.Message);
+                        else
+                            Register.Instance.ShowError(message.Message);
+
+                        Console.Write(message.Message);
+                    }
                 }
             }
             catch(Exception e)
@@ -159,65 +185,65 @@ namespace Helpa.Services
             }
         }
 
-        public async Task FacebookSignUp(ExternalLoginViewModel externalDetail)
-        {
-            try
-            {
-                if (CrossConnectivity.Current.IsConnected)
-                {
-                    HttpClient httpClient = new HttpClient();
-                    //FormUrlEncodedContent
-                    var uri = new Uri(string.Concat(Constants.baseUrl, externalDetail.Url));
+        //public async Task FacebookSignUp(ExternalLoginModel externalDetail)
+        //{
+        //    try
+        //    {
+        //        if (CrossConnectivity.Current.IsConnected)
+        //        {
+        //            HttpClient httpClient = new HttpClient();
+        //            //FormUrlEncodedContent
+        //            var uri = new Uri(string.Concat(Constants.baseUrl, externalDetail.Url));
 
-                    var response = await httpClient.GetAsync(uri);
+        //            var response = await httpClient.GetAsync(uri);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var result = response.Content.GetType();
-                    }
-                    else
-                    {
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                var result = response.Content.GetType();
+        //            }
+        //            else
+        //            {
 
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.StackTrace);
-            }
-        }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.Write(e.StackTrace);
+        //    }
+        //}
 
-        public async Task<IEnumerable<ExternalLoginViewModel>> GetExternalDetails()
-        {
-            IEnumerable<ExternalLoginViewModel> extrenalLoginDetail = new List<ExternalLoginViewModel>();
+        //public async Task<IEnumerable<RegisterUserModel>> GetExternalDetails()
+        //{
+        //    IEnumerable<ExternalModel> extrenalLoginDetail = new List<ExternalModel>();
 
-            try
-            {
-                if (CrossConnectivity.Current.IsConnected)
-                {
-                    HttpClient httpClient = new HttpClient();
+        //    try
+        //    {
+        //        if (CrossConnectivity.Current.IsConnected)
+        //        {
+        //            HttpClient httpClient = new HttpClient();
 
-                    var uri = new Uri(string.Concat(Constants.baseUrl, "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true"));
+        //            var uri = new Uri(string.Concat(Constants.baseUrl, "/api/Account/ExternalLogins?returnUrl=%2F&generateState=true"));
 
-                    var response = await httpClient.GetAsync(uri);
+        //            var response = await httpClient.GetAsync(uri);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string result = await response.Content.ReadAsStringAsync();
-                        extrenalLoginDetail = JsonConvert.DeserializeObject<IEnumerable<ExternalLoginViewModel>>(result);
-                    }
-                    else
-                    {
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.StackTrace);
-            }
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                string result = await response.Content.ReadAsStringAsync();
+        //                extrenalLoginDetail = JsonConvert.DeserializeObject<IEnumerable<ExternalModel>>(result);
+        //            }
+        //            else
+        //            {
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.Write(e.StackTrace);
+        //    }
 
-            return extrenalLoginDetail;
-        }
+        //    return extrenalLoginDetail;
+        //}
         #endregion
 
         #region Other Utlity Register Api
@@ -240,23 +266,27 @@ namespace Helpa.Services
                     var json = JsonConvert.SerializeObject(new { user = userId });
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await httpClient.PutAsync(uri, content);
-                    string result = await response.Content.ReadAsStringAsync();
+                    //var response = await httpClient.PutAsync(uri, content);
+
+                    var requestTask = httpClient.PutAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
 
                     if (role.Equals("HELPER"))
-                        HelperCompleteRegister.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
+                        HelperCompleteRegister.Instance.ShowSmsMessage(message, response.Result.IsSuccessStatusCode);
                     else if (role.Equals("PARENT"))
                     {
-                        Register1.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
+                        Register1.Instance.ShowSmsMessage(message, response.Result.IsSuccessStatusCode);
                     }
                     else if (role.Equals("VERIFICATION"))
                     {
-                        EditVerificationPage.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
+                        EditVerificationPage.Instance.ShowSmsMessage(message, response.Result.IsSuccessStatusCode);
                     }
                     else if (role.Equals("EDITINFO"))
                     {
-                        EditBasicInfo.Instance.ShowSmsMessage(message, response.IsSuccessStatusCode);
+                        EditBasicInfo.Instance.ShowSmsMessage(message, response.Result.IsSuccessStatusCode);
                     }
                 }
             }
@@ -285,24 +315,28 @@ namespace Helpa.Services
                     var json = JsonConvert.SerializeObject(new { user = userId });
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await httpClient.PutAsync(uri, content);
-                    string result = await response.Content.ReadAsStringAsync();
+                    //var response = await httpClient.PutAsync(uri, content);
+
+                    var requestTask = httpClient.PutAsync(uri,content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
                     //if (response.IsSuccessStatusCode)
                     //{
                     if (role.Equals("HELPER"))
-                        HelperCompleteRegister.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
+                        HelperCompleteRegister.Instance.ShowVerificationMessage(message, response.Result.IsSuccessStatusCode);
                     else if (role.Equals("PARENT"))
                     {
-                        Register1.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
+                        Register1.Instance.ShowVerificationMessage(message, response.Result.IsSuccessStatusCode);
                     }
                     else if(role.Equals("VERIFICATION"))
                     {
-                        EditVerificationPage.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
+                        EditVerificationPage.Instance.ShowVerificationMessage(message, response.Result.IsSuccessStatusCode);
                     }
                     else if(role.Equals("EDITINFO"))
                     {
-                        EditBasicInfo.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
+                        EditBasicInfo.Instance.ShowVerificationMessage(message, response.Result.IsSuccessStatusCode);
                     }
                 }
             }
@@ -327,9 +361,13 @@ namespace Helpa.Services
                     HttpClient httpClient = new HttpClient();
 
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Account/ForgetPasword?EmailId=" + email));
-                    
-                    var response = await httpClient.GetAsync(uri);
-                    string result = await response.Content.ReadAsStringAsync();
+
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
                     message = JsonConvert.DeserializeObject<ResponseModel>(result);
                 }
             }
@@ -355,8 +393,12 @@ namespace Helpa.Services
                     var json = JsonConvert.SerializeObject(new { OldPassword = oldpwd, NewPassword = newpwd, userId = userId });
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await httpClient.PostAsync(uri, content);
-                    string result = await response.Content.ReadAsStringAsync();
+                    //var response = await httpClient.PostAsync(uri, content);
+
+                    var requestTask = httpClient.PostAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
                     message = JsonConvert.DeserializeObject<ResponseModel>(result);
                 }
             }
@@ -381,10 +423,14 @@ namespace Helpa.Services
                     var json = JsonConvert.SerializeObject(new { user = Email });
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await httpClient.PutAsync(uri, content);
-                    string result = await response.Content.ReadAsStringAsync();
+                    //var response = await httpClient.PutAsync(uri, content);
+
+                    var requestTask = httpClient.PutAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
-                    EditVerificationPage.Instance.ShowVerificationMessage(message, response.IsSuccessStatusCode);
+                    EditVerificationPage.Instance.ShowEmailVerifyMessage(message, response.Result.IsSuccessStatusCode);
                 }
             }
             catch (Exception e)

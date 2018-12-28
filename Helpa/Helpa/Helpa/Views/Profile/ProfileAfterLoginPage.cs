@@ -80,9 +80,9 @@ namespace Helpa.Views.Profile
             //Device.OpenUri(new Uri("fb://page/108972495813848"));
         }
 
-        private void OnClickLogout(object sender, EventArgs e)
+        private async void OnClickLogout(object sender, EventArgs e)
         {
-            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
             if (loggedUser == null)
                 return;
             loggedUser.isLoggedIn = false;

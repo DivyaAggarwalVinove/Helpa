@@ -37,7 +37,7 @@ namespace Helpa.Services
                     if (res.IsSuccessStatusCode)
                     {
                         LoginResponseModel message = JsonConvert.DeserializeObject<LoginResponseModel>(result);
-                        if(message!=null && !message.id.Equals(""))
+                        if (message != null && !message.id.Equals(""))
                         {
                             message.userId = int.Parse(message.id);
                         }
@@ -47,6 +47,12 @@ namespace Helpa.Services
                             user = new RegisterUserModel();
 
                         user.Id = message.userId;
+
+                        if (message != null && !message.HelperId.Equals(""))
+                        {
+                            user.HelperId = int.Parse(message.HelperId);
+                        }
+
                         user.UserName = message.userName;
                         user.Token = message.access_token;
                         user.isLoggedIn = true;
@@ -78,6 +84,58 @@ namespace Helpa.Services
             return err_msg;
         }
 
+        public async Task<bool> ExternalLogin(ExternalUserModel userModel)
+        {
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "/api/Account/GoogleExternalSignUp"));
+                    var json = JsonConvert.SerializeObject(userModel);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    // var response = await httpClient.PostAsync(uri, content);
+
+                    var requestTask = httpClient.PostAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
+                    var message = JsonConvert.DeserializeObject<ExternalLoginResponseModel>(result);
+
+                    if (response.Result.IsSuccessStatusCode)
+                    {
+                        RegisterUserModel rum = new RegisterUserModel();
+
+                        rum.Id = int.Parse(message.id);
+                        rum.UserName = message.userName;
+                        rum.Email = message.email;
+                        rum.LoginProvider = userModel.LoginProvider;
+                        rum.Role = message.roles;
+                        rum.profileImage = message.profileImage;
+
+                        rum.isLoggedIn = true;
+
+                        await App.Database.SaveUserAsync(rum);
+
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace.ToString());
+                return false;
+            }
+
+            return false;
+        }
+
         #region User Basic Info Services 
         public async Task<UserModel> GetUserBasicInfo(int UserId)
         {
@@ -90,14 +148,18 @@ namespace Helpa.Services
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/GetBasic?id=" + UserId));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         userInfo = JsonConvert.DeserializeObject<UserModel>(result);
 
 
-                        RegisterUserModel rum = App.Database.GetLoggedUser();
+                        RegisterUserModel rum = (await App.Database.GetLoggedUser());
 
                         rum.Id = UserId;
                         rum.UserName = userInfo.UserName;
@@ -144,12 +206,16 @@ namespace Helpa.Services
                     tokenSource.CancelAfter(TimeSpan.FromMilliseconds(Timeout.Infinite));
 
                     var response = await httpClient.PutAsync(uri, content, tokenSource.Token);
-                    string result = await response.Content.ReadAsStringAsync();
-                    var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+
+                    //var requestTask = httpClient.PutAsync(uri, content, tokenSource.Token);
+                    //var response = Task.Run(() => requestTask);
+
+                    //string result = await response.Content.ReadAsStringAsync();
+                    //var message = JsonConvert.DeserializeObject<ResponseModel>(result);
 
                     if (response.IsSuccessStatusCode)
                     {
-                        result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Content.ReadAsStringAsync();
 
                         flag = true;
                     }
@@ -181,10 +247,14 @@ namespace Helpa.Services
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/editVerification?id=" + UserId));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         VerificationInfo = JsonConvert.DeserializeObject<VerificationInfoModel>(result);
                     }
                     else
@@ -200,7 +270,7 @@ namespace Helpa.Services
             return VerificationInfo;
         }
 
-        public async Task UploadCertificate(int hid, string cert)
+        public async Task<bool> UploadCertificate(int hid, string cert)
         {
             try
             {
@@ -213,29 +283,76 @@ namespace Helpa.Services
                     var json = JsonConvert.SerializeObject(new { HelperId = hid, certificate = cert });
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await httpClient.PostAsync(uri, content);
-                    string result = await response.Content.ReadAsStringAsync();
-                    var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+                    //var response = await httpClient.PostAsync(uri, content);
 
-                    if (response.IsSuccessStatusCode)
+                    var requestTask = httpClient.PostAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
+                    var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+                    
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        result = await response.Content.ReadAsStringAsync();
+                        result = await response.Result.Content.ReadAsStringAsync();
+                        return true;
                         //helpers = JsonConvert.DeserializeObject<HelperResponseModel>(result);
                         //helperService.HelperId = helpers.helperid;
                     }
                     else
                     {
+                        return false;
                     }
                 }
             }
             catch (Exception e)
             {
                 Console.Write(e.StackTrace);
+                return false;
             }
 
-            //return helperService;
+            return false;
         }
 
+        public async Task<bool> UploadID(int hid, string cert)
+        {
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/PostIdentity"));
+
+                    var json = JsonConvert.SerializeObject(new { HelperId = hid, certificate = cert });
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    
+                    var requestTask = httpClient.PostAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
+                    var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+
+                    if (response.Result.IsSuccessStatusCode)
+                    {
+                        result = await response.Result.Content.ReadAsStringAsync();
+                        return true;
+                        //helpers = JsonConvert.DeserializeObject<HelperResponseModel>(result);
+                        //helperService.HelperId = helpers.helperid;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+                return false;
+            }
+
+            return false;
+        }
         #endregion
     }
 }

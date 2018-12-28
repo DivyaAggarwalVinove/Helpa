@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpa.Android", "Helpa\Help
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpa.iOS", "Helpa\Helpa.iOS\Helpa.iOS.csproj", "{BEC66CCA-35F4-40C4-9C2D-F77E3ACD7F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpa", "Helpa\Helpa\Helpa.csproj", "{0D931DE1-C435-401C-9CE1-AB2C7D9111A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpa", "Helpa\Helpa\Helpa.csproj", "{0D931DE1-C435-401C-9CE1-AB2C7D9111A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,7 +101,6 @@ Global
 		{BEC66CCA-35F4-40C4-9C2D-F77E3ACD7F64}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{BEC66CCA-35F4-40C4-9C2D-F77E3ACD7F64}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{BEC66CCA-35F4-40C4-9C2D-F77E3ACD7F64}.Release|x86.ActiveCfg = Debug|iPhoneSimulator
-		{BEC66CCA-35F4-40C4-9C2D-F77E3ACD7F64}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{0D931DE1-C435-401C-9CE1-AB2C7D9111A4}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D931DE1-C435-401C-9CE1-AB2C7D9111A4}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
 		{0D931DE1-C435-401C-9CE1-AB2C7D9111A4}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU

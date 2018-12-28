@@ -22,7 +22,8 @@ using Helpa.Models;
 namespace Helpa.Droid
 {
     class CustomMapRendererAndroid : MapRenderer, IOnMapReadyCallback,
-        ClusterManager.IOnClusterClickListener, ClusterManager.IOnClusterItemClickListener
+        ClusterManager.IOnClusterClickListener, ClusterManager.IOnClusterItemClickListener,
+        GoogleMap.IOnMarkerClickListener
     {
         CustomMap customMap;
         public CustomMapRendererAndroid(Context context) : base(context)
@@ -44,12 +45,12 @@ namespace Helpa.Droid
         {
             base.OnMapReady(map);
 
-            SetupMapClusting(map);
+            //SetupMapClusting(map);
 
-            //map.SetOnMarkerClickListener(this);
-            
+            map.SetOnMarkerClickListener(this);
+
             //NativeMap.InfoWindowClick += OnInfoWindowClick;
-            //NativeMap.SetInfoWindowAdapter(this);
+           // NativeMap.SetInfoWindowAdapter(this);
         }
 
         // Declare a variable for the cluster manager.
@@ -141,8 +142,8 @@ namespace Helpa.Droid
 
         public bool OnMarkerClick(Marker marker)
         {
-            //string selectedCluster = marker.Title.Substring(0, marker.Title.Length - 4).Trim();
-            //customMap.ClickedOnPin(selectedCluster);
+            string selectedCluster = marker.Title.Substring(0, marker.Title.Length - 4).Trim();
+            customMap.ClickedOnPin(selectedCluster);
             return true; //disables info window from showing but now I can't check for clicks on the map and get the data from the marker
         }
 

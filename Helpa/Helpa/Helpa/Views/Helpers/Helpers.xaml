@@ -30,7 +30,7 @@
                     <Grid Grid.Row="0"  x:Name="gridSearchBar" ColumnSpacing="0" Margin="5,0,5,0">
                         <local:CustomStackLayout Orientation="Horizontal" Padding="10,5,10,5" >
                             <!--<Image x:Name="imgSearch" Source="search.png"/>
-                        <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>-->
+                                <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>-->
                             <places:PlacesBar
                                 x:Name="entrySearch"
                                 BackgroundColor="Transparent"
@@ -122,7 +122,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
-                                <Label Text="Sort by" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" LineBreakMode="TailTruncation" VerticalTextAlignment="Center"/>
+                                <Label x:Name="lblSortByFilter" Text="Sort by" TextColor="#494949" FontSize="12" HorizontalTextAlignment="End" LineBreakMode="TailTruncation" VerticalTextAlignment="Center"/>
                             </Grid>
 
                             <Grid Grid.Column="1">
@@ -338,9 +338,11 @@
                             </Image.GestureRecognizers>
                         </Image>
 
-                        <local:CustomTotalHelpers x:Name="lblCount" Text="{Binding TotalHelpers}" TextColor="#FF4968" HeightRequest="60" WidthRequest="60" FontAttributes="Bold"
-                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Width, Factor=0.75, Constant = -30}"
-                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=0.75, Constant = -50}"/>
+                        <local:CustomTotalHelpers 
+                            x:Name="lblCount" Text="{Binding TotalHelpers}" TextColor="#FF4968" HeightRequest="60" WidthRequest="60" FontAttributes="Bold"
+                            VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Width, Factor=0.75, Constant = -30}"
+                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=Height, Factor=0.75, Constant = -50}"/>
 
                         <RelativeLayout x:Name="rlHalfView" BackgroundColor="#F1F5F6" IsVisible="False"
                                  RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=relativeLayout, Property=X, Factor=1, Constant = 0}"
@@ -380,13 +382,13 @@
                                                         <Grid Grid.Column="0" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
                                                             <RelativeLayout BackgroundColor="Transparent" WidthRequest="90" HeightRequest="90">
                                                                 <controls:CircleImage 
-                                                                Source="{Binding ProfilePicture}" 
-                                                                BackgroundColor="Transparent" 
-                                                                Aspect="Fill" 
-                                                                HorizontalOptions="Center" 
-                                                                VerticalOptions="Center" 
-                                                                WidthRequest="80" 
-                                                                HeightRequest="80"/>
+                                                                    Source="{Binding ProfilePicture}" 
+                                                                    BackgroundColor="Transparent" 
+                                                                    Aspect="Fill" 
+                                                                    HorizontalOptions="Center" 
+                                                                    VerticalOptions="Center" 
+                                                                    WidthRequest="80" 
+                                                                    HeightRequest="80"/>
 
                                                                 <Image Source="hands2.png" WidthRequest="35" HeightRequest="35"
                                                                     RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = -30}"

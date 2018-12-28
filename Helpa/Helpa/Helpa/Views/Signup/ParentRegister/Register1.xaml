@@ -94,7 +94,7 @@
                                             BackgroundColor="#FF748C" WidthRequest="120" HeightRequest="120" CornerRadius="120"
                                             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = -60}">-->
                                             <controls:CircleImage 
-                                                x:Name="imgEditBasicInfoProfile" Source="profile_default.png" 
+                                                x:Name="imgRegProfile" Source="profile_default.png" 
                                                 HeightRequest="118" WidthRequest="118" 
                                                 Aspect="AspectFill" BackgroundColor="Transparent"
                                                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant = -60}"/>

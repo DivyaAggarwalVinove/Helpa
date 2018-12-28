@@ -1,5 +1,9 @@
 using Helpa.Models;
 using Helpa.Services;
+using Newtonsoft.Json;
+using Plugin.FacebookClient;
+using Plugin.GoogleClient;
+using Plugin.GoogleClient.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +28,10 @@ namespace Helpa
 
         async void OnExternalLogin(object sender, EventArgs args)
         {
-            var externalDetails = await (new RegisterServices()).GetExternalDetails();
-            await (new RegisterServices()).FacebookSignUp(externalDetails.Where(x => x.Name.ToUpper() == "FACEBOOK").FirstOrDefault());
+            ExternalUserModel um = new ExternalUserModel();
+            await (new RegisterServices()).RegisterExternal(um);
+            //var externalDetails = await (new RegisterServices()).GetExternalDetails();
+            //await (new RegisterServices()).FacebookSignUp(externalDetails.Where(x => x.Name.ToUpper() == "FACEBOOK").FirstOrDefault());
         }
 
         void OnLoginEmailPhnClicked(object sender, EventArgs args)
@@ -84,37 +90,68 @@ namespace Helpa
             }
             else
             {
-                LoginErrorResponseModel response = await(new LoginServices()).Login(entryLoginEmail.Text, entryLoginPwd.Text);
+                LoginErrorResponseModel response = await (new LoginServices()).Login(entryLoginEmail.Text, entryLoginPwd.Text);
                 if (response == null)
                 {
-                    //if (App.selectedPage == 4)
-                    //{
-                    //    try
-                    //    {
-                    //        await Navigation.PopAsync();
-
-                    //        var loggedUser = App.Database.GetLoggedUser();
-
-                    //        ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage();
-                    //        profileAfterLoginPage.currentUser = loggedUser;
-
-                    //        var cp = App.app.contentPresenter;
-                    //        cp.Content = profileAfterLoginPage.Content;
-                    //    }
-                    //    catch (Exception e)
-                    //    {
-                    //        Console.Write(e.StackTrace);
-                    //    }
-                    //}
-                    //else
-                    //{
-                        await Navigation.PopAsync();
-                    //}
+                    await Navigation.PopAsync();
                 }
                 else
                 {
                     await DisplayAlert("Error!", response.error_description, "Ok");
                 }
+            }
+        }
+
+        async void OnFacebookLogin(object sender, EventArgs args)
+        {
+            var userdata = await CrossFacebookClient.Current.RequestUserDataAsync(new string[] { "email", "first_name", "gender", "last_name", "birthday" }, new string[] { "email", "user_birthday" });
+            var data = userdata.Data;
+
+            //var json = JsonConvert.SerializeObject(data);
+            var d = JsonConvert.DeserializeObject<FacebookModel>(data);
+
+            ExternalUserModel userinfo = new ExternalUserModel();
+            //userinfo.id = data.Id;
+            //userinfo.idToken = data.Id;
+            //userinfo.name = data.Name;
+            //userinfo.email = data.Email;
+            userinfo.LoginProvider = "FACEBOOK".ToUpper();
+            userinfo.provider = "FACEBOOK".ToUpper();
+
+            bool result = await (new LoginServices()).ExternalLogin(userinfo);
+
+            if (result)
+            {
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("", "Not able to Login!", "Ok");
+            }
+        }
+        async void OnGoogleLogin(object sender, EventArgs args)
+        {
+            var userdata = await CrossGoogleClient.Current.LoginAsync();
+            GoogleUser data = userdata.Data;
+
+            ExternalUserModel userinfo = new ExternalUserModel();
+            userinfo.id = data.Id;
+            userinfo.idToken = data.Id;
+            userinfo.name = data.Name;
+            userinfo.email = data.Email;
+            userinfo.profileImage = data.Picture.AbsoluteUri;
+
+            userinfo.LoginProvider = "GOOGLE".ToUpper();
+            userinfo.provider = "GOOGLE".ToUpper();
+            bool result = await (new LoginServices()).ExternalLogin(userinfo);
+
+            if(result)
+            {
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("", "Not able to Login!", "Ok");
             }
         }
 

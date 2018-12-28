@@ -19,22 +19,23 @@ namespace Helpa.Views.Profile
             NavigationPage.SetHasNavigationBar((BindableObject)this, false);
             pcv = ProfileContentView;
 
-            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
-            if (loggedUser == null)
-                ProfileContentView.Content = (new ProfileBeforeLoginPage()).Content;
-            else
-                ProfileContentView.Content = (new ProfileAfterLoginPage(loggedUser)).Content;
+            GoToProfilePage();
         }
 
-        protected override void OnAppearing()
+        async void GoToProfilePage()
         {
-            base.OnAppearing();
-            //RegisterUserModel loggedUser = App.Database.GetLoggedUser();
-            //if (loggedUser == null)
-            //    return;
-            //ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage();
-            //profileAfterLoginPage.currentUser = loggedUser;
-            //Content = profileAfterLoginPage.Content;
+            try
+            {
+                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+                if (loggedUser == null)
+                    ProfileContentView.Content = (new ProfileBeforeLoginPage()).Content;
+                else
+                    ProfileContentView.Content = (new ProfileAfterLoginPage(loggedUser)).Content;
+            }
+            catch(Exception e)
+            {
+                Console.Write(e.Message);
+            }
         }
     }
 }

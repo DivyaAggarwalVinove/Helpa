@@ -124,7 +124,7 @@ namespace Helpa
                         {
                             AddGrid(gridHelperEditServices);
 
-                            HelperService helperService = new HelperService();
+                            HelperServices helperService = new HelperServices();
                             helperService.ServiceId = service.Id;
                             helperService.ServiceName = service.ServiceName;
                             helperServices.Service.Add(helperService);
@@ -145,7 +145,7 @@ namespace Helpa
                             for (int i = 0; i < count - 1; i++)
                                 AddGrid(gridHelperEditServices);
 
-                            HelperService helperService =  helperServices.Service.Where(a => a.ServiceId == service.Id).FirstOrDefault();
+                            HelperServices helperService =  helperServices.Service.Where(a => a.ServiceId == service.Id).FirstOrDefault();
                             helperServices.Service.Remove(helperService);
 
                             //selectedService.isSelected = false;
@@ -491,7 +491,7 @@ namespace Helpa
                 }
 
                 //Save services data
-                HelperService service = new HelperService();
+                HelperServices service = new HelperServices();
                 if (rgHelperHomeLocation.Checked)
                     helperServices.Service[currentService].LocationType = 1;
                 else
@@ -569,7 +569,7 @@ namespace Helpa
             svHelperRegHelperHome.IsVisible = true;
 
             // Reset data
-            HelperService service = helperServices.Service.ElementAt(i);
+            HelperServices service = helperServices.Service.ElementAt(i);
             btnHelperRegSelectedService.Text = service.ServiceName;
 
             SetScopes(service.ServiceId);
@@ -746,7 +746,7 @@ namespace Helpa
             svHelperEditServices.IsVisible = true;
 
             helperServices = new HelperServiceModel();
-            helperServices.Service = new List<HelperService>();
+            helperServices.Service = new List<HelperServices>();
         }
 
         void GoToBuildTrust()

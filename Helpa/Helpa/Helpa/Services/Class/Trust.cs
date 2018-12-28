@@ -24,19 +24,21 @@ namespace Helpa.Services
                     var json = JsonConvert.SerializeObject(trust);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await httpClient.PostAsync(uri, content);
-                    string result = await response.Content.ReadAsStringAsync();
+                    //var response = await httpClient.PostAsync(uri, content);
+
+                    var requestTask = httpClient.PostAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+
+                    string result = await response.Result.Content.ReadAsStringAsync();
                     var message = JsonConvert.DeserializeObject<ResponseModel>(result);
 
-                    if (response.IsSuccessStatusCode)
+                    if (response.Result.IsSuccessStatusCode)
                         return true;
                 }
             }
             catch (Exception e)
             {
                 Console.Write(e.StackTrace.ToString());
-
-                
             }
 
             return false;

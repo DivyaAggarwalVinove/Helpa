@@ -46,29 +46,30 @@
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Basic Info" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#6E706F" />
                         <Image Source="angle_grey_right.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="10" WidthRequest="10" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnClickBasicInfo" NumberOfTapsRequired="1"/>
-                        </StackLayout.GestureRecognizers>
                     </StackLayout>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnClickBasicInfo" NumberOfTapsRequired="1"/>
+                    </Grid.GestureRecognizers>
                 </Grid>
                 
                 <Grid Grid.Row="1" Padding="0,20,0,20" BackgroundColor="#F1F5F6">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Services" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#6E706F" />
                         <Image Source="angle_grey_right.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="10" WidthRequest="10" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnClickServices" NumberOfTapsRequired="1"/>
-                        </StackLayout.GestureRecognizers>
                     </StackLayout>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnClickServices" NumberOfTapsRequired="1"/>
+                    </Grid.GestureRecognizers>
                 </Grid>
+                
                  <Grid Grid.Row="2" Padding="0,20,0,20" BackgroundColor="#F1F5F6">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Verification" VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#6E706F" />
                         <Image Source="angle_grey_right.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand" HeightRequest="10" WidthRequest="10" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnClickVerification" NumberOfTapsRequired="1"/>
-                        </StackLayout.GestureRecognizers>
                     </StackLayout>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnClickVerification" NumberOfTapsRequired="1"/>
+                    </Grid.GestureRecognizers>
                 </Grid>
             </Grid>
             

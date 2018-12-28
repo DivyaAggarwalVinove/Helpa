@@ -47,7 +47,7 @@ namespace Helpa.ViewModels
             IsBusy = true;
             try
             {
-                var user = App.Database.GetLoggedUser();
+                RegisterUserModel user = App.Database.GetLoggedUser().Result;
                 HelpersServices helpersServices = new HelpersServices();
                 var myNetwork = await helpersServices.GetMyNetworks(user.Id);
                 var n = myNetwork.Data;

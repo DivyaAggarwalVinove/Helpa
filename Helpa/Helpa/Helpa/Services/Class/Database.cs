@@ -61,9 +61,11 @@ namespace Helpa.Services
             return database.Table<RegisterUserModel>().Where(i => i.IsCompleted == true).FirstOrDefaultAsync().Result;
         }
 
-        public RegisterUserModel GetLoggedUser()
+        public Task<RegisterUserModel> GetLoggedUser()
         {
-            var user = database.Table<RegisterUserModel>().Where(i => i.isLoggedIn == true).FirstOrDefaultAsync().Result;
+            var user = database.Table<RegisterUserModel>().Where(i => i.isLoggedIn == true).FirstOrDefaultAsync();
+           // await user;
+
             return user;
         }
 

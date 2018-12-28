@@ -21,6 +21,8 @@ namespace Helpa.Models
         public int Rating { get; set; }
         public string Review { get; set; }
         public DateTime Datetime { get; set; }
+        public bool isReplied { get; set; }
+        public bool isNotReplied { get; set; }
         public List<ReviewModel> ReviewData { get; set; }
     }
 }

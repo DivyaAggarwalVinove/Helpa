@@ -10,7 +10,9 @@ using Android.Support.Design.Widget;
 using Android.Util;
 using Android.Widget;
 using AsNum.XFControls.Droid;
+using Plugin.FacebookClient;
 using Plugin.Geolocator;
+using Plugin.GoogleClient;
 using Plugin.Media;
 using Xamarin.Facebook;
 using Xamarin.Forms;
@@ -18,7 +20,7 @@ using Xamarin.Forms;
 namespace Helpa.Droid
 {
     [Activity(Label = "Helpa", Icon = "@drawable/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
         public static ICallbackManager CallbackManager = CallbackManagerFactory.Create();
         public static readonly string[] PERMISSIONS = new[] { "publish_actions" };
@@ -45,8 +47,11 @@ namespace Helpa.Droid
 
                 base.OnCreate(bundle);
 
-                FacebookSdk.SdkInitialize(this.ApplicationContext);
+                //FacebookSdk.SdkInitialize(this.ApplicationContext);
                 AsNumAssemblyHelper.HoldAssembly();
+
+                FacebookClientManager.Initialize(this);
+                GoogleClientManager.Initialize(this);
 
                 await CrossMedia.Current.Initialize();
                 Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
@@ -72,15 +77,17 @@ namespace Helpa.Droid
             Manifest.Permission.AccessFineLocation
         };
         const int RequestLocationId = 0;
-        
-        public async Task GetLocationPermissionAsync(PermissionServicesAndroid permissionServices)
+
+        Page page;
+        public async Task GetLocationPermissionAsync(PermissionServicesAndroid permissionServices, Page page)
         {
+            this.page = page;
             // Check to see if any permission in our group is available, if one, then all are
             const string permission = Manifest.Permission.AccessFineLocation;
             Permission perm = CheckSelfPermission(permission);
             if (CheckSelfPermission(permission) == (int)Permission.Granted)
             {
-                await GetLocationAsync();
+                //await GetLocationAsync();
                 return;
             }
 
@@ -113,38 +120,53 @@ namespace Helpa.Droid
 
         public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
-            switch (requestCode)
+            try
             {
-                case RequestLocationId:
-                    {
-                        if (grantResults[0] == Permission.Granted)
+                switch (requestCode)
+                {
+                    case RequestLocationId:
                         {
-                            //TextView tv = new TextView(this);
-                            //// Permission granted
-                            //var snack = Snackbar.Make(tv, "Location permission is available, getting lat/long.", Snackbar.LengthShort);
-                            //snack.Show();
+                            if (grantResults[0] == Permission.Granted)
+                            {
+                                //TextView tv = new TextView(this);
+                                //// Permission granted
+                                //var snack = Snackbar.Make(tv, "Location permission is available, getting lat/long.", Snackbar.LengthShort);
+                                //snack.Show();
 
-                            //Toast.MakeText(this, "Location permission is available, getting lat/long.", ToastLength.Long).Show();
+                                //Toast.MakeText(this, "Location permission is available, getting lat/long.", ToastLength.Long).Show();
+                                
+                                //MessagingCenter.Send<Page>(page, "true");
+                                if(page!=null && page.GetType() == typeof(Helpers))
+                                {
+                                    Helpers p = (Helpers)page;
+                                    p.helpersViewModel.SetLocationOnMap(p.helpersViewModel.helperHomeList);
+                                }
+                                await GetLocationAsync();
+                            }
+                            else
+                            {
+                                //TextView tv = new TextView(this);
+                                //// Permission Denied :(
+                                //// Disabling location functionality
+                                //var snack = Snackbar.Make(tv, "Location permission is denied.", Snackbar.LengthShort);
+                                //snack.Show();
+                                
+                                //await page.DisplayAlert("", "Location permission is denied. Please allow location permission in app setting to show locations on map.", "Ok");
 
-                            await GetLocationAsync();
+                                Toast.MakeText(this, "Location permission is denied.", ToastLength.Long).Show();
+                                instance.Finish();
+                            }
                         }
-                        else
-                        {
-                            //TextView tv = new TextView(this);
-                            //// Permission Denied :(
-                            //// Disabling location functionality
-                            //var snack = Snackbar.Make(tv, "Location permission is denied.", Snackbar.LengthShort);
-                            //snack.Show();
+                        break;
 
-                            Toast.MakeText(this, "Location permission is denied.", ToastLength.Long).Show();
-                            instance.Finish();
-                        }
-                    }
-                    break;
-
-                default:
-                    Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-                    break;
+                    default:
+                        Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+                        break;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.Write(e.Message);
             }
         }
 
@@ -175,6 +197,8 @@ namespace Helpa.Droid
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
         {
             base.OnActivityResult(requestCode, resultCode, intent);
+            FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
+            GoogleClientManager.OnAuthCompleted(requestCode, resultCode, intent);
 
             CallbackManager.OnActivityResult(requestCode, (int)resultCode, intent);
 

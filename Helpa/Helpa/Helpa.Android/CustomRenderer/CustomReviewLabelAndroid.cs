@@ -17,7 +17,7 @@ namespace Helpa.Droid
             base.OnElementChanged(e);
             if (Control != null)
             {
-                Control.SetMaxLines(3);
+                Control.SetMaxLines(4);
                 
                 //Control.InputType = Android.Text.InputTypes.TextFlagCapSentences;
             }

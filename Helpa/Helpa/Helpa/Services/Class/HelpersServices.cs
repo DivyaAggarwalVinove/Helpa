@@ -12,21 +12,26 @@ namespace Helpa.Services
 {
     public class HelpersServices : IHelpersServices
     {
-        public async Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId, int ServiceId=0)
+        public async Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId=0, int ServiceId=0, int ScopeId=0)
         {
             IEnumerable<HelperHomeModel> helpers = new List<HelperHomeModel>();
 
+            /* http://180.151.232.92:127/api/HomeCount?UserId=133&ServiceId=20&ScopeId=68 */
             try
             {
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     HttpClient httpClient = new HttpClient();
-                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/HomeCount?UserId=" + UserId));
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/HomeCount?UserId=" + UserId + "&ServiceId=" + ServiceId + "&ScopeId=" + ScopeId));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         var h = JsonConvert.DeserializeObject<HHome>(result);
                         helpers = h.Data;
                     }
@@ -54,10 +59,14 @@ namespace Helpa.Services
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/HelpersHomeMap?Latitude=" + Latitude + "&Longitude=" + Longitude +"&UserId=" + UserId ));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         helpers = JsonConvert.DeserializeObject<IEnumerable<HelperHome>>(result);
                     }
                     else
@@ -84,10 +93,14 @@ namespace Helpa.Services
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Home?UserId=" + UserId + "&PageNo=0"));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         helpers = JsonConvert.DeserializeObject<HHomeModel>(result);
                     }
                     else
@@ -106,7 +119,7 @@ namespace Helpa.Services
         public async Task<NetworkModel> GetMyNetworks(int UserId)
         {
             NetworkModel myNetwork = new NetworkModel();
-            UserId = 1257;
+
             try
             {
                 if (CrossConnectivity.Current.IsConnected)
@@ -114,10 +127,14 @@ namespace Helpa.Services
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Favourates/MyNetwork?Id=" + UserId + "&PageNo=0"));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         myNetwork = JsonConvert.DeserializeObject<NetworkModel>(result);
                     }
                     else
@@ -144,10 +161,14 @@ namespace Helpa.Services
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Helpers/GetSavedUsers?UserId=" + UserId + "&PageNo=1"));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         savedUsers = JsonConvert.DeserializeObject<NetworkModel>(result);
                     }
                     else
@@ -178,18 +199,21 @@ namespace Helpa.Services
                     var json = JsonConvert.SerializeObject(helperService);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = await httpClient.PostAsync(uri, content);
-                    string result = await response.Content.ReadAsStringAsync();
-                    var message = JsonConvert.DeserializeObject<ResponseModel>(result);
-                                        
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.PostAsync(uri, content);
+
+                    var requestTask = httpClient.PostAsync(uri, content);
+                    var response = Task.Run(() => requestTask);
+                    
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         helpers = JsonConvert.DeserializeObject<HelperResponseModel>(result);
                         helperService.HelperId = helpers.helperid;     
                     }
                     else
                     {
+                        string result = await response.Result.Content.ReadAsStringAsync();
+                        var message = JsonConvert.DeserializeObject<ResponseModel>(result);
                     }
                 }
             }
@@ -213,11 +237,15 @@ namespace Helpa.Services
                 var json = JsonConvert.SerializeObject("");
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PutAsync(uri, content);
-                string result = await response.Content.ReadAsStringAsync();
-                var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+                // var response = await httpClient.PutAsync(uri, content);
 
-                if (response.IsSuccessStatusCode)
+                var requestTask = httpClient.PutAsync(uri, content);
+                var response = Task.Run(() => requestTask);
+
+                //string result = await response.Result.Content.ReadAsStringAsync();
+                //var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+
+                if (response.Result.IsSuccessStatusCode)
                 {
                     return true;
                 }
@@ -241,11 +269,15 @@ namespace Helpa.Services
                 var json = JsonConvert.SerializeObject("");
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PutAsync(uri, content);
-                string result = await response.Content.ReadAsStringAsync();
-                var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+                //var response = await httpClient.PutAsync(uri, content);
 
-                if (response.IsSuccessStatusCode)
+                var requestTask = httpClient.PutAsync(uri, content);
+                var response = Task.Run(() => requestTask);
+
+                //string result = await response.Content.ReadAsStringAsync();
+                //var message = JsonConvert.DeserializeObject<ResponseModel>(result);
+
+                if (response.Result.IsSuccessStatusCode)
                 {
                     return true;
                 }
@@ -259,5 +291,6 @@ namespace Helpa.Services
         }
     }
 }
+ 
  
  

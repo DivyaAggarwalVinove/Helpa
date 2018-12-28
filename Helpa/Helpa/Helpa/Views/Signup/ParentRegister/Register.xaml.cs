@@ -1,7 +1,11 @@
 ﻿using Helpa.Models;
 using Helpa.Services;
 using Helpa.Utility;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.FacebookClient;
+using Plugin.GoogleClient;
+using Plugin.GoogleClient.Shared;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -27,17 +31,7 @@ namespace Helpa
             NavigationPage.SetHasNavigationBar(this, false);
 
             Instance = this;
-
-            App.PostSuccessFacebookAction = async token =>
-            {
-                //you can use this token to authenticate to the server here
-                //call your FacebookLoginService.LoginToServer(token)
-                //I'll just navigate to a screen that displays the token:
-                //await Navigation.PushAsync(new Register1());
-
-                await GetFacebookProfileAsync(token);
-            };
-
+            
             entryRegEmail.Completed += (s, e) => entryRegUsername.Focus();
             entryRegUsername.Completed += (s, e) => entryRegPwd.Focus();
         }
@@ -48,7 +42,6 @@ namespace Helpa
             App.Database.SaveUserAsync(userModel);
             App.NavigationPage.Navigation.PushAsync(new Register1(userModel));
         }
-
         public void ShowError(string error)
         {
             DisplayAlert("Error", error, "Ok");
@@ -76,7 +69,6 @@ namespace Helpa
                 return base.OnBackButtonPressed();
             }
         }
-
         public void OnBackPress(object sender, TappedEventArgs eventArgs)
         {
             if (slSignUpEmailPhn.IsVisible)
@@ -91,87 +83,63 @@ namespace Helpa
             }
         }
 
-        void OnFacebookLogin(object sender, EventArgs args)
+        async void OnFacebookLogin(object sender, EventArgs args)
         {
-            /*var api_request = "
-             * https://www.facebook.com/v3.0/dialog/oauth?client_id=172211350107196&display=popup&response_type=token&redirect_uri=https://www.facebook.com/connect/login_success.html
-             * ";
-             *
-            var webview = new WebView
-            {
-                Source = api_request,
-                HeightRequest = 1,
-            };
+            var userdata = await CrossFacebookClient.Current.RequestUserDataAsync(new string[] { "email", "first_name", "gender", "last_name", "birthday" }, new string[] { "email", "user_birthday" });
+            var data = userdata.Data;
+
+            //var json = JsonConvert.SerializeObject(data);
+            var d = JsonConvert.DeserializeObject<FacebookModel>(data);
             
-            //webview.Navigated += WebViewNavigation;
-            webview.Navigating += WebViewNavigating;
+            ExternalUserModel userinfo = new ExternalUserModel();
+            //userinfo.id = data.Id;
+            //userinfo.idToken = data.Id;
+            //userinfo.name = data.Name;
+            //userinfo.email = data.Email;
+            userinfo.LoginProvider = "FACEBOOK".ToUpper();
+            userinfo.provider = "FACEBOOK".ToUpper();
+            userinfo.Role = "Parent".ToUpper();
 
-            Navigation.PushAsync(new ContentPage() { Content = webview });
-            Content = webview;*/
+            await (new RegisterServices()).RegisterExternal(userinfo);
         }
-
-        //private async void WebViewNavigating(object sender, WebNavigatingEventArgs e)
-        //{
-        //    var url = e.Url;
-        //    var cancel = e.Cancel;
-
-        //    var accessToken = ExtractAccessTokenFromUrl(e.Url);
-        //    if (accessToken != "")
-        //    {
-        //        await GetFacebookProfileAsync(accessToken);
-        //    }
-        //}
-
-        //private void WebViewNavigation(object sender, WebNavigatedEventArgs e)
-        //{
-        //    var accessToken = ExtractAccessTokenFromUrl(e.Url);
-        //    var result = e.Result;
-
-        //    if (accessToken != null)
-        //    {
-        //        //await GetFacebookProfileAsync(accessToken);
-        //    }
-        //}
-
-        //private string ExtractAccessTokenFromUrl(string url)
-        //{
-        //    string access_code = "";
-        //    if (url.Contains("access_token") && url.Contains("&expires_in="))
-        //    {
-        //        access_code = url.Replace("https://www.facebook.com/connect/login_success.html#access_token=", "").ToString();
-
-        //        if(access_code.Contains("reauthorize_required_in"))
-        //        {
-        //            access_code = access_code.Remove(access_code.IndexOf("&reauthorize_required_in"));
-        //        }
-        //        else
-        //        {
-        //            access_code = access_code.Remove(access_code.IndexOf("&expires_in"));
-        //        }
-        //    }
-
-        //    return access_code;
-        //}
-
-        private async Task GetFacebookProfileAsync(string accessToken)
+        async void OnGoogleLogin(object sender, EventArgs args)
         {
-            var requestUrl = "https://graph.facebook.com/v2.7/me/?fields=name,id,email,gender,picture&access_token=" + accessToken;
-            var httpClient = new HttpClient();
-            var userDetails = await httpClient.GetStringAsync(requestUrl);
+            var userdata = await CrossGoogleClient.Current.LoginAsync();
+            GoogleUser data = userdata.Data;
 
-            var detailsInJson = JObject.Parse(userDetails);
+            ExternalUserModel userinfo = new ExternalUserModel();
+            userinfo.id = data.Id;
+            userinfo.idToken = data.Id;
+            userinfo.name = data.Name;
+            userinfo.email = data.Email;
+            userinfo.profileImage = data.Picture.AbsoluteUri;
+            
+            userinfo.LoginProvider = "GOOGLE".ToUpper();
+            userinfo.provider = "GOOGLE".ToUpper();
+            userinfo.Role = "Parent".ToUpper();
 
-            RegisterUserModel userModel = new RegisterUserModel();
-            userModel.Email = detailsInJson.GetValue("email").ToString();
-            //helperModel.profileImage
-            //userModel.Gender = detailsInJson.GetValue("gender").ToString();
-            userModel.Token = accessToken;
-            userModel.UserName = detailsInJson.GetValue("id").ToString();
-            userModel.LoginProvider = "Facebook";
-            userModel.Role = "Parent".ToUpper();
-
-            await (new RegisterServices()).RegisterExternal(userModel);
+            await (new RegisterServices()).RegisterExternal(userinfo);   
         }
+
+        //private async Task GetFacebookProfileAsync(string accessToken)
+        //{
+        //    var requestUrl = "https://graph.facebook.com/v2.7/me/?fields=name,id,email,gender,picture&access_token=" + accessToken;
+        //    var httpClient = new HttpClient();
+        //    var userDetails = await httpClient.GetStringAsync(requestUrl);
+
+        //    var detailsInJson = JObject.Parse(userDetails);
+
+        //    ExternalModel userModel = new ExternalModel();
+        //    userModel.email = detailsInJson.GetValue("email").ToString();
+        //    //helperModel.profileImage
+        //    //userModel.Gender = detailsInJson.GetValue("gender").ToString();
+        //    userModel.idToken = accessToken;
+        //    userModel.name = detailsInJson.GetValue("id").ToString();
+        //    userModel.LoginProvider = "Facebook";
+        //    userModel.Role = "Parent".ToUpper();
+
+        //    await (new RegisterServices()).RegisterExternal(userModel);
+        //}
 
         async void OnSignUp(object sender, EventArgs args)
         {
@@ -215,18 +183,14 @@ namespace Helpa
                 //Navigation.PushAsync(new Register1());
             }
         }
-
         void OnClickLogin(object sender, EventArgs args)
         {
             Navigation.PopAsync();
             //Navigation.PushAsync(new LoginPage());
         }
-
         void ShowOrHidePassword(object sender, EventArgs args)
         {
             entryRegPwd.IsPassword = !entryRegPwd.IsPassword;
         }
-
-        
     }
 }

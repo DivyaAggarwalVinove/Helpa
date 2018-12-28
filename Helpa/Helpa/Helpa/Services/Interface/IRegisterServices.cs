@@ -12,9 +12,7 @@ namespace Helpa.Services
         #endregion
 
         #region External Sign in
-        Task RegisterExternal(RegisterUserModel helpersModel);
-        Task FacebookSignUp(ExternalLoginViewModel externalDetail);
-        Task<IEnumerable<ExternalLoginViewModel>> GetExternalDetails();
+        Task RegisterExternal(ExternalUserModel helpersModel);
         #endregion
 
         #region Other Utlity Register Api

@@ -5,6 +5,6 @@
     <DefaultDevice>Android_Accelerated_x86_Oreo</DefaultDevice>
     <ProjectView>ShowAllFiles</ProjectView>
     <AndroidDesignerPreferredDevice>Nexus 10</AndroidDesignerPreferredDevice>
-    <AndroidDesignerPreferredTheme>Theme.DeviceDefault.NoActionBar.Fullscreen</AndroidDesignerPreferredTheme>
+    <AndroidDesignerPreferredTheme>Theme.DeviceDefault</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>

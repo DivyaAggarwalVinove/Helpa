@@ -22,7 +22,8 @@ namespace Helpa
     public partial class Helpers : ContentPage
     {
         public HelpersViewModel helpersViewModel;
-
+        public ActivityIndicator activityIndicator;
+        public CustomMap map;
         #region HelperInstance
         static Helpers instance;
         public static Helpers Instance
@@ -39,10 +40,12 @@ namespace Helpa
             InitializeComponent();
 
             instance = this;
+            activityIndicator = aiFindHelper;
+
             NavigationPage.SetHasNavigationBar(this, false);
 
-            helpersViewModel = new HelpersViewModel(this);
-            helpersViewModel.mapHelper = mapHelper;
+            helpersViewModel = new HelpersViewModel(this, mapHelper);
+
             BindingContext = helpersViewModel;
 
             entrySearch.ApiKey = Constants.googlePlaceApiKey;
@@ -67,25 +70,33 @@ namespace Helpa
                     Console.Write(e.StackTrace);
                 }
             });
+
+            
+            //Page page=null;
+            //MessagingCenter.Subscribe<Page>(page, "true", (sender) => {
+            //    // do something whenever the "Hi" message is sent
+            //});
+            
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
             if (App.selectedPage != 4)
                 return;
 
-            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
             if (loggedUser == null)
                 return;
 
             ProfileAfterLoginPage profileAfterLoginPage = new ProfileAfterLoginPage(loggedUser);
-            //profileAfterLoginPage.BindingContext = new ProfileAfterLoginViewModel(loggedUser);
+            // profileAfterLoginPage.BindingContext = new ProfileAfterLoginViewModel(loggedUser);
             ProfilePage.pcv.Content = profileAfterLoginPage.Content;
 
-            //await GetRuntimeLocationPermission(5000);
+            // await GetRuntimeLocationPermission(5000);
         }
+
         async void ShowHelperHalfList(string selectedCluster)
         {
             try
@@ -98,7 +109,7 @@ namespace Helpa
                 IEnumerable<HelperHome> hs = new List<HelperHome>();
                 HelpersServices helpersServices = new HelpersServices();
 
-                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
                 if (loggedUser == null)
                     hs = await helpersServices.GetHelpersInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
                 else
@@ -109,13 +120,21 @@ namespace Helpa
                 for (int i = 0; i < hs.Count(); i++)
                 {
                     HelperHome h = hs.ElementAt(i);
+
+                    if (h.BookMark)
+                        h.BookmarkImage = "save_filled.png";
+                    else
+                        h.BookmarkImage = "save.png";
+
                     if (h.Service != null && h.Service.Count() != 0)
                     {
                         HService hserv = h.Service.Where(x => x.ServiceName == "ChildCare").FirstOrDefault();
                         if (hserv == null)
                         {
                             hserv = h.Service.ElementAt(h.Service.Count() - 1);
+
                             h.ServiceName = hserv.ServiceName;
+                            
                             if (hserv.price.Daily)
                                 h.ServicePriceLabel = "from $" + hserv.price.Min.Remove(hserv.price.Min.IndexOf(".")) + "-$" + hserv.price.Max.Remove(hserv.price.Max.IndexOf(".")) + "/Day";
                             else if (hserv.price.Monthly)
@@ -152,7 +171,6 @@ namespace Helpa
                             hs.Select(x => x.Name == h.Name ? h : x);
                         }
                     }
-
                 }
 
                 helpersViewModel.HelperHalfList = new ObservableCollection<HelperHome>(hs);
@@ -174,7 +192,7 @@ namespace Helpa
                 HHomeModel hService = new HHomeModel();
                 HelpersServices helpersServices = new HelpersServices();
 
-                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
                 if (loggedUser == null)
                     hService = await helpersServices.GetAllHelpers(0);
                 else
@@ -354,7 +372,7 @@ namespace Helpa
             // await Navigation.PushAsync(new LoginPage());
             else
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PostJobPage() { loggedUser = user });
+                await Application.Current.MainPage.Navigation.PushAsync(new PostJobPage() { loggedUser = user.Result });
             }
         }
 
@@ -382,12 +400,12 @@ namespace Helpa
                 imgHelpersList.Source = "filter.png";
             }
         }
-
-
-        string filteredService = "";
-        string filteredScope = "";
+        
         char filteredLocationType = '\0';
-        string filteredSortBy = "";
+
+        ServiceModel selectedService = new ServiceModel();
+        ScopeModel selectedScope = new ScopeModel();
+       // string filteredSortBy = "";
         private async void OnClickServiceFilter(object sender, EventArgs e)
         {
             aiFindHelper.IsRunning = true;
@@ -397,12 +415,39 @@ namespace Helpa
 
             if (servicesName != null)
             {
-                filteredService = await DisplayActionSheet("Select Service", "Cancel", null, servicesName.ToArray());
-                lblServiceFilter.Text = filteredService;
+                string filteredService = await DisplayActionSheet("Select Service", "Cancel", null, servicesName.ToArray());
+                
+                #region reset scope filter
+                lblScopeFilter.Text = "Scope";
+                selectedScope = new ScopeModel();
+                #endregion
 
+                if (mapHelper.IsVisible)
+                {
+                    selectedService = servicesAsync.Where(x => x.ServiceName == filteredService).FirstOrDefault();
+
+                    if (selectedService != null)
+                    {
+                        HelpersServices helpersServices = new HelpersServices();
+                        var h = await helpersServices.GetHelpersList(0, selectedService.Id);
+                        if (h != null)
+                        {
+                            mapHelper.helperList = h.ToList();
+
+                            //var h = helpersViewModel.helperHomeFilterList.Where(x => x.LocationType == filteredLocationType);
+                            helpersViewModel.helperHomeFilterList = new ObservableCollection<HelperHomeModel>(h);
+                            helpersViewModel.SetLocationOnMap(helpersViewModel.helperHomeFilterList);
+                        }
+
+                        lblServiceFilter.Text = filteredService;
+                    }
+                }
+                else
+                {
+                }
                 /*
-                    var filteredList = helpersViewModel.helperHomeList.Where(x => x.Servicename == filteredService);
-                    helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+                var filteredList = helpersViewModel.helperHomeList.Where(x => x.HelpersInLocalties.ServiceName == filteredService);
+                helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
                 */
             }
 
@@ -412,24 +457,38 @@ namespace Helpa
         private async void OnClickLocationFilter(object sender, EventArgs e)
         {
             var result = await DisplayActionSheet("Select Service", "Cancel", null, "Home Helper", "Mobile's Helper", "All");
-
+            
             if (result.Equals("Home Helper"))
             {
-                var filteredList = helpersViewModel.helperHomeList.Where(x => x.LocationType == 'S');
+                var filteredList = helpersViewModel.helperHomeFilterList.Where(x => x.LocationType == 'S');
                 helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+
                 filteredLocationType = 'S';
+
+                lblLocationFilter.Text = result;
             }
             else
             if (result.Equals("All"))
             {
+                helpersViewModel.helperHomeFilterList = helpersViewModel.helperHomeList;
                 helpersViewModel.SetLocationOnMap(helpersViewModel.helperHomeList);
+
                 filteredLocationType = '\0';
+
+                lblLocationFilter.Text = "Location types";
+
+            }
+            else if(result.Equals("Cancel"))
+            {
             }
             else
             {
-                var filteredList = helpersViewModel.helperHomeList.Where(x => x.LocationType.Equals('M'));
+                var filteredList = helpersViewModel.helperHomeFilterList.Where(x => x.LocationType.Equals('M'));
                 helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+
                 filteredLocationType = 'M';
+
+                lblLocationFilter.Text = result;
             }
         }
 
@@ -437,26 +496,70 @@ namespace Helpa
         {
             aiFindHelper.IsRunning = true;
 
-            IList<ScopeModel> scopeAsync = (await new Utilities().GetScpoesAsync(123));
-            var scopesName = scopeAsync.Select(x => x.ScopeName);
-
-            if (scopesName != null)
+            if (selectedService != null && selectedService.Id != 0)
             {
-                filteredScope = await DisplayActionSheet("Select Service", "Cancel", null, scopesName.ToArray());
-                lblScopeFilter.Text = filteredScope;
+                IList<ScopeModel> scopeAsync = (await new Utilities().GetScpoesAsync(selectedService.Id));
+                var scopesName = scopeAsync.Select(x => x.ScopeName);
 
-                /*
-                    var filteredList = helpersViewModel.helperHomeList.Where(x => x.Servicename == filteredService);
-                    helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
-                */
+                if (scopesName != null)
+                {
+                    string filteredScope = await DisplayActionSheet("Select Scope", "Cancel", null, scopesName.ToArray());
+                    lblScopeFilter.Text = filteredScope;
+
+                    if (mapHelper.IsVisible)
+                    {
+                        selectedScope = scopeAsync.Where(x => x.ScopeName == filteredScope).FirstOrDefault();
+
+                        if (selectedScope != null)
+                        {
+                            HelpersServices helpersServices = new HelpersServices();
+                            var h = await helpersServices.GetHelpersList(0, selectedService.Id, selectedScope.Id);
+
+                            if (h != null)
+                            {
+                                if (filteredLocationType != '\0')
+                                    h = h.Where(x => x.LocationType.Equals(filteredLocationType));
+
+                                if (h != null)
+                                {
+                                    mapHelper.helperList = h.ToList();
+
+                                    //var h = helpersViewModel.helperHomeFilterList.Where(x => x.LocationType == filteredLocationType);
+                                    helpersViewModel.helperHomeFilterList = new ObservableCollection<HelperHomeModel>(h);
+                                    helpersViewModel.SetLocationOnMap(helpersViewModel.helperHomeFilterList);
+                                }
+                                else
+                                {
+                                    await DisplayAlert("", "No Helper found.", "OK");
+                                }
+                            }
+                            else
+                            {
+                                await DisplayAlert("", "No Helper found.", "OK");
+                            }
+                        }
+                    }
+                    else
+                    {
+                    }
+                    /*
+                        var filteredList = helpersViewModel.helperHomeList.Where(x => x.Servicename == filteredService);
+                        helpersViewModel.SetLocationOnMap(new ObservableCollection<HelperHomeModel>(filteredList));
+                    */
+                }
             }
+            else
+            {
+                await DisplayAlert("", "Please select service", "Ok");
+            }    
 
             aiFindHelper.IsRunning = false;
         }
 
-        private void OnClickSortByFilter(object sender, EventArgs e)
+        private async void OnClickSortByFilter(object sender, EventArgs e)
         {
-
+            string sortByFilter = await DisplayActionSheet("Sort By", "Cancel", null, "Newest", "Rating","Popularity");
+            lblSortByFilter.Text = sortByFilter;
         }
 
         bool flag = true;
@@ -527,7 +630,8 @@ namespace Helpa
                 var latitude = place.Latitude;
                 var longitude = place.Longitude;
                 IList<HelperHomeModel> filterList = helpersViewModel.helperHomeList.Where(x => (x.Latitude == latitude)).ToList();
-                var c = filterList.Where(x => x.Longitude == longitude).ToList();*/
+                var c = filterList.Where(x => x.Longitude == longitude).ToList();
+                */
 
                 var filterList = helpersViewModel.helperHomeList.Where(x => x.Latitude == place.Latitude && x.Longitude == place.Longitude);
 
@@ -557,7 +661,7 @@ namespace Helpa
         {
             aiFindHelper.IsRunning = true;
 
-            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
             if (loggedUser == null)
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());

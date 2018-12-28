@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -22,11 +23,15 @@ namespace Helpa.Services
                 {
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Scopes/"+serviceId));
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
                         ServiceModel sm = new ServiceModel();
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         scopes = JsonConvert.DeserializeObject<List<ScopeModel>>(result);
                     }
                     else
@@ -51,11 +56,15 @@ namespace Helpa.Services
                 {
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Services"));
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
                         ServiceModel sm = new ServiceModel();
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         services = JsonConvert.DeserializeObject<IList<ServiceModel>>(result);
                     }
                     else
@@ -106,6 +115,37 @@ namespace Helpa.Services
                 webclient = (WebClient)null;
             }
             return str;
+        }
+
+        public static byte[] GetImage(string url)
+        {
+            Stream stream = null;
+            byte[] buf;
+
+            try
+            {
+                WebProxy myProxy = new WebProxy();
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+
+                HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+                stream = response.GetResponseStream();
+
+                using (BinaryReader br = new BinaryReader(stream))
+                {
+                    int len = (int)(response.ContentLength);
+                    buf = br.ReadBytes(len);
+                    br.Close();
+                }
+
+                stream.Close();
+                response.Close();
+            }
+            catch (Exception exp)
+            {
+                buf = null;
+            }
+
+            return (buf);
         }
     }
 }

@@ -34,11 +34,6 @@
     <None Remove="Views\Profile\ProfileAfterLoginPage.xaml" />
     <None Remove="Views\Profile\ProfileBeforeLoginPage.xaml" />
     <None Remove="Views\Profile\ProfilePage.xaml" />
-    <None Remove="Views\Profile\EditProfile\EditBasicInfo.xaml" />
-    <None Remove="Views\Profile\EditProfile\EditProfilePage.xaml" />
-    <None Remove="Views\Profile\EditProfile\EditService.xaml" />
-    <None Remove="Views\Profile\EditProfile\EditVerificationPage.xaml" />
-    <None Remove="Views\Profile\EditProfile\ServiceDetailPage.xaml" />
     <None Remove="Views\Profile\OtherPages\MyJobPostPage.xaml" />
     <None Remove="Views\Profile\OtherPages\MyNetworkPage.xaml" />
     <None Remove="Views\Profile\OtherPages\MyReviewsPage.xaml" />
@@ -58,6 +53,7 @@
     <None Remove="Views\Profile\Signup\ParentRegister\Register2.xaml" />
     <None Remove="Views\Profile\Signup\ParentRegister\Register3.xaml" />
     <EmbeddedResource Remove="Views\Helpers\HelpersList.xaml" />
+    <Compile Remove="Models\ExternalLoginModel.cs" />
     <Compile Remove="ViewModels\ProfileViewModel\ProfileAfterLoginViewModel.cs" />
     <Compile Remove="Views\Helpers\HelpersList.xaml.cs" />
     <None Remove="Views\Profile\.DS_Store" />
@@ -80,10 +76,13 @@
 
   <ItemGroup>
     <PackageReference Include="DurianCode.PlacesSearchBar" Version="2.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Plugin.FacebookClient" Version="1.4.0" />
+    <PackageReference Include="Plugin.GoogleClient" Version="1.1.0" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Plugin.Share" Version="7.1.1" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.180" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="15.4.0.20" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
@@ -91,9 +90,9 @@
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Facebook" Version="4.4.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
-    <PackageReference Include="Xamarin.Forms.Maps" Version="3.1.0.697729" />
-    <PackageReference Include="Xamarin.Forms.RangeSlider" Version="0.7.36" />
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="3.2.0.871581" />
+    <PackageReference Include="Xamarin.Forms.RangeSlider" Version="0.8.1" />
     <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.0.135" />
     <PackageReference Include="XFControls" Version="1.0.0.6" />
   </ItemGroup>
@@ -132,7 +131,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="App.xaml" />
+    <None Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Include="Views\Helpers\ChildView.xaml">
       <Link>Views\Views\Helpers\ChildView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +170,11 @@
       <Link>Views\Views\Notifications\Notifications.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Include="Views\Profile\EditProfile\EditBasicInfo.xaml" />
+    <None Include="Views\Profile\EditProfile\EditProfilePage.xaml" />
+    <None Include="Views\Profile\EditProfile\EditService.xaml" />
+    <None Include="Views\Profile\EditProfile\EditVerificationPage.xaml" />
+    <None Include="Views\Profile\EditProfile\ServiceDetailPage.xaml" />
     <None Include="Views\Profile\ProfileSettings\BlockUserPage.xaml">
       <Link>Views\Views\Profile\ProfileSettings\BlockUserPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -227,6 +233,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Views\Profile\EditProfile\EditLocationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Views\Profile\UserProfile\ProfileAfterLoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>

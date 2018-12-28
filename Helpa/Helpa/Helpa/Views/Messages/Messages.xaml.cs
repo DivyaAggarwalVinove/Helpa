@@ -19,7 +19,7 @@ namespace Helpa
             var user = App.Database.GetLoggedUser();
 
             if (user != null)
-                wvMessage.Source = "http://180.151.232.92:151/Login.aspx?Email=" + user.Email;
+                wvMessage.Source = "http://180.151.232.92:151/Login.aspx?Email=" + user.Result.Email;
             else
                 DisplayAlert("", "You are logged-in. Please login for Message funactionality", "Ok");
         }

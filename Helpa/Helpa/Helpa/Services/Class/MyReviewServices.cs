@@ -24,10 +24,14 @@ namespace Helpa.Services.Class
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Favourates/ToReviewList?Id=" + UserId + "&PageNo=1"));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         toReview = JsonConvert.DeserializeObject<NetworkModel>(result);
                     }
                     else
@@ -54,10 +58,14 @@ namespace Helpa.Services.Class
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Favourates/GetReviewAboutMe?id=" + UserId + "&PageNo=1"));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         reviewAboutMe = JsonConvert.DeserializeObject<MyReviewModel>(result);
                     }
                     else
@@ -83,10 +91,14 @@ namespace Helpa.Services.Class
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Favourates/GetReviewByMe?id=" + UserId + "&PageNo=1"));
 
-                    var response = await httpClient.GetAsync(uri);
-                    if (response.IsSuccessStatusCode)
+                    //var response = await httpClient.GetAsync(uri);
+                    
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+                    
+                    if (response.Result.IsSuccessStatusCode)
                     {
-                        string result = await response.Content.ReadAsStringAsync();
+                        string result = await response.Result.Content.ReadAsStringAsync();
                         reviewByMe = JsonConvert.DeserializeObject<MyReviewModel>(result);
                     }
                     else

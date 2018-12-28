@@ -4,10 +4,6 @@ using Helpa.ViewModels;
 using Plugin.Share;
 using Plugin.Share.Abstractions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -72,16 +68,25 @@ namespace Helpa.Views.Profile.OtherPages
             lblReviewByMe.TextColor = Color.FromHex("#FF748E");
             bvReviewByMe.BackgroundColor = Color.FromHex("#FF748E");
         }
+        private void OnReplyAboutMeReview(object sender, EventArgs e)
+        {
+            var gridReviewAboutMeReply = ((Grid)((Label)sender).Parent.Parent.Parent.Parent.Parent).Children[2];
+            gridReviewAboutMeReply.IsVisible = true;
+        }
+        private void OnClickCancel(object sender, EventArgs e)
+        {
+            var gridReviewAboutMeReply = ((Grid)((Button)sender).Parent.Parent.Parent);
+            gridReviewAboutMeReply.IsVisible = false;
+        }
         private void OnBackPress(object sender, EventArgs e)
         {
             App.NavigationPage.Navigation.PopAsync();
         }
-
         private async void OnClickBookmark(object sender, TappedEventArgs e)
         {
             //aiFindHelper.IsRunning = true;
 
-            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
             if (loggedUser == null)
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
@@ -110,7 +115,6 @@ namespace Helpa.Views.Profile.OtherPages
 
             //aiFindHelper.IsRunning = false;
         }
-
         private void OnClickShare(object sender, EventArgs e)
         {
             //aiFindHelper.IsRunning = true;

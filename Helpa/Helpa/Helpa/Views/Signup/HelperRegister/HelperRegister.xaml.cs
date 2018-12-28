@@ -42,7 +42,7 @@ namespace Helpa
                 userModel.LoginProvider = "Facebook";
                 userModel.Role = "Helper".ToUpper();
 
-                await (new RegisterServices()).RegisterExternal(userModel);
+                //await (new RegisterServices()).RegisterExternal(userModel);
                 //await GetFacebookProfileAsync(token);
             };
 
@@ -68,11 +68,11 @@ namespace Helpa
             btnHelperSignUp.IsVisible = true;
         }
 
-        async void OnFaceBookSignUp(object sender, EventArgs args)
-        {
-            var externalDetails = await (new RegisterServices()).GetExternalDetails();
-            await (new RegisterServices()).FacebookSignUp(externalDetails.Where(x=>x.Name.ToUpper() == "FACEBOOK").FirstOrDefault());
-        }
+        //async void OnFaceBookSignUp(object sender, EventArgs args)
+        //{
+        //    var externalDetails = await (new RegisterServices()).GetExternalDetails();
+        //    await (new RegisterServices()).FacebookSignUp(externalDetails.Where(x=>x.Name.ToUpper() == "FACEBOOK").FirstOrDefault());
+        //}
 
         protected override bool OnBackButtonPressed()
         {

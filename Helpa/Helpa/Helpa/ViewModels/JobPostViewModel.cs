@@ -34,9 +34,11 @@ namespace Helpa.ViewModels
         public CustomMap mapJob;
         public ActivityIndicator activityIndicator;
 
-        public JobPostViewModel(JobPosts jobPosts)
+        public JobPostViewModel(JobPosts jobPosts, CustomMap map)
         {
             activityIndicator = JobPosts.Instance.Content.FindByName<ActivityIndicator>("aiJobPost");
+
+            mapJob = map;
 
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             LoadItemsCommand.Execute(null);

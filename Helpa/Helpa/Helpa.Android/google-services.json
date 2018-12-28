@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "317077432043",
+    "firebase_url": "https://helpa-201710.firebaseio.com",
+    "project_id": "helpa-201710",
+    "storage_bucket": "helpa-201710.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317077432043:android:99e7fffd83bfb90e",
+        "android_client_info": {
+          "package_name": "com.vinove.Helpa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317077432043-9g8jn2s4ani6scb9nhn2mpce894dk81e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vinove.Helpa",
+            "certificate_hash": "d32859680cf302b023d5d790983a4e139e6d7025"
+          }
+        },
+        {
+          "client_id": "317077432043-vhgv2s98kjpo70fbccl3cckoejg8v7u2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vinove.Helpa",
+            "certificate_hash": "629c86bea596d73c469fc93d942abb255795a216"
+          }
+        },
+        {
+          "client_id": "317077432043-jlvni20ufderqd3ue0qr901poj9ooomn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX_jIqPxG96psOYCFB-HXPOoMHSD-0unQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317077432043-jlvni20ufderqd3ue0qr901poj9ooomn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

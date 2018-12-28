@@ -68,6 +68,7 @@ namespace Helpa.Models
         public string LocationType { get; set; }
 
         public bool BookMark { get; set; }
+        public string BookmarkImage { get; set; }
         public bool IsDraft { get; set; }
 
         public string CreateDate { get; set; }

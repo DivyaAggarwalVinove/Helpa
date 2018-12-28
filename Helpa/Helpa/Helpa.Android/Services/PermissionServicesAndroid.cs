@@ -36,7 +36,7 @@ namespace Helpa.Droid
                 return;
             }
 
-            await MainActivity.Instance.GetLocationPermissionAsync(this);
+            await MainActivity.Instance.GetLocationPermissionAsync(this, page);
         }
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using Helpa.Models;
 using Helpa.Services;
+using Plugin.Geolocator;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
@@ -20,6 +21,8 @@ namespace Helpa.ViewModels
         //public IHelpersServices<HelperHomeModel> DataStore => DependencyService.Get<IHelpersServices<HelperHomeModel>>();
         public ObservableCollection<HelperHomeModel> helperHomeList { get; set; }
 
+        public ObservableCollection<HelperHomeModel> helperHomeFilterList { get; set; }
+
         public ObservableCollection<HelperHome> HelperFullList { get; set; }
 
         ObservableCollection<HelperHome> helperHalfList=new ObservableCollection<HelperHome>();
@@ -34,14 +37,25 @@ namespace Helpa.ViewModels
         public Command LoadItemsCommand { get; set; }
 
         public CustomMap mapHelper;
+        public Helpers  helperInstance;
         public ActivityIndicator activityIndicator;
 
-        public HelpersViewModel(Helpers helpers)
+        public HelpersViewModel(Helpers helpers, CustomMap map)
         {
-            activityIndicator = Helpers.Instance.Content.FindByName<ActivityIndicator>("aiFindHelper");
+            try
+            {
+                // activityIndicator = Helpers.Instance.Content.FindByName<ActivityIndicator>("aiFindHelper");
+                activityIndicator = helpers.activityIndicator;
+                mapHelper = map;
+                helperInstance = helpers;
 
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            LoadItemsCommand.Execute(null);
+                LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+                LoadItemsCommand.Execute(null);
+            }
+            catch(Exception e)
+            {
+                Console.Write(e.Message);
+            }
         }
 
         public async Task ExecuteLoadItemsCommand()
@@ -58,23 +72,58 @@ namespace Helpa.ViewModels
 
                 activityIndicator.IsRunning = true;
                 HelpersServices helpersServices = new HelpersServices();
-                var h = await helpersServices.GetHelpersList(0);
+                var h = await helpersServices.GetHelpersList();
                 if (h != null && (h.Count() > 0))
                 {
                     mapHelper.helperList = h.ToList();
                     helperHomeList = new ObservableCollection<HelperHomeModel>(h.ToList());
+                    helperHomeFilterList = helperHomeList;
                 }
+                
                 //var HelperList = new ObservableCollection<HelperHome>(((new HelpersServices()).GetHelpersList(2000000, 28.4514279, 77.0704678)).Result.First().HelpersInLocalties);
                 //for(int i=0;i<helperHomeList.Count;i++)
                 //{
                 //    helperHomeList.ElementAt(i).LocationType = 'S';
                 //}
-
-                SetLocationOnMap(helperHomeList);
-
-                activityIndicator.IsRunning = false;
-
+                
                 #region Check Location Permission
+
+                try
+                {
+                    var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                    if (status != PermissionStatus.Granted)
+                    {
+                        if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
+                        {
+                            await helperInstance.DisplayAlert("Need location", "Helpa need that location", "OK");
+                            return;
+                        }
+
+                        //var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+                        await DependencyService.Get<IPermissionServices>().GetPermission(helperInstance);
+
+                        //if (results.ContainsKey(Permission.Location))
+                        //    status = results[Permission.Location];
+                    }
+
+                    if (status == PermissionStatus.Granted)
+                    {
+                        await DependencyService.Get<IPermissionServices>().CheckAndTurnOnGPS(helperInstance);
+
+                        SetLocationOnMap(helperHomeList);
+                    }
+                    else if (status != PermissionStatus.Unknown)
+                    {
+                        await helperInstance.DisplayAlert("Location Denied", "Please allow location permission to get your location for Helpa app in Device setting", "OK");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await helperInstance.DisplayAlert("Error", ex.Message, "OK");
+                }
+
+                /**********************************************************************/
+
                 //var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
                 //if (status == PermissionStatus.Granted)
                 /*{
@@ -97,7 +146,6 @@ namespace Helpa.ViewModels
                     #endregion
                 }*/
                 #endregion
-
             }
             catch (Exception ex)
             {
@@ -128,7 +176,7 @@ namespace Helpa.ViewModels
                         Address = i.ToString(),
                         Id = i.ToString()
                     };
-                    //mapHelper.Pins.Add(pin);
+                    mapHelper.Pins.Add(pin);
                     
                     t = (int.Parse(t) + h.Count).ToString();
                     i++;
@@ -146,6 +194,8 @@ namespace Helpa.ViewModels
             {
                 Debug.Write(e.Message);
             }
+
+            activityIndicator.IsRunning = false;
         }
 
         string totalHelpers = "?";

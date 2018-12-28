@@ -20,10 +20,10 @@ namespace Helpa.Models
 
         public int MaxAge { get; set; }
 
-        public List<HelperService> Service { get; set; }
+        public List<HelperServices> Service { get; set; }
     }
     
-    public class HelperService
+    public class HelperServices
     {
         public int ServiceId { get; set; }
 

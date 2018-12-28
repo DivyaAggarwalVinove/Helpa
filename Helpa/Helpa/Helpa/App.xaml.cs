@@ -5,6 +5,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Helpa.Services;
 using Helpa.Views.Profile;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace Helpa
 {
@@ -55,6 +57,8 @@ namespace Helpa
 
                 DependencyService.Register<IPermissionServices>();
 
+                //RequestLocationPermission();
+
                 listTabs = new List<KeyValuePair<string, string>>()
                 {
                     new KeyValuePair<string, string>("imgHelpers", "lblHelpers"),
@@ -79,6 +83,25 @@ namespace Helpa
                 Debug.Write(e.Message);
             }
         }
+        
+        //public async void RequestLocationPermission()
+        //{
+        //    var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+        //    if (status != PermissionStatus.Granted)
+        //    {
+        //        if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
+        //        {
+        //            //await helperInstance.DisplayAlert("Need location", "Helpa need that location", "OK");
+        //            return;
+        //        }
+
+        //        //var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+        //        await DependencyService.Get<IPermissionServices>().GetPermission(MainPage);
+
+        //        //if (results.ContainsKey(Permission.Location))
+        //        //    status = results[Permission.Location];
+        //    }
+        //}
 
         public ContentPresenter contentPresenter;
         void OnFindHelperPressed(object sender, EventArgs args)

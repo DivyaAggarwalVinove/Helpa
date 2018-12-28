@@ -166,9 +166,9 @@
                                                             </Grid>
 
                                                             <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Image Source="save.png" Aspect="AspectFit" Margin="2">
+                                                                <Image Source="{Binding BookmarkImage}" Aspect="AspectFit" Margin="2">
                                                                     <Image.GestureRecognizers>
-                                                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickBookmark" CommandParameter="{Binding UserId}" />
+                                                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickBookmark" CommandParameter="{Binding JobId}" />
                                                                     </Image.GestureRecognizers>
                                                                 </Image>
                                                             </Grid>
@@ -323,7 +323,7 @@
                                                             </Grid>
 
                                                             <Grid Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                                                <Image Source="save.png" Aspect="AspectFit" Margin="2">
+                                                                <Image Source="{Binding BookmarkImage}" Aspect="AspectFit" Margin="2">
                                                                     <Image.GestureRecognizers>
                                                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnClickBookmark" CommandParameter="{Binding UserId}" />
                                                                     </Image.GestureRecognizers>

@@ -22,22 +22,30 @@ namespace Helpa.Views.Profile.EditProfile
         public RegisterUserModel LoggedinUser { get; set; }
         public static EditBasicInfo Instance { get; set; }
         #endregion
-        public EditBasicInfo()
+        public EditBasicInfo(RegisterUserModel LoggedinUser)
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            Instance = this;
+                Instance = this;
+                this.LoggedinUser = LoggedinUser;
 
-            IEnumerable<string> genders = new List<string>() { "Male", "Female", "Rather no to say" };
-            SetRadioList(genders, rgEditBasicInfoGender);
-            NavigationPage.SetHasNavigationBar(this, false);
+                IEnumerable<string> genders = new List<string>() { "Male", "Female", "Rather no to say" };
+                SetRadioList(genders, rgEditBasicInfoGender);
+                NavigationPage.SetHasNavigationBar(this, false);
 
-            BindingContext = new EditBasicInfoViewModel();
-            //_objProfileInfoResponse = new ProfileInfoResponse();
-            //_apiService = new RestApi();
-            //_objHeaderModel = new HeaderModel();
-            //_objHeaderModel.TokenCode = Settings.TokenCode;
-            //_baseUrl = Domain.Url + Domain.GetProfileInfoApiConstant;
+                BindingContext = new EditBasicInfoViewModel(LoggedinUser);
+                //_objProfileInfoResponse = new ProfileInfoResponse();
+                //_apiService = new RestApi();
+                //_objHeaderModel = new HeaderModel();
+                //_objHeaderModel.TokenCode = Settings.TokenCode;
+                //_baseUrl = Domain.Url + Domain.GetProfileInfoApiConstant;
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.StackTrace);
+            }
         }
 
         void SetRadioList(IEnumerable<string> genderList, RadioGroup radioGroup)
@@ -71,7 +79,7 @@ namespace Helpa.Views.Profile.EditProfile
             }
             else
             {
-                RegisterUserModel currentUser = App.Database.GetLoggedUser();
+                RegisterUserModel currentUser = await App.Database.GetLoggedUser();
                 if (currentUser != null)
                     await (new RegisterServices()).SendSmsCode(currentUser.Id, entryEditBasicInfoPhone.Text, "EDITINFO");
             }
@@ -85,7 +93,7 @@ namespace Helpa.Views.Profile.EditProfile
             }
             else
             {
-                RegisterUserModel currentUser = App.Database.GetLoggedUser();
+                RegisterUserModel currentUser = await App.Database.GetLoggedUser();
                 if (currentUser != null)
                     await (new RegisterServices()).VerifyOtp(currentUser.Id, entryEditBasicInfoSmsCode.Text, "EDITINFO");
             }
@@ -93,7 +101,7 @@ namespace Helpa.Views.Profile.EditProfile
 
         public void ShowSmsMessage(ResponseModel message, bool isSuccess)
         {
-            if (isSuccess)
+            if (isSuccess && message.Code == "200")
             {
                 entryEditBasicInfoPhone.IsEnabled = false;
             }
@@ -103,7 +111,7 @@ namespace Helpa.Views.Profile.EditProfile
 
         public void ShowVerificationMessage(ResponseModel message, bool isSuccess)
         {
-            if (isSuccess)
+            if (isSuccess && message.Code == "200")
             {
                 entryEditBasicInfoSmsCode.IsEnabled = false;
             }

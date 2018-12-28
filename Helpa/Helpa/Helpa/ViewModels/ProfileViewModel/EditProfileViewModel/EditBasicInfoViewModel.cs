@@ -61,9 +61,9 @@ namespace Helpa.ViewModels.ProfileViewModel.EditProfileViewModel
         }
         #endregion
 
-        public EditBasicInfoViewModel()
+        public EditBasicInfoViewModel(RegisterUserModel LoggedinUser)
         {
-            var LoggedinUser = App.Database.GetLoggedUser();
+            //var LoggedinUser = App.Database.GetLoggedUser();
             if (LoggedinUser != null)
                 GetUserBasicInfo(LoggedinUser.Id);
         }
@@ -80,8 +80,9 @@ namespace Helpa.ViewModels.ProfileViewModel.EditProfileViewModel
 
                 UserInfo.UserId = userid;
 
-                SelectedCarousel = "1/" + ((UserInfo.Carousel != null) ? UserInfo.Carousel.Count.ToString() : "0");
-                UserInfo.GenderName = (UserInfo.Gender == 1) ? "Male" : (UserInfo.Gender == 2) ? "Female" : "Rather no to say";
+                SelectedCarousel = ((UserInfo.Carousel != null) ? "1/" + UserInfo.Carousel.Count.ToString() : "0/0");
+                if (userInfo.Gender != 0)
+                    UserInfo.GenderName = (UserInfo.Gender == 1) ? "Male" : (UserInfo.Gender == 2) ? "Female" : "Rather no to say";
             }
         }
     }

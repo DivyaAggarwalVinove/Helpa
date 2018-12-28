@@ -39,8 +39,8 @@ namespace Helpa
             instance = this;
             NavigationPage.SetHasNavigationBar(this, false);
 
-            jobsViewModel = new JobPostViewModel(this);
-            jobsViewModel.mapJob = mapJob;
+            jobsViewModel = new JobPostViewModel(this, mapJob);
+            //jobsViewModel.mapJob = mapJob;
             BindingContext = jobsViewModel;
 
             MessagingCenter.Subscribe<CustomMap, string>(this, "Hi", (sender, selectedCluster) =>
@@ -79,15 +79,26 @@ namespace Helpa
 
                 var selectedHelpersInCluster = jobsViewModel.jobPostList.Where(h => h.LocationName == (selectedCluster)).FirstOrDefault();
                 mapJob.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(selectedHelpersInCluster.Latitude - 0.0055, selectedHelpersInCluster.Longitude), Distance.FromKilometers(1)));
-
+                
+                IEnumerable<JobsHome> js = new List<JobsHome>();
                 JobServices jobServices = new JobServices();
-                var js = await jobServices.GetJobsInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
+
+                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+                if (loggedUser == null)
+                    js = await jobServices.GetJobsInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
+                else
+                    js = await jobServices.GetJobsInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, loggedUser.Id);
 
                 for (int i = 0; i < js.Count(); i++)
                 {
                     JobsHome j = js.ElementAt(i);
                     if (j != null)
                     {
+                        if (j.BookMark)
+                            j.BookmarkImage = "save_filled.png";
+                        else
+                            j.BookmarkImage = "save.png";
+
                         if (j.JobType == "N")
                         {
                             j.JobType = "Normal";
@@ -140,10 +151,16 @@ namespace Helpa
             try
             {
                 aiJobPost.IsRunning = true;
-
+                
+                JHomeModel js = new JHomeModel();
                 JobServices jobServices = new JobServices();
-                var js = await jobServices.GetAllJobs(0);
 
+                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+                if (loggedUser == null)
+                    js = await jobServices.GetAllJobs(0);
+                else
+                    js = await jobServices.GetAllJobs(loggedUser.Id);
+                
                 lblJobFullCount.Text = js.Total + " Job posts found";
 
                 for (int i = 0; i < js.Data.Count(); i++)
@@ -151,6 +168,11 @@ namespace Helpa
                     JobsHome j = js.Data.ElementAt(i);
                     if (j != null)
                     {
+                        if (j.BookMark)
+                            j.BookmarkImage = "save_filled.png";
+                        else
+                            j.BookmarkImage = "save.png";
+
                         if (j.JobType == "N")
                         {
                             j.JobType = "Normal";
@@ -275,7 +297,7 @@ namespace Helpa
         {
             aiJobPost.IsRunning = true;
 
-            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
             if (loggedUser == null)
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
@@ -287,17 +309,17 @@ namespace Helpa
                 {
                     if (e.Parameter != null)
                     {
-                        int helperId = int.Parse(e.Parameter.ToString());
+                        int jobId = int.Parse(e.Parameter.ToString());
 
-                        bool isSuccess = await (new HelpersServices()).BookMarkHelper(loggedUser.Id, helperId);
+                        bool isSuccess = await (new JobServices()).BookMarkJob(loggedUser.Id, jobId);
                         imgBookmark.Source = "save_filled.png";
                     }
                 }
                 else
                 {
-                    int helperId = int.Parse(e.Parameter.ToString());
+                    int jobId = int.Parse(e.Parameter.ToString());
 
-                    bool isSuccess = await (new HelpersServices()).UnBookMarkHelper(loggedUser.Id, helperId);
+                    bool isSuccess = await (new JobServices()).UnBookMarkJob(loggedUser.Id, jobId);
                     imgBookmark.Source = "save.png";
                 }
             }

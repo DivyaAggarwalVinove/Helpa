@@ -94,7 +94,7 @@
                     </Grid>
 
                     <Grid Grid.Row="2" Padding="0,10,0,10">
-                        <ListView x:Name="lvReviewToReview" ItemsSource="{Binding ToReviewList}" SelectionMode="None" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False">
+                        <ListView x:Name="lvReviewToReview" ItemsSource="{Binding ToReviewList}" SelectionMode="None" SeparatorVisibility="None" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="False">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell Height="135">
@@ -227,64 +227,185 @@
                             </ListView.ItemTemplate>
                         </ListView>
 
-                        <ListView x:Name="lvReviewAboutMe" ItemsSource="{Binding AboutMeList}" SelectionMode="None" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True">
+                        <ListView x:Name="lvReviewAboutMe" ItemsSource="{Binding AboutMeList}" SelectionMode="None" SeparatorVisibility="None" VerticalOptions="FillAndExpand" HasUnevenRows="true" IsVisible="True">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <ViewCell Height="135">
+                                    <ViewCell>
                                         <Frame Margin="5" VerticalOptions="Center" BackgroundColor="White" CornerRadius="5" HasShadow="True" Padding="10">
                                             <Grid RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="60"/>
                                                     <RowDefinition Height="Auto"/>
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
 
-                                                <Grid Grid.Row="0" VerticalOptions="StartAndExpand">
+                                                <Grid Grid.Row="0" VerticalOptions="StartAndExpand"  HorizontalOptions="FillAndExpand">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="1*"/>
-                                                        <ColumnDefinition Width="1*"/>
                                                     </Grid.ColumnDefinitions>
 
                                                     <Grid Grid.Column="0">
                                                         <controls:CircleImage 
-                                                            Source="picture.png" 
-                                                            BackgroundColor="Transparent" 
+                                                            Source="{Binding Image}"  
                                                             Aspect="Fill" 
                                                             HorizontalOptions="Center" 
                                                             VerticalOptions="Center" 
                                                             WidthRequest="50" 
                                                             HeightRequest="50"/>
                                                     </Grid>
-                                                    
-                                                    <Grid Grid.Column="1">
-                                                        <Label Text="{Binding UserName}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                                                    </Grid>
-                                                    
-                                                    <Grid Grid.Column="2">
-                                                        <rating:SfRating ItemCount="5" Value="{Binding Rating}" BackgroundColor="Green" IsEnabled="False" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                                            <rating:SfRating.RatingSettings>
-                                                                <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
-                                                            </rating:SfRating.RatingSettings>
-                                                        </rating:SfRating>
-                                                    </Grid>
-                                                    
-                                                    <Grid Grid.Column="3">
-                                                        <Label Text="Reply"  TextColor="#A4DAEE" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
-                                                    </Grid>
 
-                                                    <Grid Grid.Column="4">
-                                                        <Label Text="Report" TextColor="#A4DAEE" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                                                    <Grid Grid.Column="1" RowSpacing="0"  HorizontalOptions="FillAndExpand">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+
+                                                        <Grid Grid.Row="0" ColumnSpacing="5" HorizontalOptions="FillAndExpand">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Grid Grid.Column="0">
+                                                                <Label Text="{Binding UserName}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="1">
+                                                                <rating:SfRating ItemCount="5" Value="{Binding Rating}" IsEnabled="False" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                                    <rating:SfRating.RatingSettings>
+                                                                        <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
+                                                                    </rating:SfRating.RatingSettings>
+                                                                </rating:SfRating>
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                                <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">-->
+                                                                    <Label 
+                                                                        Text="Reply"  
+                                                                        TextColor="#A4DAEE"
+                                                                        FontAttributes="Bold" 
+                                                                        IsVisible="{Binding isReplied}"
+                                                                        VerticalOptions="EndAndExpand" 
+                                                                        HorizontalOptions="EndAndExpand">
+                                                                        <Label.GestureRecognizers>
+                                                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnReplyAboutMeReview"/>
+                                                                        </Label.GestureRecognizers>
+                                                                    </Label>
+                                                                <!--</StackLayout>-->
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="3">
+                                                                <Label Text="Report" FontAttributes="Bold" TextColor="#A4DAEE" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                                                            </Grid>
+                                                        </Grid>
+
+                                                        <Grid Grid.Row="1">
+                                                            <Label Text="2018-01-12" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
                                                     </Grid>
                                                 </Grid>
 
-                                                <Grid Grid.Row="1">
-                                                    <local:CustomReviewLabel Text="{Binding Review}" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                <Grid Grid.Row="1" BackgroundColor="Pink">
+                                                    <Label
+                                                        Text="{Binding Review}" 
+                                                        TextColor="Black" 
+                                                        VerticalOptions="CenterAndExpand" 
+                                                        HorizontalOptions="StartAndExpand">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <FormattedString.Spans>
+                                                                    <Span Text="Read more" TextColor="Blue"/>
+                                                                </FormattedString.Spans>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
                                                 </Grid>
 
-                                                <Grid Grid.Row="2">
+                                                <Grid Grid.Row="2" IsVisible="{Binding isNotReplied}" Margin="0,10,0,0" >
+                                                    <Grid RowSpacing="5" IsVisible="{Binding isReplied}">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+
+                                                        <Grid Grid.Row="0">
+                                                            <Frame BackgroundColor="White" CornerRadius="10" BorderColor="LightGray" HasShadow="True" HeightRequest="100" Margin="0" Padding="2">
+                                                                <Editor HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="2"
+                                                                    TextColor="Gray" BackgroundColor="White" MaxLength="300"/>
+                                                            </Frame>
+                                                        </Grid>
+                                                        
+                                                        <Grid Grid.Row="1">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="1*"/>
+                                                                <ColumnDefinition Width="1*"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Button Grid.Column="0" Text="Cancel" VerticalOptions="Center" HorizontalOptions="FillAndExpand" TextColor="Gray" Clicked="OnClickCancel"/>
+                                                            <Button Grid.Column="1" Text="Submit" VerticalOptions="Center" HorizontalOptions="FillAndExpand" TextColor="Gray"/>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <Grid Margin="30,0,0,0" IsVisible="{Binding isNotReplied}">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="60"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+
+                                                        <Grid Grid.Row="0" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Grid Grid.Column="0">
+                                                                <controls:CircleImage 
+                                                                    Source="{Binding ReviewData.Image}"  
+                                                                    Aspect="Fill" 
+                                                                    HorizontalOptions="Center" 
+                                                                    VerticalOptions="Center" 
+                                                                    WidthRequest="50" 
+                                                                    HeightRequest="50"/>    
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="1" RowSpacing="0"  HorizontalOptions="FillAndExpand">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                </Grid.RowDefinitions>
+
+                                                                <Grid Grid.Row="0" ColumnSpacing="5" HorizontalOptions="FillAndExpand">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                    </Grid.ColumnDefinitions>
+
+                                                                    <Grid Grid.Column="0">
+                                                                        <Label Text="{Binding ReviewData.UserName}"  TextColor="Black" Font="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                    </Grid>
+
+                                                                    <Grid Grid.Column="1">
+                                                                        <rating:SfRating ItemCount="5" Value="{Binding ReviewData.Rating}" IsEnabled="False" Precision="Exact" ItemSize="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                                            <rating:SfRating.RatingSettings>
+                                                                                <rating:SfRatingSettings RatedFill="#FBDB52" UnRatedFill="#494949" RatedStrokeWidth="0" UnRatedStrokeWidth="0" />
+                                                                            </rating:SfRating.RatingSettings>
+                                                                        </rating:SfRating>
+                                                                    </Grid>
+                                                                </Grid>
+
+                                                                <Grid Grid.Row="1">
+                                                                    <Label Text="2018-01-12" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Grid>
+
+                                                        <Grid Grid.Row="1" BackgroundColor="Pink">
+                                                            <local:CustomReviewLabel Text="{Binding Review}" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                                                        </Grid>
+                                                    </Grid>
                                                 </Grid>
                                             </Grid>
                                         </Frame>

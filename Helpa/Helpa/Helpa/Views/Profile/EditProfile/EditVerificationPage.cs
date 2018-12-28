@@ -20,7 +20,6 @@ namespace Helpa.Views.Profile
             Instance = this;
             NavigationPage.SetHasNavigationBar(this, false);   
         }
-
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -29,12 +28,12 @@ namespace Helpa.Views.Profile
             if (verificationInfo.certificate == null)
             {
                 gridVerifiedCertificate.IsVisible = false;
-                gridNotVerifiedIdCertificate.IsVisible = true;
+                gridNotVerifiedCertificate.IsVisible = true;
             }
             else
             {
                 gridVerifiedCertificate.IsVisible = true;
-                gridNotVerifiedIdCertificate.IsVisible = false;
+                gridNotVerifiedCertificate.IsVisible = false;
             }
 
             if (verificationInfo.idcard == null)
@@ -152,12 +151,86 @@ namespace Helpa.Views.Profile
                 {
                     var stream = Utils.ConvertByteToBase64(file.DataArray);
 
-                    //await (new LoginServices()).UploadCertificate(LoggedinUser.HelperId, stream);
-                    await (new LoginServices()).UploadCertificate(133, stream);
+                    bool result = await (new LoginServices()).UploadCertificate(LoggedinUser.HelperId, stream);
+                    if (result)
+                    {
+                        await DisplayAlert("", "Certificate uploaded successfully.", "Ok");
+
+                        gridNotVerifiedCertificate.IsVisible = false;
+                        gridVerifiedCertificate.IsVisible = true;
+                    }
+                    else
+                        await DisplayAlert("", "Certificate not uploaded.", "Ok");
                 }
             }
         }
 
+        async void OnIDCardUpload(object sender, EventArgs e)
+        {
+            if (LoggedinUser != null)
+            {
+                var file = await CrossFilePicker.Current.PickFile();
+
+                if (file != null)
+                {
+                    var stream = Utils.ConvertByteToBase64(file.DataArray);
+
+                    bool result = await (new LoginServices()).UploadID(LoggedinUser.HelperId, stream);
+                    if (result)
+                    {
+                        await DisplayAlert("", "ID Card uploaded successfully.", "Ok");
+
+                        gridNotVerifiedIdIdCard.IsVisible = false;
+                        gridVerifiedIdCard.IsVisible = true;
+                    }
+                    else
+                        await DisplayAlert("", "ID Card not uploaded.", "Ok");
+                }
+            }
+        }
+
+        async void OnCertificateEdit(object sender, EventArgs e)
+        {
+            if (LoggedinUser != null)
+            {
+                var file = await CrossFilePicker.Current.PickFile();
+
+                if (file != null)
+                {
+                    var stream = Utils.ConvertByteToBase64(file.DataArray);
+
+                    bool result = await (new LoginServices()).UploadCertificate(LoggedinUser.HelperId, stream);
+                    if (result)
+                    {
+                        await DisplayAlert("", "Certificate uploaded successfully.", "Ok");
+
+                        gridNotVerifiedCertificate.IsVisible = false;
+                        gridVerifiedCertificate.IsVisible = true;
+                    }
+                    else
+                        await DisplayAlert("", "Certificate not uploaded.", "Ok");
+                }
+            }
+        }
+
+        async void OnIDCardEdit(object sender, EventArgs e)
+        {
+            if (LoggedinUser != null)
+            {
+                var file = await CrossFilePicker.Current.PickFile();
+
+                if (file != null)
+                {
+                    var stream = Utils.ConvertByteToBase64(file.DataArray);
+
+                    bool result = await (new LoginServices()).UploadID(LoggedinUser.HelperId, stream);
+                    if (result)
+                        await DisplayAlert("", "ID Card uploaded successfully.", "Ok");
+                    else
+                        await DisplayAlert("", "ID Card not uploaded.", "Ok");
+                }
+            }
+        }
         public void ShowSmsMessage(ResponseModel message, bool isSuccess)
         {
             if (isSuccess)
@@ -170,10 +243,10 @@ namespace Helpa.Views.Profile
 
         public void ShowVerificationMessage(ResponseModel message, bool isSuccess)
         {
-            if (isSuccess)
+            if (isSuccess && message.Code=="200")
             {
                 entryEditVerifySmsCode.IsEnabled = false;
-                gridNotVerifiedIdMobile.IsVisible = true;
+                gridNotVerifiedIdMobile.IsVisible = false;
             }
 
             DisplayAlert("", message.Message, "Ok");
@@ -181,11 +254,11 @@ namespace Helpa.Views.Profile
 
         public void ShowEmailVerifyMessage(ResponseModel message, bool isSuccess)
         {
-            if (isSuccess)
-            {
-                entryEditVerifyEmail.IsEnabled = false;
-                gridNotVerifiedIdEmail.IsVisible = false;
-            }
+            //if (isSuccess)
+            //{
+            //    entryEditVerifyEmail.IsEnabled = false;
+            //    gridNotVerifiedIdEmail.IsVisible = false;
+            //}
             DisplayAlert("", message.Message, "Ok");
         }
     }
