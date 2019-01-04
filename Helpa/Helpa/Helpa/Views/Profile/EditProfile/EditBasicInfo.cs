@@ -79,7 +79,7 @@ namespace Helpa.Views.Profile.EditProfile
             }
             else
             {
-                RegisterUserModel currentUser = await App.Database.GetLoggedUser();
+                RegisterUserModel currentUser = App.Database.GetLoggedUser();
                 if (currentUser != null)
                     await (new RegisterServices()).SendSmsCode(currentUser.Id, entryEditBasicInfoPhone.Text, "EDITINFO");
             }
@@ -93,7 +93,7 @@ namespace Helpa.Views.Profile.EditProfile
             }
             else
             {
-                RegisterUserModel currentUser = await App.Database.GetLoggedUser();
+                RegisterUserModel currentUser = App.Database.GetLoggedUser();
                 if (currentUser != null)
                     await (new RegisterServices()).VerifyOtp(currentUser.Id, entryEditBasicInfoSmsCode.Text, "EDITINFO");
             }

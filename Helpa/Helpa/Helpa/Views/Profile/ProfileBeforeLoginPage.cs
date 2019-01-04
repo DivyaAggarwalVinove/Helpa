@@ -21,7 +21,7 @@ namespace Helpa.Views.Profile
 
         private void OnClickProfileParentSignup(object sender, EventArgs e)
         {
-            var user = App.Database.GetUsersAsync();
+            var user = App.Database.GetUsers();
             if (user == null || user.Count == 0)
                 App.NavigationPage.Navigation.PushAsync(new Register());
             else

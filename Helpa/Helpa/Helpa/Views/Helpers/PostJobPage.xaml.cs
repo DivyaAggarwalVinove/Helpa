@@ -165,8 +165,8 @@ namespace Helpa.Views.Helpers
             ((Button)gridPJServices.Children[0]).BorderColor = Color.FromHex("FE7890");
             ((Button)gridPJServices.Children[0]).TextColor = Color.FromHex("FE7890");
             gridPJServices.Children[1].IsVisible = true;
-            App.Database.DeleteServiceAsync();
-            int num2 = await App.Database.SaveServicesAsync((IEnumerable<ServiceModel>)services);
+            App.Database.DeleteService();
+            int num2 = App.Database.SaveServices((IEnumerable<ServiceModel>)services);
         }
 
         private void ClickOnAddMoreChild(object sender, EventArgs e)
@@ -236,8 +236,8 @@ namespace Helpa.Views.Helpers
                 });
                 this.gridPJScopes.Children.Add((View)button1, index % 2, index / 2);
             }
-            App.Database.DeleteServiceAsync();
-            int num2 = await App.Database.SaveServicesAsync((IEnumerable<ServiceModel>)this.services);
+            App.Database.DeleteService();
+            int num2 = App.Database.SaveServices((IEnumerable<ServiceModel>)this.services);
         }
 
         private void OnHomeLocationSelected(object sender, EventArgs args)

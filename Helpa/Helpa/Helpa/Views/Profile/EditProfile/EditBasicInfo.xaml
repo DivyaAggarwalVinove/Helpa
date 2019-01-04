@@ -7,6 +7,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
              x:Class="Helpa.Views.Profile.EditProfile.EditBasicInfo">
+    
     <ContentPage.Content>
         <RelativeLayout>
             <Grid 

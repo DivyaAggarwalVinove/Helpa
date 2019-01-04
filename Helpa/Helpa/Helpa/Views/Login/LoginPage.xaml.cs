@@ -162,7 +162,7 @@ namespace Helpa
 
         async void OnParentSignup(object sender, EventArgs args)
         {
-            var user = App.Database.GetUsersAsync();
+            var user = App.Database.GetUsers();
             if (user == null || user.Count == 0)
                 await Navigation.PushAsync(new Register());
             else
@@ -173,7 +173,7 @@ namespace Helpa
 
         async void OnHelperSignup(object sender, EventArgs args)
         {
-            var user = App.Database.GetUsersAsync();
+            var user = App.Database.GetUsers();
             if (user == null || user.Count == 0)
                 await Navigation.PushAsync(new HelperRegister());
             else

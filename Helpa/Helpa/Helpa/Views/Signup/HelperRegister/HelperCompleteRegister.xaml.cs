@@ -113,7 +113,7 @@ namespace Helpa
                     }
                     else
                     {
-                        List<ServiceModel> services = App.Database.GetServicesAsync();
+                        List<ServiceModel> services = App.Database.GetServices();
                         ServiceModel service = services.Where(a => a.ServiceName == serviceName).FirstOrDefault();
                         //var selectedService = helperServices.Service.Where(a => a.ServiceId == service.Id).FirstOrDefault();
                         int serviceIndex = services.IndexOf(service);
@@ -167,7 +167,7 @@ namespace Helpa
                 try
                 {
                     string scopeName = ((ScopeButton)sender).scopeName;
-                    List<ScopeModel> scopes = App.Database.GetScopesAsync();
+                    List<ScopeModel> scopes = App.Database.GetScopes();
                     ScopeModel scope = scopes.Where(a => a.ScopeName == scopeName).FirstOrDefault();
 
                     if (isSelected)
@@ -293,8 +293,8 @@ namespace Helpa
                 gridServices.Children.Add(image, i % 3, i / 3);                
                 #endregion
             }
-            App.Database.DeleteServiceAsync();
-            await App.Database.SaveServicesAsync(services);
+            App.Database.DeleteService();
+            App.Database.SaveServices(services);
         }
 
         void SetPriceType()
@@ -369,8 +369,8 @@ namespace Helpa
             }
             #endregion
 
-            App.Database.DeleteScopeAsync();
-            await App.Database.SaveScopeAsync(scopes);
+            App.Database.DeleteScope();
+            App.Database.SaveScope(scopes);
         }
 
         //async void SetLocation()
@@ -432,7 +432,7 @@ namespace Helpa
         public void GotoNext(RegisterUserModel userModel)
         {
             userModel.IsCompleted = true;
-            App.Database.SaveUserAsync(userModel);
+            App.Database.SaveUser(userModel);
             GoToEditServices();
             //Navigation.PushAsync(new HelperRegister1(userModel));
         }
@@ -459,7 +459,7 @@ namespace Helpa
 
         void OnHelperRegEditServicesNext(object sender, EventArgs args)
         {
-            List<ServiceModel> selectedServices = App.Database.GetServicesAsync();
+            List<ServiceModel> selectedServices = App.Database.GetServices();
             if (helperServices.Service.Count == 0)
                 DisplayAlert("Warning", "Please select at least any one service.", "Ok");
             else
@@ -493,9 +493,9 @@ namespace Helpa
                 //Save services data
                 HelperServices service = new HelperServices();
                 if (rgHelperHomeLocation.Checked)
-                    helperServices.Service[currentService].LocationType = 1;
+                    helperServices.Service[currentService].LocationType = "S";
                 else
-                    helperServices.Service[currentService].LocationType = 2;
+                    helperServices.Service[currentService].LocationType = "M";
 
                 if (((ServiceButton)gridPriceType.Children.ElementAt(0)).isSelected)
                 {
@@ -545,9 +545,9 @@ namespace Helpa
 
                 if (helperServices.HelperId != 0)
                 {
-                    RegisterUserModel user = await App.Database.GetUsersAsync(helperServices.UserId);
+                    RegisterUserModel user = App.Database.GetUsers(helperServices.UserId);
                     user.IsServiced = true;
-                    await App.Database.SaveUserAsync(user);
+                    App.Database.SaveUser(user);
 
                     await DisplayAlert("Information", "Services saved successfully", "Ok");
 

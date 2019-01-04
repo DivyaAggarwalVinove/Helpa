@@ -86,7 +86,7 @@ namespace Helpa
             if (App.selectedPage != 4)
                 return;
 
-            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
             if (loggedUser == null)
                 return;
 
@@ -109,7 +109,7 @@ namespace Helpa
                 IEnumerable<HelperHome> hs = new List<HelperHome>();
                 HelpersServices helpersServices = new HelpersServices();
 
-                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
                 if (loggedUser == null)
                     hs = await helpersServices.GetHelpersInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
                 else
@@ -192,7 +192,7 @@ namespace Helpa
                 HHomeModel hService = new HHomeModel();
                 HelpersServices helpersServices = new HelpersServices();
 
-                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
                 if (loggedUser == null)
                     hService = await helpersServices.GetAllHelpers(0);
                 else
@@ -372,7 +372,7 @@ namespace Helpa
             // await Navigation.PushAsync(new LoginPage());
             else
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PostJobPage() { loggedUser = user.Result });
+                await Application.Current.MainPage.Navigation.PushAsync(new PostJobPage() { loggedUser = user });
             }
         }
 
@@ -661,7 +661,7 @@ namespace Helpa
         {
             aiFindHelper.IsRunning = true;
 
-            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
             if (loggedUser == null)
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());

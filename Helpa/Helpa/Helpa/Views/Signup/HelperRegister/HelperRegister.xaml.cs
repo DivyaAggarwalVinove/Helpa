@@ -52,7 +52,7 @@ namespace Helpa
 
         public void GotoNext(RegisterUserModel userModel)
         {
-            App.Database.SaveUserAsync(userModel);
+            App.Database.SaveUser(userModel);
             Navigation.PushAsync(new HelperCompleteRegister(userModel));
         }
 

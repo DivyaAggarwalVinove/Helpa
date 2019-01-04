@@ -46,7 +46,7 @@ namespace Helpa.ViewModels.OtherViewModels
         {
             try
             {
-                var user = App.Database.GetLoggedUser().Result;
+                var user = App.Database.GetLoggedUser();
                 JobServices jobServices = new JobServices();
                 var js = await jobServices.GetMyJobs(user.Id);
 

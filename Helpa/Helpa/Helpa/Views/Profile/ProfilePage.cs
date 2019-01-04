@@ -26,7 +26,7 @@ namespace Helpa.Views.Profile
         {
             try
             {
-                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
                 if (loggedUser == null)
                     ProfileContentView.Content = (new ProfileBeforeLoginPage()).Content;
                 else

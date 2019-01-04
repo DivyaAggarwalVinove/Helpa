@@ -19,7 +19,7 @@ namespace Helpa.Models
         public int MinAge { get; set; }
 
         public int MaxAge { get; set; }
-
+        public int ServiceCount { get; set; }
         public List<HelperServices> Service { get; set; }
     }
     
@@ -29,7 +29,7 @@ namespace Helpa.Models
 
         public string ServiceName { get; set; }
 
-        public int LocationType { get; set; }
+        public string LocationType { get; set; }
 
         public string LocationName { get; set; }
 

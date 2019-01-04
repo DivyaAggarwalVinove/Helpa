@@ -45,7 +45,7 @@ namespace Helpa.Views.Profile.OtherPages
         {
             aiMyJobPost.IsRunning = true;
 
-            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
             if (loggedUser == null)
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());

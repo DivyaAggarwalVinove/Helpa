@@ -62,8 +62,8 @@ namespace Helpa.Views.Profile
                 gridServices.Children.Add(image, i % 3, i / 3);
                 #endregion
             }
-            App.Database.DeleteServiceAsync();
-            await App.Database.SaveServicesAsync(services);
+            App.Database.DeleteService();
+            App.Database.SaveServices(services);
         }
         private void XFBTNServiceDetail_Tapped(object sender, EventArgs e)
         {

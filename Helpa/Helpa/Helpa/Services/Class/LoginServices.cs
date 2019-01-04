@@ -42,7 +42,7 @@ namespace Helpa.Services
                             message.userId = int.Parse(message.id);
                         }
 
-                        RegisterUserModel user = await App.Database.GetUsersAsync(message.userId);
+                        RegisterUserModel user = App.Database.GetUsers(message.userId);
                         if (user == null)
                             user = new RegisterUserModel();
 
@@ -59,7 +59,7 @@ namespace Helpa.Services
                         user.Role = message.roles;
                         user.Email = email;
                         user.profileImage = message.profileImage;
-                        await App.Database.SaveUserAsync(user);
+                        App.Database.SaveUser(user);
 
                         return null;
                     }
@@ -117,7 +117,7 @@ namespace Helpa.Services
 
                         rum.isLoggedIn = true;
 
-                        await App.Database.SaveUserAsync(rum);
+                        App.Database.SaveUser(rum);
 
                         return true;
                     }
@@ -159,7 +159,7 @@ namespace Helpa.Services
                         userInfo = JsonConvert.DeserializeObject<UserModel>(result);
 
 
-                        RegisterUserModel rum = (await App.Database.GetLoggedUser());
+                        RegisterUserModel rum = App.Database.GetLoggedUser();
 
                         rum.Id = UserId;
                         rum.UserName = userInfo.UserName;
@@ -172,7 +172,7 @@ namespace Helpa.Services
                         rum.longitude = userInfo.Longitude;
                         rum.description = userInfo.selfintroduction;
 
-                        await App.Database.SaveUserAsync(rum);
+                        App.Database.SaveUser(rum);
                     }
                     else
                     {

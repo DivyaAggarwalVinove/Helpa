@@ -1,5 +1,6 @@
 ﻿using Helpa.Models;
 using Helpa.ViewModels;
+using Helpa.Views.Profile.DetailedProfile;
 using Helpa.Views.Profile.OtherPages;
 using Helpa.Views.Profile.ProfileSettings;
 using System;
@@ -37,7 +38,8 @@ namespace Helpa.Views.Profile
 
         private void OnClickViewProfile(object sender, EventArgs e)
         {
-            App.NavigationPage.Navigation.PushAsync(new EditProfilePage() { LoggedinUser = currentUser });
+            //App.NavigationPage.Navigation.PushAsync(new EditProfilePage() { LoggedinUser = currentUser });
+            App.NavigationPage.Navigation.PushAsync(new DetailedProfilePage(currentUser));
         }
 
         private void OnClickSetting(object sender, EventArgs e)
@@ -80,13 +82,13 @@ namespace Helpa.Views.Profile
             //Device.OpenUri(new Uri("fb://page/108972495813848"));
         }
 
-        private async void OnClickLogout(object sender, EventArgs e)
+        private void OnClickLogout(object sender, EventArgs e)
         {
-            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
             if (loggedUser == null)
                 return;
             loggedUser.isLoggedIn = false;
-            App.Database.SaveUserAsync(loggedUser);
+            App.Database.SaveUser(loggedUser);
             ProfilePage.pcv.Content = (new ProfileBeforeLoginPage()).Content;
         }
     }

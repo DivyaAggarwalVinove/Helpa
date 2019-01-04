@@ -39,7 +39,7 @@ namespace Helpa
         public void GotoNext(RegisterUserModel userModel)
         {
             userModel.IsRegistered = true;
-            App.Database.SaveUserAsync(userModel);
+            App.Database.SaveUser(userModel);
             App.NavigationPage.Navigation.PushAsync(new Register1(userModel));
         }
         public void ShowError(string error)

@@ -12,7 +12,7 @@ namespace Helpa.Services
     public class Database
     {
         #region Local Variables
-        SQLiteAsyncConnection database;
+        SQLiteConnection database;
         #endregion
 
         #region Constructor
@@ -24,10 +24,10 @@ namespace Helpa.Services
         {
             try
             {
-                database = new SQLiteAsyncConnection(dbPath);
-                database.CreateTableAsync<RegisterUserModel>().Wait();
-                database.CreateTableAsync<ServiceModel>().Wait();
-                database.CreateTableAsync<ScopeModel>().Wait();
+                database = new SQLiteConnection(dbPath);
+                database.CreateTable<RegisterUserModel>();
+                database.CreateTable<ServiceModel>();
+                database.CreateTable<ScopeModel>();
             }
             catch(Exception e)
             {
@@ -38,18 +38,18 @@ namespace Helpa.Services
 
         #region Operations on Register user Table
         /// <summary>
-        /// GetUsersAsync: Read all user.
+        /// GetUsers: Read all user.
         /// </summary>
         /// <returns></returns>
-        public List<RegisterUserModel> GetUsersAsync()
+        public List<RegisterUserModel> GetUsers()
         {
-            List<RegisterUserModel> user = database.Table<RegisterUserModel>().Where(i => i.IsCompleted == true && i.IsRegistered==true).ToListAsync().Result;
+            List<RegisterUserModel> user = database.Table<RegisterUserModel>().Where(i => i.IsCompleted == true && i.IsRegistered==true).ToList();
             if(user.Count==0)
             {
-                user = database.Table<RegisterUserModel>().Where(i => i.IsVerified == true && i.IsRegistered == true).ToListAsync().Result;
+                user = database.Table<RegisterUserModel>().Where(i => i.IsVerified == true && i.IsRegistered == true).ToList();
                 if(user.Count==0) 
                 {
-                    user = database.Table<RegisterUserModel>().Where(i => i.IsRegistered == true).ToListAsync().Result;
+                    user = database.Table<RegisterUserModel>().Where(i => i.IsRegistered == true).ToList();
                 }
             }
 
@@ -58,75 +58,75 @@ namespace Helpa.Services
 
         public RegisterUserModel GetRegisteredUser()
         {
-            return database.Table<RegisterUserModel>().Where(i => i.IsCompleted == true).FirstOrDefaultAsync().Result;
+            return database.Table<RegisterUserModel>().Where(i => i.IsCompleted == true).FirstOrDefault();
         }
 
-        public Task<RegisterUserModel> GetLoggedUser()
+        public RegisterUserModel GetLoggedUser()
         {
-            var user = database.Table<RegisterUserModel>().Where(i => i.isLoggedIn == true).FirstOrDefaultAsync();
-           // await user;
+            var user = database.Table<RegisterUserModel>().Where(i => i.isLoggedIn == true);
+            // await user;
 
-            return user;
+            return user.FirstOrDefault();
         }
 
         /// <summary>
-        /// GetRegisterUsersAsync: Read  user filter by id.
+        /// GetRegisterUsers: Read  user filter by id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<RegisterUserModel> GetUsersAsync(int id)
+        public RegisterUserModel GetUsers(int id)
         {
-            return database.Table<RegisterUserModel>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            return database.Table<RegisterUserModel>().Where(i => i.Id == id).FirstOrDefault();
         }
 
         /// <summary>
-        /// SaveUserAsync: Save user into database.
+        /// SaveUser: Save user into database.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public Task<int> SaveUserAsync(RegisterUserModel user)
+        public int SaveUser(RegisterUserModel user)
         {
-            RegisterUserModel registerUser = database.Table<RegisterUserModel>().Where(i => i.Id == user.Id).FirstOrDefaultAsync().Result;
+            RegisterUserModel registerUser = database.Table<RegisterUserModel>().Where(i => i.Id == user.Id).FirstOrDefault();
             if (registerUser != null)
             {
-                return database.UpdateAsync(user);
+                return database.Update(user);
             }
             else
             {
-                return database.InsertAsync(user);
+                return database.Insert(user);
             }
         }
 
         /// <summary>
-        /// DeleteUserAsync: Delete user from database.
+        /// DeleteUser: Delete user from database.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public Task<int> DeleteUserAsync(RegisterUserModel user)
+        public int DeleteUser(RegisterUserModel user)
         {
-            return database.DeleteAsync(user);
+            return database.Delete(user);
         }
         #endregion
 
         #region Operations on Service Table
         /// <summary>
-        /// SaveServicesAsync: Save services into database.
+        /// SaveServices: Save services into database.
         /// </summary>
         /// <param name="service"></param>
         /// <returns></returns>
-        public Task<int> SaveServicesAsync(IEnumerable<ServiceModel> services)
+        public int SaveServices(IEnumerable<ServiceModel> services)
         {
-            Task<int> result = null;
+            int result = 0;
             foreach (ServiceModel service in services)
             {
-                ServiceModel s = database.Table<ServiceModel>().Where(i => i.Id == service.Id).FirstOrDefaultAsync().Result;
+                ServiceModel s = database.Table<ServiceModel>().Where(i => i.Id == service.Id).FirstOrDefault();
                 if (s != null)
                 {
-                    result = database.UpdateAsync(service);
+                    result = database.Update(service);
                 }
                 else
                 {
-                    result = database.InsertAsync(service);
+                    result = database.Update(service);
                 }
             }
 
@@ -134,63 +134,63 @@ namespace Helpa.Services
         }
 
         /// <summary>
-        /// SaveServiceAsync: Save service into database.
+        /// SaveService: Save service into database.
         /// </summary>
         /// <param name="service"></param>
         /// <returns></returns>
-        public Task<int> SaveServiceAsync(ServiceModel service)
+        public int SaveService(ServiceModel service)
         {
-            ServiceModel s = database.Table<ServiceModel>().Where(i => i.Id == service.Id).FirstOrDefaultAsync().Result;
+            ServiceModel s = database.Table<ServiceModel>().Where(i => i.Id == service.Id).FirstOrDefault();
             if (s != null)
             {
-                return database.UpdateAsync(service);
+                return database.Update(service);
             }
             else
             {
-                return database.InsertAsync(service);
+                return database.Insert(service);
             }
         }
 
         /// <summary>
-        /// GetServicesAsync: To get the list of services from the database.
+        /// GetServices: To get the list of services from the database.
         /// </summary>
         /// <returns></returns>
-        public List<ServiceModel> GetServicesAsync()
+        public List<ServiceModel> GetServices()
         {
-            List<ServiceModel> services = database.Table<ServiceModel>().ToListAsync().Result;
+            List<ServiceModel> services = database.Table<ServiceModel>().ToList();
             
             return services;
         }
 
         /// <summary>
-        /// DeleteServiceAsync: Delete all services in the table.
+        /// DeleteService: Delete all services in the table.
         /// </summary>
-        public void DeleteServiceAsync()
+        public void DeleteService()
         {
-            database.DropTableAsync<ServiceModel>().Wait();
-            database.CreateTableAsync<ServiceModel>().Wait();
+            database.DropTable<ServiceModel>();
+            database.CreateTable<ServiceModel>();
         }
         #endregion
 
         #region Operations on Scope Table
         /// <summary>
-        /// SaveScopeAsync: Save scopes into database.
+        /// SaveScope: Save scopes into database.
         /// </summary>
         /// <param name="scopes"></param>
         /// <returns></returns>
-        public Task<int> SaveScopeAsync(List<ScopeModel> scopes)
+        public int SaveScope(List<ScopeModel> scopes)
         {
-            Task<int> result = null;
+            int result = 0;
             foreach (ScopeModel scope in scopes)
             {
-                ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefaultAsync().Result;
+                ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefault();
                 if (s != null)
                 {
-                    result = database.UpdateAsync(scope);
+                    result = database.Update(scope);
                 }
                 else
                 {
-                    result = database.InsertAsync(scope);
+                    result = database.Insert(scope);
                 }
             }
 
@@ -198,41 +198,41 @@ namespace Helpa.Services
         }
 
         /// <summary>
-        /// SaveScopeAsync: Save scope into database.
+        /// SaveScope: Save scope into database.
         /// </summary>
         /// <param name="service"></param>
         /// <returns></returns>
-        public Task<int> SaveScopeAsync(ScopeModel scope)
+        public int SaveScope(ScopeModel scope)
         {
-            ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefaultAsync().Result;
+            ScopeModel s = database.Table<ScopeModel>().Where(i => i.Id == scope.Id).FirstOrDefault();
             if (s != null)
             {
-                return database.UpdateAsync(scope);
+                return database.Update(scope);
             }
             else
             {
-                return database.InsertAsync(scope);
+                return database.Insert(scope);
             }
         }
 
         /// <summary>
-        /// GetScopesAsync: To get the list of scopes from the database.
+        /// GetScopes: To get the list of scopes from the database.
         /// </summary>
         /// <returns></returns>
-        public List<ScopeModel> GetScopesAsync()
+        public List<ScopeModel> GetScopes()
         {
-            List<ScopeModel> scopes = database.Table<ScopeModel>().ToListAsync().Result;
+            List<ScopeModel> scopes = database.Table<ScopeModel>().ToList();
 
             return scopes;
         }
 
         /// <summary>
-        /// DeleteScopeAsync: Delete all scope from table.
+        /// DeleteScope: Delete all scope from table.
         /// </summary>
-        public void DeleteScopeAsync()
+        public void DeleteScope()
         {
-            database.DropTableAsync<ScopeModel>().Wait();
-            database.CreateTableAsync<ScopeModel>().Wait();
+            database.DropTable<ScopeModel>();
+            database.CreateTable<ScopeModel>();
         }
         #endregion
     }

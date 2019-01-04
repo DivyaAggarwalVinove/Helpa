@@ -289,8 +289,45 @@ namespace Helpa.Services
 
             return false;
         }
+
+        /* GetAllHelperServices*/
+        public async Task<HelperServiceModel> GetHelperServices(int UserId)
+        {
+            HelperServiceModel helperServices = new HelperServiceModel();
+
+            try
+            {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/GetAllHelperServices?id=" + UserId));
+
+
+                    //var response = await httpClient.GetAsync(uri);
+
+                    var requestTask = httpClient.GetAsync(uri);
+                    var response = Task.Run(() => requestTask);
+
+                    if (response.Result.IsSuccessStatusCode)
+                    {
+                        string result = await response.Result.Content.ReadAsStringAsync();
+                        helperServices = JsonConvert.DeserializeObject<HelperServiceModel>(result);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+
+            return helperServices;
+        }
     }
 }
+ 
  
  
  

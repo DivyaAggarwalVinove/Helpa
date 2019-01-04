@@ -1093,7 +1093,7 @@
     <AndroidResource Include="Resources\drawable\menu_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\message_picture1.png" />
+    <AndroidResource Include="Resources\drawable\message_picture.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\message_picture2.png" />

@@ -83,7 +83,7 @@ namespace Helpa
                 IEnumerable<JobsHome> js = new List<JobsHome>();
                 JobServices jobServices = new JobServices();
 
-                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
                 if (loggedUser == null)
                     js = await jobServices.GetJobsInLocation(selectedHelpersInCluster.Latitude, selectedHelpersInCluster.Longitude, 0);
                 else
@@ -155,7 +155,7 @@ namespace Helpa
                 JHomeModel js = new JHomeModel();
                 JobServices jobServices = new JobServices();
 
-                RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+                RegisterUserModel loggedUser = App.Database.GetLoggedUser();
                 if (loggedUser == null)
                     js = await jobServices.GetAllJobs(0);
                 else
@@ -297,7 +297,7 @@ namespace Helpa
         {
             aiJobPost.IsRunning = true;
 
-            RegisterUserModel loggedUser = await App.Database.GetLoggedUser();
+            RegisterUserModel loggedUser = App.Database.GetLoggedUser();
             if (loggedUser == null)
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());

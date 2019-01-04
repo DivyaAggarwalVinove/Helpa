@@ -110,12 +110,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\Profile\DetailedProfile\DetailedProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Profile\Profile.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Profile\DetailedProfile\DetailedProfilePage.xaml.cs">
+      <DependentUpon>DetailedProfilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Profile\EditProfile\EditVerificationPage.xaml.cs">
       <DependentUpon>EditVerificationPage.xaml</DependentUpon>
     </Compile>

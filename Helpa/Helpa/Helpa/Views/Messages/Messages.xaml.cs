@@ -18,10 +18,10 @@ namespace Helpa
 
             var user = App.Database.GetLoggedUser();
 
-            if (user != null)
-                wvMessage.Source = "http://180.151.232.92:151/Login.aspx?Email=" + user.Result.Email;
+            if (user != null) 
+                wvMessage.Source = Utility.Constants.messageingChatUrl + "Login.aspx?Email=" + user.Email;
             else
-                DisplayAlert("", "You are logged-in. Please login for Message funactionality", "Ok");
+                DisplayAlert("", "You are not logged-in. Please login for Message funactionality", "Ok");
         }
 	}
 }
