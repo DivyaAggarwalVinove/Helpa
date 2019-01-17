@@ -20,6 +20,16 @@ namespace Helpa.Models
 
         public int MaxAge { get; set; }
         public int ServiceCount { get; set; }
+
+        public string ServiceName1 { get; set; }
+        public string ServiceName2 { get; set; }
+        public string ServiceName3 { get; set; }
+        public string ServiceName4 { get; set; }
+
+        public bool isService1 { get; set; }
+        public bool isService2 { get; set; }
+        public bool isService3 { get; set; }
+        public bool isService4 { get; set; }
         public List<HelperServices> Service { get; set; }
     }
     

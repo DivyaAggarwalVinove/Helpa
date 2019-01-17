@@ -25,6 +25,8 @@ namespace Helpa.ViewModels
 
         public ObservableCollection<HelperHome> HelperFullList { get; set; }
 
+        public ObservableCollection<HelperHome> helperFullFilterList { get; set; }
+
         ObservableCollection<HelperHome> helperHalfList=new ObservableCollection<HelperHome>();
         public ObservableCollection<HelperHome> HelperHalfList
         {

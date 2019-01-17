@@ -65,8 +65,9 @@
                 </Grid>
 
                 <Grid Grid.Row="1" BackgroundColor="#F1F5F6" Padding="10,0,10,0">
-                    <Grid>
+                    <Grid RowSpacing="0">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -75,7 +76,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0" HeightRequest="100" ColumnSpacing="5">
+                        <Grid Grid.Row="0" HeightRequest="100" ColumnSpacing="5"  Margin="0,0,0,5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="0.55*"/>
@@ -175,17 +176,17 @@
                         </Grid>
 
                         <!--I have been a kindergarden teacherfor 7 years before i became a stay at home mother 2 years ago. I have a 2years old daughter and am happy to help look after more children in the neighourhood, from 8am to 7 pm on weekdays only. Welcometo check out my facebook page https://faebook.com/helpahk/-->
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1"  Margin="0,0,0,10">
                             <Label 
                                 Text="{Binding UserInfo.selfintroduction}"
                                 TextColor="Gray"/>
                         </Grid>
 
-                        <Grid Grid.Row="2">
+                        <Grid Grid.Row="2" Margin="0,0,0,5">
                             <Label Text="Verified info" TextColor="#FF748C" FontSize="15" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                         </Grid>
 
-                        <Frame Grid.Row="3" VerticalOptions="Center" CornerRadius="10" BackgroundColor="White" Padding="5">
+                        <Frame Grid.Row="3" VerticalOptions="Center" CornerRadius="10" BackgroundColor="White" Padding="5"  Margin="0,0,0,10">
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                 <Label x:Name="lblDP_VerifiedPhone" Text="Phone Number" TextColor="Black" VerticalOptions="Center" FontSize="10" IsVisible="{Binding VerificationInfo.phonenumberconfirmed}"/>
                                 <BoxView x:Name="bvDP_VerifiedPhone" HeightRequest="2" WidthRequest="2" VerticalOptions="Center" BackgroundColor="Black" IsVisible="{Binding VerificationInfo.phonenumberconfirmed}"/>
@@ -201,7 +202,7 @@
                             </StackLayout>
                         </Frame>
 
-                        <Grid Grid.Row="4" Padding="0,5,0,5">
+                        <Grid Grid.Row="4" Padding="0,5,0,5" Margin="0,0,0,10">
                             <Label Text="{Binding HelperServices.ServiceCount, StringFormat='Services ({0})'} " TextColor="#FF748C" FontSize="17" FontAttributes="Bold" VerticalTextAlignment="Center"/>
                         </Grid>
 
@@ -213,21 +214,154 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Frame Grid.Column="0" VerticalOptions="Center" CornerRadius="5" BackgroundColor="White" Padding="5">
-                                <Label Text="Service 1" TextColor="#FF748C"/>
-                            </Frame>
+                            <StackLayout Orientation="Vertical" Grid.Column="0" VerticalOptions="Center" Spacing="0" IsVisible="{Binding HelperServices.isService1}">
+                                <Frame x:Name="frameDetailedProfileService1" CornerRadius="5" BackgroundColor="White" Padding="8">
+                                    <Label 
+                                        Text="{Binding HelperServices.ServiceName1}" 
+                                        HorizontalTextAlignment="Center" 
+                                        LineBreakMode="HeadTruncation" 
+                                        TextColor="#FF748C" 
+                                        FontAttributes="Bold"/>
+                                </Frame>
 
-                            <Frame Grid.Column="1" VerticalOptions="Center" CornerRadius="5" BackgroundColor="#E5E5E5" Padding="5">
-                                <Label Text="Service 2" TextColor="DarkGray" FontAttributes="Bold"/>
-                            </Frame>
+                                <BoxView 
+                                    Color="#FF748C" 
+                                    HorizontalOptions="FillAndExpand" 
+                                    HeightRequest="2"/>
+                            </StackLayout>
 
-                            <Frame Grid.Column="2" VerticalOptions="Center" CornerRadius="5" BackgroundColor="#E5E5E5" Padding="5">
-                                <Label Text="Service 3" TextColor="DarkGray" FontAttributes="Bold"/>
-                            </Frame>
+                            <StackLayout Orientation="Vertical" Grid.Column="1" VerticalOptions="Center" Spacing="0" IsVisible="{Binding HelperServices.isService2}">
+                                <Frame x:Name="frameDetailedProfileService2" CornerRadius="5" BackgroundColor="#E5E5E5" Padding="8">
+                                    <Label 
+                                        Text="{Binding HelperServices.ServiceName2}" 
+                                        HorizontalTextAlignment="Center" 
+                                        LineBreakMode="HeadTruncation" 
+                                        TextColor="DarkGray" 
+                                        FontAttributes="Bold"/>
+                                </Frame>
 
-                            <Frame Grid.Column="3" VerticalOptions="Center" CornerRadius="5" BackgroundColor="#E5E5E5" Padding="5">
-                                <Label Text="Service 4" TextColor="DarkGray" FontAttributes="Bold"/>
-                            </Frame>
+                                <BoxView 
+                                    Color="#E5E5E5" 
+                                    HorizontalOptions="FillAndExpand" 
+                                    HeightRequest="2"/>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Vertical" Grid.Column="2" VerticalOptions="Center" Spacing="0" IsVisible="{Binding HelperServices.isService3}">
+                                <Frame x:Name="frameDetailedProfileService3" CornerRadius="5" BackgroundColor="#E5E5E5" Padding="8">
+                                    <Label Text="{Binding HelperServices.ServiceName3}" HorizontalTextAlignment="Center" LineBreakMode="HeadTruncation" TextColor="DarkGray" FontAttributes="Bold"/>
+                                </Frame>
+
+                                <BoxView 
+                                    Color="#E5E5E5" 
+                                    HorizontalOptions="FillAndExpand" 
+                                    HeightRequest="2"/>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Vertical" Grid.Column="3" VerticalOptions="Center" Spacing="0" IsVisible="{Binding HelperServices.isService4}">
+                                <Frame x:Name="frameDetailedProfileService4" CornerRadius="5" BackgroundColor="#E5E5E5" Padding="8">
+                                    <Label Text="{Binding HelperServices.ServiceName4}" HorizontalTextAlignment="Center" LineBreakMode="HeadTruncation" TextColor="DarkGray" FontAttributes="Bold"/>
+                                </Frame>
+
+                                <BoxView 
+                                    Color="#E5E5E5" 
+                                    HorizontalOptions="FillAndExpand" 
+                                    HeightRequest="2"/>
+                            </StackLayout>
+                        </Grid>
+
+                        <Grid Grid.Row="6" Padding="0,5,0,0" Margin="0,0,0,10" BackgroundColor="White" RowSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Label Text="Scope:" TextColor="Black" Font="Bold" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Label Text="Location:" TextColor="Black" Font="Bold" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Label Text="Years of experience:" TextColor="Black" Font="Bold" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Label Text="Target age group:" TextColor="Black" Font="Bold" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                </Grid>
+                            </Grid>
+                            
+                            <Grid Grid.Row="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Label Text="Qualifications:" TextColor="Black" Font="Bold" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Label Text="Price:" TextColor="Black" Font="Bold" HorizontalTextAlignment="End" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>

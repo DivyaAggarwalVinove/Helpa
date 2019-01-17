@@ -11,11 +11,13 @@
              BackgroundColor="#EFF3F6"
              ControlTemplate="{StaticResource MainPageTemplate}"
              x:Class="Helpa.Helpers">
+    
     <ContentView x:Name="body">
         <RelativeLayout>
             <Grid RowSpacing="0"
                   RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant = 0}"
                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant = 0}">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.15*"/>
                     <RowDefinition Height="0.85*"/>
@@ -27,8 +29,8 @@
                         <RowDefinition Height="0.05*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0"  x:Name="gridSearchBar" ColumnSpacing="0" Margin="5,0,5,0">
-                        <local:CustomStackLayout Orientation="Horizontal" Padding="10,5,10,5" >
+                    <Grid Grid.Row="0"  x:Name="gridSearchBar" ColumnSpacing="0" Margin="5,5,5,0">
+                        <local:CustomStackLayout Orientation="Horizontal" Padding="10,0,10,0" >
                             <!--<Image x:Name="imgSearch" Source="search.png"/>
                                 <local:CustomEntry x:Name="entrySearch" IsEnabled="True" Placeholder="Search Helpers by Location" FontSize="Small" PlaceholderColor="#676D70" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="5,0,0,0"/>-->
                             <places:PlacesBar
@@ -40,6 +42,7 @@
                                 VerticalOptions="CenterAndExpand" 
                                 HorizontalOptions="FillAndExpand"
                                 PlacesRetrieved="OnPlacesRetrieved"
+                                TextChanged="OnSearchTextChange"
                                 Margin="-20,0,0,0" />
 
                             <Image x:Name="imgSend" Source="send.png">
@@ -50,7 +53,7 @@
                         </local:CustomStackLayout>
                     </Grid>
 
-                    <Grid Grid.Row="1" ColumnSpacing="10" Margin="5,0,5,0" VerticalOptions="CenterAndExpand">
+                    <Grid Grid.Row="1" ColumnSpacing="5" Margin="5" VerticalOptions="CenterAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.09*"/>
                             <ColumnDefinition Width="0.13*"/>
@@ -58,7 +61,7 @@
                             <ColumnDefinition Width="0.09*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0" ColumnSpacing="0" BackgroundColor="Transparent">
+                        <Grid Grid.Column="0" ColumnSpacing="0" BackgroundColor="White">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.2*"/>
                                 <ColumnDefinition Width="0.1*"/>
@@ -77,7 +80,7 @@
                             </Grid.GestureRecognizers>
                         </Grid>
 
-                        <Grid Grid.Column="1" ColumnSpacing="0" BackgroundColor="Transparent">
+                        <Grid Grid.Column="1" ColumnSpacing="0" BackgroundColor="White">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.3*"/>
                                 <ColumnDefinition Width="0.1*"/>
@@ -96,7 +99,7 @@
                             </Grid.GestureRecognizers>
                         </Grid>
 
-                        <Grid Grid.Column="2" ColumnSpacing="0" BackgroundColor="Transparent">
+                        <Grid Grid.Column="2" ColumnSpacing="0" BackgroundColor="White">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.2*"/>
                                 <ColumnDefinition Width="0.1*"/>
@@ -115,7 +118,7 @@
                             </Grid.GestureRecognizers>
                         </Grid>
 
-                        <Grid Grid.Column="3" ColumnSpacing="0" BackgroundColor="Transparent">
+                        <Grid Grid.Column="3" ColumnSpacing="0" BackgroundColor="White">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.2*"/>
                                 <ColumnDefinition Width="0.1*"/>
@@ -552,4 +555,5 @@
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant = 0}"/>
         </RelativeLayout>
     </ContentView>
+    
 </ContentPage>

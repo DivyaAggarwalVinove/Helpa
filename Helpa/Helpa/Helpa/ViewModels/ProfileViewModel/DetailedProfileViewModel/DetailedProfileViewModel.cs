@@ -31,6 +31,30 @@ namespace Helpa.ViewModels.ProfileViewModel.DetailedProfileViewModel
                 verificationInfo = await (new LoginServices()).GetVerificationInfo(userid);
                 HelperServices = await (new HelpersServices()).GetHelperServices(userid);
                 HelperServices.ServiceCount = HelperServices.Service.Count;
+
+                if (HelperServices.Service.Count > 0)
+                {
+                    HelperServices.ServiceName1 = HelperServices.Service[0].ServiceName;
+                    HelperServices.isService1 = true;
+                }
+
+                if (HelperServices.Service.Count > 1)
+                {
+                    HelperServices.ServiceName2 = HelperServices.Service[1].ServiceName;
+                    HelperServices.isService2 = true;
+                }
+
+                if (HelperServices.Service.Count > 2)
+                {
+                    HelperServices.ServiceName3 = HelperServices.Service[2].ServiceName;
+                    HelperServices.isService3 = true;
+                }
+
+                if (HelperServices.Service.Count > 3)
+                {
+                    HelperServices.ServiceName4 = HelperServices.Service[3].ServiceName;
+                    HelperServices.isService4 = true;
+                }
             }
         }
 

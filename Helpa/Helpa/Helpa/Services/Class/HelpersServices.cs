@@ -12,7 +12,7 @@ namespace Helpa.Services
 {
     public class HelpersServices : IHelpersServices
     {
-        public async Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId=0, int ServiceId=0, int ScopeId=0)
+        public async Task<IEnumerable<HelperHomeModel>> GetHelpersList(int UserId=0, int ServiceId=0, int ScopeId=0, double latitude = 0, double longitude = 0)
         {
             IEnumerable<HelperHomeModel> helpers = new List<HelperHomeModel>();
 
@@ -22,7 +22,7 @@ namespace Helpa.Services
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     HttpClient httpClient = new HttpClient();
-                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/HomeCount?UserId=" + UserId + "&ServiceId=" + ServiceId + "&ScopeId=" + ScopeId));
+                    var uri = new Uri(string.Concat(Constants.baseUrl, "api/HomeCount?UserId=" + UserId + "&latitude=" + latitude + "&longitude=" + longitude + "&ServiceId=" + ServiceId + "&ScopeId=" + ScopeId));
 
                     //var response = await httpClient.GetAsync(uri);
 
@@ -301,8 +301,7 @@ namespace Helpa.Services
                 {
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/GetAllHelperServices?id=" + UserId));
-
-
+                    
                     //var response = await httpClient.GetAsync(uri);
 
                     var requestTask = httpClient.GetAsync(uri);
