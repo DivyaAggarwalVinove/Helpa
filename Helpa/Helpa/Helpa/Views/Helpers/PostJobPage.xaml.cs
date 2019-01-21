@@ -104,7 +104,8 @@ namespace Helpa.Views.Helpers
                          Image imgSelected = (Image)grid.Children.ElementAt(selectedService * 2 + 1);
                          imgSelected.IsVisible = false;
 
-                         if (btnSelectedService.Text.Equals("Child Care"))
+                         // if (btnSelectedService.Text.Equals("Child Care"))
+                         if(btnSelectedService.Text.ToLower().Contains("child"))
                          {
                              for (int i = gridChildCare.Children.Count - 2; i >= 0; i--)
                              {
@@ -127,7 +128,8 @@ namespace Helpa.Views.Helpers
 
                          SetScopes(services.ElementAt(selectedService).Id);
 
-                         if (btn.Text.Equals("Child Care"))
+                         //if (btn.Text.Equals("Child Care"))
+                         if(btn.Text.ToLower().Contains("child"))
                          {
                              btnAddMoreChild.IsVisible = true;
                              
@@ -594,7 +596,8 @@ namespace Helpa.Views.Helpers
                     jpm.JobServicesId = serviceModel.Id;
                     jpm.JobServicesName = serviceModel.ServiceName;
 
-                    if (serviceModel.ServiceName.Equals("Child Care"))
+                    //if (serviceModel.ServiceName.Equals("Child Care"))
+                    if (serviceModel.ServiceName.ToLower().Contains("child"))
                     {
                         jpm.Receivers = new List<Receiver>();
 

@@ -56,15 +56,15 @@ namespace Helpa.Services
                 {
                     HttpClient httpClient = new HttpClient();
                     var uri = new Uri(string.Concat(Constants.baseUrl, "api/Services"));
-                    //var response = await httpClient.GetAsync(uri);
+                    var response = await httpClient.GetAsync(uri);
 
-                    var requestTask = httpClient.GetAsync(uri);
-                    var response = Task.Run(() => requestTask);
+                    //var requestTask = httpClient.GetAsync(uri);
+                    //var response = Task.Run(() => requestTask);
 
-                    if (response.Result.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
                         ServiceModel sm = new ServiceModel();
-                        string result = await response.Result.Content.ReadAsStringAsync();
+                        string result = await response.Content.ReadAsStringAsync();
                         services = JsonConvert.DeserializeObject<IList<ServiceModel>>(result);
                     }
                     else

@@ -111,13 +111,13 @@ namespace Helpa
             var d = JsonConvert.DeserializeObject<FacebookModel>(data);
 
             ExternalUserModel userinfo = new ExternalUserModel();
-            //userinfo.id = data.Id;
-            //userinfo.idToken = data.Id;
-            //userinfo.name = data.Name;
-            //userinfo.email = data.Email;
+            userinfo.id = d.id;
+            userinfo.idToken = d.id;
+            userinfo.name = d.first_name;
+            userinfo.email = d.email;
             userinfo.LoginProvider = "FACEBOOK".ToUpper();
             userinfo.provider = "FACEBOOK".ToUpper();
-
+            
             bool result = await (new LoginServices()).ExternalLogin(userinfo);
 
             if (result)

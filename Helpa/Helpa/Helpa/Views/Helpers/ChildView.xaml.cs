@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.RangeSlider.Forms;
@@ -14,14 +13,21 @@ namespace Helpa.Views.Helpers
 	{
         public ChildView()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            SetRadioList(new List<string>()
+                SetRadioList(new List<string>()
               {
                 "Male",
                 "Female",
                 "N/A"
               }, rgPJChildGender);
+            }
+            catch(Exception e)
+            {
+
+            }
         }
 
         private void SetRadioList(IEnumerable<string> genderList, RadioGroup radioGroup)

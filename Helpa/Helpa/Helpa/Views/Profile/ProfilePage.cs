@@ -22,7 +22,7 @@ namespace Helpa.Views.Profile
             GoToProfilePage();
         }
 
-        async void GoToProfilePage()
+        void GoToProfilePage()
         {
             try
             {

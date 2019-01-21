@@ -48,7 +48,7 @@ namespace Helpa.Droid
                 base.OnCreate(bundle);
 
                 //FacebookSdk.SdkInitialize(this.ApplicationContext);
-                AsNumAssemblyHelper.HoldAssembly();
+                //AsNumAssemblyHelper.HoldAssembly();
 
                 FacebookClientManager.Initialize(this);
                 GoogleClientManager.Initialize(this);

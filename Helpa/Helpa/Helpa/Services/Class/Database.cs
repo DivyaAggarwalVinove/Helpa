@@ -126,7 +126,7 @@ namespace Helpa.Services
                 }
                 else
                 {
-                    result = database.Update(service);
+                    result = database.Insert(service);
                 }
             }
 

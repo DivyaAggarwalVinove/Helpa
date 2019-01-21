@@ -199,20 +199,20 @@ namespace Helpa.Services
                     var json = JsonConvert.SerializeObject(helperService);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    //var response = await httpClient.PostAsync(uri, content);
+                    var response = await httpClient.PostAsync(uri, content);
 
-                    var requestTask = httpClient.PostAsync(uri, content);
-                    var response = Task.Run(() => requestTask);
+                    //var requestTask = httpClient.PostAsync(uri, content);
+                    //var response = Task.Run(() => requestTask);
                     
-                    if (response.Result.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
-                        string result = await response.Result.Content.ReadAsStringAsync();
+                        string result = await response.Content.ReadAsStringAsync();
                         helpers = JsonConvert.DeserializeObject<HelperResponseModel>(result);
                         helperService.HelperId = helpers.helperid;     
                     }
                     else
                     {
-                        string result = await response.Result.Content.ReadAsStringAsync();
+                        string result = await response.Content.ReadAsStringAsync();
                         var message = JsonConvert.DeserializeObject<ResponseModel>(result);
                     }
                 }

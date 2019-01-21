@@ -36,7 +36,6 @@ namespace Helpa.Views.Profile.OtherPages
 
             lblReviewByMe.TextColor = Color.LightGray;
             bvReviewByMe.BackgroundColor = Color.Transparent;
-            
         }
         private void OnClickReviewAboutMe(object sender, EventArgs e)
         {

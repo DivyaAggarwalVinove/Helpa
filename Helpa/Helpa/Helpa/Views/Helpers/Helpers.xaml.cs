@@ -253,6 +253,9 @@ namespace Helpa
                                 h.helperStatus = "Not Available";
                             }
 
+                            if (h.AverageRating == null)
+                                h.AverageRating = "0";
+
                             hs.Select(x => x.Name == h.Name ? h : x);
                         }
                     }
@@ -378,26 +381,33 @@ namespace Helpa
 
         void OnShowHelpersList(object sender, EventArgs args)
         {
-            if (mapHelper.IsVisible)
+            try
             {
-                slFullHelpa.IsVisible = true;
-                mapHelper.IsVisible = false;
-                lblCount.IsVisible = false;
+                if (mapHelper.IsVisible)
+                {
+                    slFullHelpa.IsVisible = true;
+                    mapHelper.IsVisible = false;
+                    lblCount.IsVisible = false;
 
-                ShowHelperFullList();
+                    ShowHelperFullList();
 
-                imgHelpersList.Source = "location_filter.png";
+                    imgHelpersList.Source = "location_filter.png";
+                }
+                else
+                {
+                    slFullHelpa.IsVisible = false;
+                    mapHelper.IsVisible = true;
+                    lblCount.IsVisible = true;
+
+                    lvFullHelpa.ItemsSource = null;
+                    lblHelperFullCount.Text = " Helpers found";
+
+                    imgHelpersList.Source = "filter.png";
+                }
             }
-            else
+            catch(Exception e)
             {
-                slFullHelpa.IsVisible = false;
-                mapHelper.IsVisible = true;
-                lblCount.IsVisible = true;
 
-                lvFullHelpa.ItemsSource = null;
-                lblHelperFullCount.Text = " Helpers found";
-
-                imgHelpersList.Source = "filter.png";
             }
         }
         
